@@ -6,7 +6,7 @@
         if (is_dir($source)) {
             // if source is directory, then create destination directory
             if (!is_dir($destination)) {
-                mkdir($destination);
+                mkdir($destination, recursive: true);
             }
             // get all files and directories in source directory
             $files = scandir($source);
