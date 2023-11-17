@@ -1,6 +1,5 @@
 <?php
 
-
 class Helper
 {
 	/**
@@ -23,8 +22,9 @@ class Helper
 	 */
 	public static function view(string $view, array $data = [])
 	{
+		$data = [...$data, 'subview' => "app/views/{$view}.view.php"];
 		extract($data);
-		return require "app/views/{$view}.view.php";
+		return require "app/views/base.view.php";
 	}
 
 	/**
@@ -34,6 +34,6 @@ class Helper
 	 */
 	public static function redirect($path)
 	{
-		header("Location: {$path}");
+		header("Location: " . App::get("root_uri") . "{$path}");
 	}
 }

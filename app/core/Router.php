@@ -32,9 +32,16 @@ class Router
 	public function direct($uri, $requestType)
 	{
 		if (array_key_exists($uri, $this->routes[$requestType])) {
-			$this->callAction(
-				...explode('@', $this->routes[$requestType][$uri])
-			);
+
+			$actions = $this->routes[$requestType][$uri];
+
+			for ($i=0; $i < count($actions); $i++) {
+				$action = $actions[$i]; 
+				$this->callAction(
+					...explode('@', $action)
+				);
+			}
+			
 		} else {
 			http_response_code(404);
 			throw new Exception("Route: " . $uri . " not found!");
@@ -55,7 +62,6 @@ class Router
 			http_response_code(500);
 			throw new Exception($method . " not define on " . $controller);
 		}
-
 		return (new $controller)->$method();
 	}
 
@@ -66,9 +72,10 @@ class Router
 	 * @param  string $controller
 	 * @return null
 	 */
-	public function get($uri, $controller)
+	public function get($uri, $actions)
 	{
-		$this->routes['GET'][$uri] = $controller;
+		$this->routes['GET'][$uri] = $actions;
+		// $this->routes['GET'][$uri] = $controller;
 	}
 
 	/**
@@ -78,9 +85,9 @@ class Router
 	 * @param  string $controller
 	 * @return null
 	 */
-	public function post($uri, $controller)
+	public function post($uri, $actions)
 	{
-		$this->routes['POST'][$uri] = $controller;
+		$this->routes['POST'][$uri] = $actions;
 	}
 
 	/**

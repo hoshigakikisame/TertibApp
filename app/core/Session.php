@@ -17,11 +17,22 @@ class Session
 		$_SESSION[$name] = $data;
 	}
 
+	public static function pop(string $name)
+	{
+		session_start();
+		if (self::has($name)) {
+			$data = $_SESSION[$name];
+			unset($_SESSION[$name]);
+			return $data;
+		}
+		throw new Exception();
+	}
+
 	/**
 	 * Retrieve an item from the global $_SESSION variable
 	 *
 	 * @param  string $name
-	 *@throws Exception
+	 * @throws Exception
 	 * @return mixed       
 	 */
 	public static function get(string $name)
@@ -29,9 +40,7 @@ class Session
 		if (self::has($name)) {
 			return $_SESSION[$name];
 		}
-
 		throw new Exception();
-
 	}
 
 	/**
@@ -42,7 +51,7 @@ class Session
 	 */
 	public static function has(string $name): bool
 	{
-
+		session_start();
 		if (array_key_exists($name, $_SESSION)) {
 			return true;
 		}

@@ -10,8 +10,10 @@
    |
    */
 
-$router->get('', 'PagesController@home');
-$router->get('about', 'PagesController@about');
-$router->get('contact', 'PagesController@contact');
-$router->get('users', 'UsersController@index');
-$router->post('users', 'UsersController@store');
+$router->get('', ['PagesController@home']);
+$router->get('contact', ['PagesController@contact']);
+$router->get('users', ['UsersController@index']);
+$router->post('users', ['UsersController@store']);
+$router->get('about', ['AuthMiddleware@validateSession', 'PagesController@about']);
+$router->get('login', ['AuthsController@loginForm']);
+$router->post('login', ['AuthsController@login']);

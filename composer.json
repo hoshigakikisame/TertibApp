@@ -9,11 +9,17 @@
 	"license": "MIT",
 	"type": "project",
 	"require": {
-		"php": ">=7.0"
+		"php": ">=8.2",
+		"twbs/bootstrap": "@stable"
 	},
 	"autoload": {
 		"classmap": [
 			"./"
 		]
-	}
+	},
+	"scripts": {
+        "post-update-cmd": [
+			"php scripts/cpdir.php vendor/twbs/bootstrap/dist public/vendor/bootstrap"
+        ]
+    }
 }
