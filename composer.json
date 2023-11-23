@@ -10,7 +10,8 @@
 	"type": "project",
 	"require": {
 		"php": ">=8.2",
-		"twbs/bootstrap": "@stable"
+		"twbs/bootstrap": "@stable",
+		"vlucas/phpdotenv": "@stable"
 	},
 	"autoload": {
 		"classmap": [
