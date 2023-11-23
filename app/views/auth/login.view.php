@@ -1,5 +1,4 @@
 <?php
-// add header.view.php
 $redirected =  App::get('root_uri') . "/login";
 ?>
 <main class="container-fluid d-flex flex-column justify-content-center px-4" style="font-family: Poppins; height:100vh;">
