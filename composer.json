@@ -12,7 +12,8 @@
 		"php": ">=8.2",
 		"twbs/bootstrap": "@stable",
 		"vlucas/phpdotenv": "@stable",
-		"components/jquery": "@stable"
+		"components/jquery": "@stable",
+		"twbs/bootstrap-icons": "@stable"
 	},
 	"autoload": {
 		"classmap": [
