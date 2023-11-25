@@ -23,7 +23,8 @@
 	"scripts": {
         "post-update-cmd": [
 			"php scripts/cpdir.php vendor/twbs/bootstrap/dist public/vendor/bootstrap",
-			"php scripts/cpdir.php vendor/components/jquery public/vendor/jquery"
+			"php scripts/cpdir.php vendor/components/jquery public/vendor/jquery",
+			"php scripts/cpdir.php vendor/components/twbs public/vendor/twbs"
         ]
     }
 }

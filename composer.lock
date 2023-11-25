@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d3a5de4ceb1679faf0691661146dd0be",
+    "content-hash": "e5833d9bc962134a092ce8bcb00ba1c2",
     "packages": [
         {
             "name": "components/jquery",
@@ -620,7 +620,8 @@
     "stability-flags": {
         "twbs/bootstrap": 0,
         "vlucas/phpdotenv": 0,
-        "components/jquery": 0
+        "components/jquery": 0,
+        "twbs/bootstrap-icons": 0
     },
     "prefer-stable": false,
     "prefer-lowest": false,
