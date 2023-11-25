@@ -17,3 +17,5 @@ $router->post('users', ['UsersController@store']);
 $router->get('about', ['AuthMiddleware@validateSession', 'PagesController@about']);
 $router->get('login', ['AuthsController@loginForm']);
 $router->post('login', ['AuthsController@login']);
+
+$router->get('dashboard', ['AuthMiddleware@validateSession', 'PagesController@dashboard']);
