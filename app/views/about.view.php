@@ -10,8 +10,8 @@
 </head>
 
 <body>
-	<h1>About US Page</h1>
 	<?php require 'partials/nav.view.php'; ?>
+	<h1>About US Page</h1>
 </body>
 
 </html>
