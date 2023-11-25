@@ -3,7 +3,7 @@
 
 <main class='container'>
 	<!-- Start Hero Section -->
-	<section class="row justify-content-between" style='height:80vh;'>
+	<section class="row justify-content-between hero-section" style='height:80vh;'>
 		<div class="col flex-column align-self-center">
 			<h1 class="lh-1" style="font-family:Poppins Extra Bold;font-size:5em;">WELCOME TO JTI.TERTIB</h1>
 			<div class="d-flex gap-2" style="font-family:Poppins Medium; color:var(--orange-opa)">
@@ -17,8 +17,8 @@
 		</div>
 		<div class="col ">
 			<div class="container position-relative end-0">
-				<div class="cirle rounded-circle position-absolute end-0" style='width: 463px;height: 463px;background: linear-gradient(180deg, #FCB216 6.77%, #F3542C 27.6%, rgba(255, 255, 255, 0.32) 65.62%);'></div>
-				<img class="position-absolute end-0" src="<?php echo App::get("root_uri") . "/public/img/code of conduct image.png" ?>" alt="code of conduct image">
+				<div class="cirle rounded-circle position-absolute end-0 d-none d-lg-block" style='width: 463px;height: 463px;background: linear-gradient(180deg, #FCB216 6.77%, #F3542C 27.6%, rgba(255, 255, 255, 0.32) 65.62%);'></div>
+				<img class="position-absolute end-0 d-none d-lg-block" src="<?php echo App::get("root_uri") . "/public/img/code of conduct image.png" ?>" alt="code of conduct image">
 			</div>
 		</div>
 	</section>
