@@ -5,20 +5,20 @@
 	<!-- Start Hero Section -->
 	<section class="row justify-content-between hero-section" style='height:80vh;'>
 		<div class="col flex-column align-self-center">
-			<h1 class="lh-1" style="font-family:Poppins Extra Bold;font-size:5em;">WELCOME TO JTI.TERTIB</h1>
+			<h1 class="lh-1 display-1" style="font-family:Poppins Extra Bold;">WELCOME TO JTI.TERTIB</h1>
 			<div class="d-flex gap-2" style="font-family:Poppins Medium; color:var(--orange-opa)">
 				<h6>#JTIdisiplin</h6>
 				<h6>#JTItertib</h6>
 			</div>
-			<p class="py-3" style="font-family:Poppins Medium;width:max(50%,350px)">Laporkan Para Oknum Kampus yang
+			<p class="py-3" style="font-family:Poppins Medium;width:min(80vw,320px)">Laporkan Para Oknum Kampus yang
 				Kurang Tertib dan Disiplin di <span style="color:var(--yellow);">Tertib</span> App</p>
 			<!-- link Report Button -->
 			<a href="report" class="py-2 px-5 rounded-3 link-underline link-underline-opacity-0" style="color:var(--white);font-family:Poppins Semi Bold; background:var(--btn-gradient);">Report ></a>
 		</div>
-		<div class="col ">
-			<div class="container position-relative end-0">
-				<div class="cirle rounded-circle position-absolute end-0 d-none d-lg-block" style='width: 463px;height: 463px;background: linear-gradient(180deg, #FCB216 6.77%, #F3542C 27.6%, rgba(255, 255, 255, 0.32) 65.62%);'></div>
-				<img class="position-absolute end-0 d-none d-lg-block" src="<?php echo App::get("root_uri") . "/public/img/code of conduct image.png" ?>" alt="code of conduct image">
+		<div class="col d-none d-lg-block">
+			<div class="position-relative " style="height:40vh;">
+				<div class="cirle rounded-circle position-absolute top-50 end-0 d-none d-lg-block" style='width: 463px;height: 463px;background: linear-gradient(180deg, #FCB216 6.77%, #F3542C 27.6%, rgba(255, 255, 255, 0.32) 65.62%);'></div>
+				<img class="position-absolute top-50 end-0 d-none d-lg-block" src="<?php echo App::get("root_uri") . "/public/img/code of conduct image.png" ?>" alt="code of conduct image">
 			</div>
 		</div>
 	</section>
