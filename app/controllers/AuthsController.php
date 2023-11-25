@@ -25,7 +25,7 @@ class AuthsController
 
             if ($username == "rian" && $password = "rian") {
                 Session::push('auth', new Auth(1, $username, 'admin'));
-                Helper::redirect('/');
+                Helper::redirect('/dashboard');
             } else {
                 echo "Login gagal";
             }
