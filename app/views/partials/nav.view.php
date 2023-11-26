@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg sticky-top bg-white">
+<nav class="navbar NavUp navbar-expand-lg sticky-top bg-white">
 	<div class="container-fluid px-5 py-2">
 		<a class="navbar-brand" href="#">Tertib APP</a>
 		<button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
