@@ -9,7 +9,7 @@ class AuthsController
             return Helper::redirect('/');
         }
 
-        return Helper::view('auth/login');
+        return Helper::view('auth/login', ["flash" => Flasher::flash()]);
     }
 
     public function login()
@@ -28,6 +28,8 @@ class AuthsController
                 Helper::redirect('/dashboard');
             } else {
                 echo "Login gagal";
+                Flasher::setFlash("danger", "SLIWIK");
+                Helper::redirect('/login');
             }
         } else {
             echo "Login gagal";

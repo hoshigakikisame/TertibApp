@@ -1,5 +1,6 @@
 <?php
 $redirected =  App::get('root_uri') . "/login";
+echo $flash;
 ?>
 <main class="container-fluid d-flex flex-column justify-content-center px-4" style="font-family: Poppins; height:100vh;">
     <div class="row shadow-sm rounded-5 align-self-center  px-2 w-lg-25" style="padding-top:5vh;padding-bottom:10vh;">
