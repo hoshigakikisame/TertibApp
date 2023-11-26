@@ -68,6 +68,7 @@
 
         /* custom css for all page*/
     </style>
+    <link rel="stylesheet" href="<?php echo App::get("root_uri") . "/public/css/style.css" ?>">
 </head>
 
 <body style="background:var(--bg-gradient);">
