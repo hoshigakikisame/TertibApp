@@ -8,8 +8,11 @@
     <title><?php echo isset($title) ? $title : "Default Title" ?></title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="<?php echo App::get("root_uri") . "/public/vendor/bootstrap/css/bootstrap.min.css" ?>">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="<?php echo App::get("root_uri") . "/public/vendor/bootstrap-icons/font/bootstrap-icons.min.css" ?>">
     <!-- Jquery -->
-    <script src="<?php echo App::get("root_uri") . "/public/vendor/jquery/jquery.min.js" ?>"></script>
+    <script src=" <?php echo App::get("root_uri") . "/public/vendor/jquery/jquery.min.js" ?>">
+    </script>
 
     <style>
         /* start font initialize */
