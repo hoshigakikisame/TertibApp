@@ -1,0 +1,32 @@
+.active-page,
+.active-page a.nav-link,
+a.nav-link:hover,
+.nav-item:hover {
+  color: var(--orange-opa);
+  transition: all 0.5s;
+}
+
+li.active-page::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  background-color: var(--orange-opa);
+  width: 3px;
+  height: 25px;
+  transition: all ease 0.5s;
+}
+
+.nav-item::before {
+  content: "";
+  height: 0;
+}
+
+.nav-item:hover::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  background-color: var(--orange-opa);
+  width: 3px;
+  height: 25px;
+  transition: all ease 0.5s;
+}

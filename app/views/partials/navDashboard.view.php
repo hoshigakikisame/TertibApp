@@ -14,19 +14,19 @@
                 <ul class="navbar-nav mb-2 mb-lg-0 flex-column align-items-end  align-items-lg-start flex-grow-1 pe-3">
                     <li class="nav-item d-flex align-items-center mb-2 gap-1">
                         <i class="bi bi-house"></i>
-                        <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+                        <a class="nav-link" aria-current="page" href="dashboard">Dashboard</a>
                     </li>
                     <li class="nav-item d-flex align-items-center mb-2 gap-1">
                         <i class="bi bi-exclamation-circle"></i>
-                        <a class="nav-link" href="#">Report</a>
+                        <a class="nav-link" href="report">Report</a>
                     </li>
                     <li class="nav-item d-flex align-items-center mb-2 gap-1">
                         <i class="bi bi-bell"></i>
-                        <a class="nav-link" href="#">Notification</a>
+                        <a class="nav-link" href="notification">Notification</a>
                     </li>
                     <li class="nav-item d-flex align-items-center mb-2 gap-1">
                         <i class="bi bi-person"></i>
-                        <a class="nav-link" href="#">Profile</a>
+                        <a class="nav-link" href="profile">Profile</a>
                     </li>
                     <li class="nav-item logOut d-flex align-items-center border-top mt-4 gap-2">
                         <i class="bi bi-box-arrow-in-right"></i>

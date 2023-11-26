@@ -26,3 +26,12 @@ $(window).ready(function () {
   }
 });
 // End responsive sidebar
+
+// Start navbar active
+$(window).ready(function (e) {
+  $(".nav-item").removeClass("active-page");
+  $(".nav-link[href=" + location.pathname.split("/")[2] + "]")
+    .parent()
+    .addClass("active-page");
+});
+// End navbar active
