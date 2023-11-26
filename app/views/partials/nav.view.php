@@ -7,13 +7,18 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				<li class="nav-item">
-					<a href="<?php echo App::get('root_uri'); ?>" title="Home" class="nav-link active">Home</a>
+					<a href="<?php echo App::get('root_uri'); ?>" class="nav-link ">Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="about">About</a>
+					<a class="nav-link" href="<?php echo App::get('root_uri') . "/about"; ?>">About</a>
 				</li>
 			</ul>
-			<a class="btn border-0 rounded-3 fs-6 my-auto" href="login" style="width:min(50%,155px); background-color:var(--orange); color:var(--white);">Login</a>
+
+			<?php if (!Session::has('auth')) : ?>
+				<a class="btn border-0 rounded-3 fs-6 my-auto" href="login" style="width:min(50%,155px); background-color:var(--orange); color:var(--white);">Login</a>
+			<?php else : ?>
+				<a class="btn border-0 rounded-3 fs-6 my-auto" href="dashboard" style="width:min(50%,155px); background-color:var(--orange); color:var(--white);">Dashboard</a>
+			<?php endif; ?>
 		</div>
 	</div>
 </nav>

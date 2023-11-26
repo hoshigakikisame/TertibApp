@@ -1,12 +1,38 @@
-// Start scroll add shadow
+// Start scroll handling
 $(window).scroll(function () {
+  // Start scroll add shadow
   if ($(window).scrollTop() >= 10) {
-    $(".NavUp").addClass("shadow-lg");
+    $(".NavUp").addClass("shadow-drop-bottom");
   } else {
-    $(".NavUp").removeClass("shadow-lg");
+    $(".NavUp").removeClass("shadow-drop-bottom");
+  }
+  // End scroll add shadow
+
+  if ($(window).scrollTop() <= 700) {
+    $("div[title=lefthero]").addClass("slide-in-left");
+  } else {
+    $("div[title=lefthero]").removeClass("slide-in-left");
+  }
+
+  if ($(window).scrollTop() <= 700) {
+    $("div[title=righthero]").addClass("slide-in-right");
+  } else {
+    $("div[title=righthero]").removeClass("slide-in-right");
+  }
+
+  if ($(window).scrollTop() >= 50) {
+    $("section[title=pelanggaran]").addClass("slide-in-bottom");
+  } else {
+    $("section[title=pelanggaran]").removeClass("slide-in-bottom");
+  }
+  if ($(window).scrollTop() >= 400) {
+    $("section[title=tatatertib]").addClass("slide-in-bottom");
+  } else {
+    $("section[title=tatatertib]").removeClass("slide-in-bottom");
   }
 });
-// End scroll add shadow
+
+// End scroll handling
 
 // Start responsive sidebar
 $(window).ready(function () {
@@ -29,9 +55,8 @@ $(window).ready(function () {
 
 // Start navbar active
 $(window).ready(function (e) {
+  let page = location.pathname.replace(/\/$/, "");
   $(".nav-item").removeClass("active-page");
-  $(".nav-link[href=" + location.pathname.split("/")[2] + "]")
-    .parent()
-    .addClass("active-page");
+  $(`.nav-link[href="${page}"]`).parent().addClass("active-page");
 });
 // End navbar active
