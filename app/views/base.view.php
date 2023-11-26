@@ -56,7 +56,7 @@
             --white-gray: #FDFDFD;
 
             /* Gradient */
-            --bg-gradient: background: linear-gradient(0deg, rgba(252, 178, 22, 0.02) 0%, rgba(252, 178, 22, 0.02) 100%), #FFF;
+            --bg-gradient: linear-gradient(0deg, rgba(252, 178, 22, 0.02) 0%, rgba(252, 178, 22, 0.02) 100%), #FFF !important;
             --btn-gradient: linear-gradient(270deg, #FCB216 -15.46%, #FCB216 5.16%, #F3542C 37.46%);
 
             /* Drop Shadow Filter */
@@ -71,7 +71,7 @@
     <link rel="stylesheet" href="<?php echo App::get("root_uri") . "/public/css/style.css" ?>">
 </head>
 
-<body style="background:var(--bg-gradient);">
+<body class="" style="background:var(--bg-gradient);">
 
 
     <?php require $subview; ?>
