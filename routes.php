@@ -19,3 +19,6 @@ $router->get('login', ['AuthsController@loginForm']);
 $router->post('login', ['AuthsController@login']);
 
 $router->get('dashboard', ['AuthMiddleware@validateSession', 'PagesController@dashboard']);
+$router->get('report', ['AuthMiddleware@validateSession', 'PagesController@report']);
+$router->get('notification', ['AuthMiddleware@validateSession', 'PagesController@notification']);
+$router->get('profile', ['AuthMiddleware@validateSession', 'PagesController@profile']);

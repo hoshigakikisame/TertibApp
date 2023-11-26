@@ -39,4 +39,28 @@ class PagesController
 	{
 		return Helper::view('dashboard');
 	}
+	/**
+	 * [contact description]
+	 * @return [type] [description]
+	 */
+	public function report()
+	{
+		return Helper::view('report');
+	}
+	/**
+	 * [contact description]
+	 * @return [type] [description]
+	 */
+	public function notification()
+	{
+		return Helper::view('notification');
+	}
+	/**
+	 * [contact description]
+	 * @return [type] [description]
+	 */
+	public function profile()
+	{
+		return Helper::view('profile');
+	}
 }
