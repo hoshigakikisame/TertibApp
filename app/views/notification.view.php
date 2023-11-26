@@ -7,7 +7,7 @@
 
         <main class="col position-relative main" style="left:0;height:200vh">
             <div class="container-fluid">
-                Hello world dashboard
+                Hello world notification
             </div>
         </main>
     </div>
