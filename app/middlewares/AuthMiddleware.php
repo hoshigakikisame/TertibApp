@@ -6,7 +6,7 @@
          * @return void
          */
         public function validateSession() {
-            if (!Session::has('auth')) {
+            if (!Session::getInstance()->has('auth')) {
                 Helper::redirect('/login');
                 exit;
             }

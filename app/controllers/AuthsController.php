@@ -5,7 +5,7 @@ class AuthsController
     public function loginForm()
     {
 
-        if (Session::has('auth')) {
+        if (Session::getInstance()->has('auth')) {
             return Helper::redirect('/');
         }
 
@@ -15,7 +15,7 @@ class AuthsController
     public function login()
     {
 
-        if (Session::has('auth')) {
+        if (Session::getInstance()->has('auth')) {
             return Helper::redirect('/');
         }
 
@@ -24,7 +24,7 @@ class AuthsController
             $password = $_POST['password'];
 
             if ($username == "rian" && $password = "rian") {
-                Session::push('auth', new Auth(1, $username, 'admin'));
+                Session::getInstance()->push('auth', new Auth(1, $username, 'admin'));
                 Helper::redirect('/dashboard');
             } else {
                 echo "Login gagal";

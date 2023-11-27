@@ -14,7 +14,6 @@ class Connection
 			);
 		} catch
 		(PDOException $e) {
-			echo $config['host'] . '<br>';
 			// dd($e);
 			echo $e->getMessage();
 			die();

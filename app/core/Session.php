@@ -11,15 +11,38 @@ class Session
 	 * @param  mixed $data item to be pushed
 	 * @return null      
 	 */
-	public static function push(string $name, $data)
-	{
+
+	 private static $instances = [];
+
+	 protected function __construct() {
 		session_start();
+	 }
+
+	 protected function __clone() { }
+
+	 public function __wakeup()
+    {
+        throw new \Exception("Cannot unserialize a singleton.");
+    }
+
+	 public static function getInstance(): Session
+	 {
+		 $cls = static::class;
+		 if (!isset(self::$instances[$cls])) {
+			 self::$instances[$cls] = new static();
+		 }
+ 
+		 return self::$instances[$cls];
+	 }
+ 
+
+	public function push(string $name, $data)
+	{
 		$_SESSION[$name] = $data;
 	}
 
-	public static function pop(string $name)
+	public function pop(string $name)
 	{
-		session_start();
 		if (self::has($name)) {
 			$data = $_SESSION[$name];
 			unset($_SESSION[$name]);
@@ -35,7 +58,7 @@ class Session
 	 * @throws Exception
 	 * @return mixed       
 	 */
-	public static function get(string $name)
+	public function get(string $name)
 	{
 		if (self::has($name)) {
 			return $_SESSION[$name];
@@ -49,9 +72,8 @@ class Session
 	 * @param  string  $name item name
 	 * @return boolean       
 	 */
-	public static function has(string $name): bool
+	public function has(string $name): bool
 	{
-		session_start();
 		if (array_key_exists($name, $_SESSION)) {
 			return true;
 		}
