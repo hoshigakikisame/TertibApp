@@ -34,11 +34,11 @@
                     </li>
                 </ul>
                 <div class="container end-0">
-                    <div class="card-user">
-                        <img src="" alt="">
-                        <div class="userinfo">
-                            <h3 style="margin-bottom:-5px">Jonas sutoyo</h3>
-                            <p>Dosen</p>
+                    <div class="card-user d-flex gap-2 align-items-center">
+                        <div class="img-profile border rounded-circle" style="background:grey"></div>
+                        <div class="userinfo d-flex align-items-start flex-column">
+                            <h3 class="fs-5" style="margin-bottom:-5px;">Jonas sutoyo</h3>
+                            <p style="margin-bottom:-5px;">Dosen</p>
                         </div>
                     </div>
                 </div>

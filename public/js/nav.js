@@ -8,6 +8,7 @@ $(window).scroll(function () {
   }
   // End scroll add shadow
 
+  // Start animation handling
   if ($(window).scrollTop() <= 700) {
     $("div[title=lefthero]").addClass("slide-in-left");
   } else {
@@ -30,28 +31,11 @@ $(window).scroll(function () {
   } else {
     $("section[title=tatatertib]").removeClass("slide-in-bottom");
   }
+
+  // End animation handling
 });
 
 // End scroll handling
-
-// Start responsive sidebar
-$(window).ready(function () {
-  if ($(window).width() >= 1024) {
-    $(".sidebar").addClass("position-fixed");
-    $(".sidebar").css({
-      height: "100vh",
-    });
-    $(".main").css({
-      left: "260px",
-    });
-  } else {
-    $(".sidebar").removeClass("position-fixed");
-    $(".sidebar").css({
-      height: "100%",
-    });
-  }
-});
-// End responsive sidebar
 
 // Start navbar active
 $(window).ready(function (e) {
