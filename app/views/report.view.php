@@ -5,8 +5,8 @@
             ?>
         </div>
 
-        <main class="col position-relative main" style="left:0;height:200vh">
-            <div class="container-fluid">
+        <main class="col-auto position-relative" style="height:200vh">
+            <div class="container-fluid " title="main">
                 Hello world report
             </div>
         </main>
