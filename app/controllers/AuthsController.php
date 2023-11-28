@@ -39,6 +39,6 @@ class AuthsController
     public function logout()
     {
         Session::getInstance()->pop('auth');
-        Helper::redirect('/login');
+        Helper::redirect('/');
     }
 }
