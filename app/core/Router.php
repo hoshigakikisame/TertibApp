@@ -31,21 +31,32 @@ class Router
 	 */
 	public function direct($uri, $requestType)
 	{
-		if (array_key_exists($uri, $this->routes[$requestType])) {
+		foreach ($this->routes[$requestType] as $key => $value) {
+			if (preg_match_all($key, $uri, $matches)) {
+				$rawParams = array_slice($matches, 1);
+				$params = [];
 
-			$actions = $this->routes[$requestType][$uri];
+				foreach ($rawParams as $k => $v) {
+					$params[$k] = $v[0];
+				}
 
-			for ($i=0; $i < count($actions); $i++) {
-				$action = $actions[$i]; 
-				$this->callAction(
-					...explode('@', $action)
-				);
+				$actions = $this->routes[$requestType][$key];
+
+				for ($i = 0; $i < count($actions); $i++) {
+					$action = explode('@', $actions[$i]);
+					$class = $action[0];
+					$method = $action[1];
+					$this->callAction(
+						$class,
+						$method,
+						$params
+					);
+				}
+				return;
 			}
-			
-		} else {
-			http_response_code(404);
-			throw new Exception("Route: " . $uri . " not found!");
 		}
+		http_response_code(404);
+		throw new Exception("Route: " . $uri . " not found!");
 	}
 
 	/**
@@ -56,13 +67,13 @@ class Router
 	 * @throws Exception
 	 * @return [type]             [description]
 	 */
-	protected function callAction(string $controller, string $method)
+	protected function callAction(string $controller, string $method, $parameters = [])
 	{
 		if (!method_exists($controller, $method)) {
 			http_response_code(500);
 			throw new Exception($method . " not define on " . $controller);
 		}
-		return (new $controller)->$method();
+		return (new $controller)->$method(...$parameters);
 	}
 
 	/**

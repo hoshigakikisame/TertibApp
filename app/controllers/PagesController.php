@@ -22,6 +22,13 @@ class PagesController
 		return Helper::view('about');
 	}
 
+	public function test($id, $id2)
+	{
+		echo $id;
+		echo $id2;
+		return Helper::view('about');
+	}
+
 	/**
 	 * [contact description]
 	 * @return [type] [description]
