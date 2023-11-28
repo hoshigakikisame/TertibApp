@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author AKEEM AMUSAT
  * @copyright Bigbang Inc.
@@ -7,5 +8,5 @@
 require 'vendor/autoload.php';
 require 'app/core/bootstrap.php';
 
-Router::load('routes.php')->direct(Request::uri(), Request::method());
 Session::getInstance();
+Router::load('routes.php')->direct(Request::uri(), Request::method());
