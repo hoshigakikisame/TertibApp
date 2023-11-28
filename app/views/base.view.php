@@ -6,8 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo isset($title) ? $title : "Default Title" ?></title>
+    <!-- Custom Bootstrap  -->
+    <link rel="stylesheet" href="<?php echo App::get("root_uri") . "/public/css/index.css" ?>">
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="<?php echo App::get("root_uri") . "/public/vendor/bootstrap/css/bootstrap.min.css" ?>">
+    <!-- <link rel="stylesheet" href="<?php echo App::get("root_uri") . "/public/vendor/bootstrap/css/bootstrap.min.css" ?>"> -->
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="<?php echo App::get("root_uri") . "/public/vendor/bootstrap-icons/font/bootstrap-icons.min.css" ?>">
     <!-- Jquery -->
@@ -71,11 +73,11 @@
     <link rel="stylesheet" href="<?php echo App::get("root_uri") . "/public/css/style.css" ?>">
 </head>
 
-<body class="" style="background:var(--bg-gradient);">
-
-
+<body class="" style="">
     <?php require $subview; ?>
     <script src=" <?php echo App::get("root_uri") . "/public/vendor/bootstrap/js/bootstrap.bundle.min.js" ?>">
+    </script>
+    <script src=" <?php echo App::get("root_uri") . "/public/js/color-modes.js" ?>">
     </script>
     <!-- script for navbar -->
     <script src="<?php echo App::get("root_uri") . "/public/js/nav.js" ?>"></script>
