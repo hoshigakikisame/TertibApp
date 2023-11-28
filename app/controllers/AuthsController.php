@@ -35,4 +35,10 @@ class AuthsController
             echo "Login gagal";
         }
     }
+
+    public function logout()
+    {
+        Session::getInstance()->pop('auth');
+        Helper::redirect('/login');
+    }
 }

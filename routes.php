@@ -23,3 +23,4 @@ $router->get('/dashboard/', ['AuthMiddleware@validateSession', 'PagesController@
 $router->get('/report/', ['AuthMiddleware@validateSession', 'PagesController@report']);
 $router->get('/notification/', ['AuthMiddleware@validateSession', 'PagesController@notification']);
 $router->get('/profile/', ['AuthMiddleware@validateSession', 'PagesController@profile']);
+$router->get('/logout/', ['AuthMiddleware@validateSession', 'AuthsController@logout']);
