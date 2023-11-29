@@ -23,7 +23,7 @@
 			<?php endif;
 			?>
 			<div class="pe-5">
-				<?php require 'utils/darkModeButton.view.php';
+				<?php Helper::importView('partials/utils/dark_mode_button.view.php');
 				?>
 			</div>
 		</div>

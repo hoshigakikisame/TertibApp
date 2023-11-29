@@ -10,10 +10,10 @@
 
 <body>
 
-	<?php require 'partials/nav.view.php'; ?>
+	<?php Helper::importView('partials/nav.view.php'); ?>
 	<h1>All Users</h1>
 	<ul>
-		<?php foreach ($users as $user): ?>
+		<?php foreach ($users as $user) : ?>
 			<li>
 				<?= $user->name ?>
 			</li>

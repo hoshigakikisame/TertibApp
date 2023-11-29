@@ -3,7 +3,7 @@
     <div class="row-auto flex-column flex-lg-row position-relative">
         <!-- Start Sidebar -->
         <div class="col-auto sidebar shadow-sm">
-            <?php require 'partials/navDashboard.view.php';
+            <?php Helper::importView('partials/nav_dashboard.view.php');
             ?>
         </div>
         <!-- End Sidebar -->
@@ -11,7 +11,7 @@
         <main class="col position-relative" style=" height:200vh">
             <div class="container-fluid py-4" title="main">
                 <div class="position-absolute" style="left: 80px;top: 14px;">
-                    <?php require 'partials/utils/darkModeButton.view.php';
+                    <?php Helper::importView('partials/utils/darkModeButton.view.php');
                     ?>
                 </div>
                 <div class="row mb-4">

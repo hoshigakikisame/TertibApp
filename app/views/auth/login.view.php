@@ -3,7 +3,8 @@ $redirected =  App::get('root_uri') . "/login";
 ?>
 <div class="position-absolute ">
 
-    <?php require __DIR__ . '/../partials/utils/darkModeButton.view.php';
+    <?php
+    Helper::importView("partials/utils/dark_mode_button.view.php");
     ?>
 </div>
 <main class="container-fluid d-flex flex-column justify-content-center px-4" style="font-family: Poppins; height:100vh;">

@@ -1,4 +1,4 @@
-<?php require 'partials/nav.view.php'; ?>
+<?php Helper::importView('partials/nav.view.php'); ?>
 
 
 <main class='overflow-hidden'>

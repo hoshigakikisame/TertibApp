@@ -11,7 +11,7 @@
 
 <body>
 	<h1>Contact us page</h1>
-	<?php require 'partials/nav.view.php'; ?>
+	<?php Helper::importView('partials/nav.view.php'); ?>
 </body>
 
 </html>
