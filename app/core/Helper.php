@@ -36,4 +36,10 @@ class Helper
 	{
 		header("Location: " . App::get("root_uri") . "{$path}");
 	}
+
+	public static function importView(string $filePath)
+	{
+		$appDir = dirname(__DIR__);
+		return require_once "$appDir/views/$filePath";
+	}
 }
