@@ -12,29 +12,32 @@ class Session
 	 * @return null      
 	 */
 
-	 private static $instances = [];
+	private static $instances = [];
 
-	 protected function __construct() {
+	protected function __construct()
+	{
 		session_start();
-	 }
+	}
 
-	 protected function __clone() { }
+	protected function __clone()
+	{
+	}
 
-	 public function __wakeup()
-    {
-        throw new \Exception("Cannot unserialize a singleton.");
-    }
+	public function __wakeup()
+	{
+		throw new \Exception("Cannot unserialize a singleton.");
+	}
 
-	 public static function getInstance(): Session
-	 {
-		 $cls = static::class;
-		 if (!isset(self::$instances[$cls])) {
-			 self::$instances[$cls] = new static();
-		 }
- 
-		 return self::$instances[$cls];
-	 }
- 
+	public static function getInstance(): Session
+	{
+		$cls = static::class;
+		if (!isset(self::$instances[$cls])) {
+			self::$instances[$cls] = new static();
+		}
+
+		return self::$instances[$cls];
+	}
+
 
 	public function push(string $name, $data)
 	{

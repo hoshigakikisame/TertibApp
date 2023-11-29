@@ -1,0 +1,426 @@
+// Override Bootstrap's Sass default variables
+//
+// Nearly all variables in Bootstrap are written with the `!default` flag.
+// This allows you to override the default values of those variables before
+// you import Bootstrap's source Sass files.
+//
+// Overriding the default variable values is the best way to customize your
+// CSS without writing _new_ styles. For example, you can either change
+// `$body-color` or write more CSS that override's Bootstrap's CSS like so:
+// `body { color: red; }`.
+
+
+//
+// Bring in Bootstrap
+//
+
+// Option 2
+//
+// Place variable overrides first, then import just the styles you need. Note that some stylesheets are required no matter what.
+
+// Toggle global options
+$enable-gradients: true;
+$enable-shadows: true;
+
+$offcanvas-box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175);
+
+// Include functions first
+@import "../vendor/twbs/bootstrap/scss/functions";
+
+// Customize some defaults
+$body-color: #333;
+// $body-bg: #fff;
+$border-radius: .4rem;
+$success: #7952b3;
+
+$primary: #FCB216;
+$secondary: #F3542C;
+$dark: #0C1C44;
+$light: #fff;
+
+
+// Required
+@import "../vendor/twbs/bootstrap/scss/variables";
+@import "../vendor/twbs/bootstrap/scss/variables-dark";
+@import "../vendor/twbs/bootstrap/scss/maps";
+@import "../vendor/twbs/bootstrap/scss/mixins";
+@import "../vendor/twbs/bootstrap/scss/utilities";
+@import "../vendor/twbs/bootstrap/scss/root";
+@import "../vendor/twbs/bootstrap/scss/reboot";
+
+@import "../vendor/twbs/bootstrap/scss/type";
+// @import "../vendor/twbs/bootstrap/scss/images";
+@import "../vendor/twbs/bootstrap/scss/containers";
+@import "../vendor/twbs/bootstrap/scss/grid";
+// @import "../vendor/twbs/bootstrap/scss/tables";
+// @import "../vendor/twbs/bootstrap/scss/forms";
+@import "../vendor/twbs/bootstrap/scss/buttons";
+@import "../vendor/twbs/bootstrap/scss/transitions";
+@import "../vendor/twbs/bootstrap/scss/dropdown";
+// @import ../vendor/twbs/bootstrap/scss/button-group";
+// @import "../vendor/twbs/bootstrap/scss/nav";
+// @import "../vendor/twbs/bootstrap/scss/navbar"; // Requires nav
+// @import "../vendor/twbs/bootstrap/scss/card";
+// @import "../vendor/twbs/bootstrap/scss/breadcrumb";
+// @import "../vendor/twbs/bootstrap/scss/accordion";
+// @import "../vendor/twbs/bootstrap/scss/pagination";
+// @import "../vendor/twbs/bootstrap/scss/badge";
+// @import "../vendor/twbs/bootstrap/scss/alert";
+// @import "../vendor/twbs/bootstrap/scss/progress";
+// @import "../vendor/twbs/bootstrap/scss/list-group";
+@import "../vendor/twbs/bootstrap/scss/close";
+// @import "../vendor/twbs/bootstrap/scss/toasts";
+@import "../vendor/twbs/bootstrap/scss/modal"; // Requires transitions
+// @import "../vendor/twbs/bootstrap/scss/tooltip";
+@import "../vendor/twbs/bootstrap/scss/popover";
+// @import "../vendor/twbs/bootstrap/scss/carousel";
+// @import "../vendor/twbs/bootstrap/scss/spinners";
+@import "../vendor/twbs/bootstrap/scss/offcanvas"; // Requires transitions
+// @import "../vendor/twbs/bootstrap/scss/placeholders";
+
+// Helpers
+// @import "../vendor/twbs/bootstrap/scss/helpers";
+
+// Utilities
+@import "../vendor/twbs/bootstrap/scss/utilities/api";
+
+
+
+$color-mode-type: data;
+
+
+
+
+//
+// Custom styles
+//
+
+@import "icon-list";
+
+
+
+
+.color-modes {
+  .dropdown-menu {
+    padding: .25rem;
+
+    li + li {
+      margin-top: .125rem;
+    }
+  }
+
+  .dropdown-item {
+    @include border-radius(.25rem);
+  }
+
+  .active {
+    font-weight: 600;
+
+    .bi {
+      display: block !important; // stylelint-disable-line declaration-no-important
+    }
+  }
+}
+
+
+
+// Start nav
+.active-page,
+.active-page a.nav-link,
+a.nav-link:hover,
+.nav-item:hover {
+  color: $secondary;
+  transition: all 0.5s;
+}
+
+nav.navbar, footer{
+    background-color: var(--bs-body-bg);
+}
+
+// hero section
+.hero-section{
+    height:90vh;
+}
+
+.circle-elemen-hero{
+    height:40vh;
+}
+
+.circle-elemen-hero > .elemen , .circle-elemen-hero > img{
+    top: 7vh;
+    right: 0;
+}
+
+.circle-elemen-hero > .elemen{
+    width: 463px;
+    height: 463px;
+    background: linear-gradient(180deg, #FCB216 6.77%, #F3542C 27.6%, rgba(255, 255, 255, 0.32) 65.62%);
+}
+
+@include color-mode(dark) {
+.active-page,
+.active-page a.nav-link,
+a.nav-link:hover,
+.nav-item:hover {
+  color: $primary;
+  transition: all 0.5s;
+}
+
+.circle-elemen-hero > .elemen{
+  background: linear-gradient(180deg, #FCB216 6.77%, #F3542C 27.6%, rgba(33, 37, 41, 0.32) 65.62%);
+}
+  
+@media (min-width: 992px) {
+    li.active-page::before {
+        background-color: $primary;
+    }
+    .nav-item:hover::before {
+        background-color: $primary;
+    }
+
+}
+
+
+}
+
+
+.img-profile {
+  width: 50px;
+  height: 50px;
+}
+
+li.active-page::before {
+  background-color: $secondary;
+  content: "";
+  position: absolute;
+  left: 0px;
+  width: 3px;
+  height: 25px;
+  transition: all ease 0.5s;
+}
+
+.nav-item:hover::before {
+  background-color: $secondary;
+  content: "";
+  position: absolute;
+  left: 0px;
+  width: 3px;
+  height: 25px;
+  transition: all ease 0.5s;
+}
+
+@media (min-width: 992px) {
+  li.active-page::before {
+    content: "";
+    position: absolute;
+    left: 0px;
+    background-color: $secondary;
+    width: 3px;
+    height: 25px;
+    transition: all ease 0.5s;
+  }
+
+  .nav-item::before {
+    content: "";
+    height: 0;
+  }
+
+  .nav-item:hover::before {
+    content: "";
+    position: absolute;
+    left: 0px;
+    background-color: $secondary;
+    width: 3px;
+    height: 25px;
+    transition: all ease 0.5s;
+  }
+
+  .sidebar {
+    z-index: 1000;
+    height: 100vh;
+    position: fixed !important;
+    left: 0px;
+  }
+
+  main {
+    overflow-x: hidden !important;
+  }
+
+  div[title="main"] {
+    position: relative !important;
+    left: 300px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Start Animation */
+/* Declare class animation */
+.slide-in-right {
+    -webkit-animation: slide-in-right 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s
+      both;
+    animation: slide-in-right 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both;
+  }
+  
+  .slide-in-left {
+    -webkit-animation: slide-in-left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s
+      both;
+    animation: slide-in-left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both;
+  }
+  
+  .slide-in-bottom {
+    -webkit-animation: slide-in-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      both;
+    animation: slide-in-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+  
+  .shadow-drop-bottom {
+    -webkit-animation: shadow-drop-bottom 0.4s ease-in both;
+    animation: shadow-drop-bottom 0.4s ease-in both;
+  }
+  
+  /**
+   * ----------------------------------------
+   * animation shadow-drop-bottom
+   * ----------------------------------------
+   */
+  @-webkit-keyframes shadow-drop-bottom {
+    0% {
+      -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+    100% {
+      -webkit-box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.35);
+      box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.35) !important;
+    }
+  }
+  @keyframes shadow-drop-bottom {
+    0% {
+      -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+    100% {
+      -webkit-box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.35);
+      box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.35) !important;
+    }
+  }
+  
+  /**
+   * ----------------------------------------
+   * animation slide-in-right
+   * ----------------------------------------
+   */
+  @-webkit-keyframes slide-in-right {
+    0% {
+      -webkit-transform: translateX(1000px);
+      transform: translateX(1000px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  @keyframes slide-in-right {
+    0% {
+      -webkit-transform: translateX(1000px);
+      transform: translateX(1000px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  /**
+   * ----------------------------------------
+   * animation slide-in-left
+   * ----------------------------------------
+   */
+  @-webkit-keyframes slide-in-left {
+    0% {
+      -webkit-transform: translateX(-1000px);
+      transform: translateX(-1000px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  @keyframes slide-in-left {
+    0% {
+      -webkit-transform: translateX(-1000px);
+      transform: translateX(-1000px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  /**
+   * ----------------------------------------
+   * animation slide-in-bottom
+   * ----------------------------------------
+   */
+  @-webkit-keyframes slide-in-bottom {
+    0% {
+      -webkit-transform: translateY(1000px);
+      transform: translateY(1000px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  @keyframes slide-in-bottom {
+    0% {
+      -webkit-transform: translateY(1000px);
+      transform: translateY(1000px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  /* End Animation */
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+@import "../vendor/twbs/bootstrap/scss/bootstrap";
