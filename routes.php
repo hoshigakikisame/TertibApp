@@ -19,6 +19,8 @@ $router->get('/^test\/(\d+)\/(\d+)$/', ['PagesController@test']);
 
 $router->get('/^login$/', ['AuthMiddleware@shouldAnonymous', 'AuthsController@loginForm']);
 $router->post('/^login$/', ['AuthMiddleware@shouldAnonymous', 'AuthsController@login']);
+$router->get('/^change_password$/', ['AuthMiddleware@shouldAnonymous', 'PagesController@changePassword']);
+
 
 $router->get('/^dashboard$/', ['AuthMiddleware@shouldValidated', 'PagesController@dashboard']);
 $router->get('/^report$/', ['AuthMiddleware@shouldValidated', 'PagesController@report']);

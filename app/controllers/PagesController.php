@@ -50,7 +50,7 @@ class PagesController
 		$user = Session::getInstance()->get('user');
 
 		$adminRole = $user->getRoleDetail();
-		assert ($adminRole instanceof AdminModel);
+		assert($adminRole instanceof AdminModel);
 
 		// echo $admin->getFirstName();
 
@@ -79,5 +79,14 @@ class PagesController
 	public function profile()
 	{
 		return Helper::view('profile');
+	}
+
+	/**
+	 * [contact description]
+	 * @return [type] [description]
+	 */
+	public function changePassword()
+	{
+		return Helper::view('change_password');
 	}
 }
