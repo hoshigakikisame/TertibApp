@@ -5,7 +5,7 @@ class AuthsController
     public function loginForm()
     {
 
-        if (Session::getInstance()->has('auth')) {
+        if (Session::getInstance()->has('user')) {
             return Helper::redirect('/');
         }
 
@@ -14,31 +14,37 @@ class AuthsController
 
     public function login()
     {
-
-        if (Session::getInstance()->has('auth')) {
-            return Helper::redirect('/');
-        }
-
         if (isset($_POST['username']) && isset($_POST['password'])) {
             $username = $_POST['username'];
             $password = $_POST['password'];
 
-            if ($username == "rian" && $password = "rian") {
-                Session::getInstance()->push('auth', new Auth(1, $username, 'admin'));
-                Helper::redirect('/dashboard');
-            } else {
-                echo "Login gagal";
-                Flasher::setFlash("danger", "SLIWIK");
+            $user = AuthService::getSingleUser($username);
+
+            if (!$user) {
+                Flasher::setFlash("danger", "Login Failed");
                 Helper::redirect('/login');
             }
-        } else {
-            echo "Login gagal";
+            
+            $salt = $user->getSalt();
+            $passwordHash = $user->getPasswordHash();
+
+            $saltedPassword = $salt . $password;
+
+            $verified = password_verify($saltedPassword, $passwordHash);
+
+            if ($verified) {
+                Session::getInstance()->push('user', $user);
+                Helper::redirect('/dashboard');
+            } else {
+                Flasher::setFlash("danger", "Login Failed");
+                Helper::redirect('/login');
+            }
         }
     }
 
     public function logout()
     {
-        Session::getInstance()->pop('auth');
+        Session::getInstance()->pop('user');
         Helper::redirect('/');
     }
 }

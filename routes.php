@@ -16,11 +16,12 @@ $router->get('/^users$/', ['UsersController@index']);
 $router->post('/^users$/', ['UsersController@store']);
 $router->get('/^about$/', ['PagesController@about']);
 $router->get('/^test\/(\d+)\/(\d+)$/', ['PagesController@test']);
-$router->get('/^login$/', ['AuthsController@loginForm']);
-$router->post('/^login$/', ['AuthsController@login']);
 
-$router->get('/^dashboard$/', ['AuthMiddleware@validateSession', 'PagesController@dashboard']);
-$router->get('/^report$/', ['AuthMiddleware@validateSession', 'PagesController@report']);
-$router->get('/^notification$/', ['AuthMiddleware@validateSession', 'PagesController@notification']);
-$router->get('/^profile$/', ['AuthMiddleware@validateSession', 'PagesController@profile']);
-$router->get('/^logout$/', ['AuthMiddleware@validateSession', 'AuthsController@logout']);
+$router->get('/^login$/', ['AuthMiddleware@shouldAnonymous', 'AuthsController@loginForm']);
+$router->post('/^login$/', ['AuthMiddleware@shouldAnonymous', 'AuthsController@login']);
+
+$router->get('/^dashboard$/', ['AuthMiddleware@shouldValidated', 'PagesController@dashboard']);
+$router->get('/^report$/', ['AuthMiddleware@shouldValidated', 'PagesController@report']);
+$router->get('/^notification$/', ['AuthMiddleware@shouldValidated', 'PagesController@notification']);
+$router->get('/^profile$/', ['AuthMiddleware@shouldValidated', 'PagesController@profile']);
+$router->get('/^logout$/', ['AuthMiddleware@shouldValidated', 'AuthsController@logout']);
