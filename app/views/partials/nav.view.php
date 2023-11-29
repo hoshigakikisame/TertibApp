@@ -14,7 +14,7 @@
 				</li>
 			</ul>
 
-			<?php if (!Session::getInstance()->has('auth')) :
+			<?php if (!Session::getInstance()->has('user')) :
 			?>
 				<a class="btn border-0 rounded-3 fs-6 my-auto bg-primary text-white" href="login" style="width:min(50%,155px);">Login</a>
 			<?php else :

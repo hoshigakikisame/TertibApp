@@ -44,6 +44,16 @@ class PagesController
 	 */
 	public function dashboard()
 	{
+		/**
+		 * @var UserModel
+		 */
+		$user = Session::getInstance()->get('user');
+
+		$adminRole = $user->getRoleDetail();
+		assert ($adminRole instanceof AdminModel);
+
+		// echo $admin->getFirstName();
+
 		return Helper::view('dashboard');
 	}
 	/**

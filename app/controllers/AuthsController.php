@@ -5,7 +5,7 @@ class AuthsController
     public function loginForm()
     {
 
-        if (Session::getInstance()->has('auth')) {
+        if (Session::getInstance()->has('user')) {
             return Helper::redirect('/');
         }
 
@@ -14,31 +14,55 @@ class AuthsController
 
     public function login()
     {
-
-        if (Session::getInstance()->has('auth')) {
-            return Helper::redirect('/');
-        }
-
         if (isset($_POST['username']) && isset($_POST['password'])) {
+            // declare services
+            $userService = UserService::getInstance();
+            $adminService = AdminService::getInstance();
+
+            // get input
             $username = $_POST['username'];
             $password = $_POST['password'];
 
-            if ($username == "rian" && $password = "rian") {
-                Session::getInstance()->push('auth', new Auth(1, $username, 'admin'));
-                Helper::redirect('/dashboard');
-            } else {
-                echo "Login gagal";
-                Flasher::setFlash("danger", "SLIWIK");
+            // get user
+            $user = $userService->getSingleUser($username);
+
+            // check if user exists
+            if (!$user) {
+                Flasher::setFlash("danger", "Login Failed");
                 Helper::redirect('/login');
             }
-        } else {
-            echo "Login gagal";
+            
+            // verify password
+            $salt = $user->getSalt();
+            $passwordHash = $user->getPasswordHash();
+            $saltedPassword = $salt . $password;
+            $verified = password_verify($saltedPassword, $passwordHash);
+
+            if ($verified) {
+
+                // set role detail
+                switch ($user->getRole()) {
+                    case 'admin':
+                        $user->setRoleDetail($adminService->getSingleAdmin($user->getIdUser()));
+                        break;
+                    case 'dosen': break;
+                    case 'mahasiswa': break;
+                    default: break;
+                }
+
+                // set session
+                Session::getInstance()->push('user', $user);
+                Helper::redirect('/dashboard');
+            } else {
+                Flasher::setFlash("danger", "Login Failed");
+                Helper::redirect('/login');
+            }
         }
     }
 
     public function logout()
     {
-        Session::getInstance()->pop('auth');
+        Session::getInstance()->pop('user');
         Helper::redirect('/');
     }
 }

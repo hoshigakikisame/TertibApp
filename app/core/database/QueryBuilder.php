@@ -37,11 +37,22 @@ class QueryBuilder
 	 * @param string $table_name
 	 * @return array 
 	 */
-	public function findOne($id, $table)
+	public function findOne($table, $parameters = [])
 	{
-		$statement = $this->pdo->prepare("SELECT * FROM {$table} WHERE id={$id} LIMIT 1");
-		$statement->execute();
-		return $statement->fetchAll(PDO::FETCH_OBJ);
+		$sql = sprintf(
+			"SELECT * FROM %s WHERE %s",
+			$table,
+			implode(' AND ', array_map(fn ($key) => "$key = :$key", array_keys($parameters)))
+		);
+
+		try {
+			$statement = $this->pdo->prepare($sql);
+			$statement->execute($parameters);
+			$results = $statement->fetchAll(PDO::FETCH_CLASS);
+			return $results[0];
+		} catch (PDOException $e) {
+			die("Whoops!! Something Went Wrong!!!");
+		}
 	}
 
 	/**
