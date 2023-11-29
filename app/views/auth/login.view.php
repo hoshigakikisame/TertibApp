@@ -24,12 +24,11 @@ $redirected =  App::get('root_uri') . "/login";
                     <label for="passwordInput" class="form-label">Password</label>
                     <input type="password" name="password" id="passwordInput" class="form-control" aria-describedby="passwordHelpBlock" placeholder='Password'>
                     <div id="forgotPassword" class="form-text">
-                        <p>Forgot Your Password? <a class="link-underline link-underline-opacity-0" style="color:var(--red)" href="">Change Password </a></p>
+                        <p>Forgot Your Password? <a class="link-underline link-underline-opacity-0" href="<?= App::get('root_uri') . "/change_password" ?>">Change Password </a></p>
                     </div>
                 </div>
                 <div class="mb-3">
-                    <input type="submit" class="btn w-100 " style='border-radius: 6px;
-background: rgba(252, 178, 22, 0.22);'></input>
+                    <input type="submit" class="btn w-100 bg-primary text-white" style='border-radius: 6px;'></input>
                 </div>
             </form>
         </div>
