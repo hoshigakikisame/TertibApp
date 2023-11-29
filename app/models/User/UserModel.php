@@ -1,4 +1,8 @@
 <?php 
+    /**
+     * @template T
+     */
+
     class UserModel {
         protected int $idUser;
         protected string $username;
@@ -7,6 +11,11 @@
         protected string $email;
         protected string $role;
         protected string $imagePath = '/public/media/default/blank_user.png';
+        
+        /**
+         * @var T
+         */
+        protected $roleDetail;
 
         public function __construct($idUser, $username, $salt, $passwordHash, $email, $role, $imagePath) {
             $this->idUser = $idUser;
@@ -57,6 +66,13 @@
             return $this->imagePath;
         }
 
+        /**
+         * @return T
+         */
+        public function getRoleDetail() {
+            return $this->roleDetail;
+        }
+
         public function setIdUser($idUser) {
             $this->idUser = $idUser;
         }
@@ -83,6 +99,13 @@
 
         public function setImagePath($imagePath) {
             $this->imagePath = $imagePath;
+        }
+
+        /**
+         * @param T $roleDetail
+         */
+        public function setRoleDetail($roleDetail) {
+            $this->roleDetail = $roleDetail;
         }
 
         public function isAdmin() {
