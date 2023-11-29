@@ -89,4 +89,13 @@ class PagesController
 	{
 		return Helper::view('change_password');
 	}
+
+	/**
+	 * [contact description]
+	 * @return [type] [description]
+	 */
+	public function sendVerification()
+	{
+		return Helper::view('send_verification');
+	}
 }

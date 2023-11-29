@@ -20,6 +20,8 @@ $router->get('/^test\/(\d+)\/(\d+)$/', ['PagesController@test']);
 $router->get('/^login$/', ['AuthMiddleware@shouldAnonymous', 'AuthsController@loginForm']);
 $router->post('/^login$/', ['AuthMiddleware@shouldAnonymous', 'AuthsController@login']);
 $router->get('/^change_password$/', ['AuthMiddleware@shouldAnonymous', 'PagesController@changePassword']);
+$router->get('/^send_verification$/', ['AuthMiddleware@shouldAnonymous', 'PagesController@sendVerification']);
+
 
 
 $router->get('/^dashboard$/', ['AuthMiddleware@shouldValidated', 'PagesController@dashboard']);
