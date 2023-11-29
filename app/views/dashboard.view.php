@@ -10,10 +10,6 @@
 
         <main class="col position-relative" style=" height:200vh">
             <div class="container-fluid py-4" title="main">
-                <div class="position-absolute" style="left: 80px;top: 14px;">
-                    <?php Helper::importView('partials/utils/darkModeButton.view.php');
-                    ?>
-                </div>
                 <div class="row mb-4">
                     <p class='mb-0' style="color: var(--yellow);">Hi, Jonas</p>
                     <h1>Welcome to Tertib App</h1>

@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row flex-column flex-lg-row position-relative" style="">
         <div class="col-auto sidebar shadow-sm" style="">
-            <?php Helper::importView('partials/navDashboard.view.php');
+            <?php Helper::importView('partials/nav_dashboard.view.php');
             ?>
         </div>
 

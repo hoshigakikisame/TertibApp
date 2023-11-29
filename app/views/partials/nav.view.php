@@ -22,10 +22,6 @@
 				<a class="btn border-0 rounded-3 fs-6 my-auto bg-primary text-white" href="dashboard" style="width:min(50%,155px)">Dashboard</a>
 			<?php endif;
 			?>
-			<div class="pe-5">
-				<?php Helper::importView('partials/utils/dark_mode_button.view.php');
-				?>
-			</div>
 		</div>
 	</div>
 </nav>
