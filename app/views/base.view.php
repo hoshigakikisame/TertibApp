@@ -73,7 +73,11 @@
     <link rel="stylesheet" href="<?php echo App::get("root_uri") . "/public/css/style.css" ?>">
 </head>
 
-<body class="" style="">
+<body class="position-relative">
+    <div class="position-fixed z-2" style="right: -85px; bottom:9vh;">
+        <?php Helper::importView('partials/utils/dark_mode_button.view.php');
+        ?>
+    </div>
     <?php require $subview; ?>
     <script src=" <?php echo App::get("root_uri") . "/public/vendor/bootstrap/js/bootstrap.bundle.min.js" ?>">
     </script>

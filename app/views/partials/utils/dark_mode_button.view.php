@@ -1,4 +1,4 @@
-<div class="d-flex ms-2 align-items-center dropdown color-modes">
+<div class="d-flex ms-2 align-items-center dropup-center dropstart color-modes pe-5 me-5 ">
     <button class="btn btn-link px-0 text-decoration-none dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static">
         <div class="my-1 me-2">
             <i class="bi theme-icon-active"></i>
