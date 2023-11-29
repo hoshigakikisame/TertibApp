@@ -143,12 +143,7 @@ nav.navbar, footer{
 }
 
 .circle-elemen-hero{
-    height:40vh;
-}
-
-.circle-elemen-hero > .elemen , .circle-elemen-hero > img{
-    top: 7vh;
-    right: 0;
+    top: 35%;
 }
 
 .circle-elemen-hero > .elemen{
@@ -157,6 +152,8 @@ nav.navbar, footer{
     background: linear-gradient(180deg, #FCB216 6.77%, #F3542C 27.6%, rgba(255, 255, 255, 0.32) 65.62%);
 }
 
+
+// start dark mode
 @include color-mode(dark) {
 .active-page,
 .active-page a.nav-link,
@@ -180,9 +177,12 @@ a.nav-link:hover,
 
 }
 
-
+.card .card-emblem{
+  background-color:var(--bs-body-bg);
 }
 
+}
+// end dark mode
 
 .img-profile {
   width: 50px;

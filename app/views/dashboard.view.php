@@ -1,7 +1,8 @@
 <div class="container-fluid">
-    <div class="row-auto flex-column flex-lg-row position-relative" style="">
+
+    <div class="row-auto flex-column flex-lg-row position-relative">
         <!-- Start Sidebar -->
-        <div class="col-auto sidebar shadow-sm" style="">
+        <div class="col-auto sidebar shadow-sm">
             <?php require 'partials/navDashboard.view.php';
             ?>
         </div>
@@ -9,6 +10,10 @@
 
         <main class="col position-relative" style=" height:200vh">
             <div class="container-fluid py-4" title="main">
+                <div class="position-absolute" style="left: 80px;top: 14px;">
+                    <?php require 'partials/utils/darkModeButton.view.php';
+                    ?>
+                </div>
                 <div class="row mb-4">
                     <p class='mb-0' style="color: var(--yellow);">Hi, Jonas</p>
                     <h1>Welcome to Tertib App</h1>
@@ -36,6 +41,7 @@
                 </div>
 
                 <div class="row mb-4">
+
                     <h1>Recent Reports</h1>
                 </div>
             </div>

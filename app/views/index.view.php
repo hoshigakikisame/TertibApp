@@ -16,8 +16,8 @@
 				<!-- link Report Button -->
 				<a href="report" class="py-2 px-5 rounded-3 link-underline link-underline-opacity-0" style="color:var(--white);font-family:Poppins Semi Bold; background:var(--btn-gradient);">Report ></a>
 			</div>
-			<div class="col d-none d-lg-block slide-in-right" title='righthero'>
-				<div class="position-relative circle-elemen-hero">
+			<div class="col d-none d-lg-block slide-in-right position-relative" title='righthero'>
+				<div class="position-absolute circle-elemen-hero">
 					<div class="elemen cirle rounded-circle position-absolute d-none d-lg-block"></div>
 					<img class="position-absolute d-none d-lg-block" src="<?php echo App::get("root_uri") . "/public/img/code of conduct image.png" ?>" alt="code of conduct image">
 				</div>
@@ -41,8 +41,8 @@
 						?>
 						<div class="col">
 							<div class="card border-0 align-items-center bg-transparent">
-								<div class="card-emblem border border-2 rounded-circle p-2" style="height:100px;width:100px;border-color:var(--dark-blue) !important;"> <!--add color in var for changes color-->
-									<h1 class="text-center rounded-circle p-4 p-md-3" style="background-color:var(--white-gray); filter:var(--drop-shadow)">I</h1> <!--for number -->
+								<div class="card-emblem border border-2 border-primary rounded-circle p-2" style="height:100px;width:100px;"> <!--add color in var for changes color-->
+									<h1 class="text-center rounded-circle p-4 p-md-3 shadow-lg ">I</h1> <!--for number -->
 								</div>
 								<div class="card-body text-center" style="width:min(80%,200px);">
 									<h5 class="card-title">Pelanggaran Sangat Berat</h5> <!--for text -->

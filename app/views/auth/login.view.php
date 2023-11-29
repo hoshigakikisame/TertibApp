@@ -1,10 +1,15 @@
 <?php
 $redirected =  App::get('root_uri') . "/login";
-echo $flash;
 ?>
+<div class="position-absolute ">
+
+    <?php require __DIR__ . '/../partials/utils/darkModeButton.view.php';
+    ?>
+</div>
 <main class="container-fluid d-flex flex-column justify-content-center px-4" style="font-family: Poppins; height:100vh;">
-    <div class="row shadow-sm rounded-5 align-self-center  px-2 w-lg-25" style="padding-top:5vh;padding-bottom:10vh;">
-        <div class="col d-flex flex-column ">
+
+    <div class="row rounded-5 align-self-center border border-2 p-1 w-lg-25">
+        <div class="col shadow-sm  d-flex flex-column  rounded-5 m-2 px-0 py-5">
             <div class="text d-flex flex-column align-items-center mb-5">
                 <h1 class="fs-3" style="font-family: Poppins Bold;">Account Login</h1>
                 <p class="h6 text-center" style='width:min(80%,300px)'>Hey, Enter Your Details to Get Sign In to Your Account</p>
@@ -28,7 +33,7 @@ background: rgba(252, 178, 22, 0.22);'></input>
             </form>
         </div>
     </div>
-    <footer class="text-center p-3">
+    <footer class="text-center m-4 ">
         <p>Copyright | Privacy Policy</p>
     </footer>
 </main>

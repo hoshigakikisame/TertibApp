@@ -8393,12 +8393,7 @@ nav.navbar, footer {
 }
 
 .circle-elemen-hero {
-  height: 40vh;
-}
-
-.circle-elemen-hero > .elemen, .circle-elemen-hero > img {
-  top: 7vh;
-  right: 0;
+  top: 35%;
 }
 
 .circle-elemen-hero > .elemen {
@@ -8424,6 +8419,9 @@ nav.navbar, footer {
   [data-bs-theme=dark] .nav-item:hover::before {
     background-color: #FCB216;
   }
+}
+[data-bs-theme=dark] .card .card-emblem {
+  background-color: var(--bs-body-bg);
 }
 
 .img-profile {
