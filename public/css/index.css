@@ -8482,8 +8482,7 @@ li.active-page::before {
     overflow-x: hidden !important;
   }
   div[title=main] {
-    position: relative !important;
-    left: 300px;
+    padding-left: 300px;
   }
 }
 /* Start Animation */
