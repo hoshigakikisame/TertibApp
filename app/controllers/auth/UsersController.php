@@ -5,7 +5,11 @@
 	{
 		public function index()
 		{
-			$users = App::get('database')->selectAll("users");
+			/**
+			 * @var QueryBuilder
+			 */
+			$db = App::get('database');
+			$users = $db->selectAll("users");
 			return Helper::view('users', [
 					'users' => $users
 				]);
@@ -13,7 +17,11 @@
 
 		public function store()
 		{
-			App::get('database')->insert('users', [
+			/**
+			 * @var QueryBuilder
+			 */
+			$db = App::get('database');
+			$db->insert('users', [
 				'name' => $_POST['name']
 			]);
 

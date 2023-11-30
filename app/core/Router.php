@@ -12,6 +12,29 @@ class Router
 		"HEAD" => []
 	);
 
+	private static $instances = [];
+
+	protected function __construct(){}
+
+	protected function __clone()
+	{
+	}
+
+	public function __wakeup()
+	{
+		throw new \Exception("Cannot unserialize a singleton.");
+	}
+
+	public static function getInstance(): Router
+	{
+		$cls = static::class;
+		if (!isset(self::$instances[$cls])) {
+			self::$instances[$cls] = new static();
+		}
+
+		return self::$instances[$cls];
+	}
+
 	/**
 	 * Route registrar
 	 * @param  array $routes
@@ -29,10 +52,10 @@ class Router
 	 * @throws Exception
 	 * @return null
 	 */
-	public function direct($uri, $requestType)
+	public function direct($requestUri, $requestType)
 	{
-		foreach ($this->routes[$requestType] as $key => $value) {
-			if (preg_match_all($key, $uri, $matches)) {
+		foreach ($this->routes[$requestType] as $routeUri => $actions) {
+			if (preg_match_all($routeUri, $requestUri, $matches)) {
 				$rawParams = array_slice($matches, 1);
 				$params = [];
 
@@ -40,7 +63,7 @@ class Router
 					$params[$k] = $v[0];
 				}
 
-				$actions = $this->routes[$requestType][$key];
+				$actions = $this->routes[$requestType][$routeUri];
 
 				for ($i = 0; $i < count($actions); $i++) {
 					$action = explode('@', $actions[$i]);
@@ -56,7 +79,7 @@ class Router
 			}
 		}
 		http_response_code(404);
-		throw new Exception("Route: " . $uri . " not found!");
+		throw new Exception("Route: " . $requestUri . " not found!");
 	}
 
 	/**
@@ -86,7 +109,6 @@ class Router
 	public function get($uri, $actions)
 	{
 		$this->routes['GET'][$uri] = $actions;
-		// $this->routes['GET'][$uri] = $controller;
 	}
 
 	/**
@@ -108,9 +130,9 @@ class Router
 	 * @param  string $controller
 	 * @return null
 	 */
-	public function put($uri, $controller)
+	public function put($uri, $actions)
 	{
-		$this->routes['PUT'][$uri] = $controller;
+		$this->routes['PUT'][$uri] = $actions;
 	}
 
 	/**
@@ -120,9 +142,9 @@ class Router
 	 * @param  string $controller
 	 * @return mixed
 	 */
-	public function delete($uri, $controller)
+	public function delete($uri, $actions)
 	{
-		$this->routes['DELETE'][$uri] = $controller;
+		$this->routes['DELETE'][$uri] = $actions;
 	}
 
 	/**
@@ -132,9 +154,9 @@ class Router
 	 * @param  string $controller
 	 * @return mixed
 	 */
-	public function patch($uri, $controller)
+	public function patch($uri, $actions)
 	{
-		$this->routes['PATCH'][$uri] = $controller;
+		$this->routes['PATCH'][$uri] = $actions;
 	}
 
 	/**
@@ -144,9 +166,9 @@ class Router
 	 * @param  string $controller
 	 * @return mixed
 	 */
-	public function head($uri, $controller)
+	public function head($uri, $actions)
 	{
-		$this->routes['HEAD'][$uri] = $controller;
+		$this->routes['HEAD'][$uri] = $actions;
 	}
 
 	/**
@@ -157,7 +179,7 @@ class Router
 	 */
 	public static function load($file)
 	{
-		$router = new self;
+		$router = self::getInstance();
 		require $file;
 		return $router;
 	}

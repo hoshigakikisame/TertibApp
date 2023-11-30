@@ -1,5 +1,5 @@
 <?php
-$redirected =  App::get('root_uri') . "/login";
+$redirected =  App::get('root_uri') . "/auth/login";
 ?>
 <main class="container-fluid d-flex flex-column justify-content-center" style="font-family: Poppins; height:100vh;">
 

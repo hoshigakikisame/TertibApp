@@ -15,3 +15,5 @@ App::bind(
 );
 
 App::bind('root_uri', App::get('config')['root_uri']);
+
+App::bind('router', Router::getInstance());

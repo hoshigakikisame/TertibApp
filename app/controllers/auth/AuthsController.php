@@ -29,9 +29,9 @@ class AuthsController
             // check if user exists
             if (!$user) {
                 Flasher::setFlash("danger", "Login Failed");
-                Helper::redirect('/login');
+                Helper::redirect('/auth/login');
             }
-            
+
             // verify password
             $salt = $user->getSalt();
             $passwordHash = $user->getPasswordHash();
@@ -45,17 +45,20 @@ class AuthsController
                     case 'admin':
                         $user->setRoleDetail($adminService->getSingleAdmin($user->getIdUser()));
                         break;
-                    case 'dosen': break;
-                    case 'mahasiswa': break;
-                    default: break;
+                    case 'dosen':
+                        break;
+                    case 'mahasiswa':
+                        break;
+                    default:
+                        break;
                 }
 
                 // set session
                 Session::getInstance()->push('user', $user);
-                Helper::redirect('/dashboard');
+                Helper::redirect('/admin/dashboard');
             } else {
                 Flasher::setFlash("danger", "Login Failed");
-                Helper::redirect('/login');
+                Helper::redirect('/auth/login');
             }
         }
     }
@@ -64,5 +67,15 @@ class AuthsController
     {
         Session::getInstance()->pop('user');
         Helper::redirect('/');
+    }
+
+    public function forgotPassword()
+    {
+        return Helper::view('auth/forgot_password');
+    }
+
+    public function updatePassword()
+    {
+        return Helper::view('auth/update_password');
     }
 }

@@ -1,5 +1,5 @@
 <?php
-$redirected =  App::get('root_uri') . "/send_verification";
+$redirected =  App::get('root_uri') . "/auth/forgot-password";
 ?>
 <main class="container d-flex flex-column justify-content-center" style="font-family: Poppins; height:100vh;">
     <div class="row-auto rounded-5 align-self-center border border-2 p-1 w-lg-25" style="width:min(100%,400px) !important">
@@ -17,7 +17,7 @@ $redirected =  App::get('root_uri') . "/send_verification";
                 </div>
             </form>
             <div id="forgotPassword" class="form-text mt-3">
-                <p>Do You Have an Account? <a class="link-underline link-underline-opacity-0" href="<?= App::get('root_uri') . "/login" ?>">Login</a></p>
+                <p>Do You Have an Account? <a class="link-underline link-underline-opacity-0" href="<?= App::get('root_uri') . "/auth/login" ?>">Login</a></p>
             </div>
         </div>
     </div>

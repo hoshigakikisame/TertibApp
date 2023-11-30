@@ -1,14 +1,14 @@
 <?php
 
 
-class PagesController
+class GlobalController
 {
 
 	/**
 	 * Go to the homepage
 	 * @return view
 	 */
-	public function home()
+	public function landing()
 	{
 		return Helper::view('index');
 	}
@@ -36,66 +36,5 @@ class PagesController
 	public function contact()
 	{
 		return Helper::view('contact');
-	}
-
-	/**
-	 * [contact description]
-	 * @return [type] [description]
-	 */
-	public function dashboard()
-	{
-		/**
-		 * @var UserModel
-		 */
-		$user = Session::getInstance()->get('user');
-
-		$adminRole = $user->getRoleDetail();
-		assert($adminRole instanceof AdminModel);
-
-		// echo $admin->getFirstName();
-
-		return Helper::view('dashboard');
-	}
-	/**
-	 * [contact description]
-	 * @return [type] [description]
-	 */
-	public function report()
-	{
-		return Helper::view('report');
-	}
-	/**
-	 * [contact description]
-	 * @return [type] [description]
-	 */
-	public function notification()
-	{
-		return Helper::view('notification');
-	}
-	/**
-	 * [contact description]
-	 * @return [type] [description]
-	 */
-	public function profile()
-	{
-		return Helper::view('profile');
-	}
-
-	/**
-	 * [contact description]
-	 * @return [type] [description]
-	 */
-	public function changePassword()
-	{
-		return Helper::view('change_password');
-	}
-
-	/**
-	 * [contact description]
-	 * @return [type] [description]
-	 */
-	public function sendVerification()
-	{
-		return Helper::view('send_verification');
 	}
 }

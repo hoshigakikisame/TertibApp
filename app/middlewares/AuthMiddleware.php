@@ -7,14 +7,14 @@
          */
         public function shouldValidated() {
             if (!Session::getInstance()->has('user')) {
-                Helper::redirect('/login');
+                Helper::redirect('/auth/login');
                 exit;
             }
         }
 
         public function shouldAnonymous() {
             if (Session::getInstance()->has('user')) {
-                Helper::redirect('/dashboard');
+                Helper::redirect('/auth/dashboard');
                 exit;
             }
         }

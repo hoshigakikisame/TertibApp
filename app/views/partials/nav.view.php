@@ -16,10 +16,10 @@
 
 			<?php if (!Session::getInstance()->has('user')) :
 			?>
-				<a class="btn border-0 rounded-3 fs-6 my-auto bg-primary text-white" href="login" style="width:min(50%,155px);">Login</a>
+				<a class="btn border-0 rounded-3 fs-6 my-auto bg-primary text-white" href="<?php echo App::get('root_uri') . "/auth/login" ?>" style="width:min(50%,155px);">Login</a>
 			<?php else :
 			?>
-				<a class="btn border-0 rounded-3 fs-6 my-auto bg-primary text-white" href="dashboard" style="width:min(50%,155px)">Dashboard</a>
+				<a class="btn border-0 rounded-3 fs-6 my-auto bg-primary text-white" href="<?php echo App::get('root_uri') . "/admin/dashboard" ?>" style="width:min(50%,155px)">Dashboard</a>
 			<?php endif;
 			?>
 		</div>
