@@ -28,12 +28,32 @@ class UserService
 
         return self::$instances[$cls];
     }
-    public function getSingleUser($username)
+
+    public function hashPassword($salt, $password)
     {
-        $rawUser = $this->db->findOne('tb_user', ['username' => $username]);
+        /**
+         * @var array
+         */
+        $config = App::get('config');
+        $algorithm = $config['password_hash_algorithm'];
+        $saltedPassword = $salt . $password;
+        return password_hash($saltedPassword, $algorithm);
+    }
+    public function getSingleUser(array $where = [])
+    {
+        $rawUser = $this->db->findOne('tb_user', $where);
         if ($rawUser) {
             $user = UserModel::fromStdClass($rawUser);
             return $user;
         }
+    }
+
+    public function updateUserPassword($idUser, $newPassword)
+    {
+        $this->db->update('tb_user', [
+            'password_hash' => $newPassword
+        ], [
+            'id_user' => $idUser
+        ]);
     }
 }

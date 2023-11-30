@@ -13,7 +13,8 @@
 		"twbs/bootstrap": "@stable",
 		"vlucas/phpdotenv": "@stable",
 		"components/jquery": "@stable",
-		"twbs/bootstrap-icons": "@stable"
+		"twbs/bootstrap-icons": "@stable",
+		"mailjet/mailjet-apiv3-php": "@stable"
 	},
 	"autoload": {
 		"classmap": [

@@ -5,15 +5,25 @@
  * More may be added by following the convention that's used.
  */
 
-App::bind('config', require 'config.php');
+/**
+ * @var array $config
+ */
+
+$config = require 'config.php';
+
+App::bind('config', $config);
 
 App::bind(
 	'database',
 	new QueryBuilder(
-		Connection::make(App::get('config')['database'])
+		Connection::make($config['database'])
 	)
 );
 
-App::bind('root_uri', App::get('config')['root_uri']);
+App::bind(('host'), $config['host']);
+
+App::bind('root_uri', $config['root_uri']);
 
 App::bind('router', Router::getInstance());
+
+App::bind('email_api', EmailApi::getInstance());

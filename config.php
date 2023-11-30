@@ -31,5 +31,15 @@ return [
          PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
       )
 	],
-	'root_uri' => dirname($_SERVER['SCRIPT_NAME'])
+   'host' => $_ENV['HOST'],
+	'root_uri' => dirname($_SERVER['SCRIPT_NAME']),
+   'mailjet' => [
+      'api_key' => $_ENV['MAILJET_API_KEY'],
+      'secret_key' => $_ENV['MAILJET_SECRET_KEY'],
+      'sender_email' => $_ENV['MAILJET_SENDER_EMAIL'],
+      'sender_name' => $_ENV['MAILJET_SENDER_NAME'],
+   ],
+   'timezone' => 'Asia/Jakarta',
+   'recovery_token_validity' => 60 * 60, // in seconds
+   'password_algorithm' => PASSWORD_BCRYPT
 ];

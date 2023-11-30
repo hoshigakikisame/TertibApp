@@ -24,7 +24,9 @@ class AuthsController
             $password = $_POST['password'];
 
             // get user
-            $user = $userService->getSingleUser($username);
+            $user = $userService->getSingleUser([
+                'username' => $username
+            ]);
 
             // check if user exists
             if (!$user) {
@@ -69,13 +71,77 @@ class AuthsController
         Helper::redirect('/');
     }
 
-    public function forgotPassword()
-    {
+    public function forgotPasswordView()
+    {   
+        $data = [
+            "flash" => Flasher::flash()
+        ];
+
         return Helper::view('auth/forgot_password');
     }
 
-    public function updatePassword()
+    public function forgotPassword() {
+        $email = $_POST['email'];
+
+        $userService = UserService::getInstance();
+
+        $user = $userService->getSingleUser(
+            ['email' => $email]
+        );
+
+        if ($user) {
+            $accountRecoveryService = AccountRecoveryService::getInstance();
+            $accountRecoveryService->revokeAccountRecoveryRequest($user->getIdUser());
+            $success = $accountRecoveryService->createNewAccountRecoveryRequest($user);
+            
+            if ($success) {
+                Flasher::setFlash("success", "Reset password link has been sent to your email");
+            } else {
+                Flasher::setFlash("danger", "Failed to send reset password link");
+            }
+
+            Helper::redirect('/auth/forgot-password');
+        }
+
+        Helper::redirect('/auth/forgot-password');
+    }
+
+    public function updatePasswordView(string $token)
     {
-        return Helper::view('auth/update_password');
+        $data = [
+            "flash" => Flasher::flash(),
+            "token" => $token
+        ];
+        return Helper::view('auth/update_password', $data);
+    }
+
+    public function updatePassword() {
+        $token = $_POST['token'];
+        $newPassword = $_POST['new_password'];
+
+        $accountRecoveryService = AccountRecoveryService::getInstance();
+        $accountRecovery = $accountRecoveryService->validateToken($token);
+
+        var_dump($accountRecovery);
+
+        if ($accountRecovery) {
+            $idUser = $accountRecovery->getIdUser();
+            $userService = UserService::getInstance();
+
+            $user = $userService->getSingleUser(
+                ['id_user' => $idUser]
+            );
+            
+            $newPassword = $userService->hashPassword($user->getSalt(), $newPassword);
+            $userService->updateUserPassword($idUser, $newPassword);
+
+            $accountRecoveryService->revokeAccountRecoveryRequest($idUser);
+
+            Flasher::setFlash("success", "Password has been updated");
+            Helper::redirect('/auth/login');
+        } else {   
+            Flasher::setFlash("danger", "Invalid token");
+            Helper::redirect('/auth/update-password/' . $token);
+        }
     }
 }

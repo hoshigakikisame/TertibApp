@@ -11,14 +11,14 @@ $redirected =  App::get('root_uri') . "/auth/login";
             </div>
             <form action="<?= $redirected ?>" method="POST" class="align-self-center">
                 <div class="mb-3">
-                    <label for="usernameInput" class="form-label">Email address</label>
+                    <label for="usernameInput" class="form-label">Username</label>
                     <input type="username" name="username" class="form-control" id="usernameInput" placeholder="Username">
                 </div>
                 <div class="mb-3">
                     <label for="passwordInput" class="form-label">Password</label>
                     <input type="password" name="password" id="passwordInput" class="form-control" aria-describedby="passwordHelpBlock" placeholder='Password'>
                     <div id="forgotPassword" class="form-text">
-                        <p>Forgot Your Password? <a class="link-underline link-underline-opacity-0" href="<?= App::get('root_uri') . "/auth/forgot-password" ?>">Change Password </a></p>
+                        <p>Forgot Your Password? <a class="link-underline link-underline-opacity-0" href="<?= App::get('root_uri') . "/auth/forgot-password" ?>">Click Here</a></p>
                     </div>
                 </div>
                 <div class="mb-3">

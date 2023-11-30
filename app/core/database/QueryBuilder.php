@@ -78,6 +78,36 @@ class QueryBuilder
 		} catch (PDOException $e) {
 			die("Whoops!! Something Went Wrong!!!");
 		}
+	}
 
+	public function update(string $table, array $params = [], array $where = []) {
+		$sql = sprintf(
+			"UPDATE %s SET %s WHERE %s",
+			$table,
+			implode(',', array_map(fn ($key) => "$key = :$key", array_keys($params))),
+			implode(' AND ', array_map(fn ($key) => "$key = :$key", array_keys($where)))
+		);
+
+		try {
+			$statement = $this->pdo->prepare($sql);
+			$statement->execute([...$params, ...$where]);
+		} catch (PDOException $e) {
+			die("Whoops!! Something Went Wrong!!!");
+		}
+	}
+
+	public function delete(string $table, array $where = []) {
+		$sql = sprintf(
+			"DELETE FROM %s WHERE %s",
+			$table,
+			implode(' AND ', array_map(fn ($key) => "$key = :$key", array_keys($where)))
+		);
+
+		try {
+			$statement = $this->pdo->prepare($sql);
+			$statement->execute($where);
+		} catch (PDOException $e) {
+			die("Whoops!! Something Went Wrong!!!");
+		}
 	}
 }
