@@ -10,17 +10,17 @@ $password = '';
             ?>
         </div>
 
-        <main class="col-auto position-relative" style="height:200vh">
+        <main class="col-auto position-relative">
             <div class=" " title='main'>
                 <div class="row py-2 my-4 gap-2">
-                    <div class="col">
-                        <h1>Profile</h1>
+                    <h1>Profile</h1>
+                    <div class="col my-2 mx-2">
                         <form action="<?= $profile ?>" method="POST">
-                            <div class="row gap-5 justify-content-center">
-                                <div class="col-auto">
-                                    <img src="" alt="" class="bg-grey">
+                            <div class="row d-flex gap-3 flex-wrap">
+                                <div class="col-md-auto col-9" class="p-4">
+                                    <img src="<?= App::get("root_uri") . "/public/img/hasyim.jpg" ?>" alt="" class="object-fit-cover border rounded img-thumbnail" style="width:188px;height:250px;">
                                 </div>
-                                <div class="col-6">
+                                <div class="col-lg-6 col">
                                     <div class="mb-3">
                                         <label for="firstname" class="form-label">Firstname</label>
                                         <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Firstname">
@@ -47,21 +47,21 @@ $password = '';
                         </form>
                     </div>
                 </div>
-                <div class="row py-2 my-4 ">
+                <div class="row py-2 my-4 gap-2">
                     <h1>Change Password</h1>
-                    <div class="col rounded-5 p-4 m-2">
+                    <div class="col rounded-5 my-2 mx-2">
                         <form action="<?= $password ?>" method="post">
-                            <div class="row gap-5 justify-content-center">
-                                <div class="col-7 ">
-                                    <div class="mb-3 d-flex gap-2">
+                            <div class="row gap-5 ">
+                                <div class="col-lg-7 col">
+                                    <div class="mb-3 d-lg-flex gap-2">
                                         <label for="currentPassword" class="form-label w-50">Current Password</label>
                                         <input type="password" class="form-control" name="currentPassword" id="currentPassword" placeholder="Enter Your Current Password">
                                     </div>
-                                    <div class="mb-3 d-flex gap-2">
+                                    <div class="mb-3 d-lg-flex gap-2">
                                         <label for="NewPassword" class="form-label w-50">New Password</label>
                                         <input type="password" class="form-control" name="newPassword" id="newPassword" placeholder="Enter Your New Password">
                                     </div>
-                                    <div class="mb-3 d-flex gap-2">
+                                    <div class="mb-3 d-lg-flex gap-2">
                                         <label for="confirmPassword" class="form-label w-50">Confirm Password</label>
                                         <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Enter Your New Password">
                                     </div>
