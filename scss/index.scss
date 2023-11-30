@@ -247,8 +247,7 @@ li.active-page::before {
   }
 
   div[title="main"] {
-    position: relative !important;
-    left: 300px;
+    padding-left: 300px;
   }
 }
 

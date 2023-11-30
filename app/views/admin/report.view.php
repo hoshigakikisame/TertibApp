@@ -13,7 +13,7 @@
                 <div class="row py-2 my-4">
                     <h1>Report</h1>
                     <div class="col-auto rounded-5 p-4 m-2">
-                        <form action="<?= $redirect ?>" method="post">
+                        <form action="<?= $redirect ?>" method="POST">
                             <div class="row gap-5">
                                 <div class="col">
                                     <div class="mb-3">
