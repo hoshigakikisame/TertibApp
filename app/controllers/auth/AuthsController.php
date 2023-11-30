@@ -37,8 +37,7 @@ class AuthsController
             // verify password
             $salt = $user->getSalt();
             $passwordHash = $user->getPasswordHash();
-            $saltedPassword = $salt . $password;
-            $verified = password_verify($saltedPassword, $passwordHash);
+            $verified = $userService->validatePassword($salt, $password, $passwordHash);
 
             if ($verified) {
 
@@ -131,7 +130,7 @@ class AuthsController
             $user = $userService->getSingleUser(
                 ['id_user' => $idUser]
             );
-            
+
             $newPassword = $userService->hashPassword($user->getSalt(), $newPassword);
             $userService->updateUserPassword($idUser, $newPassword);
 

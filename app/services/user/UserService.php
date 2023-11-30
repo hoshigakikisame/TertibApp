@@ -39,6 +39,12 @@ class UserService
         $saltedPassword = $salt . $password;
         return password_hash($saltedPassword, $algorithm);
     }
+
+    public function validatePassword($salt, $password, $hash)
+    {
+        $saltedPassword = $salt . $password;
+        return password_verify($saltedPassword, $hash);
+    }
     public function getSingleUser(array $where = [])
     {
         $rawUser = $this->db->findOne('tb_user', $where);
