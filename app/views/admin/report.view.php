@@ -53,7 +53,7 @@
                             </div>
                             <!-- Button trigger modal -->
                             <div class="row justify-content-end">
-                                <button class="btn btn-secondary col-4 text-white" type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Kirim Aduan</button>
+                                <button class="btn btn-secondary col-4 text-white" type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Send Report</button>
                             </div>
 
                             <!-- Modal -->

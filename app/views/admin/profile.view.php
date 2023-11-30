@@ -20,7 +20,7 @@ $password = '';
                                 <div class="col-md-auto col-9" class="p-4">
                                     <img src="<?= App::get("root_uri") . "/public/img/hasyim.jpg" ?>" alt="" class="object-fit-cover border rounded img-thumbnail" style="width:188px;height:250px;">
                                 </div>
-                                <div class="col-lg-6 col">
+                                <div class="col-lg-5 col">
                                     <div class="mb-3">
                                         <label for="firstname" class="form-label">Firstname</label>
                                         <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Firstname">
@@ -41,9 +41,12 @@ $password = '';
                                         <label for="number" class="form-label">Number</label>
                                         <input type="number" class="form-control" name="number" id="number" placeholder="Your Number">
                                     </div>
+                                    <div class="d-flex gap-3 justify-content-end ">
+                                        <button type="button" class="btn btn-primary px-4 text-white">Edit</button>
+                                        <button type="submit" class="btn btn-secondary px-4 text-white">Save</button>
+                                    </div>
                                 </div>
                             </div>
-
                         </form>
                     </div>
                 </div>
@@ -64,6 +67,9 @@ $password = '';
                                     <div class="mb-3 d-lg-flex gap-2">
                                         <label for="confirmPassword" class="form-label w-50">Confirm Password</label>
                                         <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Enter Your New Password">
+                                    </div>
+                                    <div class="d-flex gap-3 justify-content-end ">
+                                        <button type="submit" class="btn btn-secondary px-4 text-white">Change Password</button>
                                     </div>
                                 </div>
                             </div>
