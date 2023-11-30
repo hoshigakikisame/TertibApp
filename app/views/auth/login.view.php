@@ -9,7 +9,7 @@ $redirected =  App::get('root_uri') . "/login";
                 <h1 class="fs-3" style="font-family: Poppins Bold;">Account Login</h1>
                 <p class="h6 text-center" style='width:min(80%,300px)'>Hey, Enter Your Details to Get Sign In to Your Account</p>
             </div>
-            <form action="<?= $redirected ?>" method="POST" class="align-self-center" style="">
+            <form action="<?= $redirected ?>" method="POST" class="align-self-center">
                 <div class="mb-3">
                     <label for="usernameInput" class="form-label">Email address</label>
                     <input type="username" name="username" class="form-control" id="usernameInput" placeholder="Username">
