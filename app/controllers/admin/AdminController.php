@@ -42,6 +42,15 @@ class AdminController
 	 * [contact description]
 	 * @return [type] [description]
 	 */
+
+	/**
+	 * [contact description]
+	 * @return [type] [description]
+	 */
+	public function manageStudent()
+	{
+		return Helper::view('admin/manage/manage_student');
+	}
 	public function profilePage()
 	{
 		/**

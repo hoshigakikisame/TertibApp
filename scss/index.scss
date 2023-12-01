@@ -163,12 +163,13 @@ a.nav-link:hover,
   transition: all 0.5s;
 }
 
+
 .circle-elemen-hero > .elemen{
   background: linear-gradient(180deg, #FCB216 6.77%, #F3542C 27.6%, rgba(33, 37, 41, 0.32) 65.62%);
 }
   
 @media (min-width: 992px) {
-    li.active-page::before {
+    .content.active-page::before {
         background-color: $primary;
     }
     .nav-item:hover::before {
@@ -247,7 +248,7 @@ a.nav-link:hover,
   }
 
   div[title="main"] {
-    padding-left: 300px;
+    
   }
 }
 

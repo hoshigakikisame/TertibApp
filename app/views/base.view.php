@@ -74,7 +74,7 @@
 </head>
 
 <body class="position-relative">
-    <div class="position-fixed z-2" style="right: -85px; bottom:9vh;">
+    <div class="position-fixed z-1" style="right: -85px; bottom:9vh;">
         <?php Helper::importView('partials/utils/dark_mode_button.view.php');
         ?>
     </div>

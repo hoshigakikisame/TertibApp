@@ -8413,7 +8413,7 @@ nav.navbar, footer {
   background: linear-gradient(180deg, #FCB216 6.77%, #F3542C 27.6%, rgba(33, 37, 41, 0.32) 65.62%);
 }
 @media (min-width: 992px) {
-  [data-bs-theme=dark] li.active-page::before {
+  [data-bs-theme=dark] .content.active-page::before {
     background-color: #FCB216;
   }
   [data-bs-theme=dark] .nav-item:hover::before {
@@ -8480,9 +8480,6 @@ nav.navbar, footer {
   }
   main {
     overflow-x: hidden !important;
-  }
-  div[title=main] {
-    padding-left: 300px;
   }
 }
 /* Start Animation */
