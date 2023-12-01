@@ -29,4 +29,5 @@ $router->get('/^auth\/logout$/', ['AuthMiddleware@shouldValidated', 'AuthsContro
 $router->get('/^admin\/dashboard$/', ['AuthMiddleware@shouldValidated', 'AdminController@dashboard']);
 $router->get('/^admin\/report$/', ['AuthMiddleware@shouldValidated', 'AdminController@report']);
 $router->get('/^admin\/notification$/', ['AuthMiddleware@shouldValidated', 'AdminController@notification']);
-$router->get('/^admin\/profile$/', ['AuthMiddleware@shouldValidated', 'AdminController@profile']);
+$router->get('/^admin\/profile$/', ['AuthMiddleware@shouldValidated', 'AdminController@profilePage']);
+$router->post('/^admin\/update-profile$/', ['AuthMiddleware@shouldValidated', 'AdminController@updateProfile']);
