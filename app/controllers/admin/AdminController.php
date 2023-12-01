@@ -59,6 +59,7 @@ class AdminController
 			'email' => $user->getEmail(),
 			'address' => $user->getAddress(),
 			'phoneNumber' => $user->getPhoneNumber(),
+			'flash' => Flasher::flash()
 		];
 
 		return Helper::view('admin/profile', $data);

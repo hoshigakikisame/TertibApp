@@ -2,6 +2,7 @@
 $updateProfileEndpoint = App::get("root_uri") . "/admin/update-profile";
 ?>
 
+<?= $flash ?>
 <div class="container-fluid">
     <div class="row-auto flex-column flex-lg-row position-relative">
         <div class="col-auto sidebar shadow-sm">
@@ -61,15 +62,15 @@ $updateProfileEndpoint = App::get("root_uri") . "/admin/update-profile";
                                 <div class="col-lg-7 col">
                                     <div class="mb-3 d-lg-flex gap-2">
                                         <label for="currentPassword" class="form-label w-50">Current Password</label>
-                                        <input type="password" class="form-control" name="currentPassword" id="currentPassword" placeholder="Enter Your Current Password">
+                                        <input type="password" class="form-control" name="current_password" id="currentPassword" placeholder="Enter Your Current Password">
                                     </div>
                                     <div class="mb-3 d-lg-flex gap-2">
-                                        <label for="NewPassword" class="form-label w-50">New Password</label>
-                                        <input type="password" class="form-control" name="newPassword" id="newPassword" placeholder="Enter Your New Password">
+                                        <label for="newPassword" class="form-label w-50">New Password</label>
+                                        <input type="password" class="form-control" name="new_password" id="newPassword" placeholder="Enter Your New Password">
                                     </div>
                                     <div class="mb-3 d-lg-flex gap-2">
                                         <label for="confirmPassword" class="form-label w-50">Confirm Password</label>
-                                        <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Enter Your New Password">
+                                        <input type="password" class="form-control" name="confirm_password" id="confirmPassword" placeholder="Enter Your New Password">
                                     </div>
                                     <div class="d-flex gap-3 justify-content-end ">
                                         <button type="submit" class="btn btn-secondary px-4 text-white">Change Password</button>
@@ -83,3 +84,18 @@ $updateProfileEndpoint = App::get("root_uri") . "/admin/update-profile";
         </main>
     </div>
 </div>
+<script>
+    const buttonChangePassword = document.querySelector('#button-change-password');
+    const newPassword = document.querySelector('#newPassword');
+    const confirmPassword = document.querySelector('#confirmPassword');
+    const form = document.querySelector('form');
+
+    buttonChangePassword.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (newPassword.value !== confirmPassword.value) {
+            alert('Password and Confirm Password must be the same');
+        } else {
+            form.submit();
+        }
+    })
+</script>
