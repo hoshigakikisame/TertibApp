@@ -15,11 +15,8 @@ class AdminController
 		 */
 		$user = Session::getInstance()->get('user');
 
-		$adminRole = $user->getRoleDetail();
-		assert($adminRole instanceof AdminModel);
-
 		$data = [
-			'firstname' => $adminRole->getFirstName(),
+			'firstname' => $user->getFirstName(),
 		];
 
 		return Helper::view('admin/dashboard', $data);
