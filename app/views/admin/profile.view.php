@@ -16,8 +16,9 @@ $updateProfileEndpoint = App::get("root_uri") . "/admin/update-profile";
                     <div class="col my-2 mx-2">
                         <form action="<?= $updateProfileEndpoint ?>" method="POST">
                             <div class="row d-flex gap-3 flex-wrap">
-                                <div class="col-md-auto col-9" class="p-4">
-                                    <img src="<?= App::get("root_uri") . "/public/img/hasyim.jpg" ?>" alt="" class="object-fit-cover border rounded img-thumbnail" style="width:188px;height:250px;">
+                                <div class="col-md-auto col-9 position-relative d-flex flex-column" class="p-4">
+                                    <img src="<?= App::get("root_uri") . "/public/img/hasyim.jpg" ?>" alt="" class="object-fit-cover border rounded img-thumbnail start-0" style="width:188px;height:250px;">
+                                    <input type="file" name="img-profile" id="" class="" style="all:unset">
                                 </div>
                                 <div class="col-lg-5 col">
                                     <div class="mb-3">
