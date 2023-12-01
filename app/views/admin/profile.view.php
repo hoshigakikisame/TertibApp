@@ -16,9 +16,9 @@ $updateProfileEndpoint = App::get("root_uri") . "/admin/update-profile";
                     <?= $flash ?>
                 </div>
                 <div class="col-lg-10 col px-5 py-4" title='main'>
-                    <div class="row py-2 my-4 gap-2">
+                    <div class="row gap-2">
                         <h1>Profile</h1>
-                        <div class="col my-2 mx-2">
+                        <div class="col mx-2">
                             <form action="<?= $updateProfileEndpoint ?>" method="POST">
                                 <div class="row d-flex gap-3 flex-wrap">
                                     <div class="col-md-auto col-9 position-relative d-flex flex-column align-items-center" class="p-4" style="width:200px ">
