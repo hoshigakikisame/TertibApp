@@ -5,7 +5,7 @@
 	<div class="container">
 		<!-- Start Hero Section -->
 		<section class="row justify-content-between flex-grow-1 hero-section">
-			<div class="col flex-column align-self-center slide-in-left" title='lefthero'>
+			<div class="col flex-column align-self-center slide-in-left ms-3 ms-lg-0" title='lefthero'>
 				<h1 class="lh-1 display-1" style="font-family:Poppins Extra Bold;">WELCOME TO JTI.TERTIB</h1>
 				<div class="d-flex gap-2 text-secondary" style="font-family:Poppins Medium;">
 					<h6>#JTIdisiplin</h6>

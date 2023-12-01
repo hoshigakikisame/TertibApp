@@ -14,7 +14,7 @@
                     <h1>Report</h1>
                     <div class="col-auto rounded-5 p-4 m-2">
                         <form action="<?= $redirect ?>" method="POST">
-                            <div class="row gap-5">
+                            <div class="row-auto gap-5 d-flex flex-column flex-md-row">
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="title" class="form-label">Judul</label>
