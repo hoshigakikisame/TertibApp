@@ -1,5 +1,4 @@
-<?php require 'partials/nav.view.php';
-?>
+<?php Helper::importView('partials/nav.view.php');?>
 <main class="container">
 
 	<div class="row text-center gap-4 justify-content-center">

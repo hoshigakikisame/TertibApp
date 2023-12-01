@@ -19,14 +19,14 @@ class GlobalController
 	 */
 	public function about()
 	{
-		return Helper::view('about');
+		return Helper::view('global/about');
 	}
 
 	public function test($id, $id2)
 	{
 		echo $id;
 		echo $id2;
-		return Helper::view('about');
+		return Helper::view('global/about');
 	}
 
 	/**

@@ -12,9 +12,9 @@
 
 // global routes
 $router->get('/^$/', ['GlobalController@landing']);
-$router->get('/^contact$/', ['AuthsController@contact']);
-$router->get('/^about$/', ['AuthsController@about']);
-$router->get('/^test\/(\d+)\/(\d+)$/', ['AuthsController@test']);
+$router->get('/^contact$/', ['GlobalController@contact']);
+$router->get('/^about$/', ['GlobalController@about']);
+$router->get('/^test\/(\d+)\/(\d+)$/', ['GlobalController@test']);
 
 // auth routes
 $router->get('/^auth\/login$/', ['AuthMiddleware@shouldAnonymous', 'AuthsController@loginForm']);
