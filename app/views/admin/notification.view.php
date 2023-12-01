@@ -12,7 +12,7 @@
                     <div class="row py-2 my-4 gap-4">
                         <h1>Notification</h1>
                         <!-- Start Notif -->
-                        <div class="col-xl-9 col">
+                        <div class="col-xl-10 col">
                             <div class="row-auto flex-column p-3 bg-light-subtle rounded-3">
                                 <div class="col ">
                                     <h5>
