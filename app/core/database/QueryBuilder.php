@@ -92,7 +92,7 @@ class QueryBuilder
 			$statement = $this->pdo->prepare($sql);
 			$statement->execute([...$params, ...$where]);
 		} catch (PDOException $e) {
-			die("Whoops!! Something Went Wrong!!!");
+			die("Whoops!! Something Went Wrong!!!" . $e->getMessage());
 		}
 	}
 

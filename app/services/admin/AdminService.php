@@ -8,7 +8,7 @@ class AdminService
      * @var QueryBuilder
      */
     private $db;
-    protected function __construct(){
+    public function __construct(){
         $this->db = App::get('database');
         assert($this->db instanceof QueryBuilder);
     }
@@ -35,5 +35,12 @@ class AdminService
             $admin = AdminModel::fromStdClass($rawAdmin);
             return $admin;
         }
+    }
+
+    public function updateAdminProfile($title, $where = [])
+    {
+        $this->db->update('tb_admin', [
+            'title' => $title,
+        ], $where);
     }
 }

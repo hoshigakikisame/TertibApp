@@ -8,7 +8,7 @@ class UserService
      * @var QueryBuilder
      */
     private $db;
-    protected function __construct(){
+    public function __construct(){
         $this->db = App::get('database');
         assert($this->db instanceof QueryBuilder);
     }
@@ -52,6 +52,16 @@ class UserService
             $user = UserModel::fromStdClass($rawUser);
             return $user;
         }
+    }
+
+    public function updateUserProfile($firstName, $lastName, $address, $phoneNumber, $where = [])
+    {
+        $this->db->update('tb_user', [
+            'first_name' => $firstName,
+            'last_name' => $lastName,
+            'address' => $address,
+            'phone_number' => $phoneNumber
+        ], $where);
     }
 
     public function updateUserPassword($idUser, $newPassword)

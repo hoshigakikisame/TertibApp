@@ -1,6 +1,5 @@
 <?php
-$profile = '';
-$password = '';
+$updateProfileEndpoint = App::get("root_uri") . "/admin/update-profile";
 ?>
 
 <div class="container-fluid">
@@ -15,7 +14,7 @@ $password = '';
                 <div class="row py-2 my-4 gap-2">
                     <h1>Profile</h1>
                     <div class="col my-2 mx-2">
-                        <form action="<?= $profile ?>" method="POST">
+                        <form action="<?= $updateProfileEndpoint ?>" method="POST">
                             <div class="row d-flex gap-3 flex-wrap">
                                 <div class="col-md-auto col-9" class="p-4">
                                     <img src="<?= App::get("root_uri") . "/public/img/hasyim.jpg" ?>" alt="" class="object-fit-cover border rounded img-thumbnail" style="width:188px;height:250px;">
@@ -23,26 +22,29 @@ $password = '';
                                 <div class="col-lg-5 col">
                                     <div class="mb-3">
                                         <label for="firstname" class="form-label">Firstname</label>
-                                        <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Firstname">
+                                        <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Firstname" value="<?= $firstName ?>">
                                     </div>
                                     <div class="mb-3">
                                         <label for="lastname" class="form-label">Lastname</label>
-                                        <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Lastname">
+                                        <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Lastname" value="<?= $lastName ?>">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="title" class="form-label">Title</label>
+                                        <input type="text" class="form-control" name="title" id="title" placeholder="title" value="<?= $title ?>">
                                     </div>
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" name="email" id="email" placeholder="yourEmail@gmail.com">
+                                        <input type="email" class="form-control" name="email" id="email" placeholder="yourEmail@gmail.com" value="<?= $email ?>">
                                     </div>
                                     <div class="mb-3">
                                         <label for="address" class="form-label">Address</label>
-                                        <input type="text" class="form-control" name="address" id="address" placeholder="Address">
+                                        <input type="text" class="form-control" name="address" id="address" placeholder="Address" value="<?= $address ?>">
                                     </div>
                                     <div class="mb-3">
                                         <label for="number" class="form-label">Number</label>
-                                        <input type="number" class="form-control" name="number" id="number" placeholder="Your Number">
+                                        <input type="number" class="form-control" name="number" id="number" placeholder="Your Number" value="<?= $phoneNumber ?>">
                                     </div>
-                                    <div class="d-flex gap-3 justify-content-end ">
-                                        <button type="button" class="btn btn-primary px-4 text-white">Edit</button>
+                                    <div class="d-flex gap-3 justify-content-end">
                                         <button type="submit" class="btn btn-secondary px-4 text-white">Save</button>
                                     </div>
                                 </div>

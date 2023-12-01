@@ -1,22 +1,19 @@
 <?php 
     class AdminModel {
         protected int $idAdmin;
-        protected string $firstName;
-        protected string $lastName;
+        protected string $title;
         protected string $idUser;
 
-        public function __construct($idAdmin, $firstName, $lastName, $idUser) {
+        public function __construct($idAdmin, $title, $idUser) {
             $this->idAdmin = $idAdmin;
-            $this->firstName = $firstName;
-            $this->lastName = $lastName;
+            $this->title = $title;
             $this->idUser = $idUser;
         }
 
         public static function fromStdClass($stdClass): AdminModel {
             return new AdminModel(
                 $stdClass->id_admin,
-                $stdClass->first_name,
-                $stdClass->last_name,
+                $stdClass->title,
                 $stdClass->id_user
             );
         }
@@ -25,12 +22,8 @@
             return $this->idAdmin;
         }
 
-        public function getFirstName() {
-            return $this->firstName;
-        }
-
-        public function getLastName() {
-            return $this->lastName;
+        public function getTitle() {
+            return $this->title;
         }
 
         public function getIdUser() {
@@ -41,12 +34,8 @@
             $this->idAdmin = $idAdmin;
         }
 
-        public function setFirstName($firstName) {
-            $this->firstName = $firstName;
-        }
-
-        public function setLastName($lastName) {
-            $this->lastName = $lastName;
+        public function setTitle($title) {
+            $this->title = $title;
         }
 
         public function setIdUser($idUser) {
