@@ -189,13 +189,13 @@ a.nav-link:hover,
   height: 50px;
 }
 
-li.active-page::before {
+.content.active-page::before {
   background-color: $secondary;
   content: "";
   position: absolute;
-  left: 0px;
+  left: -12px;
   width: 3px;
-  height: 25px;
+  height: 100%;
   transition: all ease 0.5s;
 }
 
@@ -203,20 +203,20 @@ li.active-page::before {
   background-color: $secondary;
   content: "";
   position: absolute;
-  left: 0px;
+  left: -12px;
   width: 3px;
-  height: 25px;
+  height: 100%;
   transition: all ease 0.5s;
 }
 
 @media (min-width: 992px) {
-  li.active-page::before {
+  .content.active-page::before {
     content: "";
     position: absolute;
-    left: 0px;
+    left: -12px;
     background-color: $secondary;
     width: 3px;
-    height: 25px;
+    height: 100%;
     transition: all ease 0.5s;
   }
 
@@ -228,10 +228,10 @@ li.active-page::before {
   .nav-item:hover::before {
     content: "";
     position: absolute;
-    left: 0px;
+    left: -12px;
     background-color: $secondary;
     width: 3px;
-    height: 25px;
+    height: 100%;
     transition: all ease 0.5s;
   }
 

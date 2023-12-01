@@ -18,9 +18,11 @@ class AdminController
 		$adminRole = $user->getRoleDetail();
 		assert($adminRole instanceof AdminModel);
 
-		// echo $admin->getFirstName();
+		$data = [
+			'firstname' => $adminRole->getFirstName(),
+		];
 
-		return Helper::view('admin/dashboard');
+		return Helper::view('admin/dashboard', $data);
 	}
 	/**
 	 * [contact description]
