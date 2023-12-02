@@ -113,8 +113,6 @@ class AdminController
 			$phoneNumber = $_POST['number'];
 			$profileImage = $_FILES['profile_image'];
 
-			var_dump($profileImage);
-
 			// validate image extension
 			$validImageExtension = $mediaStorageService->validateImageExtension($profileImage);
 			if (!$validImageExtension) {
@@ -131,7 +129,9 @@ class AdminController
 
 			// upload image
 			$uploadResult = $mediaStorageService::getInstance()->uploadImage($profileImage['tmp_name'], 'user_profile', $idUser);
-			$imagePath = $uploadResult->imagePath;
+
+			// get image path from upload result publicId and extension
+			$imagePath = $uploadResult->publicId . '.' . $mediaStorageService->getImageExtension($profileImage);
 			
 			// update user's profile
 			$userService->updateUserProfile(

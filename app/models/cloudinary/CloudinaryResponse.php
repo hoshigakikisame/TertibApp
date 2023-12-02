@@ -20,8 +20,6 @@ class CloudinaryResponse {
     public string $originalFilename;
     public string $originalExtension;
     public string $apiKey;
-    public string $imagePath;
-
     public function __construct(
         string $assetId, 
         string $publicId,
@@ -64,7 +62,6 @@ class CloudinaryResponse {
         $this->originalFilename = $originalFilename;
         $this->originalExtension = $originalExtension;
         $this->apiKey = $apiKey;
-        $this->imagePath = $publicId . '.webp';
     }
 
     public static function fromJson($json): CloudinaryResponse {

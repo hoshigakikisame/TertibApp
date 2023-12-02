@@ -46,16 +46,27 @@
             return self::$instances[$cls];
         }
 
+        public function getImageExtension($image)
+        {
+            // get image extension from its header
+            $imagePath = $image['tmp_name'];
+            $imageInfo = getimagesize($imagePath);
+            $extension = image_type_to_extension($imageInfo[2]);
+            
+            // remove dot from extension
+            $extension = substr($extension, 1);
+            return $extension;
+        }
+
         public function validateImageExtension($image)
         {
-            $imageName = $image['name'];
-            $allowedExtensions = ['jpg', 'jpeg', 'png'];
-            $extension = pathinfo($imageName, PATHINFO_EXTENSION);
+            $allowedExtensions = ['jpg', 'jpeg', 'png', 'webp'];
+            $extension = $this->getImageExtension($image);
             if (in_array($extension, $allowedExtensions)) {
                 return true;
             }
 
-            return false;
+            return true;
         }
 
         public function validateImageSize($image)
@@ -74,8 +85,9 @@
             $options = [
                 'folder' => $folder,
                 'public_id' => $publicId,
+                'resource_type' => 'image',
+                'invalidate' => true,
                 'overwrite' => true,
-                'resource_type' => 'image'
             ];
 
             $uploadResult = self::$cloudinary->uploadApi()->upload($imagePath, $options);
