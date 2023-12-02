@@ -41,5 +41,10 @@ return [
    ],
    'timezone' => 'Asia/Jakarta',
    'recovery_token_validity' => 60 * 60, // in seconds
-   'password_hash_algorithm' => PASSWORD_BCRYPT
+   'password_hash_algorithm' => PASSWORD_BCRYPT,
+   'cloudinary' => [
+      'connection_url' => $_ENV['CLOUDINARY_CONNECTION_URL'],
+      'access_url' => $_ENV['CLOUDINARY_ACCESS_URL'],
+      'max_image_size' => 1024 * 1024 * 5, // 5 MB
+   ]
 ];

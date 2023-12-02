@@ -20,12 +20,14 @@ $updatePasswordEndpoint = App::get("root_uri") . "/admin/update-password";
                     <div class="row gap-2">
                         <h1>Profile</h1>
                         <div class="col mx-2">
-                            <form action="<?= $updateProfileEndpoint ?>" method="POST">
+                            <form action="<?= $updateProfileEndpoint ?>" method="POST" enctype="multipart/form-data">
                                 <div class="row d-flex gap-3 flex-wrap">
                                     <div class="col-md-auto col-9 position-relative d-flex flex-column align-items-center" class="p-4" style="width:200px ">
-                                        <img src="<?= App::get("root_uri") . "/public/img/hasyim.jpg" ?>" alt="" class="object-fit-cover border rounded img-thumbnail start-0" style="width:188px;height:250px;cursor: pointer;">
-                                        <label for="img-profile" class="form-label border border-secondary rounded-3 px-4 py-1 my-2 text-secondary" style="cursor:pointer;">Change Picture</label>
-                                        <input type="file" name="img-profile" id="img-profile" class="form-control opacity-0">
+                                        <img src="<?= $imageUrl ?>" alt="" id="img_profile_image" class="object-fit-cover border rounded img-thumbnail start-0" style="width:188px;height:250px;cursor: pointer;">
+                                        <div style="position: relative">
+                                            <label id="label_profile_image" for="profile_image" class="form-label border border-secondary rounded-3 px-4 py-1 my-2 text-secondary" style="cursor:pointer;">Change Picture</label>
+                                            <input type="file" name="profile_image" id="input_profile_image" class="form-control opacity-0" style="position: absolute; z-index: 999; top: 0; left: 0">
+                                        </div>
                                     </div>
                                     <div class=" col">
                                         <div class="mb-3">
@@ -105,5 +107,16 @@ $updatePasswordEndpoint = App::get("root_uri") . "/admin/update-password";
         } else {
             form.submit();
         }
-    })
+    });
+
+    // javascript for image preview
+    const inputProfileImage = document.querySelector('#input_profile_image');
+    const imgProfileImage = document.querySelector('#img_profile_image');
+    const labelProfileImage = document.querySelector('#label_profile_image');
+
+    inputProfileImage.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        const url = URL.createObjectURL(file);
+        imgProfileImage.src = url;
+    });
 </script>

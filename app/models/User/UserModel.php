@@ -3,9 +3,7 @@
     class UserModel {
         protected int $idUser;
         protected string $username;
-
         protected string $firstName;
-
         protected string $lastName;
         protected string $salt;
         protected string $passwordHash;
@@ -95,6 +93,11 @@
 
         public function getAddress() {
             return $this->address;
+        }
+
+        public function getImageUrl() {
+            $baseUrl = MediaStorageService::getInstance()->getAccessUrl();
+            return $baseUrl . $this->imagePath;
         }
 
         public function setIdUser($idUser) {

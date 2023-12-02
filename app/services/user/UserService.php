@@ -54,13 +54,14 @@ class UserService
         }
     }
 
-    public function updateUserProfile($firstName, $lastName, $address, $phoneNumber, $where = [])
+    public function updateUserProfile(string $firstName, string $lastName, string $address, string $phoneNumber, string $imagePath, $where = [])
     {
         $this->db->update('tb_user', [
             'first_name' => $firstName,
             'last_name' => $lastName,
             'address' => $address,
-            'phone_number' => $phoneNumber
+            'phone_number' => $phoneNumber,
+            'image_path' => $imagePath
         ], $where);
     }
 

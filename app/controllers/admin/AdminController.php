@@ -38,10 +38,6 @@ class AdminController
 	{
 		return Helper::view('admin/notification');
 	}
-	/**
-	 * [contact description]
-	 * @return [type] [description]
-	 */
 
 	/**
 	 * [contact description]
@@ -68,6 +64,7 @@ class AdminController
 			'email' => $user->getEmail(),
 			'address' => $user->getAddress(),
 			'phoneNumber' => $user->getPhoneNumber(),
+			'imageUrl' => $user->getImageUrl(),
 			'flash' => Flasher::flash()
 		];
 
@@ -82,10 +79,12 @@ class AdminController
 			isset($_POST['lastname']) &&
 			isset($_POST['title']) &&
 			isset($_POST['address']) &&
-			isset($_POST['number'])
+			isset($_POST['number']) &&
+			isset($_FILES['profile_image'])
 		) {
 			$userService = new UserService();
 			$adminService = new AdminService();
+			$mediaStorageService = new MediaStorageService();
 
 			/**
 			 * @var UserModel
@@ -100,13 +99,35 @@ class AdminController
 			$title = $_POST['title'];
 			$address = $_POST['address'];
 			$phoneNumber = $_POST['number'];
+			$profileImage = $_FILES['profile_image'];
 
+			var_dump($profileImage);
+
+			// validate image extension
+			$validImageExtension = $mediaStorageService->validateImageExtension($profileImage);
+			if (!$validImageExtension) {
+				Flasher::setFlash("danger", "Invalid image extension");
+				return Helper::redirect('/admin/profile');
+			}
+			
+			// validate image size
+			$validImageSize = $mediaStorageService->validateImageSize($profileImage);
+			if (!$validImageSize) {
+				Flasher::setFlash("danger", "Image size must be less than " . MediaStorageService::getInstance()->getMaxImageSize() . " bytes");
+				return Helper::redirect('/admin/profile');
+			}
+
+			// upload image
+			$uploadResult = $mediaStorageService::getInstance()->uploadImage($profileImage['tmp_name'], 'user_profile', $idUser);
+			$imagePath = $uploadResult->imagePath;
+			
 			// update user's profile
 			$userService->updateUserProfile(
 				$firstName,
 				$lastName,
 				$address,
 				$phoneNumber,
+				$imagePath,
 				['id_user' => $idUser]
 			);
 
@@ -118,8 +139,6 @@ class AdminController
 
 			// refresh user session
 			$userService->refreshUserSession($idUser);
-
-			Session::getInstance()->push('user', $user);
 
 			Flasher::setFlash("success", "Profile updated successfully");
 		} else {
