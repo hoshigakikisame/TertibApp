@@ -1,5 +1,6 @@
 <?php
 $updateProfileEndpoint = App::get("root_uri") . "/admin/update-profile";
+$updatePasswordEndpoint = App::get("root_uri") . "/admin/update-password";
 ?>
 
 
@@ -37,7 +38,7 @@ $updateProfileEndpoint = App::get("root_uri") . "/admin/update-profile";
                                         </div>
                                         <div class="mb-3">
                                             <label for="title" class="form-label">Title</label>
-                                            <input type="text" class="form-control" name="title" id="title" placeholder="title" value="<?= $title ?>">
+                                            <input type="text" class="form-control" name="title" id="title" placeholder="title" value="<?= $adminTitle ?>">
                                         </div>
                                         <div class="mb-3">
                                             <label for="email" class="form-label">Email</label>
@@ -62,7 +63,7 @@ $updateProfileEndpoint = App::get("root_uri") . "/admin/update-profile";
                     <div class="row py-2 my-4 gap-2">
                         <h1>Change Password</h1>
                         <div class="col rounded-5 my-2 mx-2">
-                            <form action="<?= $password ?>" method="post">
+                            <form action="<?= $updatePasswordEndpoint ?>" method="post" id="formUpdatePassword">
                                 <div class="row gap-5 ">
                                     <div class=" col">
                                         <div class="mb-3 d-lg-flex gap-2">
@@ -78,7 +79,7 @@ $updateProfileEndpoint = App::get("root_uri") . "/admin/update-profile";
                                             <input type="password" class="form-control" name="confirm_password" id="confirmPassword" placeholder="Enter Your New Password">
                                         </div>
                                         <div class="d-flex gap-3 justify-content-end ">
-                                            <button type="submit" class="btn btn-secondary px-4 text-white">Change Password</button>
+                                            <button type="submit" class="btn btn-secondary px-4 text-white" id="buttonUpdatePassword" >Update Password</button>
                                         </div>
                                     </div>
                                 </div>
@@ -91,12 +92,13 @@ $updateProfileEndpoint = App::get("root_uri") . "/admin/update-profile";
     </div>
 </div>
 <script>
-    const buttonChangePassword = document.querySelector('#button-change-password');
+    // javascript validation for update password
+    const form = document.querySelector('#formUpdatePassword');
     const newPassword = document.querySelector('#newPassword');
     const confirmPassword = document.querySelector('#confirmPassword');
-    const form = document.querySelector('form');
+    const buttonUpdatePassword = document.querySelector('#buttonUpdatePassword');
 
-    buttonChangePassword.addEventListener('click', (e) => {
+    buttonUpdatePassword.addEventListener('click', (e) => {
         e.preventDefault();
         if (newPassword.value !== confirmPassword.value) {
             alert('Password and Confirm Password must be the same');

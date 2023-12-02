@@ -41,5 +41,5 @@ return [
    ],
    'timezone' => 'Asia/Jakarta',
    'recovery_token_validity' => 60 * 60, // in seconds
-   'password_algorithm' => PASSWORD_BCRYPT
+   'password_hash_algorithm' => PASSWORD_BCRYPT
 ];

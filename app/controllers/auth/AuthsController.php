@@ -121,8 +121,6 @@ class AuthsController
         $accountRecoveryService = AccountRecoveryService::getInstance();
         $accountRecovery = $accountRecoveryService->validateToken($token);
 
-        var_dump($accountRecovery);
-
         if ($accountRecovery) {
             $idUser = $accountRecovery->getIdUser();
             $userService = UserService::getInstance();

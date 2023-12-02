@@ -72,4 +72,32 @@ class UserService
             'id_user' => $idUser
         ]);
     }
+
+    public function refreshUserSession($idUser)
+    {
+
+        $adminService = AdminService::getInstance();
+
+        $user = $this->getSingleUser([
+            'id_user' => $idUser
+        ]);
+
+        if (!$user) {
+            return;
+        }
+
+        switch ($user->getRole()) {
+            case 'admin':
+                $user->setRoleDetail($adminService->getSingleAdmin($user->getIdUser()));
+                break;
+            case 'dosen':
+                break;
+            case 'mahasiswa':
+                break;
+            default:
+                break;
+        }
+
+        Session::getInstance()->push('user', $user);
+    }
 }
