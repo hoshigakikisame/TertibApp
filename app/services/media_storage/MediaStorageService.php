@@ -48,14 +48,12 @@
 
         public function getImageExtension($image)
         {
-            // get image extension from its header
+            // get image extension from its header using finfo
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
             $imagePath = $image['tmp_name'];
-            $imageInfo = getimagesize($imagePath);
-            $extension = image_type_to_extension($imageInfo[2]);
-            
-            // remove dot from extension
-            $extension = substr($extension, 1);
-            return $extension;
+            $imageExtension = finfo_file($finfo, $imagePath);
+            $imageExtension = explode('/', $imageExtension)[1];
+            return $imageExtension;
         }
 
         public function validateImageExtension($image)
@@ -66,7 +64,7 @@
                 return true;
             }
 
-            return true;
+            return false;
         }
 
         public function validateImageSize($image)
