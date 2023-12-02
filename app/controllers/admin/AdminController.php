@@ -116,7 +116,6 @@ class AdminController
 			// validate image extension
 			$validImageExtension = $mediaStorageService->validateImageExtension($profileImage);
 			if (!$validImageExtension) {
-				echo "invalid image extension";
 				Flasher::setFlash("danger", "Invalid image extension");
 				return Helper::redirect('/admin/profile');
 			}
