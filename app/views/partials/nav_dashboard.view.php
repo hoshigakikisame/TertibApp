@@ -57,8 +57,7 @@
                 </ul>
                 <div class="row-auto mt-5">
                     <div class="card-user d-flex justify-content-end gap-2 align-items-center col">
-                        <div class="img-profile border rounded-circle " style="background:grey">
-                        </div>
+                        <img src="<?= $user->getImageUrl() ?>" alt="" class="img-profile rounded-circle">
                         <div class="userinfo d-flex align-items-start flex-column">
                             <h3 class="fs-6" style=" margin-bottom:-2px;"><?= $user->getFirstName() . " " . $user->getLastName() ?></h3>
                             <p class="" style="font-size:12px;margin-bottom:-5px;">Dosen</p>

@@ -51,7 +51,7 @@
                                                     <div class="mb-3">
                                                         <label for="level" class="form-label">Level</label>
                                                         <select class="form-select" id="level" aria-label="Default select example">
-                                                            <option selected>Chose Code Of Conduct Level</option>
+                                                            <option selected>Choose Code Of Conduct Level</option>
                                                             <option value="1">One</option>
                                                             <option value="2">Two</option>
                                                             <option value="3">Three</option>
