@@ -8446,6 +8446,10 @@ li.active-drop {
   height: 50px;
 }
 
+.userinfo h3, .userinfo .h3 {
+  width: 100%;
+}
+
 .content.active-page::before {
   background-color: #F3542C;
   content: "";
@@ -8467,6 +8471,9 @@ li.active-drop {
 }
 
 @media (min-width: 992px) {
+  .userinfo h3, .userinfo .h3 {
+    width: 120px;
+  }
   .content.active-page::before {
     content: "";
     position: absolute;

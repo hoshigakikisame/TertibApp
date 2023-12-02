@@ -1,5 +1,5 @@
 <?php ?>
-<div class="container-fluid">
+<div class="">
 
     <div class="row-auto flex-column flex-lg-row position-relative">
         <!-- Start Sidebar -->

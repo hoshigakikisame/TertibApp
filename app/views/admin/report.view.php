@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="">
     <div class="row-auto flex-column flex-lg-row position-relative">
         <div class="col-auto sidebar shadow-sm">
             <?php Helper::importView('partials/nav_dashboard.view.php');

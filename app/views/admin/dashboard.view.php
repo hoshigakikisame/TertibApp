@@ -1,6 +1,7 @@
-<?php ?>
-<div class="container-fluid">
+<?php
 
+?>
+<div class="">
     <div class="row-auto flex-column flex-lg-row position-relative">
         <!-- Start Sidebar -->
         <div class="col-auto sidebar shadow-sm">

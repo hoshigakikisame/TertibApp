@@ -4,7 +4,7 @@ $updatePasswordEndpoint = App::get("root_uri") . "/admin/update-password";
 ?>
 
 
-<div class="container-fluid">
+<div class="">
     <div class="row-auto flex-column flex-lg-row position-relative">
         <div class="col-auto sidebar shadow-sm">
             <?php Helper::importView('partials/nav_dashboard.view.php');
@@ -81,7 +81,7 @@ $updatePasswordEndpoint = App::get("root_uri") . "/admin/update-password";
                                             <input type="password" class="form-control" name="confirm_password" id="confirmPassword" placeholder="Enter Your New Password">
                                         </div>
                                         <div class="d-flex gap-3 justify-content-end ">
-                                            <button type="submit" class="btn btn-secondary px-4 text-white" id="buttonUpdatePassword" >Update Password</button>
+                                            <button type="submit" class="btn btn-secondary px-4 text-white" id="buttonUpdatePassword">Update Password</button>
                                         </div>
                                     </div>
                                 </div>

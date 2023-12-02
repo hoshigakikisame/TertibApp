@@ -17,6 +17,7 @@ class AdminController
 
 		$data = [
 			'firstname' => $user->getFirstName(),
+			'lastname' => $user->getLastName(),
 		];
 
 		return Helper::view('admin/dashboard', $data);
@@ -119,7 +120,7 @@ class AdminController
 				Flasher::setFlash("danger", "Invalid image extension");
 				return Helper::redirect('/admin/profile');
 			}
-			
+
 			// validate image size
 			$validImageSize = $mediaStorageService->validateImageSize($profileImage);
 			if (!$validImageSize) {
@@ -132,7 +133,7 @@ class AdminController
 
 			// get image path from upload result publicId and extension
 			$imagePath = $uploadResult->publicId . '.' . $mediaStorageService->getImageExtension($profileImage);
-			
+
 			// update user's profile
 			$userService->updateUserProfile(
 				$firstName,

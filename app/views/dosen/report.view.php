@@ -1,6 +1,6 @@
 <?php $redirect = "" ?>
 
-<div class="container-fluid">
+<div class="">
     <div class="row-auto flex-column flex-lg-row position-relative" style="">
 
         <div class="col-auto sidebar shadow-sm">
