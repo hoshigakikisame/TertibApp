@@ -8402,6 +8402,23 @@ nav.navbar, footer {
   background: linear-gradient(180deg, #FCB216 6.77%, #F3542C 27.6%, rgba(255, 255, 255, 0.32) 65.62%);
 }
 
+li.active-drop a.dropdown-item {
+  color: var(--white);
+}
+
+li.active-drop a.dropdown-item:hover {
+  color: var(--bs-dropdown-link-color);
+}
+
+a.dropdown-item:active, .active-drop a.drowdown-item:active {
+  color: var(--white);
+  background-color: var(--bs-secondary);
+}
+
+li.active-drop {
+  background: var(--bs-secondary);
+}
+
 [data-bs-theme=dark] .active-page,
 [data-bs-theme=dark] .active-page a.nav-link,
 [data-bs-theme=dark] a.nav-link:hover,

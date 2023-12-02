@@ -45,7 +45,19 @@ class AdminController
 	 */
 	public function manageStudent()
 	{
-		return Helper::view('admin/manage/manage_student');
+		return Helper::view('admin/manage/student');
+	}
+	public function manageLecture()
+	{
+		return Helper::view('admin/manage/lecture');
+	}
+	public function manageAdmin()
+	{
+		return Helper::view('admin/manage/admin');
+	}
+	public function manageCodeOfConduct()
+	{
+		return Helper::view('admin/manage/code_of_conduct');
 	}
 	public function profilePage()
 	{

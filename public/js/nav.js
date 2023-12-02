@@ -42,5 +42,16 @@ $(window).ready(function (e) {
   let page = location.pathname.replace(/\/$/, "");
   $(".nav-item").removeClass("active-page");
   $(`.nav-link[href="${page}"]`).parent().addClass("active-page");
+
+  if (location.pathname.includes("manage")) {
+    $(`.dropdown-item[href="${page}"]`).parent().addClass("active-drop");
+    page = page.substring(0, page.indexOf("manage") + "manage".length);
+    $(`.nav-item[title="${page}"]`).addClass("active-page");
+    $(`.nav-item[title="${page}"] > button`).css(
+      "color",
+      "var(--bs-secondary)"
+    );
+    $(`.active-drop`).parent().addClass("show");
+  }
 });
 // End navbar active
