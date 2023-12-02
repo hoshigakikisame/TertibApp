@@ -1,8 +1,8 @@
 <?php
 $redirected =  App::get('root_uri') . "/auth/login";
 ?>
+<?= $flash ?>
 <main class="container-fluid d-flex flex-column justify-content-center px-4" style="font-family: Poppins; height:100vh;">
-
     <div class="row rounded-5 align-self-center border border-2 p-1 w-lg-25">
         <div class="col shadow-sm  d-flex flex-column  rounded-5 m-2 px-0 py-5">
             <div class="text d-flex flex-column align-items-center mb-5">
