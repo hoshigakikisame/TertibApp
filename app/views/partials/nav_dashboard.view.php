@@ -30,7 +30,7 @@
                         </div>
                     </li>
                     <li class="mb-2 gap-1">
-                        <div class="col-auto position-relative content nav-item align-items-center">
+                        <div class="col-auto position-relative content nav-item align-items-center" title="<?php echo App::get('root_uri') . "/admin/manage" ?>">
                             <i class="bi bi-folder"></i>
                             <button type="button" class="btn dropdown-toggle shadow-none" data-bs-toggle="dropdown" aria-expanded="false">Manage</button>
                             <ul class="dropdown-menu position-static">
