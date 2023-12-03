@@ -46,6 +46,10 @@
                                                         <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Input Admin Lastname">
                                                     </div>
                                                     <div class="mb-3">
+                                                        <label for="title" class="form-label">Title</label>
+                                                        <input type="text" class="form-control" id="title" name="title" placeholder="Input Admin Title">
+                                                    </div>
+                                                    <div class="mb-3">
                                                         <label for="email" class="form-label">Email</label>
                                                         <input type="email" class="form-control" id="email" name="email" placeholder="Input Admin Email Address">
                                                     </div>
@@ -85,68 +89,72 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php 
+                                        <?php
                                         /**
                                          * @var UserModel[] $users
                                          * @var AdminModel $adminRole
                                          */
-                                        foreach ($users as $user): 
-                                        $adminRole = $user->getRoleDetail();
+                                        foreach ($users as $user) :
+                                            $adminRole = $user->getRoleDetail();
                                         ?>
-                                        <tr>
-                                            <td><?= $user->getFirstName() ?></td>
-                                            <td><?= $user->getLastName() ?></td>
-                                            <td><?= $user->getEmail() ?></td>
-                                            <td><?= $user->getPhoneNumber() ?></td>
-                                            <td>
-                                                <!-- modal trigger -->
-                                                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal">
-                                                    edit
-                                                </button>
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered">
-                                                        <div class="modal-content modal-dialog-scrollable">
-                                                            <form action="" method="post">
-                                                                <div class="modal-header justify-content-center">
-                                                                    <h1 class="modal-title fs-5" id="editModal">EDIT ADMIN</h1>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="mb-3">
-                                                                        <label for="firstname" class="form-label">Firstname</label>
-                                                                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Input Admin Firstname">
+                                            <tr>
+                                                <td><?= $user->getFirstName() ?></td>
+                                                <td><?= $user->getLastName() ?></td>
+                                                <td><?= $user->getEmail() ?></td>
+                                                <td><?= $user->getPhoneNumber() ?></td>
+                                                <td>
+                                                    <!-- modal trigger -->
+                                                    <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal">
+                                                        edit
+                                                    </button>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content modal-dialog-scrollable">
+                                                                <form action="" method="post">
+                                                                    <div class="modal-header justify-content-center">
+                                                                        <h1 class="modal-title fs-5" id="editModal">EDIT ADMIN</h1>
                                                                     </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="lastname" class="form-label">Lastname</label>
-                                                                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Input Admin Lastname">
+                                                                    <div class="modal-body">
+                                                                        <div class="mb-3">
+                                                                            <label for="firstname" class="form-label">Firstname</label>
+                                                                            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Input Admin Firstname">
+                                                                        </div>
+                                                                        <div class="mb-3">
+                                                                            <label for="lastname" class="form-label">Lastname</label>
+                                                                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Input Admin Lastname">
+                                                                        </div>
+                                                                        <div class="mb-3">
+                                                                            <label for="title" class="form-label">Title</label>
+                                                                            <input type="text" class="form-control" id="title" name="title" placeholder="Input Admin Title">
+                                                                        </div>
+                                                                        <div class="mb-3">
+                                                                            <label for="email" class="form-label">Email</label>
+                                                                            <input type="email" class="form-control" id="email" name="email" placeholder="Input Admin Email Address">
+                                                                        </div>
+                                                                        <div class="mb-3">
+                                                                            <label for="noTelp" class="form-label">No. Telp</label>
+                                                                            <input type="number" class="form-control" id="noTelp" name="noTelp" placeholder="Input Admin Number">
+                                                                        </div>
+                                                                        <div class="mb-3">
+                                                                            <label for="password" class="form-label">Password</label>
+                                                                            <input type="password" class="form-control" id="password" name="password" placeholder="Input Admin Password">
+                                                                        </div>
+                                                                        <div class="mb-3">
+                                                                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                                                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Retype Admin Password">
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="email" class="form-label">Email</label>
-                                                                        <input type="email" class="form-control" id="email" name="email" placeholder="Input Admin Email Address">
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                                                        <button type="button" class="btn btn-secondary">Save</button>
                                                                     </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="noTelp" class="form-label">No. Telp</label>
-                                                                        <input type="number" class="form-control" id="noTelp" name="noTelp" placeholder="Input Admin Number">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="password" class="form-label">Password</label>
-                                                                        <input type="password" class="form-control" id="password" name="password" placeholder="Input Admin Password">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                                                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Retype Admin Password">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                                                                    <button type="button" class="btn btn-secondary">Save</button>
-                                                                </div>
-                                                            </form>
+                                                                </form>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
