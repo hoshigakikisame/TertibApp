@@ -60,9 +60,9 @@ class AdminController
 		$users = $userService->getManyUser(['role' => 'admin']);
 		$admins = $adminService->getAllAdmin();
 
-		for($i = 0; $i < count($users); $i++) {
-			for($j = 0; $j < count($admins); $j++) {
-				if($users[$i]->getIdUser() == $admins[$j]->getIdUser()) {
+		for ($i = 0; $i < count($users); $i++) {
+			for ($j = 0; $j < count($admins); $j++) {
+				if ($users[$i]->getIdUser() == $admins[$j]->getIdUser()) {
 					$users[$i]->setRoleDetail($admins[$j]);
 				}
 			}
@@ -76,6 +76,10 @@ class AdminController
 		];
 
 		return Helper::view('admin/manage/admin', $data);
+	}
+	public function manageLevelViolation()
+	{
+		return Helper::view('admin/manage/level_violation');
 	}
 	public function manageCodeOfConduct()
 	{
@@ -226,7 +230,8 @@ class AdminController
 		return Helper::redirect('/admin/profile');
 	}
 
-	public function addNewAdmin() {
+	public function addNewAdmin()
+	{
 		if (
 			isset($_POST['username']) &&
 			isset($_POST['firstname']) &&
@@ -248,7 +253,7 @@ class AdminController
 			$address = $_POST['address'];
 			$phoneNumber = $_POST['no_telp'];
 			$role = 'admin';
-			
+
 			$rawPassword = $_POST['password'];
 			$salt = Helper::generateRandomHex(16);
 			$password = $userService->hashPassword($salt, $rawPassword);

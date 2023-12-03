@@ -24,7 +24,7 @@
                         </div>
                         <div class="row flex-column gap-3 mt-4">
                             <div class="col justify-content-end d-flex">
-                                <button type="button" class="btn border-none shadow-sm px-3 py-2 rounded-4 flex-shrink-1" data-bs-toggle="modal" data-bs-target="#modalAdd">
+                                <button type="button" id="btnPress" class="btn border-none shadow-sm px-3 py-2 rounded-4 flex-shrink-1" data-bs-toggle="modal" data-bs-target="#modalAdd">
                                     <i class="bi bi-person-plus"></i>
                                 </button>
 
@@ -74,7 +74,7 @@
                                                         <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Retype Admin Password" required>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick='$("div[role=alert]").remove();removeVal("input")'>Close</button>
                                                         <button type="submit" class="btn btn-primary">Save</button>
                                                     </div>
                                                 </div>
@@ -120,59 +120,19 @@
                                                 <td><?= $user->getAddress() ?></td>
                                                 <td>
                                                     <!-- modal trigger -->
-                                                    <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal">
+                                                    <button type="button" id="btnPress" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal" title="<?= $user->getIdUser() ?>" onclick="editButtonAction(
+                                                        <?= $user->getIdUser() ?>, 
+                                                        '<?= $user->getUsername() ?>', 
+                                                        '<?= $user->getLastName() ?>',
+                                                        '<?= $adminRole->getTitle() ?>',
+                                                        '<?= $user->getEmail() ?>',
+                                                        '<?= $user->getPhoneNumber() ?>',
+                                                        '<?= $user->getAddress() ?>'
+                                                    )">
                                                         edit
                                                     </button>
                                                     <!-- Modal -->
-                                                    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered">
-                                                            <div class="modal-content modal-dialog-scrollable">
-                                                                <form action="<?= $edit ?>" method="post">
-                                                                    <div class="modal-header justify-content-center">
-                                                                        <h1 class="modal-title fs-5" id="editModal">EDIT ADMIN</h1>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <div class="mb-3">
-                                                                            <label for="firstname" class="form-label">Firstname</label>
-                                                                            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Input Admin Firstname" required>
-                                                                        </div>
-                                                                        <div class="mb-3">
-                                                                            <label for="lastname" class="form-label">Lastname</label>
-                                                                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Input Admin Lastname" required>
-                                                                        </div>
-                                                                        <div class="mb-3">
-                                                                            <label for="title" class="form-label">Title</label>
-                                                                            <input type="text" class="form-control" id="title" name="title" placeholder="Input Admin Title" required>
-                                                                        </div>
-                                                                        <div class="mb-3">
-                                                                            <label for="email" class="form-label">Email</label>
-                                                                            <input type="email" class="form-control" id="email" name="email" placeholder="Input Admin Email Address" required>
-                                                                        </div>
-                                                                        <div class="mb-3">
-                                                                            <label for="noTelp" class="form-label">No. Telp</label>
-                                                                            <input type="number" class="form-control" id="noTelp" name="no_telp" placeholder="Input Admin Number" required>
-                                                                        </div>
-                                                                        <div class="mb-3">
-                                                                            <label for="address" class="form-label">Address</label>
-                                                                            <input type="text" class="form-control" id="address" name="address" placeholder="Input Admin Address" required>
-                                                                        </div>
-                                                                        <div class="mb-3" title="flash">
-                                                                            <label for="newPassword" class="form-label">Password</label>
-                                                                            <input type="password" class="form-control" id="newPassword" name="password" placeholder="Input Admin Password" required>
-                                                                        </div>
-                                                                        <div class="mb-3">
-                                                                            <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                                                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Retype Admin Password" required>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                                                                            <button type="submit" class="btn btn-secondary">Save</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -187,4 +147,71 @@
     </div>
 </div>
 
+<script>
+    function editButtonAction(id_user, username, lastname, title, email, phoneNumber, address) {
+        const modal = /*template*/ `
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true" data-bs-backdrop="static">
+     <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content modal-dialog-scrollable">
+             <form action="" method="post">
+                 <div class="modal-header justify-content-center">
+                     <h1 class="modal-title fs-5" id="editModal">EDIT ADMIN</h1>
+                 </div>
+                 <div class="modal-body">
+                     <div class="mb-3">
+                         <label for="firstname" class="form-label">Firstname</label>
+                         <input type="text" class="form-control" id="firstname" name="firstname"
+                             placeholder="Input Admin Firstname" value="${username}" required>
+                     </div>
+                     <div class="mb-3">
+                         <label for="lastname" class="form-label">Lastname</label>
+                         <input type="text" class="form-control" id="lastname" name="lastname"
+                             placeholder="Input Admin Lastname" value="${lastname}" required>
+                     </div>
+                     <div class="mb-3">
+                         <label for="title" class="form-label">Title</label>
+                         <input type="text" class="form-control" id="title" name="title" placeholder="Input Admin Title"
+                            value="${title}" required>
+                     </div>
+                     <div class="mb-3">
+                         <label for="email" class="form-label">Email</label>
+                         <input type="email" class="form-control" id="email" name="email"
+                            value="${email}" placeholder="Input Admin Email Address" required>
+                     </div>
+                     <div class="mb-3">
+                         <label for="noTelp" class="form-label">No. Telp</label>
+                         <input type="number" class="form-control" id="noTelp" name="no_telp"
+                            value="${phoneNumber}" placeholder="Input Admin Number" required>
+                     </div>
+                     <div class="mb-3">
+                         <label for="address" class="form-label">Address</label>
+                         <input type="text" class="form-control" id="address" name="address"
+                            value="${address}" placeholder="Input Admin Address" required>
+                     </div>
+                     <div class="mb-3" title="flash">
+                         <label for="newPassword" class="form-label">Password</label>
+                         <input type="password" class="form-control" id="newPassword" name="password"
+                             placeholder="Input Admin Password">
+                     </div>
+                     <div class="mb-3">
+                         <label for="confirmPassword" class="form-label">Confirm Password</label>
+                         <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                             placeholder="Retype Admin Password">
+                     </div>
+                     <div class="modal-footer">
+                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick='$("#editModal").remove();'>Close</button>
+                         <button type="submit" class="btn btn-secondary">Save</button>
+                     </div>
+                 </div>
+             </form>
+         </div>
+     </div>
+ </div>`
+        $(`button[title='${id_user}']`).after(modal);
+        $("#editModal").modal("show");
+
+    }
+</script>
+
 <script src="<?= App::get("root_uri") . "/public/js/script_password.js" ?>"></script>
+<script src="<?= App::get("root_uri") . "/public/js/script.js" ?>"></script>
