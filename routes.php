@@ -32,10 +32,18 @@ $router->get('/^admin\/notification$/', ['AuthMiddleware@shouldValidated', 'Admi
 $router->get('/^admin\/profile$/', ['AuthMiddleware@shouldValidated', 'AdminController@profilePage']);
 $router->post('/^admin\/update-profile$/', ['AuthMiddleware@shouldValidated', 'AdminController@updateProfile']);
 $router->post('/^admin\/update-password$/', ['AuthMiddleware@shouldValidated', 'AdminController@updatePassword']);
+
+// manage student routes
 $router->get('/^admin\/manage\/student$/', ['AuthMiddleware@shouldValidated', 'AdminController@manageStudent']);
+
+// manage lecture routes
 $router->get('/^admin\/manage\/lecture$/', ['AuthMiddleware@shouldValidated', 'AdminController@manageLecture']);
-$router->get('/^admin\/manage\/admin$/', ['AuthMiddleware@shouldValidated', 'AdminController@manageAdmin']);
-$router->post('/^admin\/manage\/admin\/new$/', ['AuthMiddleware@shouldValidated', 'AdminController@addNewAdmin']);
-$router->post('/^admin\/manage\/admin\/update$/', ['AuthMiddleware@shouldValidated', 'AdminController@updateAdmin']);
+
+// manage admin routes
+$router->get('/^admin\/manage\/admin$/', ['AuthMiddleware@shouldValidated', 'ManageAdminController@manageAdminPage']);
+$router->post('/^admin\/manage\/admin\/new$/', ['AuthMiddleware@shouldValidated', 'ManageAdminController@addNewAdmin']);
+$router->post('/^admin\/manage\/admin\/update$/', ['AuthMiddleware@shouldValidated', 'ManageAdminController@updateAdmin']);
+
+// manage code of conduct routes
 $router->get('/^admin\/manage\/level-violation$/', ['AuthMiddleware@shouldValidated', 'AdminController@manageLevelViolation']);
 $router->get('/^admin\/manage\/code-of-conduct$/', ['AuthMiddleware@shouldValidated', 'AdminController@manageCodeOfConduct']);
