@@ -71,7 +71,8 @@ class AdminController
 		$data = [
 			'users' => $users,
 			'flash' => Flasher::flash(),
-			'newAdminEndpoint' => App::get('root_uri') . '/admin/manage/admin/new'
+			'newAdminEndpoint' => App::get('root_uri') . '/admin/manage/admin/new',
+			'usersCount' => count($users)
 		];
 
 		return Helper::view('admin/manage/admin', $data);
