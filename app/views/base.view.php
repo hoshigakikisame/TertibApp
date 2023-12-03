@@ -70,7 +70,7 @@
 
         /* custom css for all page*/
     </style>
-    <link rel="stylesheet" href="<?php echo App::get("root_uri") . "/public/css/style.css" ?>">
+    <link rel="stylesheet" href="<?= App::get("root_uri") . "/public/css/style.css" ?>">
 </head>
 
 <body class="position-relative">
@@ -79,12 +79,12 @@
         ?>
     </div>
     <?php require $subview; ?>
-    <script src=" <?php echo App::get("root_uri") . "/public/vendor/bootstrap/js/bootstrap.bundle.min.js" ?>">
+    <script src=" <?= App::get("root_uri") . "/public/vendor/bootstrap/js/bootstrap.bundle.min.js" ?>">
     </script>
-    <script src=" <?php echo App::get("root_uri") . "/public/js/color-modes.js" ?>">
+    <script src=" <?= App::get("root_uri") . "/public/js/color-modes.js" ?>">
     </script>
     <!-- script for navbar -->
-    <script src="<?php echo App::get("root_uri") . "/public/js/nav.js" ?>"></script>
+    <script src="<?= App::get("root_uri") . "/public/js/nav.js" ?>"></script>
 </body>
 
 </html>

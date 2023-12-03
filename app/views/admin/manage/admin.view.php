@@ -39,44 +39,44 @@
                                                 <div class="modal-body">
                                                     <div class="mb-3">
                                                         <label for="username" class="form-label">Username</label>
-                                                        <input type="text" class="form-control" id="username" name="username" placeholder="Input Admin Username">
+                                                        <input type="text" class="form-control" id="username" name="username" placeholder="Input Admin Username" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="firstname" class="form-label">Firstname</label>
-                                                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Input Admin Firstname">
+                                                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Input Admin Firstname" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="lastname" class="form-label">Lastname</label>
-                                                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Input Admin Lastname">
+                                                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Input Admin Lastname" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="title" class="form-label">Title</label>
-                                                        <input type="text" class="form-control" id="title" name="title" placeholder="Input Admin Title">
+                                                        <input type="text" class="form-control" id="title" name="title" placeholder="Input Admin Title" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="email" class="form-label">Email</label>
-                                                        <input type="email" class="form-control" id="email" name="email" placeholder="Input Admin Email Address">
+                                                        <input type="email" class="form-control" id="email" name="email" placeholder="Input Admin Email Address" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="noTelp" class="form-label">No. Telp</label>
-                                                        <input type="number" class="form-control" id="noTelp" name="no_telp" placeholder="Input Admin Number">
+                                                        <input type="number" class="form-control" id="noTelp" name="no_telp" placeholder="Input Admin Number" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="address" class="form-label">Address</label>
-                                                        <input type="text" class="form-control" id="address" name="address" placeholder="Input Admin Address">
+                                                        <input type="text" class="form-control" id="address" name="address" placeholder="Input Admin Address" required>
                                                     </div>
-                                                    <div class="mb-3">
-                                                        <label for="password" class="form-label">Password</label>
-                                                        <input type="password" class="form-control" id="password" name="password" placeholder="Input Admin Password">
+                                                    <div class="mb-3" title="flash">
+                                                        <label for="newPassword" class="form-label">Password</label>
+                                                        <input type="password" class="form-control" id="newPassword" name="password" placeholder="Input Admin Password" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Retype Admin Password">
+                                                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Retype Admin Password" required>
                                                     </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save</button>
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>
@@ -127,51 +127,47 @@
                                                     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content modal-dialog-scrollable">
-                                                                <form action="" method="post">
+                                                                <form action="<?= $edit ?>" method="post">
                                                                     <div class="modal-header justify-content-center">
                                                                         <h1 class="modal-title fs-5" id="editModal">EDIT ADMIN</h1>
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <div class="mb-3">
-                                                                            <label for="username" class="form-label">Username</label>
-                                                                            <input type="text" class="form-control" id="username" name="username" placeholder="Input Admin Username">
-                                                                        </div>
-                                                                        <div class="mb-3">
                                                                             <label for="firstname" class="form-label">Firstname</label>
-                                                                            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Input Admin Firstname">
+                                                                            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Input Admin Firstname" required>
                                                                         </div>
                                                                         <div class="mb-3">
                                                                             <label for="lastname" class="form-label">Lastname</label>
-                                                                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Input Admin Lastname">
+                                                                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Input Admin Lastname" required>
                                                                         </div>
                                                                         <div class="mb-3">
                                                                             <label for="title" class="form-label">Title</label>
-                                                                            <input type="text" class="form-control" id="title" name="title" placeholder="Input Admin Title">
+                                                                            <input type="text" class="form-control" id="title" name="title" placeholder="Input Admin Title" required>
                                                                         </div>
                                                                         <div class="mb-3">
                                                                             <label for="email" class="form-label">Email</label>
-                                                                            <input type="email" class="form-control" id="email" name="email" placeholder="Input Admin Email Address">
+                                                                            <input type="email" class="form-control" id="email" name="email" placeholder="Input Admin Email Address" required>
                                                                         </div>
                                                                         <div class="mb-3">
                                                                             <label for="noTelp" class="form-label">No. Telp</label>
-                                                                            <input type="number" class="form-control" id="noTelp" name="no_telp" placeholder="Input Admin Number">
+                                                                            <input type="number" class="form-control" id="noTelp" name="no_telp" placeholder="Input Admin Number" required>
                                                                         </div>
                                                                         <div class="mb-3">
                                                                             <label for="address" class="form-label">Address</label>
-                                                                            <input type="text" class="form-control" id="address" name="address" placeholder="Input Admin Address">
+                                                                            <input type="text" class="form-control" id="address" name="address" placeholder="Input Admin Address" required>
                                                                         </div>
-                                                                        <div class="mb-3">
-                                                                            <label for="password" class="form-label">Password</label>
-                                                                            <input type="password" class="form-control" id="password" name="password" placeholder="Input Admin Password">
+                                                                        <div class="mb-3" title="flash">
+                                                                            <label for="newPassword" class="form-label">Password</label>
+                                                                            <input type="password" class="form-control" id="newPassword" name="password" placeholder="Input Admin Password" required>
                                                                         </div>
                                                                         <div class="mb-3">
                                                                             <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                                                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Retype Admin Password">
+                                                                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Retype Admin Password" required>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                                                                        <button type="button" class="btn btn-secondary">Save</button>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                                                            <button type="submit" class="btn btn-secondary">Save</button>
+                                                                        </div>
                                                                     </div>
                                                                 </form>
                                                             </div>
@@ -190,3 +186,5 @@
         </main>
     </div>
 </div>
+
+<script src="<?= App::get("root_uri") . "/public/js/script_password.js" ?>"></script>

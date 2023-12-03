@@ -64,7 +64,7 @@ $updatePasswordEndpoint = App::get("root_uri") . "/admin/update-password";
                     </div>
                     <div class="row py-2 my-4 gap-2">
                         <h1>Change Password</h1>
-                        <div class="col rounded-5 my-2 mx-2">
+                        <div class="col rounded-5 my-2 mx-2" title="flash">
                             <form action="<?= $updatePasswordEndpoint ?>" method="post" id="formUpdatePassword">
                                 <div class="row gap-5 ">
                                     <div class=" col">
@@ -93,30 +93,5 @@ $updatePasswordEndpoint = App::get("root_uri") . "/admin/update-password";
         </main>
     </div>
 </div>
-<script>
-    // javascript validation for update password
-    const form = document.querySelector('#formUpdatePassword');
-    const newPassword = document.querySelector('#newPassword');
-    const confirmPassword = document.querySelector('#confirmPassword');
-    const buttonUpdatePassword = document.querySelector('#buttonUpdatePassword');
-
-    buttonUpdatePassword.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (newPassword.value !== confirmPassword.value) {
-            alert('Password and Confirm Password must be the same');
-        } else {
-            form.submit();
-        }
-    });
-
-    // javascript for image preview
-    const inputProfileImage = document.querySelector('#input_profile_image');
-    const imgProfileImage = document.querySelector('#img_profile_image');
-    const labelProfileImage = document.querySelector('#label_profile_image');
-
-    inputProfileImage.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        const url = URL.createObjectURL(file);
-        imgProfileImage.src = url;
-    });
-</script>
+<script src="<?= App::get("root_uri") . "/public/js/script_password.js" ?>"></script>
+<script src="<?= App::get("root_uri") . "/public/js/img_preview.js" ?>"></script>
