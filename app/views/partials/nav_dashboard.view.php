@@ -1,4 +1,7 @@
-<?php $user = Session::getInstance()->get('user');  ?>
+<?php
+$user = Session::getInstance()->get('user');
+$admin = $user->getRoleDetail();
+?>
 <nav class="navbar navbar-expand-lg align-items-stretch">
     <div class="container-fluid align-items-lg-start flex-lg-column ">
         <a class="navbar-brand my-3" href="#">LOGO TATIB</a>
@@ -48,19 +51,21 @@
                             <a class="nav-link" href="<?php echo App::get('root_uri') . "/admin/profile" ?>">Profile</a>
                         </div>
                     </li>
-                    <li class="logOut border-top mt-4">
-                        <div class="content nav-item  gap-1 d-flex align-items-center">
+                    <li class="logOut border-top mt-2 position-relative">
+                        <div class="content nav-item gap-1 d-flex align-items-center">
                             <i class="bi bi-box-arrow-in-right"></i>
                             <a class="nav-link" href="<?php echo App::get('root_uri') . "/auth/logout" ?>">Log Out</a>
                         </div>
                     </li>
                 </ul>
-                <div class="row-auto mt-5">
+                <div class="row-auto mt-4">
                     <div class="card-user d-flex justify-content-end gap-2 align-items-center col">
                         <img src="<?= $user->getImageUrl() ?>" alt="" class="img-profile rounded-circle">
                         <div class="userinfo d-flex align-items-start flex-column">
                             <h3 class="fs-6" style=" margin-bottom:-2px;"><?= $user->getFirstName() . " " . $user->getLastName() ?></h3>
-                            <p class="" style="font-size:12px;margin-bottom:-5px;">Dosen</p>
+                            <p class="" style="font-size:12px;margin-bottom:-5px;">
+                                <?= (!$user->getRole() == "admin") ? $user->getRole() : $admin->getTitle(); ?>
+                            </p>
                         </div>
                     </div>
                 </div>
