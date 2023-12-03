@@ -119,22 +119,17 @@
                                                 <td><?= $user->getEmail() ?></td>
                                                 <td><?= $user->getPhoneNumber() ?></td>
                                                 <td><?= $user->getAddress() ?></td>
-                                                <td>
+                                                <td class="d-flex">
                                                     <!-- modal trigger -->
-                                                    <button type="button" id="btnPress" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal" title="<?= $user->getIdUser() ?>" onclick="editButtonAction(
-                                                        <?= $user->getIdUser() ?>, 
-                                                        '<?= $user->getUsername() ?>', 
-                                                        '<?= $user->getFirstName() ?>', 
-                                                        '<?= $user->getLastName() ?>',
-                                                        '<?= $adminRole->getTitle() ?>',
-                                                        '<?= $user->getEmail() ?>',
-                                                        '<?= $user->getPhoneNumber() ?>',
-                                                        '<?= $user->getAddress() ?>'
-                                                    )">
+                                                    <button type="button" id="btnPress" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal" title="<?= $user->getIdUser() ?>" onclick="editButtonAction(<?= $user->getIdUser() ?>,'<?= $user->getUsername() ?>','<?= $user->getFirstName() ?>','<?= $user->getLastName() ?>','<?= $adminRole->getTitle() ?>','<?= $user->getEmail() ?>','<?= $user->getPhoneNumber() ?>','<?= $user->getAddress() ?>')">
                                                         edit
                                                     </button>
                                                     <!-- Modal -->
 
+                                                    <form action="<?= '' ?>" method="post">
+                                                        <input type="hidden" name="id_user" value="<?= $user->getIdUser() ?>">
+                                                        <button type="submit" class="btn btn-link text-secondary">delete</button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>

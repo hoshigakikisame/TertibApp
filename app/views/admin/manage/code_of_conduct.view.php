@@ -83,13 +83,15 @@
                                             <td>92319</td>
                                             <td>Mark</td>
                                             <td>v</td>
-
-
-                                            <td>
+                                            <td class="d-flex">
                                                 <!-- modal trigger -->
                                                 <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal">
                                                     edit
                                                 </button>
+                                                <form action="<?= '' ?>" method="post">
+                                                    <input type="hidden" name="id_user" value="<?= '' ?>">
+                                                    <button type="submit" class="btn btn-link text-secondary">delete</button>
+                                                </form>
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered">
