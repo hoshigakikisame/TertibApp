@@ -13,6 +13,7 @@
             <div class="row justify-content-lg-end">
                 <div class="col-lg-10 col px-2 px-lg-5 py-4" title="main" style="max-width: 100vw; ">
                     <div class="content p-lg-4 p-0">
+                        <?= $flash ?>
                         <h1>Admin Account</h1>
                         <div class="row ms-2">
                             <div class="col-lg-2 col-auto border border-2 mt-3 py-2 px-2 rounded-3 flex-grow-1 flex-lg-grow-0">
@@ -123,6 +124,7 @@
                                                     <button type="button" id="btnPress" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal" title="<?= $user->getIdUser() ?>" onclick="editButtonAction(
                                                         <?= $user->getIdUser() ?>, 
                                                         '<?= $user->getUsername() ?>', 
+                                                        '<?= $user->getFirstName() ?>', 
                                                         '<?= $user->getLastName() ?>',
                                                         '<?= $adminRole->getTitle() ?>',
                                                         '<?= $user->getEmail() ?>',
@@ -148,20 +150,26 @@
 </div>
 
 <script>
-    function editButtonAction(id_user, username, lastname, title, email, phoneNumber, address) {
+    function editButtonAction(id_user, username, firstname, lastname, title, email, phoneNumber, address) {
         const modal = /*template*/ `
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true" data-bs-backdrop="static">
      <div class="modal-dialog modal-dialog-centered">
          <div class="modal-content modal-dialog-scrollable">
-             <form action="" method="post">
+             <form action="<?= $updateAdminEndpoint ?>" method="post">
                  <div class="modal-header justify-content-center">
                      <h1 class="modal-title fs-5" id="editModal">EDIT ADMIN</h1>
                  </div>
                  <div class="modal-body">
+                     <input type="hidden" name="id_user" value="${id_user}">
+                     <div class="mb-3">
+                         <label for="username" class="form-label">Username</label>
+                         <input type="text" class="form-control" id="username" name="username"
+                             placeholder="Input Admin Username" value="${username}" required>
+                     </div>
                      <div class="mb-3">
                          <label for="firstname" class="form-label">Firstname</label>
                          <input type="text" class="form-control" id="firstname" name="firstname"
-                             placeholder="Input Admin Firstname" value="${username}" required>
+                             placeholder="Input Admin Firstname" value="${firstname}" required>
                      </div>
                      <div class="mb-3">
                          <label for="lastname" class="form-label">Lastname</label>

@@ -82,6 +82,20 @@ class UserService
         ]);
     }
 
+    public function updateUser(string $username, string $firstName, string $lastName, string $email, string $address, string $phoneNumber, string $role, string $salt, string $passwordHash, $where = []) {
+        $this->db->update('tb_user', [
+            'username' => $username,
+            'first_name' => $firstName,
+            'last_name' => $lastName,
+            'email' => $email,
+            'address' => $address,
+            'phone_number' => $phoneNumber,
+            'role' => $role,
+            'salt' => $salt,
+            'password_hash' => $passwordHash
+        ], $where);
+    }
+
     public function updateUserProfile(string $firstName, string $lastName, string $address, string $phoneNumber, string $imagePath, $where = [])
     {
         $this->db->update('tb_user', [

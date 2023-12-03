@@ -36,5 +36,6 @@ $router->get('/^admin\/manage\/student$/', ['AuthMiddleware@shouldValidated', 'A
 $router->get('/^admin\/manage\/lecture$/', ['AuthMiddleware@shouldValidated', 'AdminController@manageLecture']);
 $router->get('/^admin\/manage\/admin$/', ['AuthMiddleware@shouldValidated', 'AdminController@manageAdmin']);
 $router->post('/^admin\/manage\/admin\/new$/', ['AuthMiddleware@shouldValidated', 'AdminController@addNewAdmin']);
+$router->post('/^admin\/manage\/admin\/update$/', ['AuthMiddleware@shouldValidated', 'AdminController@updateAdmin']);
 $router->get('/^admin\/manage\/level-violation$/', ['AuthMiddleware@shouldValidated', 'AdminController@manageLevelViolation']);
 $router->get('/^admin\/manage\/code-of-conduct$/', ['AuthMiddleware@shouldValidated', 'AdminController@manageCodeOfConduct']);
