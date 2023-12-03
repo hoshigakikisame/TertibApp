@@ -8402,6 +8402,10 @@ nav.navbar, footer {
   background: linear-gradient(180deg, #FCB216 6.77%, #F3542C 27.6%, rgba(255, 255, 255, 0.32) 65.62%);
 }
 
+li div.nav-item.active-page > button {
+  color: #F3542C;
+}
+
 li.active-drop a.dropdown-item {
   color: var(--white);
 }
@@ -8425,6 +8429,19 @@ li.active-drop {
 [data-bs-theme=dark] .nav-item:hover {
   color: #FCB216;
   transition: all 0.5s;
+}
+[data-bs-theme=dark] li.active-drop a.dropdown-item:hover {
+  color: var(--bs-dropdown-link-color);
+}
+[data-bs-theme=dark] a.dropdown-item:active, [data-bs-theme=dark] .active-drop a.drowdown-item:active {
+  color: var(--white);
+  background-color: var(--bs-primary);
+}
+[data-bs-theme=dark] li.active-drop {
+  background: var(--bs-primary);
+}
+[data-bs-theme=dark] li div.nav-item.active-page > button {
+  color: #FCB216;
 }
 [data-bs-theme=dark] .circle-elemen-hero > .elemen {
   background: linear-gradient(180deg, #FCB216 6.77%, #F3542C 27.6%, rgba(33, 37, 41, 0.32) 65.62%);
