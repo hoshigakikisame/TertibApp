@@ -76,7 +76,7 @@ class AuthsController
             "flash" => Flasher::flash()
         ];
 
-        return Helper::view('auth/forgot_password');
+        return Helper::view('auth/forgot_password', $data);
     }
 
     public function forgotPassword() {

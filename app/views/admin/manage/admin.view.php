@@ -32,11 +32,15 @@
                                 <div class="modal fade" id="modalAdd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalAdd" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered ">
                                         <div class="modal-content modal-dialog-scrollable">
-                                            <form action="" method="post">
+                                            <form action="<?= $newAdminEndpoint ?>" method="post">
                                                 <div class="modal-header justify-content-center">
                                                     <h4 class="modal-title" id="modalAdd">ADD ADMIN</h4>
                                                 </div>
                                                 <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <label for="username" class="form-label">Username</label>
+                                                        <input type="text" class="form-control" id="username" name="username" placeholder="Input Admin Username">
+                                                    </div>
                                                     <div class="mb-3">
                                                         <label for="firstname" class="form-label">Firstname</label>
                                                         <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Input Admin Firstname">
@@ -55,7 +59,11 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="noTelp" class="form-label">No. Telp</label>
-                                                        <input type="number" class="form-control" id="noTelp" name="noTelp" placeholder="Input Admin Number">
+                                                        <input type="number" class="form-control" id="noTelp" name="no_telp" placeholder="Input Admin Number">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="address" class="form-label">Address</label>
+                                                        <input type="text" class="form-control" id="address" name="address" placeholder="Input Admin Address">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="password" class="form-label">Password</label>
@@ -81,10 +89,13 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Firstname</th>
-                                            <th scope="col">Lastname</th>
+                                            <th scope="col">Username</th>
+                                            <th scope="col">First Name</th>
+                                            <th scope="col">Last Name</th>
+                                            <th scope="col">Title</th>
                                             <th scope="col">Email</th>
                                             <th scope="col">Phone Number</th>
+                                            <th scope="col">Address</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
@@ -92,16 +103,21 @@
                                         <?php
                                         /**
                                          * @var UserModel[] $users
-                                         * @var AdminModel $adminRole
                                          */
                                         foreach ($users as $user) :
+                                            /**
+                                             * @var AdminModel $adminRole
+                                             */
                                             $adminRole = $user->getRoleDetail();
                                         ?>
                                             <tr>
+                                                <td><?= $user->getUsername() ?></td>
                                                 <td><?= $user->getFirstName() ?></td>
                                                 <td><?= $user->getLastName() ?></td>
+                                                <td><?= $adminRole->getTitle() ?></td>
                                                 <td><?= $user->getEmail() ?></td>
                                                 <td><?= $user->getPhoneNumber() ?></td>
+                                                <td><?= $user->getAddress() ?></td>
                                                 <td>
                                                     <!-- modal trigger -->
                                                     <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal">
@@ -116,6 +132,10 @@
                                                                         <h1 class="modal-title fs-5" id="editModal">EDIT ADMIN</h1>
                                                                     </div>
                                                                     <div class="modal-body">
+                                                                        <div class="mb-3">
+                                                                            <label for="username" class="form-label">Username</label>
+                                                                            <input type="text" class="form-control" id="username" name="username" placeholder="Input Admin Username">
+                                                                        </div>
                                                                         <div class="mb-3">
                                                                             <label for="firstname" class="form-label">Firstname</label>
                                                                             <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Input Admin Firstname">
@@ -134,7 +154,11 @@
                                                                         </div>
                                                                         <div class="mb-3">
                                                                             <label for="noTelp" class="form-label">No. Telp</label>
-                                                                            <input type="number" class="form-control" id="noTelp" name="noTelp" placeholder="Input Admin Number">
+                                                                            <input type="number" class="form-control" id="noTelp" name="no_telp" placeholder="Input Admin Number">
+                                                                        </div>
+                                                                        <div class="mb-3">
+                                                                            <label for="address" class="form-label">Address</label>
+                                                                            <input type="text" class="form-control" id="address" name="address" placeholder="Input Admin Address">
                                                                         </div>
                                                                         <div class="mb-3">
                                                                             <label for="password" class="form-label">Password</label>

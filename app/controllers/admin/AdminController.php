@@ -69,7 +69,9 @@ class AdminController
 		}
 
 		$data = [
-			'users' => $users
+			'users' => $users,
+			'flash' => Flasher::flash(),
+			'newAdminEndpoint' => App::get('root_uri') . '/admin/manage/admin/new'
 		];
 
 		return Helper::view('admin/manage/admin', $data);
@@ -221,5 +223,46 @@ class AdminController
 		}
 
 		return Helper::redirect('/admin/profile');
+	}
+
+	public function addNewAdmin() {
+		if (
+			isset($_POST['username']) &&
+			isset($_POST['firstname']) &&
+			isset($_POST['lastname']) &&
+			isset($_POST['email']) &&
+			isset($_POST['title']) &&
+			isset($_POST['no_telp']) &&
+			isset($_POST['address']) &&
+			isset($_POST['password'])
+		) {
+			$userService = new UserService();
+			$adminService = new AdminService();
+
+			// get input
+			$username = $_POST['username'];
+			$firstName = $_POST['firstname'];
+			$lastName = $_POST['lastname'];
+			$email = $_POST['email'];
+			$address = $_POST['address'];
+			$phoneNumber = $_POST['no_telp'];
+			$role = 'admin';
+			
+			$rawPassword = $_POST['password'];
+			$salt = Helper::generateRandomHex(16);
+			$password = $userService->hashPassword($salt, $rawPassword);
+
+			$newUserId = $userService->addNewUser($username, $firstName, $lastName, $email, $address, $phoneNumber, $role, $salt, $password);
+
+			$title = $_POST['title'];
+
+			$adminService->addNewAdmin($newUserId, $title);
+
+			Flasher::setFlash("success", "User successfully added!");
+		} else {
+			Flasher::setFlash("danger", "All fields must be filled");
+		}
+
+		return Helper::redirect('/admin/manage/admin');
 	}
 }

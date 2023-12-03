@@ -9,6 +9,11 @@ class QueryBuilder
 		$this->pdo = $pdo;
 	}
 
+	public function getLastInsertId()
+	{
+		return $this->pdo->lastInsertId();
+	}
+
 	/**
 	 * select all rows from the table
 	 * @param  string $table_name
@@ -109,8 +114,9 @@ class QueryBuilder
 			$statement = $this->pdo->prepare($sql);
 			$statement->execute($params);
 
+			return $this->getLastInsertId();
 		} catch (PDOException $e) {
-			die("Whoops!! Something Went Wrong!!!");
+			die("Whoops!! Something Went Wrong!!!\n" . $e->getMessage());
 		}
 	}
 

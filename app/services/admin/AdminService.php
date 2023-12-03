@@ -49,6 +49,13 @@ class AdminService
         }
     }
 
+    public function addNewAdmin(int $idUser, string $title): string {
+        return $this->db->insert('tb_admin', [
+            'id_user' => $idUser,
+            'title' => $title
+        ]);
+    }
+
     public function updateAdminProfile($title, $where = [])
     {
         $this->db->update('tb_admin', [

@@ -66,6 +66,22 @@ class UserService
         }
     }
 
+    public function addNewUser(string $username, string $firstName, string $lastName, string $email, string $address, string $phoneNumber, string $role, string $salt, string $passwordHash): string
+    {
+        return $this->db->insert('tb_user', [
+            'username' => $username,
+            'first_name' => $firstName,
+            'last_name' => $lastName,
+            'email' => $email,
+            'address' => $address,
+            'phone_number' => $phoneNumber,
+            'role' => $role,
+            'image_path' => '',
+            'salt' => $salt,
+            'password_hash' => $passwordHash
+        ]);
+    }
+
     public function updateUserProfile(string $firstName, string $lastName, string $address, string $phoneNumber, string $imagePath, $where = [])
     {
         $this->db->update('tb_user', [

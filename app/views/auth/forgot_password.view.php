@@ -1,6 +1,7 @@
 <?php
 $redirected =  App::get('root_uri') . "/auth/forgot-password";
 ?>
+<?= $flash ?>
 <main class="container d-flex flex-column justify-content-center" style="font-family: Poppins; height:100vh;">
     <div class="row-auto rounded-5 align-self-center border border-2 p-1 w-lg-25" style="width:min(100%,400px) !important">
         <div class="col shadow-sm  d-flex flex-column align-items-center rounded-5 m-2 px-0 py-5">
