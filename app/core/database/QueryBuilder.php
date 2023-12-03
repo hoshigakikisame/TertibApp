@@ -37,7 +37,41 @@ class QueryBuilder
 	 * @param string $table_name
 	 * @return array 
 	 */
+
+	 public function findAll($table) {
+		$sql = sprintf(
+			"SELECT * FROM %s",
+			$table
+		);
+
+		try {
+			$statement = $this->pdo->prepare($sql);
+			$statement->execute();
+			return $statement->fetchAll(PDO::FETCH_CLASS);
+		} catch (PDOException $e) {
+			die("Whoops!! Something Went Wrong!!!". $e->getMessage());
+		}
+	 }
+
 	public function findOne($table, $parameters = [])
+	{
+		$sql = sprintf(
+			"SELECT * FROM %s WHERE %s LIMIT 1",
+			$table,
+			implode(' AND ', array_map(fn ($key) => "$key = :$key", array_keys($parameters)))
+		);
+
+		try {
+			$statement = $this->pdo->prepare($sql);
+			$statement->execute($parameters);
+			$results = $statement->fetchAll(PDO::FETCH_CLASS);
+			return $results[0];
+		} catch (PDOException $e) {
+			die("Whoops!! Something Went Wrong!!!");
+		}
+	}
+
+	public function findWhere($table, $parameters = [])
 	{
 		$sql = sprintf(
 			"SELECT * FROM %s WHERE %s",
@@ -49,7 +83,7 @@ class QueryBuilder
 			$statement = $this->pdo->prepare($sql);
 			$statement->execute($parameters);
 			$results = $statement->fetchAll(PDO::FETCH_CLASS);
-			return $results[0];
+			return $results;
 		} catch (PDOException $e) {
 			die("Whoops!! Something Went Wrong!!!");
 		}

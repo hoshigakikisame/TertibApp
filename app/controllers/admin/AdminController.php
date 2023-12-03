@@ -54,7 +54,25 @@ class AdminController
 	}
 	public function manageAdmin()
 	{
-		return Helper::view('admin/manage/admin');
+		$userService = new UserService();
+		$adminService = new AdminService();
+
+		$users = $userService->getManyUser(['role' => 'admin']);
+		$admins = $adminService->getAllAdmin();
+
+		for($i = 0; $i < count($users); $i++) {
+			for($j = 0; $j < count($admins); $j++) {
+				if($users[$i]->getIdUser() == $admins[$j]->getIdUser()) {
+					$users[$i]->setRoleDetail($admins[$j]);
+				}
+			}
+		}
+
+		$data = [
+			'users' => $users
+		];
+
+		return Helper::view('admin/manage/admin', $data);
 	}
 	public function manageCodeOfConduct()
 	{

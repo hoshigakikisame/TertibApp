@@ -85,11 +85,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php 
+                                        /**
+                                         * @var UserModel[] $users
+                                         * @var AdminModel $adminRole
+                                         */
+                                        foreach ($users as $user): 
+                                        $adminRole = $user->getRoleDetail();
+                                        ?>
                                         <tr>
-                                            <td>sdas</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
+                                            <td><?= $user->getFirstName() ?></td>
+                                            <td><?= $user->getLastName() ?></td>
+                                            <td><?= $user->getEmail() ?></td>
+                                            <td><?= $user->getPhoneNumber() ?></td>
                                             <td>
                                                 <!-- modal trigger -->
                                                 <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal">
@@ -139,6 +147,7 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>

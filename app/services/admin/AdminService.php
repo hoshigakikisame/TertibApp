@@ -28,6 +28,18 @@ class AdminService
 
         return self::$instances[$cls];
     }
+
+    public function getAllAdmin() {
+        $rawAdmins = $this->db->findAll('tb_admin');
+
+        if ($rawAdmins) {
+            $admins = [];
+            foreach ($rawAdmins as $rawAdmin) {
+                $admins[] = AdminModel::fromStdClass($rawAdmin);
+            }
+            return $admins;
+        }
+    }
     public function getSingleAdmin(string $idUser)
     {
         $rawAdmin = $this->db->findOne('tb_admin', ['id_user' => $idUser]);

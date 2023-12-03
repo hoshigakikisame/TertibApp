@@ -97,6 +97,9 @@
 
         public function getImageUrl() {
             $baseUrl = MediaStorageService::getInstance()->getAccessUrl();
+            if ($this->imagePath == null || $this->imagePath == '') {
+                return $baseUrl . 'user_profile/blank_user.png';
+            }
             return $baseUrl . $this->imagePath;
         }
 

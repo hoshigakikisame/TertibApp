@@ -54,6 +54,18 @@ class UserService
         }
     }
 
+    public function getManyUser(array $where = [])
+    {
+        $rawUsers = $this->db->findWhere('tb_user', $where);
+        if ($rawUsers) {
+            $users = [];
+            foreach ($rawUsers as $rawUser) {
+                $users[] = UserModel::fromStdClass($rawUser);
+            }
+            return $users;
+        }
+    }
+
     public function updateUserProfile(string $firstName, string $lastName, string $address, string $phoneNumber, string $imagePath, $where = [])
     {
         $this->db->update('tb_user', [
