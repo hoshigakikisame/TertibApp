@@ -84,14 +84,12 @@ class AdminController
 
 	public function updateProfile()
 	{
-
 		if (
 			isset($_POST['firstname']) && $_POST['firstname'] != '' &&
 			isset($_POST['lastname']) && $_POST['lastname'] != '' &&
 			isset($_POST['title']) && $_POST['title'] != '' &&
 			isset($_POST['address']) && $_POST['address'] != '' &&
-			isset($_POST['number']) && $_POST['number'] != '' &&
-			isset($_FILES['profile_image']) && $_FILES['profile_image']['name'] != ''
+			isset($_POST['number']) && $_POST['number'] != ''
 		) {
 			$userService = new UserService();
 			$adminService = new AdminService();
@@ -110,27 +108,33 @@ class AdminController
 			$title = $_POST['title'];
 			$address = $_POST['address'];
 			$phoneNumber = $_POST['number'];
-			$profileImage = $_FILES['profile_image'];
 
-			// validate image extension
-			$validImageExtension = $mediaStorageService->validateImageExtension($profileImage);
-			if (!$validImageExtension) {
-				Flasher::setFlash("danger", "Invalid image extension");
-				return Helper::redirect('/admin/profile');
+			$imagePath = $user->getImagePath();
+
+			if (isset($_FILES['profile_image']) && $_FILES['profile_image']['name'] != '') {
+				$profileImage = $_FILES['profile_image'];
+
+				// validate image extension
+				$validImageExtension = $mediaStorageService->validateImageExtension($profileImage);
+				if (!$validImageExtension) {
+					Flasher::setFlash("danger", "Invalid image extension");
+					return Helper::redirect('/admin/profile');
+				}
+
+				// validate image size
+				$validImageSize = $mediaStorageService->validateImageSize($profileImage);
+				if (!$validImageSize) {
+					Flasher::setFlash("danger", "Image size must be less than " . MediaStorageService::getInstance()->getMaxImageSize() . " bytes");
+					return Helper::redirect('/admin/profile');
+				}
+
+				// upload image
+				$uploadResult = $mediaStorageService::getInstance()->uploadImage($profileImage['tmp_name'], 'user_profile', $idUser);
+
+				// get image path from upload result publicId and extension
+				$imagePath = $uploadResult->publicId . '.' . $mediaStorageService->getImageExtension($profileImage);
 			}
 
-			// validate image size
-			$validImageSize = $mediaStorageService->validateImageSize($profileImage);
-			if (!$validImageSize) {
-				Flasher::setFlash("danger", "Image size must be less than " . MediaStorageService::getInstance()->getMaxImageSize() . " bytes");
-				return Helper::redirect('/admin/profile');
-			}
-
-			// upload image
-			$uploadResult = $mediaStorageService::getInstance()->uploadImage($profileImage['tmp_name'], 'user_profile', $idUser);
-
-			// get image path from upload result publicId and extension
-			$imagePath = $uploadResult->publicId . '.' . $mediaStorageService->getImageExtension($profileImage);
 
 			// update user's profile
 			$userService->updateUserProfile(
