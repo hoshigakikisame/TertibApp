@@ -76,55 +76,29 @@
                                     $no = 1;
                                     ?>
                                     <tbody>
-                                        <tr>
                                         <?php
                                         /**
                                          * @var ViolationLevelModel[] $violationLevels
                                          */
                                         foreach ($violationLevels as $violationLevel) :
                                         ?>
-                                            <td><?= $violationLevel->getIdViolationLevel(); ?></td>
-                                            <td><?= $violationLevel->getLevel(); ?></td>
-                                            <td><?= $violationLevel->getName(); ?></td>
-                                            <td><?= $violationLevel->getWeight(); ?></td>
+                                            <tr>
+                                                <td><?= $violationLevel->getIdViolationLevel(); ?></td>
+                                                <td><?= $violationLevel->getLevel(); ?></td>
+                                                <td><?= $violationLevel->getName(); ?></td>
+                                                <td><?= $violationLevel->getWeight(); ?></td>
 
-                                            <td>
-                                                <!-- modal trigger -->
-                                                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal">
-                                                    edit
-                                                </button>
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered">
-                                                        <div class="modal-content modal-dialog-scrollable">
-                                                            <form action="<?= $edit ?>" method="post">
-                                                                <div class="modal-header justify-content-center">
-                                                                    <h1 class="modal-title fs-5" id="editModal">EDIT Violation Level</h1>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="mb-3">
-                                                                        <label for="level" class="form-label">Level</label>
-                                                                        <input type="text" class="form-control" id="level" name="level" placeholder="Input Violation Level" required>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="name" class="form-label">Name</label>
-                                                                        <input type="text" class="form-control" id="name" name="name_violation" placeholder="Input Violation Name" required>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="weight" class="form-label">Weight</label>
-                                                                        <input type="number" class="form-control" id="weight" name="weight" placeholder="Input Violation Weight" required>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                        <button type="submit" class="btn btn-primary">Save</button>
-                                                                    </div>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                <td>
+                                                    <!-- Modal Trigger edit -->
+                                                    <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal" title="<?= $violationLevel->getIdViolationLevel(); ?>" onclick="editViolationButton(<?= $violationLevel->getIdViolationLevel(); ?>,<?= $violationLevel->getLevel(); ?>,'<?= $violationLevel->getName(); ?>',<?= $violationLevel->getWeight(); ?>)">
+                                                        edit
+                                                    </button>
+                                                    <!-- Modal Trigger delete-->
+                                                    <button type="button" id="btnPress" class="btn btn-link text-secondary" data-bs-toggle="modal" title="<?= $user->getIdUser() ?>" data-bs-target="#deleteModal" onclick="deleteButtonAction(<?= $violationLevel->getIdViolationLevel(); ?>,'<?= $violationLevel->getName();  ?>')">
+                                                        delete
+                                                    </button>
+                                                </td>
+                                            </tr>
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
@@ -136,3 +110,47 @@
         </main>
     </div>
 </div>
+
+<script>
+    function editViolationButton(id_violation_level, level, name, weight) {
+        const modal = /*html */ `
+        <div class="modal fade" id="editModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content modal-dialog-scrollable">
+             <form action="<?= $edit ?>" method="post">
+                 <div class="modal-header justify-content-center">
+                     <h1 class="modal-title fs-5" id="editModal">EDIT Violation Level</h1>
+                 </div>
+                 <div class="modal-body">
+                     <div class="mb-3">
+                         <label for="level" class="form-label">Level</label>
+                         <input type="text" class="form-control" id="level" name="level"
+                             placeholder="Input Violation Level" required>
+                     </div>
+                     <div class="mb-3">
+                         <label for="name" class="form-label">Name</label>
+                         <input type="text" class="form-control" id="name" name="name_violation"
+                             placeholder="Input Violation Name" required>
+                     </div>
+                     <div class="mb-3">
+                         <label for="weight" class="form-label">Weight</label>
+                         <input type="number" class="form-control" id="weight" name="weight"
+                             placeholder="Input Violation Weight" required>
+                     </div>
+                     <div class="modal-footer">
+                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick='$("#editModal").remove();'>Close</button>
+                         <button type="submit" class="btn btn-primary">Save</button>
+                     </div>
+                 </div>
+             </form>
+         </div>
+     </div>
+ </div>`
+        $(`button[title='${id_violation_level}']`).after(modal);
+        $("#editModal").modal("show");
+    }
+
+    function deleteViolationButton(id_violation_level, name) {
+
+    }
+</script>
