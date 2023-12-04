@@ -56,10 +56,7 @@ class AdminController
 	{
 		return Helper::view('admin/manage/level_violation');
 	}
-	public function manageCodeOfConduct()
-	{
-		return Helper::view('admin/manage/code_of_conduct');
-	}
+	
 	public function profilePage()
 	{
 		/**

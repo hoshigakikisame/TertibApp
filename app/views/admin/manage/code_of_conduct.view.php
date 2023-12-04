@@ -45,17 +45,25 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="mb-3">
-                                                        <label for="codeOfConduct" class="form-label">Code Of Conduct</label>
-                                                        <textarea class="form-control" id="codeOfConduct" rows="3" placeholder="Input New Code Of Coduct"></textarea>
+                                                        <label for="name" class="form-label">Name</label>
+                                                        <input type="text" class="form-control" id="name" placeholder="Code of Conduct Name">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="level" class="form-label">Level</label>
                                                         <select class="form-select" id="level" aria-label="Default select example">
                                                             <option selected>Choose Code Of Conduct Level</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
-                                                            <option value="3">Three</option>
+                                                            <?php 
+                                                            /**
+                                                             * @var ViolationLevelModel[] $violationLevels
+                                                             */
+                                                            foreach ($violationLevels as $violationLevel) : ?>
+                                                            <option value="<?= $violationLevel->getIdViolationLevel(); ?>"><?= "Level " . $violationLevel->getLevel() . "; Name " . $violationLevel->getName() . "; Weight " . $violationLevel->getWeight() ?></option>
+                                                            <?php endforeach; ?>
                                                         </select>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="description" class="form-label">Description</label>
+                                                        <textarea class="form-control" id="description" rows="3" placeholder="Code of Conduct Description"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -79,8 +87,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <?php
+                                        /**
+                                         * @var CodeOfConductModel[] $codeOfConducts
+                                         */
+                                        foreach ($codeOfConducts as $codeOfConduct) :
+                                            /**
+                                             * @var ViolationLevelModel $violationLevel
+                                             */
+                                            $violationLevel = $codeOfConduct->getViolationLevel();
+                                        ?>
                                         <tr>
-                                            <td>92319</td>
+                                            <td><?= $codeOfConduct->getIdCodeOfConduct(); ?></td>
                                             <td>Mark</td>
                                             <td>v</td>
                                             <td class="d-flex">
@@ -125,6 +143,7 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>

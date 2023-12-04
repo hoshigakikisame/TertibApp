@@ -50,4 +50,4 @@ $router->post('/^admin\/manage\/violation-level\/new$/', ['AuthMiddleware@should
 $router->post('/^admin\/manage\/violation-level\/update$/', ['AuthMiddleware@shouldValidated', 'ManageViolationLevelController@updateViolationLevel']);
 
 // manage code of conduct routes
-$router->get('/^admin\/manage\/code-of-conduct$/', ['AuthMiddleware@shouldValidated', 'AdminController@manageCodeOfConduct']);
+$router->get('/^admin\/manage\/code-of-conduct$/', ['AuthMiddleware@shouldValidated', 'ManageCodeOfConductController@manageCodeOfConductPage']);
