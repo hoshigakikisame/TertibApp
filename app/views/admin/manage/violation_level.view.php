@@ -13,12 +13,12 @@
             <div class="row justify-content-lg-end">
                 <div class="col-lg-10 col px-2 px-lg-5 py-4" title="main" style="max-width: 100vw; ">
                     <div class="content p-lg-4 p-0">
-                        <h1>Level Violation</h1>
+                        <h1>Violation Level</h1>
                         <div class="row ms-2">
                             <div class="col-lg-2 col-auto border border-2 mt-3 py-2 px-2 rounded-3 flex-grow-1 flex-lg-grow-0">
                                 <div class="shadow-sm rounded-3 py-3 px-lg-4 px-0 h-100">
                                     <h1 class="mb-0"><?= "12" ?></h1>
-                                    <h6>Level Violation Totals</h6>
+                                    <h6>Violation Level Totals</h6>
                                 </div>
                             </div>
                         </div>
@@ -34,7 +34,7 @@
                                         <div class="modal-content modal-dialog-scrollable">
                                             <form action="<?= $newAdminEndpoint ?>" method="post">
                                                 <div class="modal-header justify-content-center">
-                                                    <h4 class="modal-title" id="modalAdd">ADD LEVEL VIOLATION</h4>
+                                                    <h4 class="modal-title" id="modalAdd">ADD VIOLATION LEVEL</h4>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="mb-3">
@@ -93,7 +93,7 @@
                                                         <div class="modal-content modal-dialog-scrollable">
                                                             <form action="<?= $edit ?>" method="post">
                                                                 <div class="modal-header justify-content-center">
-                                                                    <h1 class="modal-title fs-5" id="editModal">EDIT LEVEL VIOLATION</h1>
+                                                                    <h1 class="modal-title fs-5" id="editModal">EDIT Violation Level</h1>
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <div class="mb-3">

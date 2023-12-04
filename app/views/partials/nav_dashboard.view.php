@@ -41,7 +41,7 @@ $admin = $user->getRoleDetail();
                                 <li><a class="dropdown-item" href="<?php echo App::get('root_uri') . "/admin/manage/student" ?>">Student</a></li>
                                 <li><a class="dropdown-item" href="<?php echo App::get('root_uri') . "/admin/manage/lecture" ?>">Lecture</a></li>
                                 <li><a class="dropdown-item" href="<?php echo App::get('root_uri') . "/admin/manage/admin" ?>">Admin</a></li>
-                                <li><a class="dropdown-item" href="<?php echo App::get('root_uri') . "/admin/manage/level-violation" ?>">Level violation</a></li>
+                                <li><a class="dropdown-item" href="<?php echo App::get('root_uri') . "/admin/manage/violation-level" ?>">Violation Level</a></li>
                                 <li><a class="dropdown-item" href="<?php echo App::get('root_uri') . "/admin/manage/code-of-conduct" ?>">Code of Conduct</a></li>
                             </ul>
                         </div>
