@@ -94,7 +94,7 @@
                                                         edit
                                                     </button>
                                                     <!-- Modal Trigger delete-->
-                                                    <button type="button" id="btnPress" class="btn btn-link text-secondary" data-bs-toggle="modal" title="<?= $user->getIdUser() ?>" data-bs-target="#deleteModal" onclick="deleteButtonAction(<?= $violationLevel->getIdViolationLevel(); ?>,'<?= $violationLevel->getName();  ?>')">
+                                                    <button type="button" id="btnPress" class="btn btn-link text-secondary" data-bs-toggle="modal" title="<?= $violationLevel->getIdViolationLevel() ?>" data-bs-target="#deleteModal" onclick="deleteButtonAction(<?= $violationLevel->getIdViolationLevel(); ?>,'<?= $violationLevel->getName();  ?>')">
                                                         delete
                                                     </button>
                                                 </td>
