@@ -31,6 +31,10 @@ $updatePasswordEndpoint = App::get("root_uri") . "/admin/update-password";
                                     </div>
                                     <div class=" col">
                                         <div class="mb-3">
+                                            <label for="username" class="form-label">Username</label>
+                                            <input type="text" class="form-control" name="username" id="username" placeholder="data" value="<?= $username ?>" disabled readonly>
+                                        </div>
+                                        <div class="mb-3">
                                             <label for="firstname" class="form-label">Firstname</label>
                                             <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Firstname" value="<?= $firstName ?>">
                                         </div>
@@ -44,7 +48,7 @@ $updatePasswordEndpoint = App::get("root_uri") . "/admin/update-password";
                                         </div>
                                         <div class="mb-3">
                                             <label for="email" class="form-label">Email</label>
-                                            <input type="email" class="form-control" name="email" id="email" placeholder="yourEmail@gmail.com" value="<?= $email ?>">
+                                            <input type="email" class="form-control" name="email" id="email" placeholder="yourEmail@gmail.com" value="<?= $email ?>" disabled readonly>
                                         </div>
                                         <div class="mb-3">
                                             <label for="address" class="form-label">Address</label>

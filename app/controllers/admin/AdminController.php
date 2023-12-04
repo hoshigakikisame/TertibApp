@@ -71,6 +71,7 @@ class AdminController
 		assert($adminRole instanceof AdminModel);
 
 		$data = [
+			'username' => $user->getUsername(),
 			'firstName' => $user->getFirstName(),
 			'lastName' => $user->getLastName(),
 			'adminTitle' => $adminRole->getTitle(),
