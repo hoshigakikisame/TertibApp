@@ -1,15 +1,15 @@
 <?php 
 class ViolationLevelModel {
     protected int $idViolationLevel;
+    protected int $level;
     protected string $name;
-    protected string $description;
     protected int $weight;
 
-    public function __construct($idViolationLevel, $name, $description, $weight)
+    public function __construct($idViolationLevel, $level, $name, $weight)
     {
         $this->idViolationLevel = $idViolationLevel;
+        $this->level = $level;
         $this->name = $name;
-        $this->description = $description;
         $this->weight = $weight;
     }
 
@@ -17,8 +17,8 @@ class ViolationLevelModel {
     {
         return new ViolationLevelModel(
             $stdClass->id_violation_level,
+            $stdClass->level,
             $stdClass->name,
-            $stdClass->description,
             $stdClass->weight
         );
     }
@@ -29,15 +29,16 @@ class ViolationLevelModel {
         return $this->idViolationLevel;
     }
 
+    public function getLevel()
+    {
+        return $this->level; 
+    }
+
     public function getName()
     {
         return $this->name;
     }
 
-    public function getDescription()
-    {
-        return $this->description; 
-    }
 
     public function getWeight()
     {
@@ -51,14 +52,14 @@ class ViolationLevelModel {
         $this->idViolationLevel = $idViolationLevel;
     }
 
+    public function setLevel($level) 
+    {
+        $this->level = $level;
+    }
+
     public function setName($name)
     {
         $this->name = $name;
-    }
-
-    public function setDescription($description) 
-    {
-        $this->description = $description;
     }
 
     public function setWeight($weight)

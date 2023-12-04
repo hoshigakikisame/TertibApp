@@ -17,7 +17,7 @@
                         <div class="row ms-2">
                             <div class="col-lg-2 col-auto border border-2 mt-3 py-2 px-2 rounded-3 flex-grow-1 flex-lg-grow-0">
                                 <div class="shadow-sm rounded-3 py-3 px-lg-4 px-0 h-100">
-                                    <h1 class="mb-0"><?= "12" ?></h1>
+                                    <h1 class="mb-0"><?= $violationLevelsCount ?></h1>
                                     <h6>Violation Level Totals</h6>
                                 </div>
                             </div>
@@ -32,18 +32,18 @@
                                 <div class="modal fade" id="modalAdd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalAdd" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered ">
                                         <div class="modal-content modal-dialog-scrollable">
-                                            <form action="<?= $newAdminEndpoint ?>" method="post">
+                                            <form action="<?= $addViolationLevelEndpoint ?>" method="post">
                                                 <div class="modal-header justify-content-center">
                                                     <h4 class="modal-title" id="modalAdd">ADD VIOLATION LEVEL</h4>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="mb-3">
                                                         <label for="level" class="form-label">Level</label>
-                                                        <input type="text" class="form-control" id="level" name="level" placeholder="Input Violation Level" required>
+                                                        <input type="number" class="form-control" id="level" name="level" placeholder="Input Violation Level" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="name" class="form-label">Name</label>
-                                                        <input type="text" class="form-control" id="name" name="name_violation" placeholder="Input Violation Name" required>
+                                                        <input type="text" class="form-control" id="name" name="name" placeholder="Input Violation Name" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="weight" class="form-label">Weight</label>
@@ -77,10 +77,16 @@
                                     ?>
                                     <tbody>
                                         <tr>
-                                            <td><?= $no++ ?></td>
-                                            <td><?= "data" ?></td>
-                                            <td><?= "data" ?></td>
-                                            <td><?= "data" ?></td>
+                                        <?php
+                                        /**
+                                         * @var ViolationLevelModel[] $violationLevels
+                                         */
+                                        foreach ($violationLevels as $violationLevel) :
+                                        ?>
+                                            <td><?= $violationLevel->getIdViolationLevel(); ?></td>
+                                            <td><?= $violationLevel->getLevel(); ?></td>
+                                            <td><?= $violationLevel->getName(); ?></td>
+                                            <td><?= $violationLevel->getWeight(); ?></td>
 
                                             <td>
                                                 <!-- modal trigger -->
@@ -119,6 +125,7 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>

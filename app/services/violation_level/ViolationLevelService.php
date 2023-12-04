@@ -32,6 +32,9 @@ class ViolationLevelService
         $rawViolationLevels = $this->db->findAll('tb_violation_level');
 
         if ($rawViolationLevels) {
+            /**
+             * @var ViolationLevelModel[] $violationLevels
+             */
             $violationLevels = [];
             foreach ($rawViolationLevels as $rawViolationLevel) {
                 $violationLevels[] = ViolationLevelModel::fromStdClass($rawViolationLevel);
@@ -48,19 +51,19 @@ class ViolationLevelService
         }
     }
 
-    public function addNewViolationLevel(string $name, string $description, int $weight): string {
+    public function addNewViolationLevel(string $level, string $name, int $weight): string {
         return $this->db->insert('tb_violation_level', [
+            'level' => $level,
             'name' => $name,
-            'description' => $description,
             'weight' => $weight
         ]);
     }
 
-    public function updateViolationLevel($name, $description, $weight, $where = [])
+    public function updateViolationLevel(string $level, string $name, int $weight, $where = [])
     {
         $this->db->update('tb_violation_level', [
+            'level' => $level,
             'name' => $name,
-            'description' => $description,
             'weight' => $weight
         ], $where);
     }
