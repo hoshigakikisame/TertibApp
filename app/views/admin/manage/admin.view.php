@@ -88,7 +88,7 @@
 
 
                             <div class="col table-responsive">
-                                <table class="table">
+                                <table class="table align-middle">
                                     <thead>
                                         <tr>
                                             <th scope="col">Username</th>
@@ -120,17 +120,18 @@
                                                 <td><?= $user->getEmail() ?></td>
                                                 <td><?= $user->getPhoneNumber() ?></td>
                                                 <td><?= $user->getAddress() ?></td>
-                                                <td class="d-flex" id="action_wrapper">
-                                                    <!-- Modal Trigger edit -->
-                                                    <button type="button" id="btnPress" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal" title="<?= $user->getIdUser() ?>" onclick="editButtonAction(<?= $user->getIdUser() ?>,'<?= $user->getUsername() ?>','<?= $user->getFirstName() ?>','<?= $user->getLastName() ?>','<?= $adminRole->getTitle() ?>','<?= $user->getEmail() ?>','<?= $user->getPhoneNumber() ?>','<?= $user->getAddress() ?>')">
-                                                        edit
-                                                    </button>
-                                                    <!-- Modal Trigger delete-->
-                                                    <button type="button" id="btnPress" class="btn btn-link text-secondary" data-bs-toggle="modal" title="<?= $user->getIdUser() ?>" data-bs-target="#deleteModal" onclick="deleteButtonAction(<?= $user->getIdUser() ?>,'<?= $user->getUsername() ?>')">
-                                                        delete
-                                                    </button>
-                                                    <!-- Modal -->
-
+                                                <td>
+                                                    <div class="d-flex" id="action_wrapper">
+                                                        <!-- Modal Trigger edit -->
+                                                        <button type="button" id="btnPress" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal" title="<?= $user->getIdUser() ?>" onclick="editButtonAction(<?= $user->getIdUser() ?>,'<?= $user->getUsername() ?>','<?= $user->getFirstName() ?>','<?= $user->getLastName() ?>','<?= $adminRole->getTitle() ?>','<?= $user->getEmail() ?>','<?= $user->getPhoneNumber() ?>','<?= $user->getAddress() ?>')">
+                                                            edit
+                                                        </button>
+                                                        <!-- Modal Trigger delete-->
+                                                        <button type="button" id="btnPress" class="btn btn-link text-secondary" data-bs-toggle="modal" title="<?= $user->getIdUser() ?>" data-bs-target="#deleteModal" onclick="deleteButtonAction(<?= $user->getIdUser() ?>,'<?= $user->getUsername() ?>')">
+                                                            delete
+                                                        </button>
+                                                        <!-- Modal -->
+                                                    </div>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>

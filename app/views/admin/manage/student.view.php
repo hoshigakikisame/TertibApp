@@ -126,16 +126,19 @@
                                             <td>@mdo</td>
                                             <td>@mdo</td>
 
-                                            <td class="d-flex">
-                                                <!-- Modal trigger edit-->
-                                                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal" onclick="editButtonAction()">
-                                                    edit
-                                                </button>
-                                                <!-- Modal Trigger delete-->
-                                                <button type="button" id="btnPress" class="btn btn-link text-secondary" data-bs-toggle="modal" title="" data-bs-target="#deleteModal" onclick="deleteButtonAction()">
-                                                    delete
-                                                </button>
-                                                <!-- Modal -->
+                                            <td>
+                                                <div class="d-flex" id="action_wrapper">
+
+                                                    <!-- Modal trigger edit-->
+                                                    <button type="button" id="btnPress" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal" onclick="editButtonAction()">
+                                                        edit
+                                                    </button>
+                                                    <!-- Modal Trigger delete-->
+                                                    <button type="button" class="btn btn-link text-secondary" data-bs-toggle="modal" title="" data-bs-target="#deleteModal" onclick="deleteButtonAction()">
+                                                        delete
+                                                    </button>
+                                                    <!-- Modal -->
+                                                </div>
 
                                             </td>
                                         </tr>

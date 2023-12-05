@@ -126,17 +126,20 @@
                                             <td>@mdo</td>
                                             <td>@mdo</td>
 
-                                            <td class="d-flex" id="action_wrapper">
-                                                <!-- Edit Modal trigger -->
-                                                <button type="button" id="btnPress" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal" onclick="editActionButton()">
-                                                    edit
-                                                </button>
-                                                <!-- Delete Modal trigger -->
-                                                <button type="button" class="btn btn-link text-secondary" onclick="deleteActionButton()">
-                                                    delete
-                                                </button>
-                                                <!-- Modal -->
+                                            <td>
+                                                <div class="d-flex" id="action_wrapper">
 
+                                                    <!-- Edit Modal trigger -->
+                                                    <button type="button" id="btnPress" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal" onclick="editActionButton()">
+                                                        edit
+                                                    </button>
+                                                    <!-- Delete Modal trigger -->
+                                                    <button type="button" class="btn btn-link text-secondary" onclick="deleteActionButton()">
+                                                        delete
+                                                    </button>
+                                                    <!-- Modal -->
+
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>
