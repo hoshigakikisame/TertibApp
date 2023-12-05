@@ -107,7 +107,7 @@
                                             <td><?= $violationLevel->getWeight(); ?></td>
                                             <td class="d-flex" id="action_wrapper">
                                                 <!-- modal trigger -->
-                                                <button type="button" class="btn btn-link" onclick="editButtonAction('<?= $codeOfConduct->getName(); ?>', <?= $violationLevel->getIdViolationLevel(); ?>, '<?= $codeOfConduct->getDescription(); ?>')">
+                                                <button type="button" class="btn btn-link" onclick="editButtonAction('<?= $codeOfConduct->getIdCodeOfConduct(); ?>', '<?= $codeOfConduct->getName(); ?>', <?= $violationLevel->getIdViolationLevel(); ?>, '<?= $codeOfConduct->getDescription(); ?>')">
                                                     edit
                                                 </button>
                                                 <form action="<?= '' ?>" method="post">
@@ -130,7 +130,7 @@
 </div>
 
 <script>
-    function editButtonAction(name, id_violation_level, description) {
+    function editButtonAction(idCodeOfConduct, name, idViolationLevel, description) {
         const modal = `
         <div class="modal fade" id="modalEdit" data-bs-backdrop="dynamic" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalEdit" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered ">
@@ -140,6 +140,7 @@
                             <h4 class="modal-title" id="modalEdit">UPDATE CODE OF CONDUCT</h4>
                         </div>
                         <div class="modal-body">
+                            <input type="hidden" id="id_code_of_conduct" name="id_code_of_conduct" value="${idCodeOfConduct}">
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>
                                 <input type="text" class="form-control" id="name" name="name" value="${name}" placeholder="Code of Conduct Name">
@@ -152,13 +153,13 @@
                                      * @var ViolationLevelModel[] $violationLevels
                                      */
                                     foreach ($violationLevels as $violationLevel) : ?>
-                                    <option value="<?= $violationLevel->getIdViolationLevel(); ?>" ${<?= $violationLevel->getIdViolationLevel(); ?> == id_violation_level ? "selected" : ""}><?= "Level " . $violationLevel->getLevel() . "; Name " . $violationLevel->getName() . "; Weight " . $violationLevel->getWeight() ?></option>
+                                    <option value="<?= $violationLevel->getIdViolationLevel(); ?>" ${<?= $violationLevel->getIdViolationLevel(); ?> == idViolationLevel ? "selected" : ""}><?= "Level " . $violationLevel->getLevel() . "; Name " . $violationLevel->getName() . "; Weight " . $violationLevel->getWeight() ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control" id="description" name="description" rows="3" placeholder="Code of Conduct Description"></textarea>
+                                <textarea class="form-control" id="description" name="description" rows="3" placeholder="Code of Conduct Description">${description}</textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
