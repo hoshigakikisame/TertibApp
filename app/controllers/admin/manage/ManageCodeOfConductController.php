@@ -58,4 +58,31 @@ class ManageCodeOfConductController {
 		
 		Helper::redirect('/admin/manage/code-of-conduct');
     }
+
+	public function updateCodeOfConduct() {
+		if (
+			isset($_POST['id_code_of_conduct']) && $_POST['id_code_of_conduct'] != '' &&
+			isset($_POST['name']) && $_POST['name'] != '' &&
+			isset($_POST['id_violation_level']) && $_POST['id_violation_level'] != '' &&
+			isset($_POST['description']) && $_POST['description'] != ''
+		) {
+			// Defining Services
+			$codeOfConductService = new CodeOfConductService();
+
+			// Take inputs from request
+			$idCodeOfConduct = $_POST['id_code_of_conduct'];
+			$name = $_POST['name'];
+			$idViolationLevel = $_POST['id_violation_level'];
+			$description = $_POST['description'];
+
+			// Add new code of conduct
+			$codeOfConductService->updateCodeOfConduct($name, $description, $idViolationLevel, ['id_code_of_conduct' => $idCodeOfConduct]);
+
+			Flasher::setFlash('success', 'Code of Conduct has been added successfully!');
+		} else {
+			Flasher::setFlash('danger', 'Please fill all the fields!');
+		}
+		
+		Helper::redirect('/admin/manage/code-of-conduct');
+	}
 }

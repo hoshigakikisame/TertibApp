@@ -9,5 +9,5 @@ class GenericUtil {
     public static function intToRoman(int $n): string {
         $formatter = new NumberFormatter('@numbers=roman', NumberFormatter::DECIMAL);
         return $formatter->format($n);
-    }   
+    }
 }
