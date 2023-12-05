@@ -126,70 +126,17 @@
                                             <td>@mdo</td>
                                             <td>@mdo</td>
 
-                                            <td class="d-flex">
-                                                <!-- modal trigger -->
-                                                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal">
+                                            <td class="d-flex" id="action_wrapper">
+                                                <!-- Edit Modal trigger -->
+                                                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal" onclick="">
                                                     edit
                                                 </button>
-                                                <form action="<?= '' ?>" method="post">
-                                                    <input type="hidden" name="id_user" value="<?= '' ?>">
-                                                    <button type="submit" class="btn btn-link text-secondary">delete</button>
-                                                </form>
+                                                <!-- Delete Modal trigger -->
+                                                <button type="submit" class="btn btn-link text-secondary" onclick="">
+                                                    delete
+                                                </button>
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered">
-                                                        <div class="modal-content modal-dialog-scrollable">
-                                                            <form action="" method="post">
-                                                                <div class="modal-header justify-content-center">
-                                                                    <h1 class="modal-title fs-5" id="editModal">EDIT LECTURE</h1>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="mb-3">
-                                                                        <label for="NIM" class="form-label">NIM</label>
-                                                                        <input type="text" class="form-control" id="NIM" name="NIM" placeholder="Input Lecture NIM">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="firstname" class="form-label">Firstname</label>
-                                                                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Input Lecture Firstname">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="lastname" class="form-label">Lastname</label>
-                                                                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Input Lecture Lastname">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="email" class="form-label">Email</label>
-                                                                        <input type="email" class="form-control" id="email" name="email" placeholder="Input Lecture Email Address">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="prodi" class="form-label">Prodi</label>
-                                                                        <select class="form-select" id="prodi" aria-label="Default select example">
-                                                                            <option selected>Choose Lecture Studi Program</option>
-                                                                            <option value="1">One</option>
-                                                                            <option value="2">Two</option>
-                                                                            <option value="3">Three</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="noTelp" class="form-label">No. Telp</label>
-                                                                        <input type="number" class="form-control" id="noTelp" name="noTelp" placeholder="Input Lecture Number">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="password" class="form-label">Password</label>
-                                                                        <input type="password" class="form-control" id="password" name="password" placeholder="Input Lecture Password">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                                                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Retype Lecture Password">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                                                                    <button type="button" class="btn btn-secondary">Save</button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
+
                                             </td>
                                         </tr>
                                     </tbody>
@@ -202,3 +149,81 @@
         </main>
     </div>
 </div>
+
+<script>
+    function editActionButton(NIDN, firstname, lastname, email, prodi, noTelp, password, confirmPassword) {
+        const modal = /*html*/ `
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-dialog-scrollable">
+            <form action="" method="post">
+                <div class="modal-header justify-content-center">
+                    <h1 class="modal-title fs-5" id="editModal">EDIT LECTURE</h1>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="NIDN" class="form-label">NIDN</label>
+                        <input type="text" class="form-control" id="NIDN" name="NIDN" placeholder="Input Lecture NIDN" value="${NIDN}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="firstname" class="form-label">Firstname</label>
+                        <input type="text" class="form-control" id="firstname" name="firstname"
+                            placeholder="Input Lecture Firstname" value="${firstname}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastname" class="form-label">Lastname</label>
+                        <input type="text" class="form-control" id="lastname" name="lastname"
+                            placeholder="Input Lecture Lastname" value="${lastname}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email"
+                            placeholder="Input Lecture Email Address" value="${email}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="prodi" class="form-label">Prodi</label>
+                        <select class="form-select" id="prodi" aria-label="Default select example">
+                            <option selected>Choose Lecture Studi Program</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="noTelp" class="form-label">No. Telp</label>
+                        <input type="number" class="form-control" id="noTelp" name="noTelp"
+                            placeholder="Input Lecture Number">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password"
+                            placeholder="Input Lecture Password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                            placeholder="Retype Lecture Password">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+`
+        $('#action_wrapper').append(modal)
+        $('#editModal').modal('show')
+        const myModalEl = document.getElementById('editModal')
+        myModalEl.addEventListener('hidden.bs.modal', event => {
+            $('#editModal').remove();
+        })
+
+    }
+
+    function deleteActionButton() {
+
+    }
+</script>
