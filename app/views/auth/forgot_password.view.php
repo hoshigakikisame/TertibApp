@@ -2,12 +2,12 @@
 $redirected =  App::get('root_uri') . "/auth/forgot-password";
 ?>
 <?= $flash ?>
-<main class="container d-flex flex-column justify-content-center" style="font-family: Poppins; height:100vh;">
+<main class="container d-flex flex-column justify-content-center" style=" height:100vh;">
     <div class="row-auto rounded-5 align-self-center border border-2 p-1 w-lg-25" style="width:min(100%,400px) !important">
         <div class="col shadow-sm  d-flex flex-column align-items-center rounded-5 m-2 px-0 py-5">
             <div class="text d-flex flex-column  mb-5">
-                <h1 class="fs-3 text-center" style="font-family: Poppins Bold;">Forgot Password</h1>
-                <p class="h6 fs-6 text-center px-5">Enter Your Email Address Associated With Your Account and We`ll Send You a Verification Code</p>
+                <h1 class="fs-3 text-center" style="font-family: Poppins-Bold;">Forgot Password</h1>
+                <h6 class=" text-center px-5">Enter Your Email Address Associated With Your Account and We`ll Send You a Verification Code</h6>
             </div>
             <form action="<?= $redirected ?>" method="POST" class="align-self-center " style="">
                 <div class="mb-3">

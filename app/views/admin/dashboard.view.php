@@ -14,7 +14,7 @@
             <div class="row justify-content-end px-auto">
                 <div class="col-lg-10 col px-5 py-4" title="main">
                     <div class="row mb-4">
-                        <p class='mb-0' style="color: var(--yellow);">Hi, <?= $firstname ?></p>
+                        <p class='mb-0 text-warning'>Hi, <?= $firstname ?></p>
                         <h1>Welcome to Tertib App</h1>
                     </div>
                     <div class="row px-4 gap-lg-5 gap-1 mb-4">

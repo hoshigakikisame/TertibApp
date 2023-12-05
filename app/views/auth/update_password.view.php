@@ -1,13 +1,13 @@
 <?php
 $redirected =  App::get('root_uri') . "/auth/update-password";
 ?>
-<main class="container-fluid d-flex flex-column justify-content-center" style="font-family: Poppins; height:100vh;">
+<main class="container-fluid d-flex flex-column justify-content-center" style="height:100vh;">
 
     <div class="row rounded-5 align-self-center border border-2 p-1" style="width:min(100%,30vw)">
         <div class="col shadow-sm  d-flex flex-column  rounded-5 m-2 px-0 py-5 p-3">
             <div class="text d-flex flex-column align-items-center mb-5 p-2">
-                <h1 class="fs-3 text-center" style="font-family: Poppins Bold;">Update Password</h1>
-                <p class="h6 text-center text-wrap">Please Update Your Password
+                <h1 class="fs-3 text-center" style="font-family: Poppins-Bold;">Update Password</h1>
+                <h6 class="text-center text-wrap">Please Update Your Password
             </div>
             <form action="<?= $redirected ?>" method="POST" class="align-self-center" style="">
                 <input type="hidden" name="token" value="<?= $token ?>">
