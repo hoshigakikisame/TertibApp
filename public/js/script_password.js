@@ -25,6 +25,7 @@ function checkValid(alert) {
 
 if ($("button#btnPress").length > 0) {
   $("button#btnPress").click(function (e) {
+    $("div[role=alert]").remove();
     checkValid(alertWarning);
   });
 } else {

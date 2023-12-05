@@ -85,7 +85,7 @@
                                                         <label for="noTelp" class="form-label">No. Telp</label>
                                                         <input type="number" class="form-control" id="noTelp" name="noTelp" placeholder="Input Student Number">
                                                     </div>
-                                                    <div class="mb-3">
+                                                    <div class="mb-3" title="flash">
                                                         <label for="password" class="form-label">Password</label>
                                                         <input type="password" class="form-control" id="password" name="password" placeholder="Input Student Password">
                                                     </div>
@@ -93,10 +93,10 @@
                                                         <label for="confirmPassword" class="form-label">Confirm Password</label>
                                                         <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Retype Student Password">
                                                     </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save</button>
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>
@@ -127,69 +127,16 @@
                                             <td>@mdo</td>
 
                                             <td class="d-flex">
-                                                <!-- modal trigger -->
-                                                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal">
+                                                <!-- Modal trigger edit-->
+                                                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal" onclick="editButtonAction()">
                                                     edit
                                                 </button>
-                                                <form action="<?= '' ?>" method="post">
-                                                    <input type="hidden" name="id_user" value="<?= '' ?>">
-                                                    <button type="submit" class="btn btn-link text-secondary">delete</button>
-                                                </form>
+                                                <!-- Modal Trigger delete-->
+                                                <button type="button" id="btnPress" class="btn btn-link text-secondary" data-bs-toggle="modal" title="" data-bs-target="#deleteModal" onclick="deleteButtonAction()">
+                                                    delete
+                                                </button>
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered">
-                                                        <div class="modal-content modal-dialog-scrollable">
-                                                            <form action="" method="post">
-                                                                <div class="modal-header justify-content-center">
-                                                                    <h1 class="modal-title fs-5" id="editModal">EDIT STUDENT</h1>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="mb-3">
-                                                                        <label for="NIM" class="form-label">NIM</label>
-                                                                        <input type="text" class="form-control" id="NIM" name="NIM" placeholder="Input Student NIM">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="firstname" class="form-label">Firstname</label>
-                                                                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Input Student Firstname">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="lastname" class="form-label">Lastname</label>
-                                                                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Input Student Lastname">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="email" class="form-label">Email</label>
-                                                                        <input type="email" class="form-control" id="email" name="email" placeholder="Input Student Email Address">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="prodi" class="form-label">Prodi</label>
-                                                                        <select class="form-select" id="prodi" aria-label="Default select example">
-                                                                            <option selected>Choose Student Studi Program</option>
-                                                                            <option value="1">One</option>
-                                                                            <option value="2">Two</option>
-                                                                            <option value="3">Three</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="noTelp" class="form-label">No. Telp</label>
-                                                                        <input type="number" class="form-control" id="noTelp" name="noTelp" placeholder="Input Student Number">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="password" class="form-label">Password</label>
-                                                                        <input type="password" class="form-control" id="password" name="password" placeholder="Input Student Password">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                                                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Retype Student Password">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                                                                    <button type="button" class="btn btn-secondary">Save</button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
+
                                             </td>
                                         </tr>
                                     </tbody>
@@ -202,3 +149,111 @@
         </main>
     </div>
 </div>
+
+<script>
+    function editButtonAction() {
+        const modal = /*html*/ `
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-dialog-scrollable">
+            <form action="" method="post">
+                <div class="modal-header justify-content-center">
+                    <h1 class="modal-title fs-5" id="editModal">EDIT STUDENT</h1>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="NIM" class="form-label">NIM</label>
+                        <input type="text" class="form-control" id="NIM" name="NIM" placeholder="Input Student NIM">
+                    </div>
+                    <div class="mb-3">
+                        <label for="firstname" class="form-label">Firstname</label>
+                        <input type="text" class="form-control" id="firstname" name="firstname"
+                            placeholder="Input Student Firstname">
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastname" class="form-label">Lastname</label>
+                        <input type="text" class="form-control" id="lastname" name="lastname"
+                            placeholder="Input Student Lastname">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email"
+                            placeholder="Input Student Email Address">
+                    </div>
+                    <div class="mb-3">
+                        <label for="prodi" class="form-label">Prodi</label>
+                        <select class="form-select" id="prodi" aria-label="Default select example">
+                            <option selected>Choose Student Studi Program</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="noTelp" class="form-label">No. Telp</label>
+                        <input type="number" class="form-control" id="noTelp" name="noTelp"
+                            placeholder="Input Student Number">
+                    </div>
+                    <div class="mb-3" title="flash">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password"
+                            placeholder="Input Student Password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                            placeholder="Retype Student Password">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+`
+
+        $('#action_wrapper').append(modal)
+        $('#editModal').modal('show')
+        const myModalEl = document.getElementById('editModal')
+        myModalEl.addEventListener('hidden.bs.modal', event => {
+            $('#editModal').remove();
+            $("div[role=alert]").remove();
+        })
+    }
+
+    function deleteButtonAction() {
+        const modal = /*html*/ `
+<div class="modal fade" id="deleteModal" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="<?= '' ?>" method="post">
+                <div class="modal-header justify-content-center">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">DELETE ADMIN</h1>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="id_user" value="">
+                    <p class="">Are You Sure Want to Delete ${username} From Admin Account? </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-primary">Yes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+        `
+
+        $('#action_wrapper').append(modal)
+        $('#deleteModal').modal('show')
+        const myModalEl = document.getElementById('deleteModal')
+        myModalEl.addEventListener('hidden.bs.modal', event => {
+            $('#deleteModal').remove();
+        })
+
+    }
+</script>

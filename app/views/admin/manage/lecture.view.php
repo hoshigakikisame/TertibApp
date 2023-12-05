@@ -43,7 +43,7 @@
 
                         <div class="row flex-column gap-3 mt-4">
                             <div class="col justify-content-end d-flex">
-                                <button type="button" class="btn border-none shadow-sm px-3 py-2 rounded-4 flex-shrink-1" data-bs-toggle="modal" data-bs-target="#modalAdd">
+                                <button type="button" class="btn border-none shadow-sm px-3 py-2 rounded-4 flex-shrink-1" data-bs-toggle="modal" id="btnPress" data-bs-target="#modalAdd">
                                     <i class="bi bi-person-plus"></i>
                                 </button>
 
@@ -85,7 +85,7 @@
                                                         <label for="noTelp" class="form-label">No. Telp</label>
                                                         <input type="number" class="form-control" id="noTelp" name="noTelp" placeholder="Input Lecture Number">
                                                     </div>
-                                                    <div class="mb-3">
+                                                    <div class="mb-3" title="flash">
                                                         <label for="password" class="form-label">Password</label>
                                                         <input type="password" class="form-control" id="password" name="password" placeholder="Input Lecture Password">
                                                     </div>
@@ -93,10 +93,10 @@
                                                         <label for="confirmPassword" class="form-label">Confirm Password</label>
                                                         <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Retype Lecture Password">
                                                     </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save</button>
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>
@@ -128,11 +128,11 @@
 
                                             <td class="d-flex" id="action_wrapper">
                                                 <!-- Edit Modal trigger -->
-                                                <button type="button" id="btnPress" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal" onclick="">
+                                                <button type="button" id="btnPress" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal" onclick="editActionButton()">
                                                     edit
                                                 </button>
                                                 <!-- Delete Modal trigger -->
-                                                <button type="button" class="btn btn-link text-secondary" onclick="">
+                                                <button type="button" class="btn btn-link text-secondary" onclick="deleteActionButton()">
                                                     delete
                                                 </button>
                                                 <!-- Modal -->
@@ -151,7 +151,7 @@
 </div>
 
 <script>
-    function editActionButton(NIDN, firstname, lastname, email, prodi, noTelp) {
+    function editActionButton(NIDN = "20", firstname = "20", lastname = "20", email = "20", prodi = "20", noTelp = "20") {
         const modal = /*html*/ `
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -194,7 +194,7 @@
                         <input type="number" class="form-control" id="noTelp" name="noTelp"
                             placeholder="Input Lecture Number" value="${noTelp}">
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3" title="flash">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password"
                             placeholder="Input Lecture Password">
@@ -204,10 +204,10 @@
                         <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
                             placeholder="Retype Lecture Password">
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-secondary">Save</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-secondary">Save</button>
+                    </div>
                 </div>
             </form>
         </div>
