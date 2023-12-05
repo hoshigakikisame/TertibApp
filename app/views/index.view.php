@@ -39,17 +39,24 @@
 						// color for border
 						$color = array('dark-blue', 'red', 'grey', 'orange-opa', 'yellow');
 
+						/**
+						 * @var ViolationLevelModel[] $violationLevels
+						 */
+
+						foreach ($violationLevels as $violationLevel) :
+
 						?>
-						<div class="col">
-							<div class="card border-0 align-items-center bg-transparent">
-								<div class="card-emblem border border-2 border-primary rounded-circle p-2" style="height:100px;width:100px;"> <!--add color in var for changes color-->
-									<h1 class="text-center rounded-circle p-4 p-md-3 shadow-lg ">I</h1> <!--for number -->
-								</div>
-								<div class="card-body text-center" style="width:min(80%,200px);">
-									<h5 class="card-title">Pelanggaran Sangat Berat</h5> <!--for text -->
+							<div class="col">
+								<div class="card border-0 align-items-center bg-transparent">
+									<div class="card-emblem border border-2 border-primary rounded-circle p-2" style="height:100px;width:100px;"> <!--add color in var for changes color-->
+										<h1 class="text-center rounded-circle p-4 p-md-3 shadow-lg "><?= GenericUtil::intToRoman($violationLevel->getLevel()) ?></h1> <!--for number -->
+									</div>
+									<div class="card-body text-center" style="width:min(80%,200px);">
+										<h5 class="card-title"><?= $violationLevel->getName() ?></h5> <!--for text -->
+									</div>
 								</div>
 							</div>
-						</div>
+						<?php endforeach; ?>
 					</div>
 				</div>
 		</section>
