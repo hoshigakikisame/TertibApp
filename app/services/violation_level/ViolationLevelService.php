@@ -67,4 +67,9 @@ class ViolationLevelService
             'weight' => $weight
         ], $where);
     }
+
+    public function deleteViolationLevel($where = [])
+    {
+        $this->db->delete('tb_violation_level', $where);
+    }
 }
