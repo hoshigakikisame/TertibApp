@@ -34,7 +34,7 @@
 						<h2>Tingkat Pelanggaran</h2>
 						<p>Kenali tingkat pelanggaran Mahasiswa</p>
 					</div>
-					<div class="row gap-5">
+					<div class="row gap-1">
 						<?php
 						// color for border
 						$color = array('dark-blue', 'red', 'grey', 'orange-opa', 'yellow');
@@ -51,7 +51,7 @@
 									<div class="card-emblem border border-2 border-primary rounded-circle p-2" style="height:100px;width:100px;"> <!--add color in var for changes color-->
 										<h1 class="text-center rounded-circle p-4 p-md-3 shadow-lg "><?= GenericUtil::intToRoman($violationLevel->getLevel()) ?></h1> <!--for number -->
 									</div>
-									<div class="card-body text-center" style="width:min(80%,200px);">
+									<div class="card-body text-center" style="width:min(100%,230px);">
 										<h5 class="card-title"><?= $violationLevel->getName() ?></h5> <!--for text -->
 									</div>
 								</div>
