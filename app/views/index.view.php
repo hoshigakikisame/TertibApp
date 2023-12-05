@@ -6,15 +6,15 @@
 		<!-- Start Hero Section -->
 		<section class="row justify-content-between flex-grow-1 hero-section">
 			<div class="col flex-column align-self-center slide-in-left ms-3 ms-lg-0" title='lefthero'>
-				<h1 class="lh-1 display-1" style="font-family:Poppins Extra Bold;">WELCOME TO JTI.TERTIB</h1>
-				<div class="d-flex gap-2 text-secondary" style="font-family:Poppins Medium;">
+				<h1 class="lh-1 display-1" style="font-family:Poppins-Extra-Bold;">WELCOME TO JTI.TERTIB</h1>
+				<div class="d-flex gap-2 text-secondary" style="font-family:Poppins-Medium;">
 					<h6>#JTIdisiplin</h6>
 					<h6>#JTItertib</h6>
 				</div>
-				<p class="py-3" style="font-family:Poppins Medium;width:min(80vw,320px)">Laporkan Para Oknum Kampus yang
+				<p class="py-3" style="font-family:Poppins-Medium;width:min(80vw,320px)">Laporkan Para Oknum Kampus yang
 					Kurang Tertib dan Disiplin di <span class="text-primary">Tertib</span> App</p>
 				<!-- link Report Button -->
-				<a href="report" class="py-2 px-5 rounded-3 link-underline link-underline-opacity-0" style="color:var(--white);font-family:Poppins Semi Bold; background:var(--btn-gradient);">Report ></a>
+				<a href="report" class="py-2 px-5 rounded-3 link-underline link-underline-opacity-0 text-white" style="font-family:Poppins-Semi-Bold; background:var(--btn-gradient);">Report ></a>
 			</div>
 			<div class="col d-none d-lg-block slide-in-right position-relative" title='righthero'>
 				<div class="position-absolute circle-elemen-hero">
