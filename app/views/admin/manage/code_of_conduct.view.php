@@ -22,11 +22,11 @@
                                     <h6>Code Of Conduct Totals</h6>
                                 </div>
                             </div>
-                            <?php 
+                            <?php
                             /**
                              * @var ViolationLevelModel[] $violationLevels
                              */
-                            for ($i=0; $i < count($violationLevels); $i++) : 
+                            for ($i = 0; $i < count($violationLevels); $i++) :
                                 $violationLevel = $violationLevels[$i];
                                 $memberCount = 0;
                                 foreach ($codeOfConducts as $codeOfConduct) {
@@ -35,12 +35,12 @@
                                     }
                                 }
                             ?>
-                            <div class="col-lg-2 col-auto border border-2 mt-3 py-2 px-2 rounded-3 flex-grow-1 flex-lg-grow-0">
-                                <div class="shadow-sm rounded-3 py-3 px-lg-4 px-0 h-100">
-                                    <h1 class="mb-0"><?= $memberCount ?></h1>
-                                    <h6>Offense level <?= GenericUtil::intToRoman($violationLevel->getLevel()) ?> </h6>
+                                <div class="col-lg-2 col-auto border border-2 mt-3 py-2 px-2 rounded-3 flex-grow-1 flex-lg-grow-0">
+                                    <div class="shadow-sm rounded-3 py-3 px-lg-4 px-0 h-100">
+                                        <h1 class="mb-0"><?= $memberCount ?></h1>
+                                        <h6>Offense level <?= GenericUtil::intToRoman($violationLevel->getLevel()) ?> </h6>
+                                    </div>
                                 </div>
-                            </div>
                             <?php endfor; ?>
                         </div>
 
@@ -91,7 +91,7 @@
                             </div>
 
                             <div class="col table-responsive">
-                                <table class="table">
+                                <table class="table align-middle">
                                     <thead>
                                         <tr>
                                             <th scope="col">No</th>
@@ -119,15 +119,18 @@
                                                 <td><?= $codeOfConduct->getDescription(); ?></td>
                                                 <td><?= $violationLevel->getLevel(); ?></td>
                                                 <td><?= $violationLevel->getWeight(); ?></td>
-                                                <td class="d-flex" id="action_wrapper">
-                                                    <!-- Edit Modal trigger -->
-                                                    <button type="button" class="btn btn-link" onclick="editButtonAction('<?= $codeOfConduct->getIdCodeOfConduct(); ?>', '<?= $codeOfConduct->getName(); ?>', <?= $violationLevel->getIdViolationLevel(); ?>, '<?= $codeOfConduct->getDescription(); ?>')">
-                                                        edit
-                                                    </button>
-                                                    <!-- Delete Modal trigger -->
-                                                    <button type="button" class="btn btn-link text-secondary" onclick="deleteButtonAction('<?= $codeOfConduct->getIdCodeOfConduct(); ?>','<?= $codeOfConduct->getName(); ?>')">delete</button>
+                                                <td>
+                                                    <div class="d-flex" id="action_wrapper">
 
-                                                    <!-- Modal -->
+                                                        <!-- Edit Modal trigger -->
+                                                        <button type="button" class="btn btn-link" onclick="editButtonAction('<?= $codeOfConduct->getIdCodeOfConduct(); ?>', '<?= $codeOfConduct->getName(); ?>', <?= $violationLevel->getIdViolationLevel(); ?>, '<?= $codeOfConduct->getDescription(); ?>')">
+                                                            edit
+                                                        </button>
+                                                        <!-- Delete Modal trigger -->
+                                                        <button type="button" class="btn btn-link text-secondary" onclick="deleteButtonAction('<?= $codeOfConduct->getIdCodeOfConduct(); ?>','<?= $codeOfConduct->getName(); ?>')">delete</button>
+
+                                                        <!-- Modal -->
+                                                    </div>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
