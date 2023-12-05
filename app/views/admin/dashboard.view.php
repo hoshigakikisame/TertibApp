@@ -40,7 +40,6 @@
                     </div>
 
                     <div class="row mb-4">
-
                         <h1>Recent Reports</h1>
                         <div class="col-11">
                             <div class="row flex-column">

@@ -10,7 +10,30 @@ class GlobalController
 	 */
 	public function landing()
 	{
-		return Helper::view('index');
+		// Defining services
+		$violationLevelService = new ViolationLevelService();
+		$codeOfConductService = new CodeOfConductService();
+
+		// Get all violation levels
+		$violationLevels = $violationLevelService->getAllViolationLevel() ?? [];
+
+		// Get all code of conducts
+		$codeOfConducts = $codeOfConductService->getAllCodeOfConduct() ?? [];
+
+		for ($i = 0; $i < count($codeOfConducts); $i++) {
+			for ($j = 0; $j < count($violationLevels); $j++) {
+				if ($codeOfConducts[$i]->getIdViolationLevel() == $violationLevels[$j]->getIdViolationLevel()) {
+					$codeOfConducts[$i]->setViolationLevel($violationLevels[$j]);
+				}
+			}
+		}
+
+		$data = [
+			'violationLevels' => $violationLevels,
+			'codeOfConducts' => $codeOfConducts,
+		];
+
+		return Helper::view('index', $data);
 	}
 
 	/**

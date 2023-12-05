@@ -162,7 +162,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="$('#modalEdit').remove()">Close</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </form>
@@ -172,5 +172,9 @@
         `
         $('#action_wrapper').append(modal)
         $('#modalEdit').modal('show')
+        const myModalEl = document.getElementById('modalEdit')
+        myModalEl.addEventListener('hidden.bs.modal', event => {
+        $('#modalEdit').remove();
+        })
     }
 </script>

@@ -38,6 +38,7 @@
 						<?php
 						// color for border
 						$color = array('dark-blue', 'red', 'grey', 'orange-opa', 'yellow');
+
 						?>
 						<div class="col">
 							<div class="card border-0 align-items-center bg-transparent">
@@ -71,12 +72,28 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
+								<?php
+								/**
+								 * @var CodeOfConductModel[] $codeOfConducts
+								 */
 
-									<th scope="row">1</th> <!--for number-->
-									<td>Mark Lorem ipsum dolor sit.</td> <!--for text pelanggaran-->
-									<td>Otto</td> <!--for Tingkat-->
-								</tr>
+								for ($i = 1; $i <= count($codeOfConducts); $i++) :
+									$codeOfConduct = $codeOfConducts[$i - 1];
+									/**
+									 * @var ViolationLevelModel $violationLevel
+									 */
+									$violationLevel = $codeOfConduct->getViolationLevel();
+								?>
+
+									<?php
+									?>
+									<tr>
+
+										<th scope="row"><?= $i ?></th> <!--for number-->
+										<td><?= $codeOfConduct->getDescription() ?></td> <!--for text pelanggaran-->
+										<td><?= $violationLevel->getLevel() ?></td> <!--for Tingkat-->
+									</tr>
+								<?php endfor; ?>
 							</tbody>
 						</table>
 					</div>

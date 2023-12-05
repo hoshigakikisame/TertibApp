@@ -25,12 +25,13 @@
                         </div>
                         <div class="row flex-column gap-3 mt-4">
                             <div class="col justify-content-end d-flex">
+                                <!-- Modal Trigger Add -->
                                 <button type="button" id="btnPress" class="btn border-none shadow-sm px-3 py-2 rounded-4 flex-shrink-1" data-bs-toggle="modal" data-bs-target="#modalAdd">
                                     <i class="bi bi-person-plus"></i>
                                 </button>
 
                                 <!-- pop up -->
-                                <div class="modal fade" id="modalAdd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalAdd" aria-hidden="true">
+                                <div class="modal fade" id="modalAdd" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalAdd" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered ">
                                         <div class="modal-content modal-dialog-scrollable">
                                             <form action="<?= $newAdminEndpoint ?>" method="post">
@@ -75,7 +76,7 @@
                                                         <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Retype Admin Password" required>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick='$("div[role=alert]").remove();removeVal("input")'>Close</button>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                         <button type="submit" class="btn btn-primary">Save</button>
                                                     </div>
                                                 </div>
@@ -119,7 +120,7 @@
                                                 <td><?= $user->getEmail() ?></td>
                                                 <td><?= $user->getPhoneNumber() ?></td>
                                                 <td><?= $user->getAddress() ?></td>
-                                                <td class="d-flex">
+                                                <td class="d-flex" id="action_wrapper">
                                                     <!-- Modal Trigger edit -->
                                                     <button type="button" id="btnPress" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal" title="<?= $user->getIdUser() ?>" onclick="editButtonAction(<?= $user->getIdUser() ?>,'<?= $user->getUsername() ?>','<?= $user->getFirstName() ?>','<?= $user->getLastName() ?>','<?= $adminRole->getTitle() ?>','<?= $user->getEmail() ?>','<?= $user->getPhoneNumber() ?>','<?= $user->getAddress() ?>')">
                                                         edit
@@ -128,6 +129,7 @@
                                                     <button type="button" id="btnPress" class="btn btn-link text-secondary" data-bs-toggle="modal" title="<?= $user->getIdUser() ?>" data-bs-target="#deleteModal" onclick="deleteButtonAction(<?= $user->getIdUser() ?>,'<?= $user->getUsername() ?>')">
                                                         delete
                                                     </button>
+                                                    <!-- Modal -->
 
                                                 </td>
                                             </tr>
@@ -143,10 +145,19 @@
     </div>
 </div>
 
+
+<script src="<?= App::get("root_uri") . "/public/js/script.js" ?>"></script>
 <script>
+    const addModal = document.getElementById('modalAdd')
+    addModal.addEventListener('hidden.bs.modal', event => {
+        $("div[role=alert]").remove();
+        removeVal("input");
+    })
+
+
     function editButtonAction(id_user, username, firstname, lastname, title, email, phoneNumber, address) {
         const modal = /*template*/ `
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true" data-bs-backdrop="static">
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
      <div class="modal-dialog modal-dialog-centered">
          <div class="modal-content modal-dialog-scrollable">
              <form action="<?= $updateAdminEndpoint ?>" method="post">
@@ -201,7 +212,7 @@
                              placeholder="Retype Admin Password">
                      </div>
                      <div class="modal-footer">
-                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick='$("#editModal").remove();'>Close</button>
+                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
                          <button type="submit" class="btn btn-secondary">Save</button>
                      </div>
                  </div>
@@ -209,15 +220,19 @@
          </div>
      </div>
  </div>`
-        $(`button[title='${id_user}']`).after(modal);
-        $("#editModal").modal("show");
-
+        $('#action_wrapper').append(modal)
+        $('#editModal').modal('show')
+        const myModalEl = document.getElementById('editModal')
+        myModalEl.addEventListener('hidden.bs.modal', event => {
+            $('#editModal').remove();
+            $("div[role=alert]").remove();
+        })
     }
 
 
     function deleteButtonAction(user_id, username) {
         const modal = /*html */ `
-<div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade" id="deleteModal" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -230,7 +245,7 @@
                     <p class="">Are You Sure Want to Delete ${username} From Admin Account? </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick='$("div#deleteModal").remove();'>No</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                     <button type="button" class="btn btn-primary">Yes</button>
                 </div>
             </form>
@@ -238,10 +253,13 @@
     </div>
 </div>
 `
-        $(`button[data-bs-target='#deleteModal']`).after(modal);
-        $("#deleteModal").modal("show");
+        $('#action_wrapper').append(modal)
+        $('#deleteModal').modal('show')
+        const myModalEl = document.getElementById('deleteModal')
+        myModalEl.addEventListener('hidden.bs.modal', event => {
+            $('#deleteModal').remove();
+        })
     }
 </script>
 
 <script src="<?= App::get("root_uri") . "/public/js/script_password.js" ?>"></script>
-<script src="<?= App::get("root_uri") . "/public/js/script.js" ?>"></script>
