@@ -12,6 +12,7 @@
         <main class="col position-relative overflow-x-hidden">
             <div class="row justify-content-lg-end">
                 <div class="col-lg-10 col px-2 px-lg-5 py-4" title="main" style="max-width: 100vw; ">
+                    <?= $flash ?>
                     <div class="content p-lg-4 p-0">
                         <h1>Violation Level</h1>
                         <div class="row ms-2">
@@ -119,7 +120,7 @@
         <div class="modal fade" id="editModal"  tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
      <div class="modal-dialog modal-dialog-centered">
          <div class="modal-content modal-dialog-scrollable">
-             <form action="<?= $edit ?>" method="post">
+             <form action="<?= $updateViolationLevelEndpoint ?>" method="post">
                 <input type="hidden" name="id_violation_level" value="${id_violation_level}">
                  <div class="modal-header justify-content-center">
                      <h1 class="modal-title fs-5" id="editModal">EDIT Violation Level</h1>

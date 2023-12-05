@@ -60,9 +60,9 @@ class ManageViolationLevelController
 
 			$violationLevelService->updateViolationLevel($name, $description, $weight, ['id_violation_level' => $idViolationLevel]);
 
-			Flasher::setFlash('Violation level has been updated successfully!', 'success');
+			Flasher::setFlash('success', 'Violation level has been updated successfully!');
 		} else {
-			Flasher::setFlash('Please fill all the fields!', 'danger');
+			Flasher::setFlash('danger', 'Please fill all the fields!');
 		}
 
 		Helper::redirect('/admin/manage/violation-level');
