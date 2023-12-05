@@ -54,3 +54,4 @@ $router->post('/^admin\/manage\/violation-level\/delete$/', ['AuthMiddleware@sho
 $router->get('/^admin\/manage\/code-of-conduct$/', ['AuthMiddleware@shouldValidated', 'ManageCodeOfConductController@manageCodeOfConductPage']);
 $router->post('/^admin\/manage\/code-of-conduct\/new$/', ['AuthMiddleware@shouldValidated', 'ManageCodeOfConductController@addCodeOfConduct']);
 $router->post('/^admin\/manage\/code-of-conduct\/update$/', ['AuthMiddleware@shouldValidated', 'ManageCodeOfConductController@updateCodeOfConduct']);
+$router->post('/^admin\/manage\/code-of-conduct\/delete$/', ['AuthMiddleware@shouldValidated', 'ManageCodeOfConductController@deleteCodeOfConduct']);
