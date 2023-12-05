@@ -123,7 +123,7 @@
              <form action="<?= $updateViolationLevelEndpoint ?>" method="post">
                  <input type="hidden" name="id_violation_level" value="${id_violation_level}">
                  <div class="modal-header justify-content-center">
-                     <h1 class="modal-title fs-5" id="editModal">EDIT Violation Level</h1>
+                     <h1 class="modal-title fs-5" id="editModal">EDIT VIOLATION LEVEL</h1>
                  </div>
                  <div class="modal-body">
                      <div class="mb-3">
@@ -166,7 +166,7 @@
         <div class="modal-content">
             <form action="<?= $deleteViolationLevelEndpoint ?>" method="post">
                 <div class="modal-header justify-content-center">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">DELETE ADMIN</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">DELETE VIOLATION LEVEL</h1>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="id_violation_level" value="${id_violation_level}">
