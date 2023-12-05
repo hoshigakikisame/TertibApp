@@ -121,7 +121,7 @@
      <div class="modal-dialog modal-dialog-centered">
          <div class="modal-content modal-dialog-scrollable">
              <form action="<?= $updateViolationLevelEndpoint ?>" method="post">
-                <input type="hidden" name="id_violation_level" value="${id_violation_level}">
+                 <input type="hidden" name="id_violation_level" value="${id_violation_level}">
                  <div class="modal-header justify-content-center">
                      <h1 class="modal-title fs-5" id="editModal">EDIT Violation Level</h1>
                  </div>
@@ -133,7 +133,7 @@
                      </div>
                      <div class="mb-3">
                          <label for="name" class="form-label">Name</label>
-                         <input type="text" class="form-control" id="name" name="name_violation"
+                         <input type="text" class="form-control" id="name" name="name"
                              placeholder="Input Violation Name" value="${name}" required>
                      </div>
                      <div class="mb-3">
