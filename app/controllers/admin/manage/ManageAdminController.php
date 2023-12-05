@@ -3,8 +3,8 @@ class ManageAdminController {
 
     public function manageAdminPage()
 	{
-		$userService = new UserService();
-		$adminService = new AdminService();
+		$userService = UserService::getInstance();
+		$adminService = AdminService::getInstance();
 
 		$users = $userService->getManyUser(['role' => 'admin']);
 		$admins = $adminService->getAllAdmin();

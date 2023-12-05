@@ -51,7 +51,7 @@ class CodeOfConductService
         }
     }
 
-    public function addNewSingleCodeOfConduct(string $name, string $description, int $idViolationLevel): string {
+    public function addNewCodeOfConduct(string $name, string $description, int $idViolationLevel): string {
         return $this->db->insert('tb_code_of_conduct', [
             'name' => $name,
             'description' => $description,

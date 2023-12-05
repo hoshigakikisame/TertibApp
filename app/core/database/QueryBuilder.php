@@ -110,7 +110,6 @@ class QueryBuilder
 		);
 
 		try {
-
 			$statement = $this->pdo->prepare($sql);
 			$statement->execute($params);
 
