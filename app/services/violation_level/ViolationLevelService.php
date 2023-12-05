@@ -30,17 +30,18 @@ class ViolationLevelService
 
     public function getAllViolationLevel() {
         $rawViolationLevels = $this->db->findAll('tb_violation_level');
+        /**
+         * @var ViolationLevelModel[] $violationLevels
+         */
+        $violationLevels = [];
 
         if ($rawViolationLevels) {
-            /**
-             * @var ViolationLevelModel[] $violationLevels
-             */
-            $violationLevels = [];
             foreach ($rawViolationLevels as $rawViolationLevel) {
                 $violationLevels[] = ViolationLevelModel::fromStdClass($rawViolationLevel);
             }
-            return $violationLevels;
         }
+
+        return $violationLevels;
     }
     public function getSingleViolationLevel(string $idViolationLevel)
     {

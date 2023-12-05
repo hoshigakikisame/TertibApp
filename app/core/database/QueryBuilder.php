@@ -23,7 +23,7 @@ class QueryBuilder
 	{
 		$statement = $this->pdo->prepare("SELECT * FROM {$table}");
 		$statement->execute();
-		return $statement->fetchAll(PDO::FETCH_CLASS);
+		return $statement->fetchAll(PDO::FETCH_CLASS) ?? [];
 	}
 
 	/**
@@ -52,7 +52,7 @@ class QueryBuilder
 		try {
 			$statement = $this->pdo->prepare($sql);
 			$statement->execute();
-			return $statement->fetchAll(PDO::FETCH_CLASS);
+			return $statement->fetchAll(PDO::FETCH_CLASS) ?? [];
 		} catch (PDOException $e) {
 			die("Whoops!! Something Went Wrong!!!". $e->getMessage());
 		}
@@ -87,7 +87,7 @@ class QueryBuilder
 		try {
 			$statement = $this->pdo->prepare($sql);
 			$statement->execute($parameters);
-			$results = $statement->fetchAll(PDO::FETCH_CLASS);
+			$results = $statement->fetchAll(PDO::FETCH_CLASS) ?? [];
 			return $results;
 		} catch (PDOException $e) {
 			die("Whoops!! Something Went Wrong!!!");

@@ -39,7 +39,7 @@ $admin = $user->getRoleDetail();
                             <button type="button" class="btn dropdown-toggle shadow-none" data-bs-toggle="dropdown" aria-expanded="false">Manage</button>
                             <ul class="dropdown-menu position-static">
                                 <li><a class="dropdown-item" href="<?php echo App::get('root_uri') . "/admin/manage/student" ?>">Student</a></li>
-                                <li><a class="dropdown-item" href="<?php echo App::get('root_uri') . "/admin/manage/lecture" ?>">Lecture</a></li>
+                                <li><a class="dropdown-item" href="<?php echo App::get('root_uri') . "/admin/manage/dosen" ?>">Dosen</a></li>
                                 <li><a class="dropdown-item" href="<?php echo App::get('root_uri') . "/admin/manage/admin" ?>">Admin</a></li>
                                 <li><a class="dropdown-item" href="<?php echo App::get('root_uri') . "/admin/manage/violation-level" ?>">Violation Level</a></li>
                                 <li><a class="dropdown-item" href="<?php echo App::get('root_uri') . "/admin/manage/code-of-conduct" ?>">Code of Conduct</a></li>

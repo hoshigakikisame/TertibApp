@@ -29,24 +29,27 @@ class AdminService
         return self::$instances[$cls];
     }
 
-    public function getAllAdmin() {
+    public function getAllAdmin(): array {
         $rawAdmins = $this->db->findAll('tb_admin');
+        $admins = [];
 
         if ($rawAdmins) {
-            $admins = [];
             foreach ($rawAdmins as $rawAdmin) {
                 $admins[] = AdminModel::fromStdClass($rawAdmin);
             }
-            return $admins;
         }
+
+        return $admins;
     }
-    public function getSingleAdmin(string $idUser)
+    public function getSingleAdmin(string $idUser): AdminModel | null
     {
         $rawAdmin = $this->db->findOne('tb_admin', ['id_user' => $idUser]);
         if ($rawAdmin) {
             $admin = AdminModel::fromStdClass($rawAdmin);
             return $admin;
         }
+
+        return null;
     }
 
     public function addNewAdmin(int $idUser, string $title): string {

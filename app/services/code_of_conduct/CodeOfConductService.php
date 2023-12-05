@@ -28,27 +28,30 @@ class CodeOfConductService
         return self::$instances[$cls];
     }
 
-    public function getAllCodeOfConduct() {
+    public function getAllCodeOfConduct(): array {
         $rawCodeOfConducts = $this->db->findAll('tb_code_of_conduct');
+        /**
+         * @var CodeOfConductModel[] $rawCodeOfConducts
+         */
+        $codeOfConducts = [];
 
         if ($rawCodeOfConducts) {
-            /**
-             * @var CodeOfConductModel[] $rawCodeOfConducts
-             */
-            $codeOfConducts = [];
             foreach ($rawCodeOfConducts as $rawCodeOfConduct) {
                 $codeOfConducts[] = CodeOfConductModel::fromStdClass($rawCodeOfConduct);
             }
-            return $codeOfConducts;
         }
+
+        return $codeOfConducts;
     }
-    public function getSingleCodeOfConduct(string $idCodeOfConduct)
+    public function getSingleCodeOfConduct(string $idCodeOfConduct): CodeOfConductModel | null
     {
         $rawCodeOfConducts = $this->db->findOne('tb_code_of_conduct', ['id_code_of_conduct' => $idCodeOfConduct]);
         if ($rawCodeOfConducts) {
             $codeOfConducts = CodeOfConductModel::fromStdClass($rawCodeOfConducts);
             return $codeOfConducts;
         }
+
+        return null;
     }
 
     public function addNewCodeOfConduct(string $name, string $description, int $idViolationLevel): string {

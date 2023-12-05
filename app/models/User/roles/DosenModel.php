@@ -1,29 +1,29 @@
 <?php
-class AdminModel
+class DosenModel
 {
-    protected int $idAdmin;
+    protected int $nidn;
     protected string $title;
     protected string $idUser;
 
-    public function __construct($idAdmin, $title, $idUser)
+    public function __construct($nidn, $title, $idUser)
     {
-        $this->idAdmin = $idAdmin;
+        $this->nidn = $nidn;
         $this->title = $title;
         $this->idUser = $idUser;
     }
 
-    public static function fromStdClass($stdClass): AdminModel
+    public static function fromStdClass($stdClass): DosenModel
     {
-        return new AdminModel(
-            $stdClass->id_admin,
+        return new DosenModel(
+            $stdClass->nidn,
             $stdClass->title,
             $stdClass->id_user
         );
     }
 
-    public function getIdAdmin()
+    public function getNidn()
     {
-        return $this->idAdmin;
+        return $this->nidn;
     }
 
     public function getTitle()
@@ -36,9 +36,9 @@ class AdminModel
         return $this->idUser;
     }
 
-    public function setIdAdmin($idAdmin)
+    public function setNidn($nidn)
     {
-        $this->idAdmin = $idAdmin;
+        $this->nidn = $nidn;
     }
 
     public function setTitle($title)

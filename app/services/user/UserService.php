@@ -45,25 +45,26 @@ class UserService
         $saltedPassword = $salt . $password;
         return password_verify($saltedPassword, $hash);
     }
-    public function getSingleUser(array $where = [])
+    public function getSingleUser(array $where = []): UserModel | null
     {
         $rawUser = $this->db->findOne('tb_user', $where);
         if ($rawUser) {
             $user = UserModel::fromStdClass($rawUser);
             return $user;
         }
+        return null;
     }
 
-    public function getManyUser(array $where = [])
+    public function getManyUser(array $where = []): array
     {
         $rawUsers = $this->db->findWhere('tb_user', $where);
+        $users = [];
         if ($rawUsers) {
-            $users = [];
             foreach ($rawUsers as $rawUser) {
                 $users[] = UserModel::fromStdClass($rawUser);
             }
-            return $users;
         }
+        return $users;
     }
 
     public function addNewUser(string $username, string $firstName, string $lastName, string $email, string $address, string $phoneNumber, string $role, string $salt, string $passwordHash): string
@@ -82,18 +83,23 @@ class UserService
         ]);
     }
 
-    public function updateUser(string $username, string $firstName, string $lastName, string $email, string $address, string $phoneNumber, string $role, string $salt, string $passwordHash, $where = []) {
-        $this->db->update('tb_user', [
+    public function updateUser(string $username, string $firstName, string $lastName, string $email, string $address, string $phoneNumber, string $role, string $salt = '', string $passwordHash = '', $where = []) {
+        $options = [
             'username' => $username,
             'first_name' => $firstName,
             'last_name' => $lastName,
             'email' => $email,
             'address' => $address,
             'phone_number' => $phoneNumber,
-            'role' => $role,
-            'salt' => $salt,
-            'password_hash' => $passwordHash
-        ], $where);
+            'role' => $role
+        ];
+
+        if ($passwordHash != '' && $salt != '') {
+            $options['salt'] = $salt;
+            $options['password_hash'] = $passwordHash;
+        }
+        
+        $this->db->update('tb_user', $options, $where);
     }
 
     public function updateUserProfile(string $firstName, string $lastName, string $address, string $phoneNumber, string $imagePath, $where = [])
@@ -142,5 +148,12 @@ class UserService
         }
 
         Session::getInstance()->push('user', $user);
+    }
+
+    public function deleteUser($idUser)
+    {
+        $this->db->delete('tb_user', [
+            'id_user' => $idUser
+        ]);
     }
 }

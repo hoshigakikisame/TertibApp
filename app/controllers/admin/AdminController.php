@@ -48,10 +48,6 @@ class AdminController
 	{
 		return Helper::view('admin/manage/student');
 	}
-	public function manageLecture()
-	{
-		return Helper::view('admin/manage/lecture');
-	}
 	public function manageLevelViolation()
 	{
 		return Helper::view('admin/manage/level_violation');
