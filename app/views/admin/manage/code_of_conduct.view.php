@@ -66,12 +66,12 @@
                                                     <div class="mb-3">
                                                         <label for="level" class="form-label">Level</label>
                                                         <select class="form-select" id="level" aria-label="Default select example" name="id_violation_level">
-                                                            <?php 
+                                                            <?php
                                                             /**
                                                              * @var ViolationLevelModel[] $violationLevels
                                                              */
                                                             foreach ($violationLevels as $violationLevel) : ?>
-                                                            <option value="<?= $violationLevel->getIdViolationLevel(); ?>"><?= "Level " . $violationLevel->getLevel() . "; Name " . $violationLevel->getName() . "; Weight " . $violationLevel->getWeight() ?></option>
+                                                                <option value="<?= $violationLevel->getIdViolationLevel(); ?>"><?= "Level " . $violationLevel->getLevel() . "; Name " . $violationLevel->getName() . "; Weight " . $violationLevel->getWeight() ?></option>
                                                             <?php endforeach; ?>
                                                         </select>
                                                     </div>
@@ -103,7 +103,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php
+                                        <?php
                                         /**
                                          * @var CodeOfConductModel[] $codeOfConducts
                                          */
@@ -113,24 +113,23 @@
                                              */
                                             $violationLevel = $codeOfConduct->getViolationLevel();
                                         ?>
-                                        <tr>
-                                            <td><?= $codeOfConduct->getIdCodeOfConduct(); ?></td>
-                                            <td><?= $codeOfConduct->getName(); ?></td>
-                                            <td><?= $codeOfConduct->getDescription(); ?></td>
-                                            <td><?= $violationLevel->getLevel(); ?></td>
-                                            <td><?= $violationLevel->getWeight(); ?></td>
-                                            <td class="d-flex" id="action_wrapper">
-                                                <!-- modal trigger -->
-                                                <button type="button" class="btn btn-link" onclick="editButtonAction('<?= $codeOfConduct->getIdCodeOfConduct(); ?>', '<?= $codeOfConduct->getName(); ?>', <?= $violationLevel->getIdViolationLevel(); ?>, '<?= $codeOfConduct->getDescription(); ?>')">
-                                                    edit
-                                                </button>
-                                                <form action="<?= '' ?>" method="post">
-                                                    <input type="hidden" name="id_user" value="<?= '' ?>">
-                                                    <button type="submit" class="btn btn-link text-secondary">delete</button>
-                                                </form>
-                                                <!-- Modal -->
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td><?= $codeOfConduct->getIdCodeOfConduct(); ?></td>
+                                                <td><?= $codeOfConduct->getName(); ?></td>
+                                                <td><?= $codeOfConduct->getDescription(); ?></td>
+                                                <td><?= $violationLevel->getLevel(); ?></td>
+                                                <td><?= $violationLevel->getWeight(); ?></td>
+                                                <td class="d-flex" id="action_wrapper">
+                                                    <!-- Edit Modal trigger -->
+                                                    <button type="button" class="btn btn-link" onclick="editButtonAction('<?= $codeOfConduct->getIdCodeOfConduct(); ?>', '<?= $codeOfConduct->getName(); ?>', <?= $violationLevel->getIdViolationLevel(); ?>, '<?= $codeOfConduct->getDescription(); ?>')">
+                                                        edit
+                                                    </button>
+                                                    <!-- Delete Modal trigger -->
+                                                    <button type="button" class="btn btn-link text-secondary" onclick="deleteButtonAction('<?= $codeOfConduct->getIdCodeOfConduct(); ?>','<?= $codeOfConduct->getName(); ?>')">delete</button>
+
+                                                    <!-- Modal -->
+                                                </td>
+                                            </tr>
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
@@ -145,7 +144,7 @@
 
 <script>
     function editButtonAction(idCodeOfConduct, name, idViolationLevel, description) {
-        const modal = `
+        const modal = /*html*/ `
         <div class="modal fade" id="modalEdit" data-bs-backdrop="dynamic" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalEdit" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered ">
                 <div class="modal-content modal-dialog-scrollable">
@@ -162,7 +161,7 @@
                             <div class="mb-3">
                                 <label for="level" class="form-label">Level</label>
                                 <select class="form-select" id="level" aria-label="Default select example" name="id_violation_level">
-                                    <?php 
+                                    <?php
                                     /**
                                      * @var ViolationLevelModel[] $violationLevels
                                      */
@@ -189,7 +188,39 @@
         $('#modalEdit').modal('show')
         const myModalEl = document.getElementById('modalEdit')
         myModalEl.addEventListener('hidden.bs.modal', event => {
-        $('#modalEdit').remove();
+            $('#modalEdit').remove();
+        })
+    }
+
+    function deleteButtonAction(id_code_of_conduct, name) {
+        const modal = /*template*/ `
+        <div class="modal fade" id="modalDelete" data-bs-keyboard="false" tabindex="-1"
+          aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <form action="<?= $delete ?>" method="post">
+                      <div class="modal-header justify-content-center">
+                          <h1 class="modal-title fs-5" id="staticBackdropLabel">DELETE CODE OF CONDUCT</h1>
+                      </div>
+                      <div class="modal-body">
+                          <input type="hidden" name="id_code_of_conduct" value="${id_code_of_conduct}">
+                          <p class="">Are You Sure Want to Delete ${name} From Code Of Conduct? </p>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                          <button type="sumbit" class="btn btn-primary">Yes</button>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+        `
+
+        $('#action_wrapper').append(modal)
+        $('#modalDelete').modal('show')
+        const myModalEl = document.getElementById('modalDelete')
+        myModalEl.addEventListener('hidden.bs.modal', event => {
+            $('#modalDelete').remove();
         })
     }
 </script>

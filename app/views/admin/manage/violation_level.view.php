@@ -161,7 +161,7 @@
 
     function deleteViolationButton(id_violation_level, name) {
         const modal = /*html */ `
-<div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade" id="deleteModal" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -174,15 +174,19 @@
                     <p class="">Are You Sure Want to Delete ${name} From Violation Level? </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick='$("div#deleteModal").remove();'>No</button>
-                    <button type="submit" class="btn btn-primary">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-primary">Yes</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 `
-        $(`button[data-bs-target='#deleteModal']`).after(modal);
-        $("#deleteModal").modal("show");
+        $('#action_wrapper').append(modal)
+        $('#deleteModal').modal('show')
+        const myModalEl = document.getElementById('deleteModal')
+        myModalEl.addEventListener('hidden.bs.modal', event => {
+            $('#deleteModal').remove();
+        })
     }
 </script>
