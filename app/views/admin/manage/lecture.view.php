@@ -128,7 +128,7 @@
 
                                             <td class="d-flex" id="action_wrapper">
                                                 <!-- Edit Modal trigger -->
-                                                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal" onclick="">
+                                                <button type="button" id="btnPress" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal" onclick="">
                                                     edit
                                                 </button>
                                                 <!-- Delete Modal trigger -->
@@ -255,3 +255,5 @@
         })
     }
 </script>
+
+<script src="<?= App::get("root_uri") . "/public/js/script_password.js" ?>"></script>
