@@ -132,7 +132,7 @@
                                                     edit
                                                 </button>
                                                 <!-- Delete Modal trigger -->
-                                                <button type="submit" class="btn btn-link text-secondary" onclick="">
+                                                <button type="button" class="btn btn-link text-secondary" onclick="">
                                                     delete
                                                 </button>
                                                 <!-- Modal -->
@@ -151,7 +151,7 @@
 </div>
 
 <script>
-    function editActionButton(NIDN, firstname, lastname, email, prodi, noTelp, password, confirmPassword) {
+    function editActionButton(NIDN, firstname, lastname, email, prodi, noTelp) {
         const modal = /*html*/ `
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -192,7 +192,7 @@
                     <div class="mb-3">
                         <label for="noTelp" class="form-label">No. Telp</label>
                         <input type="number" class="form-control" id="noTelp" name="noTelp"
-                            placeholder="Input Lecture Number">
+                            placeholder="Input Lecture Number" value="${noTelp}">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
@@ -207,7 +207,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-secondary">Save</button>
+                    <button type="submit" class="btn btn-secondary">Save</button>
                 </div>
             </form>
         </div>
@@ -223,7 +223,35 @@
 
     }
 
-    function deleteActionButton() {
+    function deleteActionButton(id_lecture, firstname, lastname) {
+        modal = /*html*/ `
+        <div class="modal fade" id="deleteModal" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="<?= '' ?>" method="post">
+                <div class="modal-header justify-content-center">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">DELETE LECTURE</h1>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="id_lecture" value="id_lecture">
+                    <p class="">Are You Sure Want to Delete ${firstname} ${lastname} From Lecture Account? </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-primary">Yes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+        `
 
+        $('#action_wrapper').append(modal)
+        $('#deleteModal').modal('show')
+        const myModalEl = document.getElementById('deleteModal')
+        myModalEl.addEventListener('hidden.bs.modal', event => {
+            $('#deleteModal').remove();
+        })
     }
 </script>
