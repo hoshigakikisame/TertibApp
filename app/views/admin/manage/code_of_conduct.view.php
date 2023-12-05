@@ -198,7 +198,7 @@
           aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog">
               <div class="modal-content">
-                  <form action="<?= $updateCodeOfConductEndpoint ?>" method="post">
+                  <form action="<?= $deleteCodeOfConductEndpoint ?>" method="post">
                       <div class="modal-header justify-content-center">
                           <h1 class="modal-title fs-5" id="staticBackdropLabel">DELETE CODE OF CONDUCT</h1>
                       </div>

@@ -29,6 +29,7 @@ class ManageCodeOfConductController {
 			'manageCodeOfConductEndpoint' => App::get('root_uri') . '/admin/manage/code-of-conduct',
 			'addCodeOfConductEndpoint' => App::get('root_uri') . '/admin/manage/code-of-conduct/new',
 			'updateCodeOfConductEndpoint' => App::get('root_uri') . '/admin/manage/code-of-conduct/update',
+			'deleteCodeOfConductEndpoint' => App::get('root_uri') . '/admin/manage/code-of-conduct/delete',
 		];
 
 		return Helper::view('admin/manage/code_of_conduct', $data);
@@ -95,7 +96,7 @@ class ManageCodeOfConductController {
 			$idCodeOfConduct = $_POST['id_code_of_conduct'];
 
 			// Add new code of conduct
-			$codeOfConductService->deleteCodeOfConduct(['id_code_of_conduct' => $idCodeOfConduct]);
+			$codeOfConductService->deleteCodeOfConduct($idCodeOfConduct);
 
 			Flasher::setFlash('success', 'Code of Conduct has been deleted successfully!');
 		} else {
