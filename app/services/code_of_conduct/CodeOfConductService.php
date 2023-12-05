@@ -67,4 +67,9 @@ class CodeOfConductService
             'id_violation_level' => $idViolationLevel
         ], $where);
     }
+
+    public function deleteCodeOfConduct(string $idCodeOfConduct)
+    {
+        $this->db->delete('tb_code_of_conduct', ['id_code_of_conduct' => $idCodeOfConduct]);
+    }
 }

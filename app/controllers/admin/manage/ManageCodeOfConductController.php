@@ -85,4 +85,23 @@ class ManageCodeOfConductController {
 		
 		Helper::redirect('/admin/manage/code-of-conduct');
 	}
+
+	public function deleteCodeOfConduct() {
+		if (isset($_POST['id_code_of_conduct']) && $_POST['id_code_of_conduct'] != '') {
+			// Defining Services
+			$codeOfConductService = CodeOfConductService::getInstance();
+
+			// Take inputs from request
+			$idCodeOfConduct = $_POST['id_code_of_conduct'];
+
+			// Add new code of conduct
+			$codeOfConductService->deleteCodeOfConduct(['id_code_of_conduct' => $idCodeOfConduct]);
+
+			Flasher::setFlash('success', 'Code of Conduct has been deleted successfully!');
+		} else {
+			Flasher::setFlash('danger', 'Please fill all the fields!');
+		}
+		
+		Helper::redirect('/admin/manage/code-of-conduct');
+	}
 }

@@ -81,10 +81,11 @@
                                         /**
                                          * @var ViolationLevelModel[] $violationLevels
                                          */
-                                        foreach ($violationLevels as $violationLevel) :
+                                        for ($i = 0; $i < count($violationLevels); $i++) :
+                                            $violationLevel = $violationLevels[$i];
                                         ?>
                                             <tr>
-                                                <td><?= $violationLevel->getIdViolationLevel(); ?></td>
+                                                <td><?= $i+1 ?></td>
                                                 <td><?= $violationLevel->getLevel(); ?></td>
                                                 <td><?= $violationLevel->getName(); ?></td>
                                                 <td><?= $violationLevel->getWeight(); ?></td>
@@ -102,7 +103,7 @@
 
                                                 </td>
                                             </tr>
-                                        <?php endforeach; ?>
+                                        <?php endfor; ?>
                                     </tbody>
                                 </table>
                             </div>
