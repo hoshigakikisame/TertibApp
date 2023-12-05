@@ -91,7 +91,7 @@
 
 										<th scope="row"><?= $i ?></th> <!--for number-->
 										<td><?= $codeOfConduct->getDescription() ?></td> <!--for text pelanggaran-->
-										<td><?= $violationLevel->getLevel() ?></td> <!--for Tingkat-->
+										<td><?= GenericUtil::intToRoman($violationLevel->getLevel()) ?></td> <!--for Tingkat-->
 									</tr>
 								<?php endfor; ?>
 							</tbody>
