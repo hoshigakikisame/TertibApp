@@ -94,7 +94,7 @@
                                                         edit
                                                     </button>
                                                     <!-- Modal Trigger delete-->
-                                                    <button type="button" id="btnPress" class="btn btn-link text-secondary" data-bs-toggle="modal" title="<?= $user->getIdUser() ?>" data-bs-target="#deleteModal" onclick="deleteButtonAction(<?= $violationLevel->getIdViolationLevel(); ?>,'<?= $violationLevel->getName();  ?>')">
+                                                    <button type="button" id="btnPress" class="btn btn-link text-secondary" data-bs-toggle="modal" title="<?= $violationLevel->getIdViolationLevel() ?>" data-bs-target="#deleteModal" onclick="deleteViolationButton(<?= $violationLevel->getIdViolationLevel(); ?>,'<?= $violationLevel->getName();  ?>')">
                                                         delete
                                                     </button>
                                                 </td>
@@ -151,6 +151,29 @@
     }
 
     function deleteViolationButton(id_violation_level, name) {
-
+        const modal = /*html */ `
+<div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="<?= '' ?>" method="post">
+                <div class="modal-header justify-content-center">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">DELETE ADMIN</h1>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="id_user" value="${id_violation_level}">
+                    <p class="">Are You Sure Want to Delete ${name} From Violation Level? </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick='$("div#deleteModal").remove();'>No</button>
+                    <button type="button" class="btn btn-primary">Yes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+`
+        $(`button[data-bs-target='#deleteModal']`).after(modal);
+        $("#deleteModal").modal("show");
     }
 </script>
