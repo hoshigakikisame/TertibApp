@@ -22,6 +22,7 @@ class ManageAdminController {
 			'flash' => Flasher::flash(),
 			'newAdminEndpoint' => App::get('root_uri') . '/admin/manage/admin/new',
 			'updateAdminEndpoint' => App::get('root_uri') . '/admin/manage/admin/update',
+			'deleteAdminEndpoint' => App::get('root_uri') . '/admin/manage/admin/delete',
 			'usersCount' => count($users),
 		];
 
@@ -129,4 +130,23 @@ class ManageAdminController {
 
 		return Helper::redirect('/admin/manage/admin');
 	}   
+
+	public function deleteAdmin() {
+		if (isset($_POST['id_user']) && $_POST['id_user'] != '') {
+			// Defining Services
+			$userService = UserService::getInstance();
+
+			// Take inputs from request
+			$idUser = $_POST['id_user'];
+
+			// Add new code of conduct
+			$userService->deleteUser($idUser);
+
+			Flasher::setFlash('success', 'Admin has been deleted successfully!');
+		} else {
+			Flasher::setFlash('danger', 'Please fill all the fields!');
+		}
+		
+		Helper::redirect('/admin/manage/dosen');
+	}
 }

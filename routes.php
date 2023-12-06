@@ -50,6 +50,7 @@ $router->post('/^admin\/manage\/dosen\/delete$/', ['AuthMiddleware@shouldValidat
 $router->get('/^admin\/manage\/admin$/', ['AuthMiddleware@shouldValidated', 'ManageAdminController@manageAdminPage']);
 $router->post('/^admin\/manage\/admin\/new$/', ['AuthMiddleware@shouldValidated', 'ManageAdminController@addNewAdmin']);
 $router->post('/^admin\/manage\/admin\/update$/', ['AuthMiddleware@shouldValidated', 'ManageAdminController@updateAdmin']);
+$router->post('/^admin\/manage\/admin\/delete$/', ['AuthMiddleware@shouldValidated', 'ManageAdminController@deleteAdmin']);
 
 // manage violation level routes
 $router->get('/^admin\/manage\/violation-level$/', ['AuthMiddleware@shouldValidated', 'ManageViolationLevelController@manageViolationLevelPage']);
