@@ -41,8 +41,8 @@ class ManageMahasiswaController {
 			isset($_POST['address']) && $_POST['address'] != '' &&
 			isset($_POST['password']) && $_POST['password'] != ''
 		) {
-			$userService = new UserService();
-			$mahasiswaService = new MahasiswaService();
+			$userService = UserService::getInstance();
+			$mahasiswaService = MahasiswaService::getInstance();
 
 			// get input
 			$username = $_POST['username'];
@@ -55,11 +55,18 @@ class ManageMahasiswaController {
 			$address = $_POST['address'];
 			$role = 'mahasiswa';
 
-			$isMahasiswaExist = $mahasiswaService->getSingleMahasiswaByNim($nim);
+            $isUserExists = $userService->getSingleUser(['username' => $username]);
 
-			if($isMahasiswaExist) {
+            if($isUserExists) {
+                Flasher::setFlash("danger", "Username already exist!");
+                return Helper::redirect('/admin/manage/admin');
+            }
+
+			$isMahasiswaExists = $mahasiswaService->getSingleMahasiswa(['nim' => $nim]);
+
+			if($isMahasiswaExists) {
 				Flasher::setFlash("danger", "NIM already exist!");
-				return Helper::redirect('/admin/manage/mahasiswa');
+				return Helper::redirect('/admin/manage/dosen');
 			}
 
 			$rawPassword = $_POST['password'];
@@ -92,8 +99,8 @@ class ManageMahasiswaController {
 			isset($_POST['no_telp']) && $_POST['no_telp'] != '' &&
 			isset($_POST['address']) && $_POST['address'] != ''
 		) {
-			$userService = new UserService();
-			$mahasiswaService = new MahasiswaService();
+			$userService = UserService::getInstance();
+			$mahasiswaService = MahasiswaService::getInstance();
 
 			// get input
 			$idUser = $_POST['id_user'];
@@ -107,18 +114,20 @@ class ManageMahasiswaController {
 			$address = $_POST['address'];
 			$role = 'mahasiswa';
 
-            $isUserExist = $userService->getSingleUser(['username' => $username])->getUsername() != $username;
+            $tempUser = $userService->getSingleUser(['username' => $username]);
+			$isUserExists = $tempUser != null && $tempUser->getIdUser() != $idUser;
 
-            if($isUserExist) {
+            if($isUserExists) {
                 Flasher::setFlash("danger", "Username already exist!");
-                return Helper::redirect('/admin/manage/mahasiswa');
+                return Helper::redirect('/admin/manage/admin');
             }
 
-			$isMahasiswaExist = $mahasiswaService->getSingleMahasiswaByNim($nim)->getIdUser() != $idUser;
+			$tempMahasiswa = $mahasiswaService->getSingleMahasiswa(['nim' => $nim]);
+			$isMahasiswaExists = $tempMahasiswa != null && $tempMahasiswa->getIdUser() != $idUser;
 
-			if($isMahasiswaExist) {
+			if($isMahasiswaExists) {
 				Flasher::setFlash("danger", "NIM already exist!");
-				return Helper::redirect('/admin/manage/mahasiswa');
+				return Helper::redirect('/admin/manage/dosen');
 			}
 
 			if (isset($_POST['password']) && $_POST['password'] != '') {

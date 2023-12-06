@@ -41,9 +41,9 @@ class AdminService
 
         return $admins;
     }
-    public function getSingleAdmin(string $idUser): AdminModel | null
+    public function getSingleAdmin(array $where): AdminModel | null
     {
-        $rawAdmin = $this->db->findOne('tb_admin', ['id_user' => $idUser]);
+        $rawAdmin = $this->db->findOne('tb_admin', $where);
         if ($rawAdmin) {
             $admin = AdminModel::fromStdClass($rawAdmin);
             return $admin;

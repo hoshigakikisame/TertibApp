@@ -41,20 +41,9 @@ class MahasiswaService
 
         return $mahasiswas;
     }
-    public function getSingleMahasiswa(string $idUser): MahasiswaModel | null
+    public function getSingleMahasiswa($where): MahasiswaModel | null
     {
-        $rawMahasiswa = $this->db->findOne('tb_mahasiswa', ['id_user' => $idUser]);
-        if ($rawMahasiswa) {
-            $mahasiswa = MahasiswaModel::fromStdClass($rawMahasiswa);
-            return $mahasiswa;
-        }
-
-        return null;
-    }
-
-    public function getSingleMahasiswaByNim(string $nim): MahasiswaModel | null
-    {
-        $rawMahasiswa = $this->db->findOne('tb_mahasiswa', ['nim' => $nim]);
+        $rawMahasiswa = $this->db->findOne('tb_mahasiswa', $where);
         if ($rawMahasiswa) {
             $mahasiswa = MahasiswaModel::fromStdClass($rawMahasiswa);
             return $mahasiswa;

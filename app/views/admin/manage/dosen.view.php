@@ -19,29 +19,8 @@
                             <div
                                 class="col-lg-2 col-auto border border-2 mt-3 py-2 px-2 rounded-3 flex-grow-1 flex-lg-grow-0">
                                 <div class="shadow-sm rounded-3 py-3 px-lg-4 px-0 h-100">
-                                    <h1 class="mb-0">120</h1>
+                                    <h1 class="mb-0"><?= $usersCount ?></h1>
                                     <h6>Account Total</h6>
-                                </div>
-                            </div>
-                            <div
-                                class="col-lg-2 col-auto border border-2 mt-3 py-2 px-2 rounded-3 flex-grow-1 flex-lg-grow-0">
-                                <div class="shadow-sm rounded-3 py-3 px-lg-4 px-0 h-100">
-                                    <h1 class="mb-0">120</h1>
-                                    <h6>Informatic Dosen</h6>
-                                </div>
-                            </div>
-                            <div
-                                class="col-lg-2 col-auto border border-2 mt-3 py-2 px-2 rounded-3 flex-grow-1 flex-lg-grow-0">
-                                <div class="shadow-sm rounded-3 py-3 px-lg-4 px-0 h-100">
-                                    <h1 class="mb-0">120</h1>
-                                    <h6>SIB Dosen</h6>
-                                </div>
-                            </div>
-                            <div
-                                class="col-lg-2 col-auto border border-2 mt-3 py-2 px-2 rounded-3 flex-grow-1 flex-lg-grow-0">
-                                <div class="shadow-sm rounded-3 py-3 px-lg-4 px-0 h-100">
-                                    <h1 class="mb-0">120</h1>
-                                    <h6>PPLS Dosen</h6>
                                 </div>
                             </div>
                         </div>

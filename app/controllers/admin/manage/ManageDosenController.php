@@ -41,8 +41,8 @@ class ManageDosenController {
 			isset($_POST['address']) && $_POST['address'] != '' &&
 			isset($_POST['password']) && $_POST['password'] != ''
 		) {
-			$userService = new UserService();
-			$dosenService = new DosenService();
+			$userService = UserService::getInstance();
+			$dosenService = DosenService::getInstance();
 
 			// get input
 			$username = $_POST['username'];
@@ -55,9 +55,16 @@ class ManageDosenController {
 			$address = $_POST['address'];
 			$role = 'dosen';
 
-			$isDosenExist = $dosenService->getSingleDosenByNidn($nidn);
+			$isUserExists = $userService->getSingleUser(['username' => $username]);
 
-			if($isDosenExist) {
+            if($isUserExists) {
+                Flasher::setFlash("danger", "Username already exist!");
+                return Helper::redirect('/admin/manage/admin');
+            }
+
+			$isDosenExists = $dosenService->getSingleDosen(['nidn' => $nidn]);
+
+			if($isDosenExists) {
 				Flasher::setFlash("danger", "NIDN already exist!");
 				return Helper::redirect('/admin/manage/dosen');
 			}
@@ -87,13 +94,14 @@ class ManageDosenController {
 			isset($_POST['nidn']) && $_POST['nidn'] != '' &&
 			isset($_POST['firstname']) && $_POST['firstname'] != '' &&
 			isset($_POST['lastname']) && $_POST['lastname'] != '' &&
-			isset($_POST['title']) && $_POST['title'] != '' &&
 			isset($_POST['email']) && $_POST['email'] != '' &&
+			isset($_POST['title']) && $_POST['title'] != '' &&
 			isset($_POST['no_telp']) && $_POST['no_telp'] != '' &&
 			isset($_POST['address']) && $_POST['address'] != ''
+
 		) {
-			$userService = new UserService();
-			$dosenService = new DosenService();
+			$userService = UserService::getInstance();
+			$dosenService = DosenService::getInstance();
 
 			// get input
 			$idUser = $_POST['id_user'];
@@ -107,16 +115,18 @@ class ManageDosenController {
 			$address = $_POST['address'];
 			$role = 'dosen';
 
-			$isUserExist = $userService->getSingleUser(['username' => $username])->getUsername() != $username;
+			$tempUser = $userService->getSingleUser(['username' => $username]);
+			$isUserExists = $tempUser != null && $tempUser->getIdUser() != $idUser;
 
-            if($isUserExist) {
+            if($isUserExists) {
                 Flasher::setFlash("danger", "Username already exist!");
-                return Helper::redirect('/admin/manage/mahasiswa');
+                return Helper::redirect('/admin/manage/admin');
             }
 
-			$isDosenExist = $dosenService->getSingleDosenByNidn($nidn)->getIdUser() != $idUser;
+			$tempDosen = $dosenService->getSingleDosen(['nidn' => $nidn]);
+			$isDosenExists = $tempDosen != null && $tempDosen->getIdUser() != $idUser;
 
-			if($isDosenExist) {
+			if($isDosenExists) {
 				Flasher::setFlash("danger", "NIDN already exist!");
 				return Helper::redirect('/admin/manage/dosen');
 			}

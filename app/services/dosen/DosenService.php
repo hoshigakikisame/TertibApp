@@ -41,20 +41,9 @@ class DosenService
 
         return $dosens;
     }
-    public function getSingleDosen(string $idUser): DosenModel | null
+    public function getSingleDosen($where): DosenModel | null
     {
-        $rawDosen = $this->db->findOne('tb_dosen', ['id_user' => $idUser]);
-        if ($rawDosen) {
-            $dosen = DosenModel::fromStdClass($rawDosen);
-            return $dosen;
-        }
-
-        return null;
-    }
-
-    public function getSingleDosenByNidn(string $nidn): DosenModel | null
-    {
-        $rawDosen = $this->db->findOne('tb_dosen', ['nidn' => $nidn]);
+        $rawDosen = $this->db->findOne('tb_dosen', $where);
         if ($rawDosen) {
             $dosen = DosenModel::fromStdClass($rawDosen);
             return $dosen;
