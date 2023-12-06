@@ -34,7 +34,10 @@ $router->post('/^admin\/update-profile$/', ['AuthMiddleware@shouldValidated', 'A
 $router->post('/^admin\/update-password$/', ['AuthMiddleware@shouldValidated', 'AdminController@updatePassword']);
 
 // manage student routes
-$router->get('/^admin\/manage\/student$/', ['AuthMiddleware@shouldValidated', 'AdminController@manageStudent']);
+$router->get('/^admin\/manage\/mahasiswa$/', ['AuthMiddleware@shouldValidated', 'ManageMahasiswaController@manageMahasiswaPage']);
+$router->post('/^admin\/manage\/mahasiswa\/new$/', ['AuthMiddleware@shouldValidated', 'ManageMahasiswaController@addNewMahasiswa']);
+$router->post('/^admin\/manage\/mahasiswa\/update$/', ['AuthMiddleware@shouldValidated', 'ManageMahasiswaController@updateMahasiswa']);
+$router->post('/^admin\/manage\/mahasiswa\/delete$/', ['AuthMiddleware@shouldValidated', 'ManageMahasiswaController@deleteMahasiswa']);
 
 // manage dosen routes
 $router->get('/^admin\/manage\/dosen$/', ['AuthMiddleware@shouldValidated', 'ManageDosenController@manageDosenPage']);

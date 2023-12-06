@@ -44,14 +44,6 @@ class AdminController
 	 * [contact description]
 	 * @return [type] [description]
 	 */
-	public function manageStudent()
-	{
-		return Helper::view('admin/manage/student');
-	}
-	public function manageLevelViolation()
-	{
-		return Helper::view('admin/manage/level_violation');
-	}
 	
 	public function profilePage()
 	{

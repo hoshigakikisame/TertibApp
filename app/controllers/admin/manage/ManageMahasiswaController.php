@@ -1,18 +1,18 @@
 <?php 
-class ManageDosenController {
+class ManageMahasiswaController {
 
-    public function manageDosenPage()
+    public function manageMahasiswaPage()
 	{
 		$userService = UserService::getInstance();
-		$dosenService = DosenService::getInstance();
+		$mahasiswaService = MahasiswaService::getInstance();
 
-		$users = $userService->getManyUser(['role' => 'dosen']);
-		$dosens = $dosenService->getAllDosen();
+		$users = $userService->getManyUser(['role' => 'mahasiswa']);
+		$mahasiswas = $mahasiswaService->getAllMahasiswa();
 
 		for ($i = 0; $i < count($users); $i++) {
-			for ($j = 0; $j < count($dosens); $j++) {
-				if ($users[$i]->getIdUser() == $dosens[$j]->getIdUser()) {
-					$users[$i]->setRoleDetail($dosens[$j]);
+			for ($j = 0; $j < count($mahasiswas); $j++) {
+				if ($users[$i]->getIdUser() == $mahasiswas[$j]->getIdUser()) {
+					$users[$i]->setRoleDetail($mahasiswas[$j]);
 				}
 			}
 		}
@@ -20,46 +20,46 @@ class ManageDosenController {
 		$data = [
 			'users' => $users,
 			'flash' => Flasher::flash(),
-			'newDosenEndpoint' => App::get('root_uri') . '/admin/manage/dosen/new',
-			'updateDosenEndpoint' => App::get('root_uri') . '/admin/manage/dosen/update',
-			'deleteDosenEndpoint' => App::get('root_uri') . '/admin/manage/dosen/delete',
+			'newMahasiswaEndpoint' => App::get('root_uri') . '/admin/manage/mahasiswa/new',
+			'updateMahasiswaEndpoint' => App::get('root_uri') . '/admin/manage/mahasiswa/update',
+			'deleteMahasiswaEndpoint' => App::get('root_uri') . '/admin/manage/mahasiswa/delete',
 			'usersCount' => count($users),
 		];
 
-		return Helper::view('admin/manage/dosen', $data);
+		return Helper::view('admin/manage/mahasiswa', $data);
 	}
-    public function addNewDosen()
+    public function addNewMahasiswa()
 	{
 		if (
 			isset($_POST['username']) && $_POST['username'] != '' &&
-			isset($_POST['nidn']) && $_POST['nidn'] != '' &&
+			isset($_POST['nim']) && $_POST['nim'] != '' &&
 			isset($_POST['firstname']) && $_POST['firstname'] != '' &&
 			isset($_POST['lastname']) && $_POST['lastname'] != '' &&
-			isset($_POST['title']) && $_POST['title'] != '' &&
+			isset($_POST['prodi']) && $_POST['prodi'] != '' &&
 			isset($_POST['email']) && $_POST['email'] != '' &&
 			isset($_POST['no_telp']) && $_POST['no_telp'] != '' &&
 			isset($_POST['address']) && $_POST['address'] != '' &&
 			isset($_POST['password']) && $_POST['password'] != ''
 		) {
 			$userService = new UserService();
-			$dosenService = new DosenService();
+			$mahasiswaService = new MahasiswaService();
 
 			// get input
 			$username = $_POST['username'];
-			$nidn = $_POST['nidn'];
+			$nim = $_POST['nim'];
 			$firstName = $_POST['firstname'];
 			$lastName = $_POST['lastname'];
-			$title = $_POST['title'];
+			$prodi = $_POST['prodi'];
 			$email = $_POST['email'];
 			$phoneNumber = $_POST['no_telp'];
 			$address = $_POST['address'];
-			$role = 'dosen';
+			$role = 'mahasiswa';
 
-			$isDosenExist = $dosenService->getSingleDosenByNidn($nidn);
+			$isMahasiswaExist = $mahasiswaService->getSingleMahasiswaByNim($nim);
 
-			if($isDosenExist) {
-				Flasher::setFlash("danger", "NIDN already exist!");
-				return Helper::redirect('/admin/manage/dosen');
+			if($isMahasiswaExist) {
+				Flasher::setFlash("danger", "NIM already exist!");
+				return Helper::redirect('/admin/manage/mahasiswa');
 			}
 
 			$rawPassword = $_POST['password'];
@@ -68,57 +68,57 @@ class ManageDosenController {
 
 			$newUserId = $userService->addNewUser($username, $firstName, $lastName, $email, $address, $phoneNumber, $role, $salt, $password);
 
-			$title = $_POST['title'];
+			$prodi = $_POST['prodi'];
 
-			$dosenService->addNewDosen($nidn, $newUserId, $title);
+			$mahasiswaService->addNewMahasiswa($nim, $newUserId, $prodi);
 
-			Flasher::setFlash("success", "Dosen successfully added!");
+			Flasher::setFlash("success", "Mahasiswa successfully added!");
 		} else {
 			Flasher::setFlash("danger", "All fields must be filled");
 		}
 
-		return Helper::redirect('/admin/manage/dosen');
+		return Helper::redirect('/admin/manage/mahasiswa');
 	}
 
-	public function updateDosen() {
+	public function updateMahasiswa() {
 		if (
 			isset($_POST['id_user']) && $_POST['id_user'] != '' &&
 			isset($_POST['username']) && $_POST['username'] != '' &&
-			isset($_POST['nidn']) && $_POST['nidn'] != '' &&
+			isset($_POST['nim']) && $_POST['nim'] != '' &&
 			isset($_POST['firstname']) && $_POST['firstname'] != '' &&
 			isset($_POST['lastname']) && $_POST['lastname'] != '' &&
-			isset($_POST['title']) && $_POST['title'] != '' &&
+			isset($_POST['prodi']) && $_POST['prodi'] != '' &&
 			isset($_POST['email']) && $_POST['email'] != '' &&
 			isset($_POST['no_telp']) && $_POST['no_telp'] != '' &&
 			isset($_POST['address']) && $_POST['address'] != ''
 		) {
 			$userService = new UserService();
-			$dosenService = new DosenService();
+			$mahasiswaService = new MahasiswaService();
 
 			// get input
 			$idUser = $_POST['id_user'];
 			$username = $_POST['username'];
-			$nidn = $_POST['nidn'];
+			$nim = $_POST['nim'];
 			$firstName = $_POST['firstname'];
 			$lastName = $_POST['lastname'];
-			$title = $_POST['title'];
+			$prodi = $_POST['prodi'];
 			$email = $_POST['email'];
 			$phoneNumber = $_POST['no_telp'];
 			$address = $_POST['address'];
-			$role = 'dosen';
+			$role = 'mahasiswa';
 
-			$isUserExist = $userService->getSingleUser(['username' => $username])->getUsername() != $username;
+            $isUserExist = $userService->getSingleUser(['username' => $username])->getUsername() != $username;
 
             if($isUserExist) {
                 Flasher::setFlash("danger", "Username already exist!");
                 return Helper::redirect('/admin/manage/mahasiswa');
             }
 
-			$isDosenExist = $dosenService->getSingleDosenByNidn($nidn)->getIdUser() != $idUser;
+			$isMahasiswaExist = $mahasiswaService->getSingleMahasiswaByNim($nim)->getIdUser() != $idUser;
 
-			if($isDosenExist) {
-				Flasher::setFlash("danger", "NIDN already exist!");
-				return Helper::redirect('/admin/manage/dosen');
+			if($isMahasiswaExist) {
+				Flasher::setFlash("danger", "NIM already exist!");
+				return Helper::redirect('/admin/manage/mahasiswa');
 			}
 
 			if (isset($_POST['password']) && $_POST['password'] != '') {
@@ -131,19 +131,19 @@ class ManageDosenController {
 				$userService->updateUser($username, $firstName, $lastName, $email, $address, $phoneNumber, $role, '', '', ['id_user' => $idUser]);
 			}
 
-			$title = $_POST['title'];
+			$prodi = $_POST['prodi'];
 
-			$dosenService->updateDosenProfile($nidn, $title, ['id_user' => $idUser]);
+			$mahasiswaService->updateMahasiswaProfile($nim, $prodi, ['id_user' => $idUser]);
 
-			Flasher::setFlash("success", "Dosen successfully updated!");
+			Flasher::setFlash("success", "Mahasiswa successfully updated!");
 		} else {
 			Flasher::setFlash("danger", "All fields must be filled");
 		}
 
-		return Helper::redirect('/admin/manage/dosen');
+		return Helper::redirect('/admin/manage/mahasiswa');
 	}
 
-	public function deleteDosen() {
+	public function deleteMahasiswa() {
 		if (isset($_POST['id_user']) && $_POST['id_user'] != '') {
 			// Defining Services
 			$userService = UserService::getInstance();
@@ -154,11 +154,11 @@ class ManageDosenController {
 			// Add new code of conduct
 			$userService->deleteUser($idUser);
 
-			Flasher::setFlash('success', 'Dosen has been deleted successfully!');
+			Flasher::setFlash('success', 'Mahasiswa has been deleted successfully!');
 		} else {
 			Flasher::setFlash('danger', 'Please fill all the fields!');
 		}
 		
-		Helper::redirect('/admin/manage/dosen');
+		Helper::redirect('/admin/manage/mahasiswa');
 	}
 }

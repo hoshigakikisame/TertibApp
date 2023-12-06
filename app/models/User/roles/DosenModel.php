@@ -1,7 +1,7 @@
 <?php
 class DosenModel
 {
-    protected int $nidn;
+    protected string $nidn;
     protected string $title;
     protected string $idUser;
 
