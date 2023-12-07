@@ -21,9 +21,9 @@ class DosenController
 		];
 
 		return Helper::view('dosen/dashboard', $data);
-    }
+	}
 
-    public function profilePage()
+	public function profilePage()
 	{
 		/**
 		 * @var UserModel
@@ -48,12 +48,21 @@ class DosenController
 		return Helper::view('dosen/profile', $data);
 	}
 
-    public function reportPage() 
-    {
-        $data = [
-            'flash' => Flasher::flash()
-        ];
+	public function reportPage()
+	{
+		$data = [
+			'flash' => Flasher::flash()
+		];
 
-        return Helper::view('dosen/report', $data);
-    }
+		return Helper::view('dosen/report', $data);
+	}
+
+	public function reportDetailPage()
+	{
+		$data = [
+			'flash' => Flasher::flash()
+		];
+
+		return Helper::view('dosen/report_detail', $data);
+	}
 }
