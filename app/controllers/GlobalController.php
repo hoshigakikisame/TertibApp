@@ -11,8 +11,8 @@ class GlobalController
 	public function landing()
 	{
 		// Defining services
-		$violationLevelService = new ViolationLevelService();
-		$codeOfConductService = new CodeOfConductService();
+		$violationLevelService = ViolationLevelService::getInstance();
+		$codeOfConductService = CodeOfConductService::getInstance();
 
 		// Get all violation levels
 		$violationLevels = $violationLevelService->getAllViolationLevel() ?? [];

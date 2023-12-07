@@ -60,7 +60,14 @@ class DosenService
         ]);
     }
 
-    public function updateDosenProfile($nidn, $title, $where = [])
+    public function updateDosenProfile($title, $where = [])
+    {
+        $this->db->update('tb_dosen', [
+            'title' => $title,
+        ], $where);
+    }
+
+    public function updateDosen($nidn, $title, $where = [])
     {
         $this->db->update('tb_dosen', [
             'nidn' => $nidn,

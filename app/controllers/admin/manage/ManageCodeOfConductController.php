@@ -3,8 +3,8 @@ class ManageCodeOfConductController {
     public function manageCodeOfConductPage()
 	{
         // Defining services
-		$violationLevelService = new ViolationLevelService();
-        $codeOfConductService = new CodeOfConductService();
+		$violationLevelService = ViolationLevelService::getInstance();
+        $codeOfConductService = CodeOfConductService::getInstance();
 
         // Get all violation levels
 		$violationLevels = $violationLevelService->getAllViolationLevel() ?? [];
@@ -42,7 +42,7 @@ class ManageCodeOfConductController {
 			isset($_POST['description']) && $_POST['description'] != ''
 		) {
 			// Defining Services
-			$codeOfConductService = new CodeOfConductService();
+			$codeOfConductService = CodeOfConductService::getInstance();
 
 			// Take inputs from request
 			$name = $_POST['name'];
@@ -68,7 +68,7 @@ class ManageCodeOfConductController {
 			isset($_POST['description']) && $_POST['description'] != ''
 		) {
 			// Defining Services
-			$codeOfConductService = new CodeOfConductService();
+			$codeOfConductService = CodeOfConductService::getInstance();
 
 			// Take inputs from request
 			$idCodeOfConduct = $_POST['id_code_of_conduct'];

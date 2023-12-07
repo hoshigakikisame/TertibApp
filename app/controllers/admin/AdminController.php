@@ -79,9 +79,9 @@ class AdminController
 			isset($_POST['address']) && $_POST['address'] != '' &&
 			isset($_POST['number']) && $_POST['number'] != ''
 		) {
-			$userService = new UserService();
-			$adminService = new AdminService();
-			$mediaStorageService = new MediaStorageService();
+			$userService = UserService::getInstance();
+			$adminService = AdminService::getInstance();
+			$mediaStorageService = MediaStorageService::getInstance();
 
 			/**
 			 * @var UserModel
@@ -157,7 +157,7 @@ class AdminController
 			isset($_POST['current_password']) && $_POST['current_password'] != '' &&
 			isset($_POST['new_password']) && $_POST['new_password'] != ''
 		) {
-			$userService = new UserService();
+			$userService = UserService::getInstance();
 
 			/**
 			 * @var UserModel

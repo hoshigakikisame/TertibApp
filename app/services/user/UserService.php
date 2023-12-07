@@ -126,6 +126,7 @@ class UserService
     {
 
         $adminService = AdminService::getInstance();
+        $dosenService = DosenService::getInstance();
 
         $user = $this->getSingleUser([
             'id_user' => $idUser
@@ -137,9 +138,10 @@ class UserService
 
         switch ($user->getRole()) {
             case 'admin':
-                $user->setRoleDetail($adminService->getSingleAdmin($user->getIdUser()));
+                $user->setRoleDetail($adminService->getSingleAdmin(['id_user' => $user->getIdUser()]));
                 break;
             case 'dosen':
+                $user->setRoleDetail($dosenService->getSingleDosen(['id_user' => $user->getIdUser()]));
                 break;
             case 'mahasiswa':
                 break;

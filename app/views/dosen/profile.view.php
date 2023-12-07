@@ -48,7 +48,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="title" class="form-label">Title</label>
-                                            <input type="text" class="form-control" name="title" id="title" placeholder="title" value="<?= $adminTitle ?>">
+                                            <input type="text" class="form-control" name="title" id="title" placeholder="title" value="<?= $dosenTitle ?>">
                                         </div>
                                         <div class="mb-3">
                                             <label for="email" class="form-label">Email</label>

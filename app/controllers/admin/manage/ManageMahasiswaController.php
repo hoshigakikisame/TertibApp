@@ -59,14 +59,14 @@ class ManageMahasiswaController {
 
             if($isUserExists) {
                 Flasher::setFlash("danger", "Username already exist!");
-                return Helper::redirect('/admin/manage/admin');
+                return Helper::redirect('/admin/manage/mahasiswa');
             }
 
 			$isMahasiswaExists = $mahasiswaService->getSingleMahasiswa(['nim' => $nim]);
 
 			if($isMahasiswaExists) {
 				Flasher::setFlash("danger", "NIM already exist!");
-				return Helper::redirect('/admin/manage/dosen');
+				return Helper::redirect('/admin/manage/mahasiswa');
 			}
 
 			$rawPassword = $_POST['password'];
@@ -119,7 +119,7 @@ class ManageMahasiswaController {
 
             if($isUserExists) {
                 Flasher::setFlash("danger", "Username already exist!");
-                return Helper::redirect('/admin/manage/admin');
+                return Helper::redirect('/admin/manage/mahasiswa');
             }
 
 			$tempMahasiswa = $mahasiswaService->getSingleMahasiswa(['nim' => $nim]);
@@ -127,7 +127,7 @@ class ManageMahasiswaController {
 
 			if($isMahasiswaExists) {
 				Flasher::setFlash("danger", "NIM already exist!");
-				return Helper::redirect('/admin/manage/dosen');
+				return Helper::redirect('/admin/manage/mahasiswa');
 			}
 
 			if (isset($_POST['password']) && $_POST['password'] != '') {
