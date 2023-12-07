@@ -18,6 +18,8 @@ class AuthsController
             // declare services
             $userService = UserService::getInstance();
             $adminService = AdminService::getInstance();
+            $dosenService = DosenService::getInstance();
+            $mahasiswaService = MahasiswaService::getInstance();
 
             // get input
             $username = $_POST['username'];
@@ -44,19 +46,21 @@ class AuthsController
                 // set role detail
                 switch ($user->getRole()) {
                     case 'admin':
-                        $user->setRoleDetail($adminService->getSingleAdmin($user->getIdUser()));
+                        $user->setRoleDetail($adminService->getSingleAdmin(['id_user' => $user->getIdUser()]));
+                        Session::getInstance()->push('user', $user);
+                        Helper::redirect('/admin/dashboard');
                         break;
                     case 'dosen':
+                        $user->setRoleDetail($dosenService->getSingleDosen(['id_user' => $user->getIdUser()]));
+                        Session::getInstance()->push('user', $user);
+                        Helper::redirect('/dosen/dashboard');
                         break;
                     case 'mahasiswa':
                         break;
                     default:
-                        break;
+                        Flasher::setFlash("danger", "Some Unexpected Happened");
+                        Helper::redirect('/auth/login');
                 }
-
-                // set session
-                Session::getInstance()->push('user', $user);
-                Helper::redirect('/admin/dashboard');
             } else {
                 Flasher::setFlash("danger", "Login Failed");
                 Helper::redirect('/auth/login');
