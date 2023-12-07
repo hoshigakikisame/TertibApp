@@ -97,16 +97,14 @@ class AuthsController
             $accountRecoveryService->revokeAccountRecoveryRequest($user->getIdUser());
             $success = $accountRecoveryService->createNewAccountRecoveryRequest($user);
             
-            if ($success) {
-                Flasher::setFlash("success", "Reset password link has been sent to your email");
-            } else {
+            if (!$success) {
                 Flasher::setFlash("danger", "Failed to send reset password link");
+                return Helper::redirect('/auth/forgot-password');
             }
-
-            Helper::redirect('/auth/forgot-password');
         }
 
-        Helper::redirect('/auth/forgot-password');
+        Flasher::setFlash("success", "If your email is registered, you will receive a reset password link");
+        return Helper::redirect('/auth/forgot-password');
     }
 
     public function updatePasswordView(string $token)
