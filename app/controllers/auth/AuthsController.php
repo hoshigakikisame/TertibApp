@@ -103,10 +103,11 @@ class AuthsController
                 Flasher::setFlash("danger", "Failed to send reset password link");
             }
 
-            Helper::redirect('/auth/forgot-password');
+            Helper::dd($success);   
+            // Helper::redirect('/auth/forgot-password');
         }
 
-        Helper::redirect('/auth/forgot-password');
+        // Helper::redirect('/auth/forgot-password');
     }
 
     public function updatePasswordView(string $token)

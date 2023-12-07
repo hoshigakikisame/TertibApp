@@ -9,8 +9,9 @@ class RoleMiddleware {
         $role = $currentUser->getRole();
 
         if ($role != 'admin') {
-            Helper::redirect('/auth/dashboard');
-            exit;
+            echo 'Forbidden';
+            http_response_code(403);
+            return die();
         }
     }
 
@@ -23,8 +24,9 @@ class RoleMiddleware {
         $role = $currentUser->getRole();
 
         if ($role != 'dosen') {
-            Helper::redirect('/auth/dashboard');
-            exit;
+            echo 'Forbidden';
+            http_response_code(403);
+            return die();
         }
     }
 }
