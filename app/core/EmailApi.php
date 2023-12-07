@@ -1,11 +1,10 @@
 <?php
 class EmailApi
 {
-    private $apiKey;
-    private $secretKey;
+    private $mailService;
     private $senderEmail;
     private $senderName;
-    private $mailJet;
+    private $appPassword;
 
     private static $instances = [];
 
@@ -15,11 +14,20 @@ class EmailApi
          * @var array $config
          */
         $config = App::get('config');
-        $this->apiKey = $config['mailjet']['api_key'];
-        $this->secretKey = $config['mailjet']['secret_key'];
-        $this->senderEmail = $config['mailjet']['sender_email'];
-        $this->senderName = $config['mailjet']['sender_name'];
-        $this->mailJet = new \Mailjet\Client($this->apiKey, $this->secretKey, true, ['version' => 'v3.1']);
+        $this->senderEmail = $config['gmail']['sender_email'];
+        $this->senderName = $config['gmail']['sender_name'];
+        $this->appPassword = $config['gmail']['app_password'];
+
+        $this->mailService = new \PHPMailer\PHPMailer\PHPMailer; 
+        $this->mailService->IsSMTP(); 
+        $this->mailService->Mailer     = "smtp";
+        $this->mailService->SMTPDebug  = 1;
+        $this->mailService->SMTPAuth   = TRUE;
+        $this->mailService->SMTPSecure = "tls";
+        $this->mailService->Port       = 587;
+        $this->mailService->Host       = "smtp.gmail.com";
+        $this->mailService->Username   = $this->senderEmail;
+        $this->mailService->Password   = $this->appPassword;
     }
 
     protected function __clone()
@@ -43,27 +51,13 @@ class EmailApi
 
     public function sendEmail($to, $subject, $body)
     {
-        $email = [
-            'Messages' => [
-                [
-                    'From' => [
-                        'Email' => $this->senderEmail,
-                        'Name' => $this->senderName
-                    ],
-                    'To' => [
-                        [
-                            'Email' => $to,
-                            'Name' => $to
-                        ]
-                    ],
-                    'Subject' => $subject,
-                    'TextPart' => $body,
-                    'HTMLPart' => $body
-                ]
-            ]
-        ];
-        $response = $this->mailJet->post(Mailjet\Resources::$Email, ['body' => $email]);
-        var_dump($response->getData());
-        return $response->success();
+
+        $this->mailService->IsHTML(true);
+        $this->mailService->AddAddress($to);
+        $this->mailService->SetFrom($this->senderEmail, $this->senderName);
+        $this->mailService->Subject = $subject;
+        $this->mailService->Body = $body;
+
+        return $this->mailService->Send();
     }
 }

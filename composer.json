@@ -14,8 +14,8 @@
 		"vlucas/phpdotenv": "@stable",
 		"components/jquery": "@stable",
 		"twbs/bootstrap-icons": "@stable",
-		"mailjet/mailjet-apiv3-php": "@stable",
-		"cloudinary/cloudinary_php": "@stable"
+		"cloudinary/cloudinary_php": "@stable",
+		"phpmailer/phpmailer": "^6.9"
 	},
 	"autoload": {
 		"classmap": [

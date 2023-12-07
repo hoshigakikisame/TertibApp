@@ -33,11 +33,10 @@ return [
 	],
    'host' => $_ENV['HOST'],
 	'root_uri' => dirname($_SERVER['SCRIPT_NAME']),
-   'mailjet' => [
-      'api_key' => $_ENV['MAILJET_API_KEY'],
-      'secret_key' => $_ENV['MAILJET_SECRET_KEY'],
-      'sender_email' => $_ENV['MAILJET_SENDER_EMAIL'],
-      'sender_name' => $_ENV['MAILJET_SENDER_NAME'],
+   'gmail' => [
+      'sender_name' => $_ENV['GMAIL_SENDER_NAME'],
+      'sender_email' => $_ENV['GMAIL_SENDER_EMAIL'],
+      'app_password' => $_ENV['GMAIL_APP_PASSWORD'],
    ],
    'timezone' => 'Asia/Jakarta',
    'recovery_token_validity' => 60 * 60, // in seconds
