@@ -143,7 +143,7 @@ class ManageDosenController {
 
 			$title = $_POST['title'];
 
-			$dosenService->updateDosenProfile($nidn, $title, ['id_user' => $idUser]);
+			$dosenService->updateDosen($nidn, $title, ['id_user' => $idUser]);
 
 			Flasher::setFlash("success", "Dosen successfully updated!");
 		} else {
