@@ -20,7 +20,7 @@ $updatePasswordEndpoint = App::get("root_uri") . "/admin/update-password";
                     <div class="row gap-2">
                         <h1>Profile</h1>
                         <div class="col mx-2">
-                            <form action="<?= $updateProfileEndpoint ?>" method="POST" enctype="multipart/form-data">
+                            <form action="<?= $updateProfileEndpoint ?>" method="POST" enctype="multipart/form-data" id="updateProfileForm">
                                 <div class="row d-flex gap-3 flex-wrap">
                                     <div class="col-md-auto col-9 position-relative d-flex flex-column align-items-center" class="p-4" style="width:200px ">
                                         <img src="<?= $imageUrl ?>" alt="" id="img_profile_image" class="object-fit-cover border rounded img-thumbnail start-0" style="width:188px;height:250px;cursor: pointer;">
@@ -59,7 +59,7 @@ $updatePasswordEndpoint = App::get("root_uri") . "/admin/update-password";
                                             <input type="number" class="form-control" name="number" id="number" placeholder="Your Number" value="<?= $phoneNumber ?>">
                                         </div>
                                         <div class="d-flex gap-3 justify-content-end">
-                                            <button type="submit" class="btn btn-secondary px-4 text-white">Save</button>
+                                            <button type="button" onclick="document.querySelector('#updateProfileForm').submit()" class="btn btn-secondary px-4 text-white">Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -69,7 +69,7 @@ $updatePasswordEndpoint = App::get("root_uri") . "/admin/update-password";
                     <div class="row py-2 my-4 gap-2">
                         <h1>Change Password</h1>
                         <div class="col rounded-5 my-2 mx-2" title="flash">
-                            <form action="<?= $updatePasswordEndpoint ?>" method="post" id="formUpdatePassword">
+                            <form action="<?= $updatePasswordEndpoint ?>" method="post" id="updatePasswordForm">
                                 <div class="row gap-5 ">
                                     <div class=" col">
                                         <div class="mb-3 d-lg-flex gap-2">
@@ -85,7 +85,7 @@ $updatePasswordEndpoint = App::get("root_uri") . "/admin/update-password";
                                             <input type="password" class="form-control" name="confirm_password" id="confirmPassword" placeholder="Enter Your New Password">
                                         </div>
                                         <div class="d-flex gap-3 justify-content-end ">
-                                            <button type="submit" class="btn btn-secondary px-4 text-white" id="buttonUpdatePassword">Update Password</button>
+                                            <button type="submit" onclick="document.querySelector('#updatePasswordForm').submit()" class="btn btn-secondary px-4 text-white" id="buttonUpdatePassword">Update Password</button>
                                         </div>
                                     </div>
                                 </div>
