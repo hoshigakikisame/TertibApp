@@ -6,3 +6,5 @@ $router->post('/^dosen\/profile\/update$/', ['AuthMiddleware@shouldValidated', '
 $router->get('/^dosen\/report$/', ['AuthMiddleware@shouldValidated', 'RoleMiddleware@shouldDosen', 'DosenController@reportPage']);
 $router->post('/^dosen\/report\/new$/', ['AuthMiddleware@shouldValidated', 'RoleMiddleware@shouldDosen', 'DosenController@addNewReport']);
 $router->get('/^dosen\/report\/detail$/', ['AuthMiddleware@shouldValidated', 'RoleMiddleware@shouldDosen', 'DosenController@reportDetailPage']);
+
+$router->get('/^dosen\/notification$/', ['AuthMiddleware@shouldValidated', 'RoleMiddleware@shouldDosen', 'DosenController@notificationPage']);
