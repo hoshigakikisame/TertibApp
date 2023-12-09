@@ -116,7 +116,8 @@ class UserModel
         if ($this->imagePath == null || $this->imagePath == '') {
             return $baseUrl . 'user_profile/blank_user.png';
         }
-        return $baseUrl . $this->imagePath;
+        $randomHex = Helper::generateRandomHex(8);
+        return $baseUrl . $this->imagePath . '?v=' . $randomHex;
     }
 
     public function setIdUser($idUser)
