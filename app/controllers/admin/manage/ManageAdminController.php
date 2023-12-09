@@ -147,6 +147,6 @@ class ManageAdminController {
 			Flasher::setFlash('danger', 'Please fill all the fields!');
 		}
 		
-		Helper::redirect('/admin/manage/dosen');
+		Helper::redirect('/admin/manage/admin');
 	}
 }
