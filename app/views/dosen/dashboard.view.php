@@ -26,13 +26,13 @@
                         </div>
                         <div class="col-lg-2 col-auto border border-2 py-2 rounded-3 flex-grow-1 flex-lg-grow-0">
                             <div class="shadow-sm rounded-3 py-3 px-4 h-100 ">
-                                <h1 class="mb-0" style="color:#28A745;">65</h1>
+                                <h1 class="mb-0">65</h1>
                                 <h6>Valid <br> Reports</h6>
                             </div>
                         </div>
                         <div class="col-lg-2 col-auto border border-2 py-2 rounded-3 flex-grow-1 flex-lg-grow-0">
                             <div class="shadow-sm rounded-3 py-3 px-4 h-100 ">
-                                <h1 class="mb-0" style=" color:#FF0018;">65</h1>
+                                <h1 class="mb-0">65</h1>
                                 <h6 class="">Invalid <br> Reports</h6>
                             </div>
                         </div>
