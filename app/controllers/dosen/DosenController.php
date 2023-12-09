@@ -34,7 +34,7 @@ class DosenController
 		assert($dosenRole instanceof DosenModel);
 
 		$data = [
-            'nidn' => $dosenRole->getNidn(),
+			'nidn' => $dosenRole->getNidn(),
 			'username' => $user->getUsername(),
 			'firstName' => $user->getFirstName(),
 			'lastName' => $user->getLastName(),
@@ -44,13 +44,13 @@ class DosenController
 			'phoneNumber' => $user->getPhoneNumber(),
 			'imageUrl' => $user->getImageUrl(),
 			'flash' => Flasher::flash(),
-            'updateProfileEndpoint' => App::get('root_uri') . '/dosen/profile/update'
+			'updateProfileEndpoint' => App::get('root_uri') . '/dosen/profile/update'
 		];
 
 		return Helper::view('dosen/profile', $data);
 	}
 
-    public function updateProfile()
+	public function updateProfile()
 	{
 		if (
 			isset($_POST['firstname']) && $_POST['firstname'] != '' &&
@@ -180,21 +180,91 @@ class DosenController
 		$data = [
 			'flash' => Flasher::flash(),
 			'users' => $users,
-			'codeOfConducts' => $codeOfConducts
+			'codeOfConducts' => $codeOfConducts,
+			'addNewReportEndpoint' => App::get('root_uri') . '/dosen/report/new'
 		];
 
 		return Helper::view('dosen/report', $data);
 	}
 
-    public function addNewReport() {
-        if (
-			isset($_POST['firstname']) && $_POST['firstname'] != '' &&
-			isset($_POST['lastname']) && $_POST['lastname'] != '' &&
+	public function addNewReport()
+	{
+		if (
 			isset($_POST['title']) && $_POST['title'] != '' &&
-			isset($_POST['address']) && $_POST['address'] != '' &&
-			isset($_POST['number']) && $_POST['number'] != ''
-		) {}
-    }
+			isset($_POST['nim_mahasiswa']) && $_POST['nim_mahasiswa'] != '' &&
+			isset($_POST['id_code_of_conduct']) && $_POST['id_code_of_conduct'] != '' &&
+			isset($_POST['location']) && $_POST['location'] != '' &&
+			isset($_POST['content']) && $_POST['content'] != ''
+		) {
+			$reportService = ReportService::getInstance();
+			$mediaStorageService = MediaStorageService::getInstance();
+
+			/**
+			 * @var UserModel
+			 */
+
+			$user = Session::getInstance()->get('user');
+			/**
+			 * @var DosenModel
+			 */
+			$dosenRole = $user->getRoleDetail();
+
+			// get input
+			$nidnDosen = $dosenRole->getNidn();
+			$title = $_POST['title'];
+			$nimMahasiswa = $_POST['nim_mahasiswa'];
+			$idCodeOfConduct = $_POST['id_code_of_conduct'];
+			$location = $_POST['location'];
+			$content = $_POST['content'];
+
+			$imagePath = '';
+
+			if (isset($_FILES['evidence_picture']) && $_FILES['evidence_picture']['name'] != '') {
+				$evidencePicture = $_FILES['evidence_picture'];
+
+				// validate image extension
+				$validImageExtension = $mediaStorageService->validateImageExtension($evidencePicture);
+				if (!$validImageExtension) {
+					Flasher::setFlash("danger", "Invalid image extension");
+					return Helper::redirect('/dosen/report');
+				}
+
+				// validate image size
+				$validImageSize = $mediaStorageService->validateImageSize($evidencePicture);
+				if (!$validImageSize) {
+					Flasher::setFlash("danger", "Image size must be less than " . MediaStorageService::getInstance()->getMaxImageSize() . " bytes");
+					return Helper::redirect('/dosen/report');
+				}
+
+				$publicId = Helper::generateRandomHex(16);
+
+				// upload image
+				$uploadResult = $mediaStorageService::getInstance()->uploadImage($evidencePicture['tmp_name'], 'report', $publicId);
+
+				// get image path from upload result publicId and extension
+				$imagePath = $uploadResult->publicId . '.' . $mediaStorageService->getImageExtension($evidencePicture);
+			}
+
+
+			// update user's profile
+			$reportService->addNewReport(
+				$idCodeOfConduct,
+				$title,
+				$nidnDosen,
+				$nimMahasiswa,
+				$content,
+				'New',
+				$imagePath,
+				$location
+			);
+
+			Flasher::setFlash("success", "Report added successfully");
+		} else {
+			Flasher::setFlash("danger", "All fields must be filled");
+		}
+
+		return Helper::redirect('/dosen/report');
+	}
 
 	public function reportDetailPage()
 	{

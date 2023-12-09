@@ -14,9 +14,10 @@
             <div class="row justify-content-end px-auto">
                 <div class="col-lg-10 col px-5 py-4" title="main">
                     <div class="row mb-4">
+                        <?= $flash ?>
                         <h1>Report</h1>
                         <div class="col-auto rounded-5 my-4 mx-2">
-                            <form action="<?= $redirect ?>" method="POST">
+                            <form action="<?= $addNewReportEndpoint ?>" method="POST" enctype="multipart/form-data">
                                 <div class="row-auto gap-5 d-flex flex-column flex-md-row">
                                     <div class="col">
                                         <div class="mb-3">
@@ -27,7 +28,7 @@
                                         <div class="mb-3">
                                             <div class="form-group">
                                                 <label for="mahasiswa_list">Mahasiswa</label>
-                                                <input type="text" class="form-control" list="mahasiswa_list" placeholder="Masukkan NIM atau Nama Mahasiswa"/>
+                                                <input type="text" class="form-control" list="mahasiswa_list" placeholder="Masukkan NIM atau Nama Mahasiswa" name="nim_mahasiswa"/>
                                             </div>
                                             <datalist id="mahasiswa_list">
                                                 <?php
@@ -48,7 +49,7 @@
                                         <div class="mb-3">
                                             <div class="form-group">
                                                 <label for="code_of_conducts">Pelanggaran</label>
-                                                <input type="text" class="form-control" list="code_of_conducts" placeholder="Masukkan Nama Pelanggaran"/>
+                                                <input type="text" class="form-control" list="code_of_conducts" placeholder="Masukkan Nama Pelanggaran" name="id_code_of_conduct"/>
                                             </div>
                                             <datalist id="code_of_conducts">
                                                 <?php
@@ -69,13 +70,13 @@
                                         <div class="mb-3">
                                             <label for="Location" class="form-label">Masukkan Lokasi Pelanggaran</label>
                                             <input type="text" class="form-control" id="Location"
-                                                placeholder="Masukkan Lokasi Pelanggaran">
+                                                placeholder="Masukkan Lokasi Pelanggaran" name="location">
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="mb-3">
                                             <label for="formFile" class="form-label">Lampiran Pelanggaran</label>
-                                            <input class="form-control" type="file" id="formFile">
+                                            <input class="form-control" type="file" id="formFile" name="evidence_picture">
                                         </div>
                                     </div>
                                 </div>
@@ -84,7 +85,7 @@
                                         <div class="mb-3">
                                             <label for="deskripsi" class="form-label">Isi Pelanggaran</label>
                                             <textarea class="form-control" id="deskripsi" rows="3"
-                                                placeholder="Isi Deskripsi Pelanggaran"></textarea>
+                                                placeholder="Isi Deskripsi Pelanggaran" name="content"></textarea>
                                         </div>
                                     </div>
                                 </div>
