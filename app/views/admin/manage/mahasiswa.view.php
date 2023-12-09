@@ -181,10 +181,10 @@
                                                     <?= $user->getEmail() ?>
                                                 </td>
                                                 <td>
-                                                    <?= $user->getAddress() ?>
+                                                    <?= $user->getPhoneNumber() ?>
                                                 </td>
                                                 <td>
-                                                    <?= $user->getPhoneNumber() ?>
+                                                    <?= $user->getAddress() ?>
                                                 </td>
 
                                                 <td>
