@@ -128,7 +128,7 @@ class ReportModel {
         return $this->codeOfConduct;
     }
 
-    public function getStatusChoices(): array {
+    public static function getStatusChoices(): array {
         return [
             'New',
             'Needs More Information',
