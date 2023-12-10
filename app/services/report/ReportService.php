@@ -51,6 +51,20 @@ class ReportService {
         return null;
     }
 
+    public function getManyReport($where): array
+    {
+        $rawReports = $this->db->findMany('tb_report', $where, 'id_report', 'DESC');
+        $reports = [];
+
+        if ($rawReports) {
+            foreach ($rawReports as $rawReport) {
+                $reports[] = ReportModel::fromStdClass($rawReport);
+            }
+        }
+
+        return $reports;
+    }
+
     public function addNewReport(
         $idCodeOfConduct,
         $title,

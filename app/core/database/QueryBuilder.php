@@ -58,6 +58,25 @@ class QueryBuilder
 		}
 	 }
 
+	 public function findMany($table, $parameters = [], string $orderby = '', string $order = 'ASC', int $limit = 0)
+	 {
+		$sql = sprintf(
+			"SELECT * FROM %s WHERE %s %s",
+			$table,
+			implode(' AND ', array_map(fn ($key) => "$key = :$key", array_keys($parameters))),
+			($orderby ? "ORDER BY $orderby $order" : '') . 
+			($limit > 0 ? " LIMIT $limit" : '')
+		);
+
+		try {
+			$statement = $this->pdo->prepare($sql);
+			$statement->execute($parameters);
+			return $statement->fetchAll(PDO::FETCH_CLASS) ?? [];
+		} catch (PDOException $e) {
+			die("Whoops!! Something Went Wrong!!!". $e->getMessage());
+		}
+	 }
+
 	public function findOne($table, $parameters = [])
 	{
 		$sql = sprintf(

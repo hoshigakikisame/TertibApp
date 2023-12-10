@@ -48,7 +48,7 @@
                                         <div class="mb-3">
                                             <div class="form-group">
                                                 <label for="code_of_conducts">Pelanggaran</label>
-                                                <input type="text" class="form-control" list="code_of_conducts" placeholder="Masukkan Nama Pelanggaran" />
+                                                <input type="text" class="form-control" list="code_of_conducts" placeholder="Masukkan Nama Pelanggaran" name="id_code_of_conduct" />
                                             </div>
                                             <datalist id="code_of_conducts" onchange="updatePelanggaran(event);">
                                                 <?php
@@ -68,7 +68,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="Location" class="form-label">Masukkan Lokasi Pelanggaran</label>
-                                            <input type="text" class="form-control" id="Location" placeholder="Masukkan Lokasi Pelanggaran">
+                                            <input type="text" class="form-control" id="Location" placeholder="Masukkan Lokasi Pelanggaran" name="location">
                                         </div>
                                     </div>
                                     <div class="col">
@@ -82,7 +82,7 @@
                                     <div class="col">
                                         <div class="mb-3">
                                             <label for="deskripsi" class="form-label">Isi Pelanggaran</label>
-                                            <textarea class="form-control" id="deskripsi" rows="3" placeholder="Isi Deskripsi Pelanggaran"></textarea>
+                                            <textarea class="form-control" id="deskripsi" rows="3" placeholder="Isi Deskripsi Pelanggaran" name="content"></textarea>
                                         </div>
                                     </div>
                                 </div>

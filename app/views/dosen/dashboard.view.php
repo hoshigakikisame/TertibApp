@@ -18,7 +18,27 @@
                         <h1>Welcome to Tertib App</h1>
                     </div>
                     <div class="row px-4 gap-lg-5 gap-1 mb-4">
-                        <div class="col-lg-2 col-auto border border-2 py-2 rounded-3 flex-grow-1 flex-lg-grow-0">
+
+                        <?php foreach (ReportModel::getStatusChoices() as $status): ?>
+                            <div class="col-lg-2 col-auto border border-2 py-2 rounded-3 flex-grow-1 flex-lg-grow-0">
+                                <div class="shadow-sm rounded-3 py-3 px-4 h-100">
+                                    <h1 class="mb-0">
+                                        <?php 
+                                            $count = 0;
+                                            foreach ($reports as $report) {
+                                                if ($report->getStatus() == $status) {
+                                                    $count++;
+                                                }
+                                            }
+                                            echo $count;
+                                        ?>
+                                    </h1>
+                                    <h6><?= $status ?> Reports</h6>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+
+                        <!-- <div class="col-lg-2 col-auto border border-2 py-2 rounded-3 flex-grow-1 flex-lg-grow-0">
                             <div class="shadow-sm rounded-3 py-3 px-4 h-100">
                                 <h1 class="mb-0">65</h1>
                                 <h6>Reports</h6>
@@ -35,29 +55,39 @@
                                 <h1 class="mb-0">65</h1>
                                 <h6 class="">Invalid <br> Reports</h6>
                             </div>
-                        </div>
+                        </div> -->
 
                     </div>
 
-                    <div class="row mb-4">
+                    <div class="row mb-4 gap-4">
                         <h1>Recent Reports</h1>
-                        <div class="col-11">
+                        <?php 
+                        /**
+                         * @var ReportModel[] $reports
+                         */
+                        foreach ($reports as $report): 
+                            /**
+                             * @var CodeOfConductModel $codeOfConduct
+                             */
+                            $codeOfConduct = $report->getCodeOfConduct();
+                        ?>
+                        <div class="col-11 border border-2 p-4 rounded-3">
                             <div class="row flex-column">
                                 <div class="col">
                                     <div class="d-flex justify-content-between mb-2">
-                                        <span class="badge text-bg-info">New</span>
-                                        <span>des 24</span>
+                                        <span class="badge text-bg-info"><?= $report->getStatus() ?></span>
+                                        <span><?= GenericUtil::dateToHumanReadable($report->getReportDate()) ?></span>
                                     </div>
-                                    <h6 class="mb-0"><span class="text-primary">LG7164</span> Deny Prihantoro</h6>
-                                    <p>Melanggar tata tertib berupa tidak memakai pakaian berkerah disaat jam pelajaran
-                                        dimulai</p>
+                                    <h6 class="mb-0"><span class="text-primary">#<?= $report->getIdReport() ?></span> <?= $firstname ?> </h6>
+                                    <p><?= $codeOfConduct->getDescription() ?></p>
                                 </div>
                                 <div class="col d-flex justify-content-end">
-                                    <a class="btn btn-primary text-white justify-self-end" href="#" role="button">Report
+                                    <a class="btn btn-primary text-white justify-self-end" href="<?= App::get('root_uri') . '/report/detail/' . $report->getIdReport() ?>" role="button">Report
                                         Detail</a>
                                 </div>
                             </div>
                         </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>

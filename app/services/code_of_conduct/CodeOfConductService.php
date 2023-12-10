@@ -43,9 +43,9 @@ class CodeOfConductService
 
         return $codeOfConducts;
     }
-    public function getSingleCodeOfConduct(string $idCodeOfConduct): CodeOfConductModel | null
+    public function getSingleCodeOfConduct(array $where): CodeOfConductModel | null
     {
-        $rawCodeOfConducts = $this->db->findOne('tb_code_of_conduct', ['id_code_of_conduct' => $idCodeOfConduct]);
+        $rawCodeOfConducts = $this->db->findOne('tb_code_of_conduct', $where);
         if ($rawCodeOfConducts) {
             $codeOfConducts = CodeOfConductModel::fromStdClass($rawCodeOfConducts);
             return $codeOfConducts;

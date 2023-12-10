@@ -10,4 +10,8 @@ class GenericUtil {
         $formatter = new NumberFormatter('@numbers=roman', NumberFormatter::DECIMAL);
         return $formatter->format($n);
     }
+
+    public static function dateToHumanReadable(string $date): string {
+        return date("F jS, Y", strtotime($date));
+    }
 }

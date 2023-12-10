@@ -15,9 +15,24 @@ class DosenController
 		 */
 		$user = Session::getInstance()->get('user');
 
+		$reportService = ReportService::getInstance();
+		$codeOfConductService = CodeOfConductService::getInstance();
+
+		$reports = $reportService->getManyReport(['nidn_dosen' => $user->getRoleDetail()->getNidn()]);
+		$codeOfConducts = $codeOfConductService->getAllCodeOfConduct();
+
+		for ($i = 0; $i < count($reports); $i++) {
+			for ($j = 0; $j < count($codeOfConducts); $j++) {
+				if ($reports[$i]->getIdCodeOfConduct() == $codeOfConducts[$j]->getIdCodeOfConduct()) {
+					$reports[$i]->setCodeOfConduct($codeOfConducts[$j]);
+				}
+			}
+		}
+
 		$data = [
 			'firstname' => $user->getFirstName(),
 			'lastname' => $user->getLastName(),
+			'reports' => $reports
 		];
 
 		return Helper::view('dosen/dashboard', $data);
@@ -279,14 +294,5 @@ class DosenController
 		}
 
 		return Helper::redirect('/dosen/report');
-	}
-
-	public function reportDetailPage()
-	{
-		$data = [
-			'flash' => Flasher::flash()
-		];
-
-		return Helper::view('dosen/report_detail', $data);
 	}
 }

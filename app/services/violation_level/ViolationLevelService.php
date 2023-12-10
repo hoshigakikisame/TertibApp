@@ -43,9 +43,9 @@ class ViolationLevelService
 
         return $violationLevels;
     }
-    public function getSingleViolationLevel(string $idViolationLevel)
+    public function getSingleViolationLevel(array $where)
     {
-        $rawViolationLevels = $this->db->findOne('tb_violation_level', ['id_violation_level' => $idViolationLevel]);
+        $rawViolationLevels = $this->db->findOne('tb_violation_level', $where);
         if ($rawViolationLevels) {
             $violationLevels = ViolationLevelModel::fromStdClass($rawViolationLevels);
             return $violationLevels;
