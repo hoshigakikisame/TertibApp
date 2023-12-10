@@ -1,3 +1,8 @@
+<?php
+$user = Session::getInstance()->get('user');
+$role = $user->getRole();
+?>
+
 <nav class="navbar NavUp navbar-expand-lg sticky-top text-dark">
 	<div class="container-fluid px-3 px-lg-5 py-2">
 		<a class="navbar-brand" href="<?php echo App::get('root_uri'); ?>">Tertib APP</a>
@@ -20,9 +25,9 @@
 					Login
 				</a>
 			<?php else :
-				$user = Session::getInstance()->get('user');
+
 			?>
-				<a class="btn border-0 rounded-3 fs-6 my-auto bg-primary text-white d-flex align-items-center justify-content-evenly" href="<?php echo App::get('root_uri') . "/admin/dashboard" ?>" style="width:min(50%,155px)">
+				<a class="btn border-0 rounded-3 fs-6 my-auto bg-primary text-w hite d-flex align-items-center justify-content-evenly" href="<?php echo App::get('root_uri') . "/" . $role . "/dashboard" ?>" style="width:min(50%,155px)">
 					Dashboard
 					<img src="<?= $user->getImageUrl() ?>" alt="" class="rounded-circle" style="width:30px;height:30px;">
 				</a>
