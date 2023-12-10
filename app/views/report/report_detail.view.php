@@ -35,10 +35,9 @@ $user = Session::getInstance()->get('user');
                                     <div class="content">
                                         <div class="info mb-2">
                                             <h6 class="mb-0">
-                                                <?= $user->getFirstName() . " " . $user->getLastName() ?> <span
-                                                    class="badge bg-success fs-6">#<?= $report->getIdReport() ?></span>
+                                                <?= $user->getFirstName() . " " . $user->getLastName() ?> <span class="badge bg-success fs-6">#<?= $report->getIdReport() ?></span>
                                             </h6>
-                                            <p class="mb-0">Submited a Report on 
+                                            <p class="mb-0">Submited a Report on
                                                 <?= GenericUtil::dateToHumanReadable($report->getReportDate()) ?>
                                             </p>
                                         </div>
@@ -96,19 +95,36 @@ $user = Session::getInstance()->get('user');
                                             <hr>
                                             <h6 class="fw-bold">Detail Pelanggaran</h6>
                                             <p><?= $report->getContent() ?></p>
-
-
-                                            <!-- Judul                   : Pelanggaran tata tertib pada bagian rambut
-                                                NIM                     : 321349234
-                                            Nama                    : Thoriq
-                                            Pelanggaran             : Mahasiswa berambut punk
-                                            Lokasi                  : ruang kelas 
-                                            Deskripsi Pelanggaran   : dasdsa -->
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- End content -->
+
+                            <!-- start comment -->
+                            <div class="row my-3">
+                                <div class="col-auto">
+                                    <img src="<?= $user->getImageUrl() ?>" class="rounded-circle img-profile" alt="">
+                                </div>
+                                <div class="col">
+                                    <div class="content">
+                                        <div class="info mb-2">
+                                            <h6 class="mb-0">
+                                                <?= $user->getFirstName() . " " . $user->getLastName() ?>
+                                            </h6>
+                                            <p class="mb-0">
+                                                <?= GenericUtil::dateToHumanReadable($report->getReportDate()) ?>
+                                            </p>
+                                        </div>
+                                        <hr>
+                                        <div class="content">
+                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam cupiditate debitis magni dicta minus quaerat doloribus libero reprehenderit sunt sit sint voluptatum temporibus, suscipit veritatis amet ipsam officiis fugiat nostrum.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End comment -->
+
                             <div class="row mt-3">
                                 <div class="col-auto">
                                     <img src="<?= $user->getImageUrl() ?>" class="rounded-circle img-profile" alt="">
@@ -119,15 +135,12 @@ $user = Session::getInstance()->get('user');
                                     </h6>
                                     <form action="post">
                                         <div class="mb-3">
-                                            <textarea class="form-control" name="comment" id="" rows="3"
-                                                placeholder="Write Your Message"></textarea>
+                                            <textarea class="form-control" name="comment" id="" rows="3" placeholder="Write Your Message"></textarea>
                                         </div>
                                         <div class="mb-3 float-end">
                                             <input class="opacity-0" id="upload" type="file" hidden>
-                                            <label for="upload" class="btn btn-primary text-white"><i
-                                                    class="bi bi-cloud-arrow-up"></i></label>
-                                            <button type="submit" class="btn btn-primary text-white"><i
-                                                    class="bi bi-send"></i></button>
+                                            <label for="upload" class="btn btn-primary text-white"><i class="bi bi-cloud-arrow-up"></i></label>
+                                            <button type="submit" class="btn btn-primary text-white"><i class="bi bi-send"></i></button>
                                         </div>
 
                                     </form>

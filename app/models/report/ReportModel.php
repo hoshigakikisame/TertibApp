@@ -1,16 +1,14 @@
 <?php
 
-class ReportModel {
+class ReportModel
+{
     protected int $idReport;
     protected int $idCodeOfConduct;
     protected string $title;
     protected string $nidnDosen;
     protected int|null $idAdmin;
     protected string $nimMahasiswa;
-    /**
-     * @var DateTime
-     */
-    protected $reportDate;
+    protected string $reportDate;
     protected string $content;
     protected string $status;
     protected string $imagePath;
@@ -51,7 +49,8 @@ class ReportModel {
         $this->location = $location;
     }
 
-    public static function fromStdClass($stdClass): ReportModel {
+    public static function fromStdClass($stdClass): ReportModel
+    {
         return new ReportModel(
             $stdClass->id_report,
             $stdClass->id_code_of_conduct,
@@ -63,7 +62,7 @@ class ReportModel {
             $stdClass->content,
             $stdClass->status,
             $stdClass->image_path,
-            $stdClass->location  
+            $stdClass->location
         );
     }
 
@@ -128,7 +127,8 @@ class ReportModel {
         return $this->codeOfConduct;
     }
 
-    public static function getStatusChoices(): array {
+    public static function getStatusChoices(): array
+    {
         return [
             'New',
             'Needs More Information',

@@ -28,7 +28,6 @@
 
         /* end local var css */
     </style>
-    <link rel="stylesheet" href="<?= App::get("root_uri") . "/public/css/style.css" ?>">
 </head>
 
 <body class="position-relative" style="font-family: Poppins-Regular;">
