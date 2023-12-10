@@ -14,6 +14,9 @@
 					<a href="<?php echo App::get('root_uri'); ?>" class="nav-link ">Home</a>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link" href="<?php echo App::get('root_uri') . "/stats"; ?>">Stats</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link" href="<?php echo App::get('root_uri') . "/about"; ?>">About</a>
 				</li>
 			</ul>
