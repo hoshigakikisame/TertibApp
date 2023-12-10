@@ -35,6 +35,11 @@ class GlobalController
 
 		return Helper::view('index', $data);
 	}
+	
+	public function stats()
+	{
+		return Helper::view('global/stats');
+	}
 
 	/**
 	 * [about description]
