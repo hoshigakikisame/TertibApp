@@ -36,9 +36,9 @@ $user = Session::getInstance()->get('user');
                                         <div class="info mb-2">
                                             <h6 class="mb-0">
                                                 <?= $user->getFirstName() . " " . $user->getLastName() ?> <span
-                                                    class="badge bg-success fs-6">LG1234</span>
+                                                    class="badge bg-success fs-6">#<?= $report->getIdReport() ?></span>
                                             </h6>
-                                            <p class="mb-0">Submited a Report:
+                                            <p class="mb-0">Submited a Report on 
                                                 <?= GenericUtil::dateToHumanReadable($report->getReportDate()) ?>
                                             </p>
                                         </div>
