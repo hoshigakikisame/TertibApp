@@ -1,6 +1,8 @@
 <?php
-class RoleMiddleware {
-    public function shouldAdmin() {
+class RoleMiddleware
+{
+    public function shouldAdmin()
+    {
 
         /**
          * @var UserModel $currentUser
@@ -9,13 +11,14 @@ class RoleMiddleware {
         $role = $currentUser->getRole();
 
         if ($role != 'admin') {
-            echo 'Forbidden';
             http_response_code(403);
+            Helper::view('error/403');
             return die();
         }
     }
 
-    public function shouldDosen() {
+    public function shouldDosen()
+    {
 
         /**
          * @var UserModel $currentUser
@@ -24,8 +27,8 @@ class RoleMiddleware {
         $role = $currentUser->getRole();
 
         if ($role != 'dosen') {
-            echo 'Forbidden';
             http_response_code(403);
+            Helper::view('error/403');
             return die();
         }
     }

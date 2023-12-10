@@ -1,6 +1,5 @@
 <?php
-$user = Session::getInstance()->get('user');
-$role = $user->getRole();
+
 ?>
 
 <nav class="navbar NavUp navbar-expand-lg sticky-top text-dark">
@@ -25,7 +24,8 @@ $role = $user->getRole();
 					Login
 				</a>
 			<?php else :
-
+				$user = Session::getInstance()->get('user');
+				$role = $user->getRole();
 			?>
 				<a class="btn border-0 rounded-3 fs-6 my-auto bg-primary text-w hite d-flex align-items-center justify-content-evenly" href="<?php echo App::get('root_uri') . "/" . $role . "/dashboard" ?>" style="width:min(50%,155px)">
 					Dashboard
