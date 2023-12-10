@@ -14,3 +14,4 @@ require 'app/routes/global_routes.php';
 require 'app/routes/auth_routes.php';
 require 'app/routes/admin_routes.php';
 require 'app/routes/dosen_routes.php';
+require 'app/routes/report_routes.php';

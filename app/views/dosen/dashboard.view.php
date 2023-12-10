@@ -39,25 +39,35 @@
 
                     </div>
 
-                    <div class="row mb-4">
+                    <div class="row mb-4 gap-4">
                         <h1>Recent Reports</h1>
-                        <div class="col-11">
+                        <?php 
+                        /**
+                         * @var ReportModel[] $reports
+                         */
+                        foreach ($reports as $report): 
+                            /**
+                             * @var CodeOfConductModel $codeOfConduct
+                             */
+                            $codeOfConduct = $report->getCodeOfConduct();
+                        ?>
+                        <div class="col-11 border border-2 p-4 rounded-3">
                             <div class="row flex-column">
                                 <div class="col">
                                     <div class="d-flex justify-content-between mb-2">
-                                        <span class="badge text-bg-info">New</span>
-                                        <span>des 24</span>
+                                        <span class="badge text-bg-info"><?= $report->getStatus() ?></span>
+                                        <span><?= GenericUtil::dateToHumanReadable($report->getReportDate()) ?></span>
                                     </div>
-                                    <h6 class="mb-0"><span class="text-primary">LG7164</span> Deny Prihantoro</h6>
-                                    <p>Melanggar tata tertib berupa tidak memakai pakaian berkerah disaat jam pelajaran
-                                        dimulai</p>
+                                    <h6 class="mb-0"><span class="text-primary">#<?= $report->getIdReport() ?></span> <?= $firstname ?> </h6>
+                                    <p><?= $codeOfConduct->getDescription() ?></p>
                                 </div>
                                 <div class="col d-flex justify-content-end">
-                                    <a class="btn btn-primary text-white justify-self-end" href="#" role="button">Report
+                                    <a class="btn btn-primary text-white justify-self-end" href="<?= App::get('root_uri') . '/report/detail/' . $report->getIdReport() ?>" role="button">Report
                                         Detail</a>
                                 </div>
                             </div>
                         </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>

@@ -5,7 +5,7 @@ class ReportModel {
     protected int $idCodeOfConduct;
     protected string $title;
     protected string $nidnDosen;
-    protected int $idAdmin;
+    protected int|null $idAdmin;
     protected string $nimMahasiswa;
     /**
      * @var DateTime
