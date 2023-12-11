@@ -32,4 +32,20 @@ class RoleMiddleware
             return die();
         }
     }
+
+    public function shouldMahasiswa()
+    {
+
+        /**
+         * @var UserModel $currentUser
+         */
+        $currentUser = Session::getInstance()->get('user');
+        $role = $currentUser->getRole();
+
+        if ($role != 'mahasiswa') {
+            http_response_code(403);
+            Helper::view('error/403');
+            return die();
+        }
+    }
 }

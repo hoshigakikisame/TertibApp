@@ -8427,6 +8427,19 @@ li.active-drop {
   background: var(--bs-secondary);
 }
 
+.drop-area {
+  width: 500px;
+  height: 300px;
+  cursor: pointer;
+}
+
+.img-view {
+  height: 100%;
+  border: 2px dashed #F3542C;
+  background-position: center;
+  background-size: cover;
+}
+
 [data-bs-theme=dark] .active-page,
 [data-bs-theme=dark] .active-page a.nav-link,
 [data-bs-theme=dark] a.nav-link:hover,
