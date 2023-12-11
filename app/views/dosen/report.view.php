@@ -74,7 +74,13 @@
                                     <div class="col">
                                         <div class="mb-3">
                                             <label for="formFile" class="form-label">Lampiran Pelanggaran</label>
-                                            <input class="form-control" type="file" id="formFile" name="evidence_picture">
+                                            <label for="formFile" class="bg-light-subtle drop-area rounded-3 p-3">
+                                                <input class="form-control" type="file" id="formFile" name="evidence_picture" hidden>
+                                                <div class="img-view d-flex flex-column align-items-center justify-content-center  rounded-3 object-fit-cover">
+                                                    <i class="bi bi-cloud-upload display-1"></i>
+                                                    <p>Drag and drop or click here to upload image</p>
+                                                </div>
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
@@ -124,4 +130,26 @@
         console.log(e);
         e.target.value = e.target;
     }
+
+
+    const dropArea = document.querySelector(".drop-area");
+    const inputFile = document.querySelector("input[type=file]");
+    const imgView = document.querySelector(".img-view");
+
+    function uploadImg() {
+        let imgLink = URL.createObjectURL(inputFile.files[0]);
+        imgView.style.backgroundImage = `url(${imgLink})`;
+        imgView.textContent = "";
+        imgView.style.border = 0;
+    }
+
+    inputFile.addEventListener('change', uploadImg)
+    dropArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+    });
+    dropArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        inputFile.files = e.dataTransfer.files;
+        uploadImg();
+    });
 </script>

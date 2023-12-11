@@ -181,6 +181,20 @@ li.active-drop{
   background: var(--bs-secondary);
 }
 
+// start drop input
+.drop-area{
+  width: 500px;
+  height: 300px;
+  cursor: pointer;
+}
+
+.img-view{
+  height: 100%;
+  border: 2px dashed $secondary;
+  background-position: center;
+  background-size: cover;
+}
+
 
 // start dark mode
 @include color-mode(dark) {
