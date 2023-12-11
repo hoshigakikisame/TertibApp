@@ -15,24 +15,12 @@ class MahasiswaController
          */
         $user = Session::getInstance()->get('user');
 
-        $reportService = ReportService::getInstance();
-        $codeOfConductService = CodeOfConductService::getInstance();
 
-        $reports = $reportService->getManyReport(['nidn_dosen' => $user->getRoleDetail()->getNidn()]);
-        $codeOfConducts = $codeOfConductService->getAllCodeOfConduct();
-
-        for ($i = 0; $i < count($reports); $i++) {
-            for ($j = 0; $j < count($codeOfConducts); $j++) {
-                if ($reports[$i]->getIdCodeOfConduct() == $codeOfConducts[$j]->getIdCodeOfConduct()) {
-                    $reports[$i]->setCodeOfConduct($codeOfConducts[$j]);
-                }
-            }
-        }
 
         $data = [
             'firstname' => $user->getFirstName(),
             'lastname' => $user->getLastName(),
-            'reports' => $reports
+
         ];
 
         return Helper::view('mahasiswa/dashboard', $data);

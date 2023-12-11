@@ -72,7 +72,7 @@ $role = $user->getRole();
                         <div class="userinfo d-flex align-items-start flex-column">
                             <h3 class="fs-6" style=" margin-bottom:-2px;"><?= $user->getFirstName() . " " . $user->getLastName() ?></h3>
                             <p class="" style="font-size:12px;margin-bottom:-5px;">
-                                <?= (!$role == "admin") ? $role : $user->getRoleDetail()->getTitle(); ?>
+                                <?= ($role == "admin") ? $user->getRoleDetail()->getTitle() : $role; ?>
                             </p>
                         </div>
                     </div>

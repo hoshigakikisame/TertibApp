@@ -56,6 +56,9 @@ class AuthsController
                         Helper::redirect('/dosen/dashboard');
                         break;
                     case 'mahasiswa':
+                        $user->setRoleDetail($mahasiswaService->getSingleMahasiswa(['id_user' => $user->getIdUser()]));
+                        Session::getInstance()->push('user', $user);
+                        Helper::redirect('/mahasiswa/dashboard');
                         break;
                     default:
                         Flasher::setFlash("danger", "Some Unexpected Happened");
@@ -75,7 +78,7 @@ class AuthsController
     }
 
     public function forgotPasswordView()
-    {   
+    {
         $data = [
             "flash" => Flasher::flash()
         ];
@@ -83,7 +86,8 @@ class AuthsController
         return Helper::view('auth/forgot_password', $data);
     }
 
-    public function forgotPassword() {
+    public function forgotPassword()
+    {
         $email = $_POST['email'];
 
         $userService = UserService::getInstance();
@@ -96,7 +100,7 @@ class AuthsController
             $accountRecoveryService = AccountRecoveryService::getInstance();
             $accountRecoveryService->revokeAccountRecoveryRequest($user->getIdUser());
             $success = $accountRecoveryService->createNewAccountRecoveryRequest($user);
-            
+
             if (!$success) {
                 Flasher::setFlash("danger", "Failed to send reset password link");
                 return Helper::redirect('/auth/forgot-password');
@@ -116,7 +120,8 @@ class AuthsController
         return Helper::view('auth/update_password', $data);
     }
 
-    public function updatePassword() {
+    public function updatePassword()
+    {
         $token = $_POST['token'];
         $newPassword = $_POST['new_password'];
 
@@ -138,7 +143,7 @@ class AuthsController
 
             Flasher::setFlash("success", "Password has been updated");
             Helper::redirect('/auth/login');
-        } else {   
+        } else {
             Flasher::setFlash("danger", "Invalid token");
             Helper::redirect('/auth/update-password/' . $token);
         }
