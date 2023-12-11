@@ -91,7 +91,7 @@ class QueryBuilder
 			$results = $statement->fetchAll(PDO::FETCH_CLASS);
 			return $results[0];
 		} catch (PDOException $e) {
-			die("Whoops!! Something Went Wrong!!!");
+			die("Whoops!! Something Went Wrong!!! " . $e->getMessage());
 		}
 	}
 

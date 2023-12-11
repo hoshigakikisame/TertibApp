@@ -1,6 +1,6 @@
 <?php
 
-class MahasiswaModel {
+class MahasiswaModel implements DBModel {
     protected string $nim;
     protected string $idUser;
     protected string $prodi;

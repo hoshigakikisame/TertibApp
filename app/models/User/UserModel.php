@@ -1,6 +1,6 @@
 <?php
 
-class UserModel
+class UserModel implements DBModel
 {
     protected int $idUser;
     protected string $username;

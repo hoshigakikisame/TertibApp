@@ -1,5 +1,5 @@
 <?php 
-class ViolationLevelModel {
+class ViolationLevelModel implements DBModel {
     protected int $idViolationLevel;
     protected int $level;
     protected string $name;

@@ -1,35 +1,18 @@
 <?php
 
-class ReportService {
-    private static $instances = [];
-
-    /**
-     * @var QueryBuilder
-     */
-    private $db;
-    public function __construct(){
-        $this->db = App::get('database');
-        assert($this->db instanceof QueryBuilder);
-    }
-
-
-    protected function __clone(){}
-
-    public function __wakeup(){
-        throw new \Exception("Cannot unserialize a singleton.");
-    }
-    public static function getInstance(): ReportService
+class ReportService extends DBService {
+    public function __construct()
     {
-        $cls = static::class;
-        if (!isset(self::$instances[$cls])) {
-            self::$instances[$cls] = new static();
-        }
+        parent::__construct('tb_report');
+    }
 
-        return self::$instances[$cls];
+    public static function getInstance(): self
+    {
+        return parent::getInstance();
     }
 
     public function getAllReport(): array {
-        $rawReports = $this->db->findAll('tb_report');
+        $rawReports = $this->getAll();
         $reports = [];
 
         if ($rawReports) {
@@ -42,7 +25,7 @@ class ReportService {
     }
     public function getSingleReport($where): ReportModel | null
     {
-        $rawReport = $this->db->findOne('tb_report', $where);
+        $rawReport = $this->getSingle($where);
         if ($rawReport) {
             $report = ReportModel::fromStdClass($rawReport);
             return $report;
@@ -53,7 +36,7 @@ class ReportService {
 
     public function getManyReport($where): array
     {
-        $rawReports = $this->db->findMany('tb_report', $where, 'id_report', 'DESC');
+        $rawReports = $this->getDB()->findMany($this->getTable(), $where, 'id_report', 'DESC');
         $reports = [];
 
         if ($rawReports) {
@@ -86,6 +69,6 @@ class ReportService {
             'location' => $location
         ];
 
-        return $this->db->insert('tb_report', $data);
+        return $this->getDB()->insert($this->getTable(), $data);
     }
 }

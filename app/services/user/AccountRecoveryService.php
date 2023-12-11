@@ -1,44 +1,20 @@
 <?php
-class AccountRecoveryService
+class AccountRecoveryService extends DBService
 {
-    private static $instances = [];
 
-    /**
-     * @var QueryBuilder
-     */
-    private $db;
-    protected function __construct()
+    public function __construct()
     {
-        $this->db = App::get('database');
-        assert($this->db instanceof QueryBuilder);
+        parent::__construct('tb_account_recovery');
     }
 
-
-    protected function __clone()
+    public static function getInstance(): self
     {
+        return parent::getInstance();
     }
 
-    public function __wakeup()
+    public function revokeAccountRecoveryRequest($idUser)
     {
-        throw new \Exception("Cannot unserialize a singleton.");
-    }
-    public static function getInstance(): AccountRecoveryService
-    {
-        $cls = static::class;
-        if (!isset(self::$instances[$cls])) {
-            self::$instances[$cls] = new static();
-        }
-
-        return self::$instances[$cls];
-    }
-
-    public static function revokeAccountRecoveryRequest($idUser)
-    {
-        /**
-         * @var QueryBuilder
-         */
-        $db = App::get('database');
-        $db->delete('tb_account_recovery', [
+        return $this->getDB()->delete($this->getTable(), [
             'id_user' => $idUser
         ]);
     }
@@ -55,7 +31,7 @@ class AccountRecoveryService
             $recoveryTokenValidity = $config['recovery_token_validity'];
             $tokenValidityDate = date('Y-m-d H:i:s', (time() + $recoveryTokenValidity));
 
-            $this->db->insert('tb_account_recovery', [
+            parent::getDB()->insert($this->getTable(), [
                 'id_user' => $user->getIdUser(),
                 'token' => $token,
                 'valid_until' => $tokenValidityDate
@@ -82,7 +58,7 @@ class AccountRecoveryService
 
     public function validateToken($token)
     {
-        $rawAccountRecovery = $this->db->findOne('tb_account_recovery', [
+        $rawAccountRecovery = parent::getDB()->findOne($this->getTable(), [
             'token' => $token
         ]);
 

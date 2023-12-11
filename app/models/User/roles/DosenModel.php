@@ -1,5 +1,5 @@
 <?php
-class DosenModel
+class DosenModel implements DBModel
 {
     protected string $nidn;
     protected string $title;

@@ -1,36 +1,19 @@
 <?php
-class MahasiswaService
+class MahasiswaService extends DBService
 {
 
-    private static $instances = [];
-
-    /**
-     * @var QueryBuilder
-     */
-    private $db;
-    public function __construct(){
-        $this->db = App::get('database');
-        assert($this->db instanceof QueryBuilder);
-    }
-
-
-    protected function __clone(){}
-
-    public function __wakeup(){
-        throw new \Exception("Cannot unserialize a singleton.");
-    }
-    public static function getInstance(): MahasiswaService
+    public function __construct()
     {
-        $cls = static::class;
-        if (!isset(self::$instances[$cls])) {
-            self::$instances[$cls] = new static();
-        }
+        parent::__construct('tb_mahasiswa');
+    }
 
-        return self::$instances[$cls];
+    public static function getInstance(): self
+    {
+        return parent::getInstance();
     }
 
     public function getAllMahasiswa(): array {
-        $rawMahasiswas = $this->db->findAll('tb_mahasiswa');
+        $rawMahasiswas = $this->getAll();
         $mahasiswas = [];
 
         if ($rawMahasiswas) {
@@ -43,7 +26,7 @@ class MahasiswaService
     }
     public function getSingleMahasiswa($where): MahasiswaModel | null
     {
-        $rawMahasiswa = $this->db->findOne('tb_mahasiswa', $where);
+        $rawMahasiswa = $this->getSingle($where);
         if ($rawMahasiswa) {
             $mahasiswa = MahasiswaModel::fromStdClass($rawMahasiswa);
             return $mahasiswa;
@@ -53,7 +36,7 @@ class MahasiswaService
     }
 
     public function addNewMahasiswa(int $nim, int $idUser, string $prodi): string {
-        return $this->db->insert('tb_mahasiswa', [
+        return $this->getDB()->insert($this->getTable(), [
             'nim' => $nim,
             'id_user' => $idUser,
             'prodi' => $prodi
@@ -62,7 +45,7 @@ class MahasiswaService
 
     public function updateMahasiswaProfile($nim, $prodi, $where = [])
     {
-        $this->db->update('tb_mahasiswa', [
+        $this->getDB()->update($this->getTable(), [
             'nim' => $nim,
             'prodi' => $prodi,
         ], $where);

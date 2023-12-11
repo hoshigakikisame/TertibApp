@@ -1,6 +1,6 @@
 <?php
 
-class ReportModel
+class ReportModel implements DBModel
 {
     protected int $idReport;
     protected int $idCodeOfConduct;
