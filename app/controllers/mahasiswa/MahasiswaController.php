@@ -38,7 +38,7 @@ class MahasiswaController
             'lastname' => $user->getLastName(),
         ];
 
-        return Helper::view('dosen/notification', $data);
+        return Helper::view('mahasiswa/notification', $data);
     }
 
     public function profilePage()
@@ -65,7 +65,7 @@ class MahasiswaController
             'updateProfileEndpoint' => App::get('root_uri') . '/dosen/profile/update'
         ];
 
-        return Helper::view('dosen/profile', $data);
+        return Helper::view('mahasiswa/profile', $data);
     }
 
     public function updateProfile()
@@ -104,14 +104,14 @@ class MahasiswaController
                 $validImageExtension = $mediaStorageService->validateImageExtension($profileImage);
                 if (!$validImageExtension) {
                     Flasher::setFlash("danger", "Invalid image extension");
-                    return Helper::redirect('/dosen/profile');
+                    return Helper::redirect('/mahasiswa/profile');
                 }
 
                 // validate image size
                 $validImageSize = $mediaStorageService->validateImageSize($profileImage);
                 if (!$validImageSize) {
                     Flasher::setFlash("danger", "Image size must be less than " . MediaStorageService::getInstance()->getMaxImageSize() . " bytes");
-                    return Helper::redirect('/dosen/profile');
+                    return Helper::redirect('/mahasiswa/profile');
                 }
 
                 // upload image
@@ -146,7 +146,7 @@ class MahasiswaController
             Flasher::setFlash("danger", "All fields must be filled");
         }
 
-        return Helper::redirect('/dosen/profile');
+        return Helper::redirect('/mahasiswa/profile');
     }
 
     public function reportPage()
@@ -202,7 +202,7 @@ class MahasiswaController
             'addNewReportEndpoint' => App::get('root_uri') . '/dosen/report/new'
         ];
 
-        return Helper::view('dosen/report', $data);
+        return Helper::view('mahasiswa/report', $data);
     }
 
     public function addNewReport()
@@ -244,14 +244,14 @@ class MahasiswaController
                 $validImageExtension = $mediaStorageService->validateImageExtension($evidencePicture);
                 if (!$validImageExtension) {
                     Flasher::setFlash("danger", "Invalid image extension");
-                    return Helper::redirect('/dosen/report');
+                    return Helper::redirect('/mahasiswa/report');
                 }
 
                 // validate image size
                 $validImageSize = $mediaStorageService->validateImageSize($evidencePicture);
                 if (!$validImageSize) {
                     Flasher::setFlash("danger", "Image size must be less than " . MediaStorageService::getInstance()->getMaxImageSize() . " bytes");
-                    return Helper::redirect('/dosen/report');
+                    return Helper::redirect('/mahasiswa/report');
                 }
 
                 $publicId = Helper::generateRandomHex(16);
@@ -281,6 +281,6 @@ class MahasiswaController
             Flasher::setFlash("danger", "All fields must be filled");
         }
 
-        return Helper::redirect('/dosen/report');
+        return Helper::redirect('/mahasiswa/report');
     }
 }
