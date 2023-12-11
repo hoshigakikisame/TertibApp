@@ -1,36 +1,19 @@
 <?php
-class AdminService
+class AdminService extends DBService
 {
 
-    private static $instances = [];
-
-    /**
-     * @var QueryBuilder
-     */
-    private $db;
-    public function __construct(){
-        $this->db = App::get('database');
-        assert($this->db instanceof QueryBuilder);
-    }
-
-
-    protected function __clone(){}
-
-    public function __wakeup(){
-        throw new \Exception("Cannot unserialize a singleton.");
-    }
-    public static function getInstance(): AdminService
+    public function __construct()
     {
-        $cls = static::class;
-        if (!isset(self::$instances[$cls])) {
-            self::$instances[$cls] = new static();
-        }
+        parent::__construct('tb_admin');
+    }
 
-        return self::$instances[$cls];
+    public static function getInstance(): self
+    {
+        return parent::getInstance();
     }
 
     public function getAllAdmin(): array {
-        $rawAdmins = $this->db->findAll('tb_admin');
+        $rawAdmins = $this->getAll();
         $admins = [];
 
         if ($rawAdmins) {
@@ -43,7 +26,7 @@ class AdminService
     }
     public function getSingleAdmin(array $where): AdminModel | null
     {
-        $rawAdmin = $this->db->findOne('tb_admin', $where);
+        $rawAdmin = $this->getSingle($where);
         if ($rawAdmin) {
             $admin = AdminModel::fromStdClass($rawAdmin);
             return $admin;
@@ -53,7 +36,7 @@ class AdminService
     }
 
     public function addNewAdmin(int $idUser, string $title): string {
-        return $this->db->insert('tb_admin', [
+        return $this->getDB()->insert($this->getTable(), [
             'id_user' => $idUser,
             'title' => $title
         ]);
@@ -61,7 +44,7 @@ class AdminService
 
     public function updateAdminProfile($title, $where = [])
     {
-        $this->db->update('tb_admin', [
+        $this->getDB()->update($this->getTable(), [
             'title' => $title,
         ], $where);
     }

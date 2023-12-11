@@ -1,32 +1,14 @@
 <?php
-class UserService
+class UserService extends DBService
 {
-
-    private static $instances = [];
-
-    /**
-     * @var QueryBuilder
-     */
-    private $db;
-    public function __construct(){
-        $this->db = App::get('database');
-        assert($this->db instanceof QueryBuilder);
-    }
-
-
-    protected function __clone(){}
-
-    public function __wakeup(){
-        throw new \Exception("Cannot unserialize a singleton.");
-    }
-    public static function getInstance(): UserService
+    public function __construct()
     {
-        $cls = static::class;
-        if (!isset(self::$instances[$cls])) {
-            self::$instances[$cls] = new static();
-        }
+        parent::__construct('tb_user');
+    }
 
-        return self::$instances[$cls];
+    public static function getInstance(): self
+    {
+        return parent::getInstance();
     }
 
     public function hashPassword($salt, $password)
@@ -47,7 +29,7 @@ class UserService
     }
     public function getSingleUser(array $where = []): UserModel | null
     {
-        $rawUser = $this->db->findOne('tb_user', $where);
+        $rawUser = $this->getSingle($where);
         if ($rawUser) {
             $user = UserModel::fromStdClass($rawUser);
             return $user;
@@ -57,7 +39,7 @@ class UserService
 
     public function getManyUser(array $where = []): array
     {
-        $rawUsers = $this->db->findWhere('tb_user', $where);
+        $rawUsers = $this->getDB()->findWhere($this->getTable(), $where);
         $users = [];
         if ($rawUsers) {
             foreach ($rawUsers as $rawUser) {
@@ -69,7 +51,7 @@ class UserService
 
     public function addNewUser(string $username, string $firstName, string $lastName, string $email, string $address, string $phoneNumber, string $role, string $salt, string $passwordHash): string
     {
-        return $this->db->insert('tb_user', [
+        return $this->getDB()->insert($this->getTable(), [
             'username' => $username,
             'first_name' => $firstName,
             'last_name' => $lastName,
@@ -99,12 +81,12 @@ class UserService
             $options['password_hash'] = $passwordHash;
         }
         
-        $this->db->update('tb_user', $options, $where);
+        $this->getDB()->update($this->getTable(), $options, $where);
     }
 
     public function updateUserProfile(string $firstName, string $lastName, string $address, string $phoneNumber, string $imagePath, $where = [])
     {
-        $this->db->update('tb_user', [
+        $this->getDB()->update($this->getTable(), [
             'first_name' => $firstName,
             'last_name' => $lastName,
             'address' => $address,
@@ -115,7 +97,7 @@ class UserService
 
     public function updateUserPassword($idUser, $newPassword)
     {
-        $this->db->update('tb_user', [
+        $this->getDB()->update($this->getTable(), [
             'password_hash' => $newPassword
         ], [
             'id_user' => $idUser
@@ -154,7 +136,7 @@ class UserService
 
     public function deleteUser($idUser)
     {
-        $this->db->delete('tb_user', [
+        $this->getDB()->delete($this->getTable(), [
             'id_user' => $idUser
         ]);
     }

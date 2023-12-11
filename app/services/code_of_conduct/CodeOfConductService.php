@@ -1,35 +1,19 @@
 <?php
-class CodeOfConductService
+class CodeOfConductService extends DBService
 {
 
-    private static $instances = [];
-
-    /**
-     * @var QueryBuilder
-     */
-    private $db;
-    public function __construct(){
-        $this->db = App::get('database');
-        assert($this->db instanceof QueryBuilder);
-    }
-
-    protected function __clone(){}
-
-    public function __wakeup(){
-        throw new \Exception("Cannot unserialize a singleton.");
-    }
-    public static function getInstance(): CodeOfConductService
+    public function __construct()
     {
-        $cls = static::class;
-        if (!isset(self::$instances[$cls])) {
-            self::$instances[$cls] = new static();
-        }
+        parent::__construct('tb_code_of_conduct');
+    }
 
-        return self::$instances[$cls];
+    public static function getInstance(): self
+    {
+        return parent::getInstance();
     }
 
     public function getAllCodeOfConduct(): array {
-        $rawCodeOfConducts = $this->db->findAll('tb_code_of_conduct');
+        $rawCodeOfConducts = $this->getAll();
         /**
          * @var CodeOfConductModel[] $rawCodeOfConducts
          */
@@ -45,7 +29,7 @@ class CodeOfConductService
     }
     public function getSingleCodeOfConduct(array $where): CodeOfConductModel | null
     {
-        $rawCodeOfConducts = $this->db->findOne('tb_code_of_conduct', $where);
+        $rawCodeOfConducts = $this->getSingle($where);
         if ($rawCodeOfConducts) {
             $codeOfConducts = CodeOfConductModel::fromStdClass($rawCodeOfConducts);
             return $codeOfConducts;
@@ -55,7 +39,7 @@ class CodeOfConductService
     }
 
     public function addNewCodeOfConduct(string $name, string $description, int $idViolationLevel): string {
-        return $this->db->insert('tb_code_of_conduct', [
+        return $this->getDB()->insert($this->getTable(), [
             'name' => $name,
             'description' => $description,
             'id_violation_level' => $idViolationLevel
@@ -64,7 +48,7 @@ class CodeOfConductService
 
     public function updateCodeOfConduct(string $name, string $description, int $idViolationLevel, $where = [])
     {
-        $this->db->update('tb_code_of_conduct', [
+        $this->getDB()->update($this->getTable(), [
             'name' => $name,
             'description' => $description,
             'id_violation_level' => $idViolationLevel
@@ -73,6 +57,6 @@ class CodeOfConductService
 
     public function deleteCodeOfConduct(string $idCodeOfConduct)
     {
-        $this->db->delete('tb_code_of_conduct', ['id_code_of_conduct' => $idCodeOfConduct]);
+        $this->getDB()->delete($this->getTable(), ['id_code_of_conduct' => $idCodeOfConduct]);
     }
 }

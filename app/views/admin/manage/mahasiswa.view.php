@@ -212,7 +212,7 @@
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content modal-dialog-scrollable">
-            <form action="<?= $deleteMahasiswaEndpoint ?>" method="post">
+            <form action="<?= $updateMahasiswaEndpoint ?>" method="post">
                 <div class="modal-header justify-content-center">
                     <h1 class="modal-title fs-5" id="editModal">UPDATE MAHASISWA</h1>
                 </div>

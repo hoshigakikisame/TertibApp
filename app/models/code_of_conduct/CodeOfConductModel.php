@@ -1,6 +1,6 @@
 <?php 
 
-class CodeOfConductModel {
+class CodeOfConductModel implements DBModel {
     protected int $idCodeOfConduct;
     protected string $name;
     protected string $description;

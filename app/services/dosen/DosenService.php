@@ -1,36 +1,18 @@
 <?php
-class DosenService
+class DosenService extends DBService
 {
 
-    private static $instances = [];
-
-    /**
-     * @var QueryBuilder
-     */
-    private $db;
-    public function __construct(){
-        $this->db = App::get('database');
-        assert($this->db instanceof QueryBuilder);
-    }
-
-
-    protected function __clone(){}
-
-    public function __wakeup(){
-        throw new \Exception("Cannot unserialize a singleton.");
-    }
-    public static function getInstance(): DosenService
+    public function __construct()
     {
-        $cls = static::class;
-        if (!isset(self::$instances[$cls])) {
-            self::$instances[$cls] = new static();
-        }
-
-        return self::$instances[$cls];
+        parent::__construct('tb_dosen');
     }
 
+    public static function getInstance(): self
+    {
+        return parent::getInstance();
+    }
     public function getAllDosen(): array {
-        $rawDosens = $this->db->findAll('tb_dosen');
+        $rawDosens = $this->getAll();
         $dosens = [];
 
         if ($rawDosens) {
@@ -43,7 +25,7 @@ class DosenService
     }
     public function getSingleDosen($where): DosenModel | null
     {
-        $rawDosen = $this->db->findOne('tb_dosen', $where);
+        $rawDosen = $this->getSingle($where);
         if ($rawDosen) {
             $dosen = DosenModel::fromStdClass($rawDosen);
             return $dosen;
@@ -53,7 +35,7 @@ class DosenService
     }
 
     public function addNewDosen(int $nidn, int $idUser, string $title): string {
-        return $this->db->insert('tb_dosen', [
+        return $this->getDB()->insert($this->getTable(), [
             'nidn' => $nidn,
             'id_user' => $idUser,
             'title' => $title
@@ -62,14 +44,14 @@ class DosenService
 
     public function updateDosenProfile($title, $where = [])
     {
-        $this->db->update('tb_dosen', [
+        $this->getDB()->update($this->getTable(), [
             'title' => $title,
         ], $where);
     }
 
     public function updateDosen($nidn, $title, $where = [])
     {
-        $this->db->update('tb_dosen', [
+        $this->getDB()->update($this->getTable(), [
             'nidn' => $nidn,
             'title' => $title,
         ], $where);

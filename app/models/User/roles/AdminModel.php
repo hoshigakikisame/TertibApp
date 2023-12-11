@@ -1,5 +1,5 @@
 <?php
-class AdminModel
+class AdminModel implements DBModel
 {
     protected int $idAdmin;
     protected string $title;

@@ -1,5 +1,5 @@
 <?php 
-    class AccountRecoveryModel {
+    class AccountRecoveryModel implements DBModel {
         protected int $idAccountRecovery;
         protected string $idUser;
         protected string $token;
