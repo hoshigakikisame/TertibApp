@@ -7,14 +7,17 @@ class ReportCommentModel implements DBModel {
     protected string $content;
     protected string $imagePath;
     protected bool $isNew;
+    protected string $createdAt;
+    protected $user;
     
-    public function __construct($idReportComment, $idReport, $idUser, $content, $imagePath, $isNew) {
+    public function __construct($idReportComment, $idReport, $idUser, $content, $imagePath, $isNew, $createdAt) {
         $this->idReportComment = $idReportComment;
         $this->idReport = $idReport;
         $this->idUser = $idUser;
         $this->content = $content;
         $this->imagePath = $imagePath;
         $this->isNew = $isNew;
+        $this->createdAt = $createdAt;
     }
 
     public static function fromStdClass($stdClass): ReportCommentModel {
@@ -24,7 +27,8 @@ class ReportCommentModel implements DBModel {
             $stdClass->id_user,
             $stdClass->content,
             $stdClass->image_path,
-            $stdClass->is_new
+            $stdClass->is_new,
+            $stdClass->created_at
         );
     }
 
@@ -53,6 +57,24 @@ class ReportCommentModel implements DBModel {
         return $this->isNew;
     }
 
+    public function getCreatedAt() {
+        return $this->createdAt;
+    }
+
+    public function getUser() {
+        return $this->user;
+    }
+
+    public function getImageUrl()
+    {
+        $baseUrl = MediaStorageService::getInstance()->getAccessUrl();
+        if ($this->imagePath == null || $this->imagePath == '') {
+            return '';
+        }
+        $randomHex = Helper::generateRandomHex(8);
+        return $baseUrl . $this->imagePath . '?v=' . $randomHex;
+    }
+
     // setters
     public function setIdReportComment($idReportComment) {
         $this->idReportComment = $idReportComment;
@@ -76,5 +98,13 @@ class ReportCommentModel implements DBModel {
 
     public function setIsNew($isNew) {
         $this->isNew = $isNew;
+    }
+
+    public function setCreatedAt($createdAt) {
+        $this->createdAt = $createdAt;
+    }
+
+    public function setUser($user) {
+        $this->user = $user;
     }
 }

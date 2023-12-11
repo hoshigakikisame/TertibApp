@@ -22,6 +22,7 @@ $user = Session::getInstance()->get('user');
             <div class="row justify-content-end px-auto">
                 <div class="col-lg-10 col px-5 py-4" title="main">
                     <div class="row mb-4">
+                        <?= $flash ?>
                         <h1>Report Detail</h1>
                     </div>
                     <div class="row">
@@ -29,13 +30,13 @@ $user = Session::getInstance()->get('user');
                             <!-- start content -->
                             <div class="row">
                                 <div class="col-auto">
-                                    <img src="<?= $user->getImageUrl() ?>" class="rounded-circle img-profile" alt="">
+                                    <img src="<?= $dosenUser->getImageUrl() ?>" class="rounded-circle img-profile" alt="">
                                 </div>
                                 <div class="col">
                                     <div class="content">
                                         <div class="info mb-2">
                                             <h6 class="mb-0">
-                                                <?= $user->getFirstName() . " " . $user->getLastName() ?> <span class="badge bg-success fs-6">#<?= $report->getIdReport() ?></span>
+                                                <?= $dosenUser->getFirstName() . " " . $dosenUser->getLastName() ?> <span class="badge bg-success fs-6">#<?= $report->getIdReport() ?></span>
                                             </h6>
                                             <p class="mb-0">Submited a Report on
                                                 <?= GenericUtil::dateToHumanReadable($report->getReportDate()) ?>
@@ -102,6 +103,13 @@ $user = Session::getInstance()->get('user');
                             <!-- End content -->
 
                             <!-- start comment -->
+                            <?php 
+                            /**
+                             * @var ReportCommentModel[] $reportComments
+                             */
+                            foreach ($reportComments as $comment): 
+                                $user = $comment->getUser();
+                            ?>
                             <div class="row my-3">
                                 <div class="col-auto">
                                     <img src="<?= $user->getImageUrl() ?>" class="rounded-circle img-profile" alt="">
@@ -110,39 +118,45 @@ $user = Session::getInstance()->get('user');
                                     <div class="content">
                                         <div class="info mb-2">
                                             <h6 class="mb-0">
-                                                <?= $user->getFirstName() . " " . $user->getLastName() ?>
+                                                <?= $user->getUsername() ?>
                                             </h6>
                                             <p class="mb-0">
-                                                <?= GenericUtil::dateToHumanReadable($report->getReportDate()) ?>
+                                                <?= GenericUtil::dateToHumanReadable($comment->getCreatedAt()) ?>
                                             </p>
                                         </div>
                                         <hr>
                                         <div class="content">
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam cupiditate debitis magni dicta minus quaerat doloribus libero reprehenderit sunt sit sint voluptatum temporibus, suscipit veritatis amet ipsam officiis fugiat nostrum.</p>
+                                            <p><?= $comment->getContent() ?></p>
                                         </div>
+                                        <img style="height: 200px" src="<?= $comment->getImageUrl() ?>" alt="">
                                     </div>
                                 </div>
                             </div>
+                            <?php endforeach; ?>
                             <!-- End comment -->
 
+                            <?php 
+                            /**
+                             * @var UserModel $currentUser
+                             */
+                            $currentUser = Session::getInstance()->get('user'); ?>
                             <div class="row mt-3">
                                 <div class="col-auto">
-                                    <img src="<?= $user->getImageUrl() ?>" class="rounded-circle img-profile" alt="">
+                                    <img src="<?= $currentUser->getImageUrl() ?>" class="rounded-circle img-profile" alt="">
                                 </div>
                                 <div class="col">
                                     <h6>
-                                        <?= $user->getFirstName() ?>
+                                        <?= $currentUser->getUsername() ?>
                                     </h6>
-                                    <form action="post">
+                                    <form method="post" action="<?= $addNewReportCommentEndpoint ?>" enctype="multipart/form-data">
                                         <div class="mb-3">
-                                            <textarea class="form-control" name="comment" id="" rows="3" placeholder="Write Your Message"></textarea>
+                                            <textarea class="form-control" name="content" id="" rows="3" placeholder="Write Your Message"></textarea>
                                         </div>
                                         <div class="mb-3 float-end">
-                                            <input class="opacity-0" id="upload" type="file" hidden>
+                                            <input class="opacity-0" id="upload" type="file" name="attachment_picture" hidden>
                                             <label for="upload" class="btn btn-primary text-white"><i class="bi bi-cloud-arrow-up"></i></label>
                                             <button type="submit" class="btn btn-primary text-white"><i class="bi bi-send"></i></button>
                                         </div>
-
                                     </form>
                                 </div>
                             </div>
