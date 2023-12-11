@@ -14,16 +14,18 @@
 				<tr>
 					<th scope="col">Tata Tertib</th>
 					<?php for ($i = 1; $i <= 12; $i++) : ?>
-						<th scope="col"><?= DateTime::createFromFormat('!m', $i)->format('F') ?></th>
+						<th scope="col"><?= substr(DateTime::createFromFormat('!m', $i)->format('F'), 0, 3) ?></th>
 					<?php endfor; ?>
+					<th scope="col">Jumlah</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<th scope="row">code of conduct</th>
+					<th scope="row">Code of Conduct</th>
 					<?php for ($i = 1; $i <= 12; $i++) : ?>
 						<th scope="col"><?= $i ?></th>
 					<?php endfor; ?>
+					<th>99</th>
 				</tr>
 			</tbody>
 		</table>
