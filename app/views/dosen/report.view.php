@@ -71,8 +71,8 @@
                                             <input type="text" class="form-control" id="Location" placeholder="Masukkan Lokasi Pelanggaran" name="location">
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <div class="mb-3">
+                                    <div class="col-auto">
+                                        <div class="mb-3 d-flex flex-column">
                                             <label for="formFile" class="form-label">Lampiran Pelanggaran</label>
                                             <label for="formFile" class="bg-light-subtle drop-area rounded-3 p-3">
                                                 <input class="form-control" type="file" id="formFile" name="evidence_picture" hidden>
