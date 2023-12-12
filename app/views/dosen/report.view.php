@@ -10,7 +10,7 @@
         </div>
         <!-- End Sidebar -->
 
-        <main class="col-auto position-relative">
+        <main class="col-auto position-relative overflow-x-hidden">
             <div class="row justify-content-end px-auto">
                 <div class="col-lg-10 col px-5 py-4" title="main">
                     <div class="row mb-4">
@@ -76,9 +76,9 @@
                                             <label for="formFile" class="form-label">Lampiran Pelanggaran</label>
                                             <label for="formFile" class="bg-light-subtle drop-area rounded-3 p-3">
                                                 <input class="form-control" type="file" id="formFile" name="evidence_picture" hidden>
-                                                <div class="img-view d-flex flex-column align-items-center justify-content-center  rounded-3 object-fit-cover">
+                                                <div class="img-view d-flex flex-column align-items-center justify-content-center  rounded-3 object-fit-cover py-5 px-2">
                                                     <i class="bi bi-cloud-upload display-1"></i>
-                                                    <p>Drag and drop or click here to upload image</p>
+                                                    <p class="w-75 text-center">Drag and drop or span click here to upload image</p>
                                                 </div>
                                             </label>
                                         </div>
@@ -98,8 +98,8 @@
                                         (hanya dapat diakses melalui akun anda)</p>
                                 </div>
                                 <!-- Button trigger modal -->
-                                <div class="row justify-content-end">
-                                    <button class="btn btn-secondary col-4 text-white" type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Send Report</button>
+                                <div class="row justify-content-lg-end justify-content-center">
+                                    <button class="btn btn-secondary col-6 col-lg-4 text-white" type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Send Report</button>
                                 </div>
 
                                 <!-- Modal -->

@@ -48,21 +48,21 @@ class MahasiswaController
          */
         $user = Session::getInstance()->get('user');
 
-        $dosenRole = $user->getRoleDetail();
-        assert($dosenRole instanceof DosenModel);
+        $mahasiswaRole = $user->getRoleDetail();
+        assert($mahasiswaRole instanceof MahasiswaModel);
 
         $data = [
-            'nidn' => $dosenRole->getNidn(),
+            'nim' => $mahasiswaRole->getNim(),
             'username' => $user->getUsername(),
             'firstName' => $user->getFirstName(),
             'lastName' => $user->getLastName(),
-            'dosenTitle' => $dosenRole->getTitle(),
+            'mahasiswaTitle' => $mahasiswaRole->getProdi(),
             'email' => $user->getEmail(),
             'address' => $user->getAddress(),
             'phoneNumber' => $user->getPhoneNumber(),
             'imageUrl' => $user->getImageUrl(),
             'flash' => Flasher::flash(),
-            'updateProfileEndpoint' => App::get('root_uri') . '/dosen/profile/update'
+            'updateProfileEndpoint' => App::get('root_uri') . '/mahasiswa/profile/update'
         ];
 
         return Helper::view('mahasiswa/profile', $data);
