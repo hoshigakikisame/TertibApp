@@ -96,7 +96,13 @@ class Router
 			http_response_code(500);
 			throw new Exception($method . " not define on " . $controller);
 		}
-		return (new $controller)->$method(...$parameters);
+
+		$method = new ReflectionMethod($controller, $method);
+		if ($method->getNumberOfParameters() > 0) {
+			return $method->invokeArgs(new $controller, $parameters);
+		} 
+
+		return $method->invoke(new $controller);
 	}
 
 	/**

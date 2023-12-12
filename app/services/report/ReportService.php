@@ -71,4 +71,19 @@ class ReportService extends DBService {
 
         return $this->getDB()->insert($this->getTable(), $data);
     }
+
+    public function updateReport(
+        $idReport,
+        $idCodeOfConduct,
+        $status,
+        $idAdmin = null
+    ) {
+        $data = [
+            'id_code_of_conduct' => $idCodeOfConduct,
+            'status' => $status,
+            'id_admin' => $idAdmin
+        ];
+
+        return $this->getDB()->update($this->getTable(), $data, ['id_report' => $idReport]);
+    }
 }

@@ -5,6 +5,7 @@ $user = Session::getInstance()->get('user');
  * @var ReportModel $report
  * @var UserModel $mahasiswaUser
  * @var UserModel $dosenUser
+ * @var UserModel|null $adminUser
  * @var CodeOfConductModel $codeOfConduct
  */
 ?>
@@ -163,63 +164,74 @@ $user = Session::getInstance()->get('user');
                         </div>
                         <div class="col-3">
                             <!-- for admin -->
+
                             <div class="row-auto">
                                 <div class="col-auto d-flex flex-column gap-2">
                                     <div class="img d-flex align-items-center gap-3">
-                                        <img src="<?= $user->getImageUrl() ?>" class="rounded-circle img-profile" alt="">
+                                        <img src="<?= $dosenUser->getImageUrl() ?>" class="border border-white rounded-circle img-profile" alt="">
                                         <h6>
-                                            <?= $user->getFirstName() . " " . $user->getLastName() ?>
+                                            <?= $dosenUser->getFirstName() . " " . $dosenUser->getLastName() ?>
                                         </h6>
                                     </div>
 
                                     <div class="info">
                                         <p>participant</p>
                                         <div class="participant">
-                                            <img src="" alt="">
-                                            <img src="" alt="">
-                                            <img src="" alt="">
+                                            <img src="<?= $dosenUser->getImageUrl() ?>" class="border border-white rounded-circle img-profile" style="width: 30px; height: 30px" alt="">
+                                            <img src="<?= $adminUser?->getImageUrl() ?? '' ?>" class="border border-white rounded-circle img-profile" style="width: 30px; height: 30px" alt="">
+                                            <img src="<?= $mahasiswaUser?->getImageUrl() ?? '' ?>" class="border border-white rounded-circle img-profile" style="width: 30px; height: 30px" alt="">
                                         </div>
-                                        <div class="row">
-                                            <div class="col-4">
+                                        <div class="row mt-3">
+                                            <div class="col-5">
                                                 <h6 class="fw-bold">Report id</h6>
                                             </div>
                                             <div class="col">
-                                                <h6>: <span class="badge bg-secondary">21312</span></h6>
+                                                <h6><span class="badge bg-success">#<?= $report->getIdReport() ?></span></h6>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-4">
-                                                <h6 class="fw-bold">Reported To</h6>
+                                            <div class="col-5">
+                                                <h6 class="fw-bold">Managed by</h6>
                                             </div>
                                             <div class="col">
-                                                <h6>: admin></h6>
+                                                <h6><?= $adminUser?->getUsername() ?? 'No One Yet' ?></h6>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="action row border-top">
-                                        <form action="post" class='col py-3'>
+                                    <div class="action row border-top ">
+                                        <form action="<?= $updateReportDetailEndpoint ?>" method="post" id="updateReportDetailForm" class='col py-3'>
                                             <div class="input-group mb-3">
                                                 <label class="input-group-text" for="inputGroupSelect01">Status</label>
-                                                <select class="form-select" id="inputGroupSelect01">
-                                                    <option selected>Choose...</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                <select class="form-select" id="inputGroupSelect01" name="status">
+                                                    <?php foreach (ReportModel::getStatusChoices() as $status): ?>
+                                                    <option value="<?= $status ?>" <?= $status == $report->getStatus() ? "selected" : "" ?> ><?= $status ?></option>
+                                                    <?php endforeach; ?>
                                                 </select>
                                             </div>
                                             <div class="input-group mb-3">
-                                                <label class="input-group-text" for="inputGroupSelect01">Point</label>
-                                                <select class="form-select" id="inputGroupSelect01">
-                                                    <option selected>Choose...</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                <label class="input-group-text" for="inputGroupSelect01">Code of Conduct</label>
+                                                <select class="form-select" id="inputGroupSelect01" name="id_code_of_conduct">
+                                                    <?php 
+                                                    /**
+                                                     * @var CodeOfConductModel[] $codeOfConducts
+                                                     */
+                                                    foreach ($codeOfConducts as $codeOfConduct): ?>
+                                                        <option value="<?= $codeOfConduct->getIdCodeOfConduct() ?>" <?= $codeOfConduct == $report->getCodeOfConduct() ? "selected" : "" ?> ><?= $codeOfConduct->getName() ?></option>
+                                                    <?php endforeach; ?>
                                                 </select>
                                             </div>
+                                            <hr>
                                             <div class="input-group mb-3 d-flex justify-content-end">
-                                                <button type="submit" class="btn btn-secondary text-white">
-                                                    Submit
+                                                <?php 
+                                                /**
+                                                 * @var UserModel $currentUser
+                                                 */
+                                                $currentUser = Session::getInstance()->get('user');
+                                                if ($currentUser->isAdmin()): ?>
+                                                <button onclick='$("#updateReportDetailForm").submit()' class="btn btn-secondary text-white">
+                                                    Save
                                                 </button>
+                                                <?php endif; ?>
                                             </div>
 
                                         </form>

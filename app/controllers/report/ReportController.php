@@ -48,6 +48,8 @@ class ReportController
 			}
 		}
 
+		$codeOfConducts = $codeOfConductService->getAllCodeOfConduct();
+
 		$data = [
 			'flash' => Flasher::flash(),
 			'report' => $report,
@@ -57,7 +59,9 @@ class ReportController
 			'dosenUser' => $dosenUser,
 			'adminUser' => $adminUser,
 			'reportComments' => $reportComments,
-			'addNewReportCommentEndpoint' => App::get('root_uri') . "/report/detail/$idReport/comment/new"
+			'codeOfConducts' => $codeOfConducts,
+			'addNewReportCommentEndpoint' => App::get('root_uri') . "/report/detail/$idReport/comment/new",
+			'updateReportDetailEndpoint' => App::get('root_uri') . "/report/detail/$idReport/update",
 		];
 
 		return Helper::view('report/report_detail', $data);
@@ -126,6 +130,54 @@ class ReportController
 			$reportCommentService->addNewReportComment($idReport, $idUser, $content, $imagePath);
 
 			Flasher::setFlash("success", "Comment added successfully");
+		} else {
+			Flasher::setFlash("danger", "All fields must be filled");
+		}
+
+		return Helper::redirect("/report/detail/$idReport");
+	}
+
+	public function updateReportDetail($idReport)
+	{
+		if (
+			isset($_POST['id_code_of_conduct']) && $_POST['id_code_of_conduct'] != '' &&
+			isset($_POST['status']) && $_POST['status'] != ''
+		) {
+			$reportService = ReportService::getInstance();
+			$adminService = AdminService::getInstance();
+
+			$report = $reportService->getSingleReport(['id_report' => $idReport]);
+			
+			if ($report == null) {
+				Flasher::setFlash("danger", "Report not found");
+				return Helper::redirect("/");
+			}
+			
+			// get input
+			$idCodeOfConduct = $_POST['id_code_of_conduct'];
+			$status = $_POST['status'];
+
+			/**
+			 * @var UserModel
+			 */
+			$user = Session::getInstance()->get('user');
+			$adminRole = $adminService->getSingleAdmin(['id_user' => $user->getIdUser()]);
+
+			if ($report->getIdAdmin() == null) {
+				// if report is not assigned to admin, then assign current
+				$reportService->updateReport($idReport, $idCodeOfConduct, $status, $adminRole->getIdAdmin());
+			} else {
+				// if report is assigned to admin, then check if current user is the admin of the report
+				if ($report->getIdAdmin() != $adminRole->getIdAdmin()) {
+					Flasher::setFlash("danger", "You are not the admin of this report");
+					return Helper::redirect("/report/detail/$idReport");
+				}
+
+				// if current user is the admin of the report, then update the report
+				$reportService->updateReport($idReport, $idCodeOfConduct, $status, $report->getIdAdmin());
+			}
+
+			Flasher::setFlash("success", "Report updated successfully");
 		} else {
 			Flasher::setFlash("danger", "All fields must be filled");
 		}
