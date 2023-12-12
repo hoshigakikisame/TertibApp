@@ -109,6 +109,7 @@ class UserService extends DBService
 
         $adminService = AdminService::getInstance();
         $dosenService = DosenService::getInstance();
+        $mahasiswaService = MahasiswaService::getInstance();
 
         $user = $this->getSingleUser([
             'id_user' => $idUser
@@ -126,6 +127,7 @@ class UserService extends DBService
                 $user->setRoleDetail($dosenService->getSingleDosen(['id_user' => $user->getIdUser()]));
                 break;
             case 'mahasiswa':
+                $user->setRoleDetail($mahasiswaService->getSingleMahasiswa(['id_user' => $user->getIdUser()]));
                 break;
             default:
                 break;

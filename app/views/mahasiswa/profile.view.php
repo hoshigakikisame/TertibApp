@@ -42,7 +42,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="title" class="form-label">Program Studi</label>
-                                            <input type="text" class="form-control" name="title" id="title" placeholder="title" value="<?= $mahasiswaTitle ?>" disabled readonly>
+                                            <input type="text" class="form-control" name="prodi" id="prodi" placeholder="prodi" value="<?= $prodi ?>" disabled readonly>
                                         </div>
                                         <div class="mb-3">
                                             <label for="email" class="form-label">Email</label>

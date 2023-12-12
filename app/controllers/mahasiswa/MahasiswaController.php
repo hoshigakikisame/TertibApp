@@ -56,7 +56,7 @@ class MahasiswaController
             'username' => $user->getUsername(),
             'firstName' => $user->getFirstName(),
             'lastName' => $user->getLastName(),
-            'mahasiswaTitle' => $mahasiswaRole->getProdi(),
+            'prodi' => $mahasiswaRole->getProdi(),
             'email' => $user->getEmail(),
             'address' => $user->getAddress(),
             'phoneNumber' => $user->getPhoneNumber(),
@@ -73,7 +73,6 @@ class MahasiswaController
         if (
             isset($_POST['firstname']) && $_POST['firstname'] != '' &&
             isset($_POST['lastname']) && $_POST['lastname'] != '' &&
-            isset($_POST['title']) && $_POST['title'] != '' &&
             isset($_POST['address']) && $_POST['address'] != '' &&
             isset($_POST['number']) && $_POST['number'] != ''
         ) {
@@ -91,7 +90,6 @@ class MahasiswaController
             $idUser = $user->getIdUser();
             $firstName = $_POST['firstname'];
             $lastName = $_POST['lastname'];
-            $title = $_POST['title'];
             $address = $_POST['address'];
             $phoneNumber = $_POST['number'];
 
@@ -132,12 +130,6 @@ class MahasiswaController
                 ['id_user' => $idUser]
             );
 
-            // update dosen's profile
-            $dosenService->updateDosenProfile(
-                $title,
-                ['id_user' => $idUser]
-            );
-
             // refresh user session
             $userService->refreshUserSession($idUser);
 
@@ -145,6 +137,8 @@ class MahasiswaController
         } else {
             Flasher::setFlash("danger", "All fields must be filled");
         }
+
+        // Helper::dd($_POST);
 
         return Helper::redirect('/mahasiswa/profile');
     }
