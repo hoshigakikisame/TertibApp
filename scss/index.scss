@@ -183,8 +183,8 @@ li.active-drop{
 
 // start drop input
 .drop-area{
-  width: 500px;
-  height: 300px;
+  max-width: max(100%,300px);
+  max-height: max(100%,150px);
   cursor: pointer;
 }
 
@@ -228,6 +228,15 @@ li div.nav-item.active-page > button {
 .circle-elemen-hero > .elemen{
   background: linear-gradient(180deg, #FCB216 6.77%, #F3542C 27.6%, rgba(33, 37, 41, 0.32) 65.62%);
 }
+
+
+.content.active-page::before {
+  background-color: $primary;
+}
+
+.nav-item:hover::before {
+  background-color: $primary;
+}
   
 @media (min-width: 992px) {
     .content.active-page::before {
@@ -259,7 +268,7 @@ li div.nav-item.active-page > button {
   background-color: $secondary;
   content: "";
   position: absolute;
-  left: -12px;
+  right: -12px;
   width: 3px;
   height: 100%;
   transition: all ease 0.5s;
@@ -269,7 +278,7 @@ li div.nav-item.active-page > button {
   background-color: $secondary;
   content: "";
   position: absolute;
-  left: -12px;
+  right: -12px;
   width: 3px;
   height: 100%;
   transition: all ease 0.5s;

@@ -8428,8 +8428,8 @@ li.active-drop {
 }
 
 .drop-area {
-  width: 500px;
-  height: 300px;
+  max-width: max(100%, 300px);
+  max-height: max(100%, 150px);
   cursor: pointer;
 }
 
@@ -8463,6 +8463,12 @@ li.active-drop {
 [data-bs-theme=dark] .circle-elemen-hero > .elemen {
   background: linear-gradient(180deg, #FCB216 6.77%, #F3542C 27.6%, rgba(33, 37, 41, 0.32) 65.62%);
 }
+[data-bs-theme=dark] .content.active-page::before {
+  background-color: #FCB216;
+}
+[data-bs-theme=dark] .nav-item:hover::before {
+  background-color: #FCB216;
+}
 @media (min-width: 992px) {
   [data-bs-theme=dark] .content.active-page::before {
     background-color: #FCB216;
@@ -8488,7 +8494,7 @@ li.active-drop {
   background-color: #F3542C;
   content: "";
   position: absolute;
-  left: -12px;
+  right: -12px;
   width: 3px;
   height: 100%;
   transition: all ease 0.5s;
@@ -8498,7 +8504,7 @@ li.active-drop {
   background-color: #F3542C;
   content: "";
   position: absolute;
-  left: -12px;
+  right: -12px;
   width: 3px;
   height: 100%;
   transition: all ease 0.5s;

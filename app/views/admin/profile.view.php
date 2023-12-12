@@ -31,8 +31,8 @@ $updatePasswordEndpoint = App::get("root_uri") . "/admin/update-password";
                                     </div>
                                     <div class=" col">
                                         <div class="mb-3">
-                                            <label for="username" class="form-label">Username</label>
-                                            <input type="text" class="form-control" name="username" id="username" placeholder="data" value="<?= $username ?>" disabled readonly>
+                                            <label for="identity" class="form-label">Username</label>
+                                            <input type="text" class="form-control" name="username" id="identity" placeholder="data" value="<?= $username ?>" disabled readonly>
                                         </div>
                                         <div class="mb-3">
                                             <label for="firstname" class="form-label">Firstname</label>
@@ -54,12 +54,12 @@ $updatePasswordEndpoint = App::get("root_uri") . "/admin/update-password";
                                             <label for="address" class="form-label">Address</label>
                                             <input type="text" class="form-control" name="address" id="address" placeholder="Address" value="<?= $address ?>">
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="number" class="form-label">Number</label>
-                                            <input type="number" class="form-control" name="number" id="number" placeholder="Your Number" value="<?= $phoneNumber ?>">
+                                        <div class="mb-3" title="flashTelepon">
+                                            <label for="noTelp" class="form-label">Number</label>
+                                            <input type="number" class="form-control" name="number" id="noTelp" placeholder="Your Number" value="<?= $phoneNumber ?>">
                                         </div>
                                         <div class="d-flex gap-3 justify-content-end">
-                                            <button type="button" onclick="document.querySelector('#updateProfileForm').submit()" class="btn btn-secondary px-4 text-white">Save</button>
+                                            <button type="submit" onclick="" class="btn btn-secondary px-4 text-white">Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -85,7 +85,7 @@ $updatePasswordEndpoint = App::get("root_uri") . "/admin/update-password";
                                             <input type="password" class="form-control" name="confirm_password" id="confirmPassword" placeholder="Enter Your New Password">
                                         </div>
                                         <div class="d-flex gap-3 justify-content-end ">
-                                            <button type="submit" onclick="document.querySelector('#updatePasswordForm').submit()" class="btn btn-secondary px-4 text-white" id="buttonUpdatePassword">Update Password</button>
+                                            <button type="submit" onclick="" class="btn btn-secondary px-4 text-white" id="buttonUpdatePassword">Update Password</button>
                                         </div>
                                     </div>
                                 </div>

@@ -11,7 +11,7 @@
         </div>
         <!-- End Sidebar -->
 
-        <main class="col-auto position-relative">
+        <main class="col-auto position-relative overflow-x-hidden">
             <div class="row justify-content-end px-auto">
                 <div class="col-lg-10 col px-5 py-4" title="main">
                     <div class="row mb-4">

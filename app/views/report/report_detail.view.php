@@ -161,8 +161,71 @@ $user = Session::getInstance()->get('user');
                                 </div>
                             </div>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-3">
                             <!-- for admin -->
+                            <div class="row-auto">
+                                <div class="col-auto d-flex flex-column gap-2">
+                                    <div class="img d-flex align-items-center gap-3">
+                                        <img src="<?= $user->getImageUrl() ?>" class="rounded-circle img-profile" alt="">
+                                        <h6>
+                                            <?= $user->getFirstName() . " " . $user->getLastName() ?>
+                                        </h6>
+                                    </div>
+
+                                    <div class="info">
+                                        <p>participant</p>
+                                        <div class="participant">
+                                            <img src="" alt="">
+                                            <img src="" alt="">
+                                            <img src="" alt="">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <h6 class="fw-bold">Report id</h6>
+                                            </div>
+                                            <div class="col">
+                                                <h6>: <span class="badge bg-secondary">21312</span></h6>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <h6 class="fw-bold">Reported To</h6>
+                                            </div>
+                                            <div class="col">
+                                                <h6>: admin></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="action row border-top">
+                                        <form action="post" class='col py-3'>
+                                            <div class="input-group mb-3">
+                                                <label class="input-group-text" for="inputGroupSelect01">Status</label>
+                                                <select class="form-select" id="inputGroupSelect01">
+                                                    <option selected>Choose...</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <label class="input-group-text" for="inputGroupSelect01">Point</label>
+                                                <select class="form-select" id="inputGroupSelect01">
+                                                    <option selected>Choose...</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                            <div class="input-group mb-3 d-flex justify-content-end">
+                                                <button type="submit" class="btn btn-secondary text-white">
+                                                    Submit
+                                                </button>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
