@@ -74,7 +74,8 @@ class DosenController
 			'phoneNumber' => $user->getPhoneNumber(),
 			'imageUrl' => $user->getImageUrl(),
 			'flash' => Flasher::flash(),
-			'updateProfileEndpoint' => App::get('root_uri') . '/dosen/profile/update'
+			'updateProfileEndpoint' => App::get('root_uri') . '/dosen/update-profile',
+			'updatePasswordEndpoint' => App::get('root_uri') . '/dosen/update-password'
 		];
 
 		return Helper::view('dosen/profile', $data);
@@ -294,5 +295,49 @@ class DosenController
 		}
 
 		return Helper::redirect('/dosen/report');
+	}
+
+	public function updatePassword()
+	{
+		if (
+			isset($_POST['current_password']) && $_POST['current_password'] != '' &&
+			isset($_POST['new_password']) && $_POST['new_password'] != ''
+		) {
+			$userService = UserService::getInstance();
+
+			/**
+			 * @var UserModel
+			 */
+			$user = Session::getInstance()->get('user');
+
+			// get input
+			$currentPassword = $_POST['current_password'];
+			$newPassword = $_POST['new_password'];
+
+			// validate password
+			$validated = $userService->validatePassword($user->getSalt(), $currentPassword, $user->getPasswordHash());
+
+			// if validation failed return to profile page
+			if (!$validated) {
+				Flasher::setFlash("danger", "Current password is incorrect");
+				return Helper::redirect('/dosen/profile');
+			}
+
+			// define updateUserPassword parameters
+			$idUser = $user->getIdUser();
+			$newPassword = $userService->hashPassword($user->getSalt(), $newPassword);
+
+			// update user's password
+			$userService->updateUserPassword($idUser, $newPassword);
+
+			// refresh user session
+			$userService->refreshUserSession($idUser);
+
+			Flasher::setFlash("success", "Password updated successfully");
+		} else {
+			Flasher::setFlash("danger", "All fields must be filled");
+		}
+
+		return Helper::redirect('/dosen/profile');
 	}
 }

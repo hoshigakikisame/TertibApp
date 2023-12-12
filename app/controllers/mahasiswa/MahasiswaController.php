@@ -62,7 +62,8 @@ class MahasiswaController
             'phoneNumber' => $user->getPhoneNumber(),
             'imageUrl' => $user->getImageUrl(),
             'flash' => Flasher::flash(),
-            'updateProfileEndpoint' => App::get('root_uri') . '/mahasiswa/profile/update'
+            'updateProfileEndpoint' => App::get('root_uri') . '/mahasiswa/update-profile',
+            'updatePasswordEndpoint' => App::get('root_uri') . '/mahasiswa/update-password'
         ];
 
         return Helper::view('mahasiswa/profile', $data);
@@ -199,82 +200,47 @@ class MahasiswaController
         return Helper::view('mahasiswa/report', $data);
     }
 
-    public function addNewReport()
-    {
-        if (
-            isset($_POST['title']) && $_POST['title'] != '' &&
-            isset($_POST['nim_mahasiswa']) && $_POST['nim_mahasiswa'] != '' &&
-            isset($_POST['id_code_of_conduct']) && $_POST['id_code_of_conduct'] != '' &&
-            isset($_POST['location']) && $_POST['location'] != '' &&
-            isset($_POST['content']) && $_POST['content'] != ''
-        ) {
-            $reportService = ReportService::getInstance();
-            $mediaStorageService = MediaStorageService::getInstance();
+    public function updatePassword()
+	{
+		if (
+			isset($_POST['current_password']) && $_POST['current_password'] != '' &&
+			isset($_POST['new_password']) && $_POST['new_password'] != ''
+		) {
+			$userService = UserService::getInstance();
 
-            /**
-             * @var UserModel
-             */
+			/**
+			 * @var UserModel
+			 */
+			$user = Session::getInstance()->get('user');
 
-            $user = Session::getInstance()->get('user');
-            /**
-             * @var DosenModel
-             */
-            $dosenRole = $user->getRoleDetail();
+			// get input
+			$currentPassword = $_POST['current_password'];
+			$newPassword = $_POST['new_password'];
 
-            // get input
-            $nidnDosen = $dosenRole->getNidn();
-            $title = $_POST['title'];
-            $nimMahasiswa = $_POST['nim_mahasiswa'];
-            $idCodeOfConduct = $_POST['id_code_of_conduct'];
-            $location = $_POST['location'];
-            $content = $_POST['content'];
+			// validate password
+			$validated = $userService->validatePassword($user->getSalt(), $currentPassword, $user->getPasswordHash());
 
-            $imagePath = '';
+			// if validation failed return to profile page
+			if (!$validated) {
+				Flasher::setFlash("danger", "Current password is incorrect");
+				return Helper::redirect('/mahasiswa/profile');
+			}
 
-            if (isset($_FILES['evidence_picture']) && $_FILES['evidence_picture']['name'] != '') {
-                $evidencePicture = $_FILES['evidence_picture'];
+			// define updateUserPassword parameters
+			$idUser = $user->getIdUser();
+			$newPassword = $userService->hashPassword($user->getSalt(), $newPassword);
 
-                // validate image extension
-                $validImageExtension = $mediaStorageService->validateImageExtension($evidencePicture);
-                if (!$validImageExtension) {
-                    Flasher::setFlash("danger", "Invalid image extension");
-                    return Helper::redirect('/mahasiswa/report');
-                }
+			// update user's password
+			$userService->updateUserPassword($idUser, $newPassword);
 
-                // validate image size
-                $validImageSize = $mediaStorageService->validateImageSize($evidencePicture);
-                if (!$validImageSize) {
-                    Flasher::setFlash("danger", "Image size must be less than " . MediaStorageService::getInstance()->getMaxImageSize() . " bytes");
-                    return Helper::redirect('/mahasiswa/report');
-                }
+			// refresh user session
+			$userService->refreshUserSession($idUser);
 
-                $publicId = Helper::generateRandomHex(16);
+			Flasher::setFlash("success", "Password updated successfully");
+		} else {
+			Flasher::setFlash("danger", "All fields must be filled");
+		}
 
-                // upload image
-                $uploadResult = $mediaStorageService::getInstance()->uploadImage($evidencePicture['tmp_name'], 'report', $publicId);
-
-                // get image path from upload result publicId and extension
-                $imagePath = $uploadResult->publicId . '.' . $mediaStorageService->getImageExtension($evidencePicture);
-            }
-
-
-            // update user's profile
-            $reportService->addNewReport(
-                $idCodeOfConduct,
-                $title,
-                $nidnDosen,
-                $nimMahasiswa,
-                $content,
-                'New',
-                $imagePath,
-                $location
-            );
-
-            Flasher::setFlash("success", "Report added successfully");
-        } else {
-            Flasher::setFlash("danger", "All fields must be filled");
-        }
-
-        return Helper::redirect('/mahasiswa/report');
-    }
+		return Helper::redirect('/mahasiswa/profile');
+	}
 }
