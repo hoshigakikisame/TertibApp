@@ -138,6 +138,16 @@ class ReportModel implements DBModel
         ];
     }
 
+    public function getImageUrl()
+    {
+        $baseUrl = MediaStorageService::getInstance()->getAccessUrl();
+        if ($this->imagePath == null || $this->imagePath == '') {
+            return '';
+        }
+        $randomHex = Helper::generateRandomHex(8);
+        return $baseUrl . $this->imagePath . '?v=' . $randomHex;
+    }
+
     public function getDosen()
     {
         return $this->dosen;
@@ -151,6 +161,35 @@ class ReportModel implements DBModel
     public function getMahasiswa()
     {
         return $this->mahasiswa;
+    }
+
+    /**
+     * @param UserModel $user
+     * @return bool
+     */
+    public function isParticipant($user): bool {
+        $isParticipant = false;
+        switch ($user->getRole()) {
+            case 'dosen':
+                /**
+                 * @var DosenModel $dosenRole
+                 */
+                $dosenRole = $user->getRoleDetail();
+                $isParticipant = $dosenRole->getNidn() == $this->getNidnDosen();
+                break;
+            case 'admin':
+                /**
+                 * @var AdminModel $adminRole
+                 */
+                $adminRole = $user->getRoleDetail();
+                $isParticipant = $adminRole->getIdAdmin() == $this->getIdAdmin();
+                break;
+            default:
+                $isParticipant = false;
+                break;
+        }
+
+        return $isParticipant;
     }
 
     // setters

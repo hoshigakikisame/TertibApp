@@ -7,7 +7,19 @@ class QueryBuilder
 	function __construct(PDO $pdo)
 	{
 		$this->pdo = $pdo;
+		$this->setTimeZone();
+		
 	}
+
+	private function setTimeZone()
+	{
+		/**
+		 * @var array $config
+		 */
+		$config = App::get('config');
+		$timezone = $config['timezone'];
+		$this->pdo->exec("SET time_zone = '{$timezone}'");
+	} 
 
 	public function getLastInsertId()
 	{
@@ -119,7 +131,7 @@ class QueryBuilder
 	 * @param  array  $params [description]
 	 * @return [type]         [description]
 	 */
-	public function insert(string $table, array $params = [])
+	public function insert(string $table, array $params = []): string 
 	{
 		$sql = sprintf(
 			"INSERT INTO %s (%s) VALUES(%s)",

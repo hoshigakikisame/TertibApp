@@ -1,41 +1,135 @@
 <?php
 
-class ReportController {
-    public function reportDetailPage(int $idReport)
+class ReportController
+{
+	public function reportDetailPage(int $idReport)
 	{
 
-        $reportService = ReportService::getInstance();
-        $codeOfConductService = CodeOfConductService::getInstance();
-        $violationLevelService = ViolationLevelService::getInstance();
-        $userService = UserService::getInstance();
-        $mahasiswaService = MahasiswaService::getInstance();
-        $dosenService = DosenService::getInstance();
-        $adminService = AdminService::getInstance();
+		$reportService = ReportService::getInstance();
+		$reportCommentService = ReportCommentService::getInstance();
+		$codeOfConductService = CodeOfConductService::getInstance();
+		$violationLevelService = ViolationLevelService::getInstance();
+		$userService = UserService::getInstance();
+		$mahasiswaService = MahasiswaService::getInstance();
+		$dosenService = DosenService::getInstance();
+		$adminService = AdminService::getInstance();
 
-        $report = $reportService->getSingleReport(['id_report' => $idReport]);
-        $codeOfConduct = $codeOfConductService->getSingleCodeOfConduct(['id_code_of_conduct' => $report->getIdCodeOfConduct()]);
-        $violationLevel = $violationLevelService->getSingleViolationLevel(['id_violation_level' => $codeOfConduct->getIdViolationLevel()]);
-        
-        // $adminUser = $userService->getSingleUser(['id_user' => $report->getIdAdmin()]);
-        // $adminRole = $adminService->getSingleAdmin(['id_user' => $adminUser->getIdUser()]);
+		$report = $reportService->getSingleReport(['id_report' => $idReport]);
+		$codeOfConduct = $codeOfConductService->getSingleCodeOfConduct(['id_code_of_conduct' => $report->getIdCodeOfConduct()]);
+		$violationLevel = $violationLevelService->getSingleViolationLevel(['id_violation_level' => $codeOfConduct->getIdViolationLevel()]);
 
-        $mahasiswaRole = $mahasiswaService->getSingleMahasiswa(['nim' => $report->getNimMahasiswa()]);
-        $mahasiswaUser = $userService->getSingleUser(['id_user' => $mahasiswaRole->getIdUser()]);
-        $mahasiswaUser->setRoleDetail($mahasiswaRole);
+		if ($report->getIdAdmin() == null) {
+			$adminUser = null;
+			$adminRole = null;
+		} else {
+			$adminUser = $userService->getSingleUser(['id_user' => $report->getIdAdmin()]);
+			$adminRole = $adminService->getSingleAdmin(['id_user' => $adminUser->getIdUser()]);
+			$adminUser->setRoleDetail($adminRole);
+		}
 
-        $dosenRole = $dosenService->getSingleDosen(['nidn' => $report->getNidnDosen()]);
-        $dosenUser = $userService->getSingleUser(['id_user' => $dosenRole->getIdUser()]);
-        $dosenUser->setRoleDetail($dosenRole);
+		$mahasiswaRole = $mahasiswaService->getSingleMahasiswa(['nim' => $report->getNimMahasiswa()]);
+		$mahasiswaUser = $userService->getSingleUser(['id_user' => $mahasiswaRole->getIdUser()]);
+		$mahasiswaUser->setRoleDetail($mahasiswaRole);
+
+		$dosenRole = $dosenService->getSingleDosen(['nidn' => $report->getNidnDosen()]);
+		$dosenUser = $userService->getSingleUser(['id_user' => $dosenRole->getIdUser()]);
+		$dosenUser->setRoleDetail($dosenRole);
+
+		$reportComments = $reportCommentService->getManyReportComment(['id_report' => $idReport]);
+		$participants = [$adminUser, $mahasiswaUser, $dosenUser];
+
+		// assign user to report comment
+		for ($i = 0; $i < count($reportComments); $i++) {
+			for ($j = 0; $j < count($participants); $j++) {
+				if ($participants[$j] == null) continue;
+				if ($reportComments[$i]->getIdUser() == $participants[$j]->getIdUser()) {
+					$reportComments[$i]->setUser($participants[$j]);
+				}
+			}
+		}
 
 		$data = [
 			'flash' => Flasher::flash(),
-            'report' => $report,
-            'codeOfConduct' => $codeOfConduct,
-            'violationLevel' => $violationLevel,
-            'mahasiswaUser' => $mahasiswaUser,
-            'dosenUser' => $dosenUser
+			'report' => $report,
+			'codeOfConduct' => $codeOfConduct,
+			'violationLevel' => $violationLevel,
+			'mahasiswaUser' => $mahasiswaUser,
+			'dosenUser' => $dosenUser,
+			'adminUser' => $adminUser,
+			'reportComments' => $reportComments,
+			'addNewReportCommentEndpoint' => App::get('root_uri') . "/report/detail/$idReport/comment/new"
 		];
 
 		return Helper::view('report/report_detail', $data);
+	}
+
+	public function addNewReportComment($idReport)
+	{
+		if (
+			isset($_POST['content']) && $_POST['content'] != ''
+		) {
+			$reportCommentService = ReportCommentService::getInstance();
+			$reportService = ReportService::getInstance();
+			$mediaStorageService = MediaStorageService::getInstance();
+
+			/**
+			 * @var UserModel
+			 */
+			$user = Session::getInstance()->get('user');
+
+			// get input
+			$idUser = $user->getIdUser();
+			$content = $_POST['content'];
+
+			$report = $reportService->getSingleReport(['id_report' => $idReport]);
+			$isParticipant = $report->isParticipant($user);
+
+			if ($report == null) {
+				Flasher::setFlash("danger", "Report not found");
+				return Helper::redirect("/");
+			}
+
+			if (!$isParticipant) {
+				Flasher::setFlash("danger", "You are not a participant of this report");
+				return Helper::redirect("/report/detail/$idReport");
+			}
+
+			$imagePath = '';
+
+			if (isset($_FILES['attachment_picture']) && $_FILES['attachment_picture']['name'] != '') {
+				$evidencePicture = $_FILES['attachment_picture'];
+
+				// validate image extension
+				$validImageExtension = $mediaStorageService->validateImageExtension($evidencePicture);
+				if (!$validImageExtension) {
+					Flasher::setFlash("danger", "Invalid image extension");
+					return Helper::redirect("/report/detail/$idReport");
+				}
+
+				// validate image size
+				$validImageSize = $mediaStorageService->validateImageSize($evidencePicture);
+				if (!$validImageSize) {
+					Flasher::setFlash("danger", "Image size must be less than " . MediaStorageService::getInstance()->getMaxImageSize() . " bytes");
+					return Helper::redirect("/report/detail/$idReport");
+				}
+
+				$publicId = Helper::generateRandomHex(16);
+
+				// upload image
+				$uploadResult = $mediaStorageService::getInstance()->uploadImage($evidencePicture['tmp_name'], 'report', $publicId);
+
+				// get image path from upload result publicId and extension
+				$imagePath = $uploadResult->publicId . '.' . $mediaStorageService->getImageExtension($evidencePicture);
+			}
+
+			// add new report comment
+			$reportCommentService->addNewReportComment($idReport, $idUser, $content, $imagePath);
+
+			Flasher::setFlash("success", "Comment added successfully");
+		} else {
+			Flasher::setFlash("danger", "All fields must be filled");
+		}
+
+		return Helper::redirect("/report/detail/$idReport");
 	}
 }

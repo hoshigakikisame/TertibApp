@@ -92,9 +92,6 @@ class UserModel implements DBModel
         return $this->imagePath;
     }
 
-    /**
-     * @return T
-     */
     public function getRoleDetail()
     {
         return $this->roleDetail;

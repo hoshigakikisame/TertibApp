@@ -57,7 +57,7 @@ class ReportService extends DBService {
         $status,
         $imagePath,
         $location
-    ): bool {
+    ): string {
         $data = [
             'id_code_of_conduct' => $idCodeOfConduct,
             'title' => $title,
