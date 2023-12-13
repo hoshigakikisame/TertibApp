@@ -40,4 +40,16 @@ class ReportCommentService extends DBService {
 
         return $this->getDB()->insert($this->getTable(), $data);
     }
+
+    /**
+     * @param ReportCommentModel[] $reportComments
+     */
+    public function markReportCommentAsRead(array $reportComments) {
+        $ids = [];
+        foreach ($reportComments as $reportComment) {
+            $ids[] = $reportComment->getIdReportComment();
+        }
+
+        return $this->getDB()->execute("UPDATE {$this->getTable()} SET is_new = false WHERE id_report_comment IN (" . implode(',', $ids) . ")");
+    }
 }

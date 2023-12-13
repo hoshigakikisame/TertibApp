@@ -44,11 +44,23 @@ class DosenController
 		 * @var UserModel
 		 */
 		$user = Session::getInstance()->get('user');
+		$dosenRole = $user->getRoleDetail();
+		assert($dosenRole instanceof DosenModel);
+
+		$dosenService = DosenService::getInstance();
+		$reportCommentService = ReportCommentService::getInstance();
+
+		$newReportComments = $dosenService->getDosenNotification($dosenRole);
 
 		$data = [
 			'firstname' => $user->getFirstName(),
 			'lastname' => $user->getLastName(),
+			'newReportComments' => $newReportComments
 		];
+
+		// mark all report comments as read
+		if (count($newReportComments) > 0)
+			$reportCommentService->markReportCommentAsRead($newReportComments);
 
 		return Helper::view('dosen/notification', $data);
 	}

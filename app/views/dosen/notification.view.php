@@ -12,6 +12,29 @@
                 <div class="col-lg-10 col px-5 py-4" title="main">
                     <div class="row mb-4">
                         <h1>Notification</h1>
+                        <?php
+                        /**
+                         * @var ReportCommentModel[] $newReportComments
+                         */
+                        foreach ($newReportComments as $comment): ?>
+                            <div class="col-xl-10 col" id="<?= $comment->getIdReportComment() ?>">
+                                <div class="row-auto flex-column p-3 bg-light-subtle rounded-3">
+                                    <div class="col ">
+                                        <h5>
+                                            <span class="badge bg-success">#
+                                                <?= $comment->getIdReportComment() ?>
+                                            </span>
+                                            User #<?= $comment->getIdUser() ?> commented on report
+                                            #<?= $comment->getIdReport() ?>
+                                        </h5>
+                                    </div>
+                                    <div class="col"></div>
+                                    <p class="text-wrap text-truncate">
+                                        <?= $comment->getContent() ?> <a target="_blank" href="<?= $comment->getReferenceUrl() ?>">Show</a>
+                                    </p>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
 
                 </div>

@@ -50,9 +50,32 @@ class AdminController
 	 * [contact description]
 	 * @return [type] [description]
 	 */
-	public function notification()
+	public function notificationPage()
 	{
-		return Helper::view('admin/notification');
+
+		/**
+		 * @var UserModel
+		 */
+		$user = Session::getInstance()->get('user');
+		$adminRole = $user->getRoleDetail();
+		assert($adminRole instanceof AdminModel);
+
+		$adminService = AdminService::getInstance();
+		$reportCommentService = ReportCommentService::getInstance();
+
+		$newReportComments = $adminService->getAdminNotification($adminRole);
+
+		$data = [
+			'firstname' => $user->getFirstName(),
+			'lastname' => $user->getLastName(),
+			'newReportComments' => $newReportComments,
+		];
+
+		// mark all report comments as read
+		if (count($newReportComments) > 0)
+			$reportCommentService->markReportCommentAsRead($newReportComments);
+
+		return Helper::view('admin/notification', $data);
 	}
 
 	/**
