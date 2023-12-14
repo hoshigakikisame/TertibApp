@@ -157,6 +157,12 @@ class ReportController
 			$idCodeOfConduct = $_POST['id_code_of_conduct'];
 			$status = $_POST['status'];
 
+			// if report status is 'Valid' or 'Invalid', then cancel update
+			if ($report->getStatus() == 'Valid' || $report->getStatus() == 'Invalid') {
+				Flasher::setFlash("danger", "Report status is already 'Valid' or 'Invalid'");
+				return Helper::redirect("/report/detail/$idReport");
+			}
+
 			/**
 			 * @var UserModel
 			 */
@@ -175,6 +181,12 @@ class ReportController
 
 				// if current user is the admin of the report, then update the report
 				$reportService->updateReport($idReport, $idCodeOfConduct, $status, $report->getIdAdmin());
+			}
+
+			if ($status == 'Valid') {
+				// if report status is 'Valid', then add violation to mahasiswa
+				$mahasiswaViolationService = MahasiswaViolationService::getInstance();
+				$mahasiswaViolationService->addNewMahasiswaViolation($report->getNimMahasiswa(), $idReport);
 			}
 
 			Flasher::setFlash("success", "Report updated successfully");

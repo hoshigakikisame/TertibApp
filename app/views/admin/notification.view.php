@@ -12,18 +12,29 @@
                     <div class="row py-2 my-4 gap-4">
                         <h1>Notification</h1>
                         <!-- Start Notif -->
-                        <div class="col-xl-10 col">
-                            <div class="row-auto flex-column p-3 bg-light-subtle rounded-3">
-                                <div class="col ">
-                                    <h5>
-                                        <span class="badge bg-primary">LG7864</span>
-                                        You Have Unread Messages
-                                    </h5>
+                        <?php
+                        /**
+                         * @var ReportCommentModel[] $newReportComments
+                         */
+                        foreach ($newReportComments as $comment): ?>
+                            <div class="col-xl-10 col" id="<?= $comment->getIdReportComment() ?>">
+                                <div class="row-auto flex-column p-3 bg-light-subtle rounded-3">
+                                    <div class="col ">
+                                        <h5>
+                                            <span class="badge bg-success">#
+                                                <?= $comment->getIdReportComment() ?>
+                                            </span>
+                                            User #<?= $comment->getIdUser() ?> commented on report
+                                            #<?= $comment->getIdReport() ?>
+                                        </h5>
+                                    </div>
+                                    <div class="col"></div>
+                                    <p class="text-wrap text-truncate">
+                                        <?= $comment->getContent() ?> <a href="<?= $comment->getReferenceUrl() ?>">Show</a>
+                                    </p>
                                 </div>
-                                <div class="col"></div>
-                                <p class="text-wrap">Kami ingin memberitahu Anda bahwa ada perkembangan baru pada halaman report detail yang memerlukan perhatian Anda. Saat ini, terdapat pesan atau chat yang belum dibaca atau dibalas oleh Anda. <a href="">Show Details</a></p>
                             </div>
-                        </div>
+                        <?php endforeach; ?>
                         <!-- End Notif -->
                     </div>
                 </div>

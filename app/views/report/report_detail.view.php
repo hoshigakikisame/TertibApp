@@ -111,7 +111,7 @@ $user = Session::getInstance()->get('user');
                             foreach ($reportComments as $comment) :
                                 $user = $comment->getUser();
                             ?>
-                                <div class="row my-3">
+                                <div class="row my-3" id="<?= $comment->getIdReportComment() ?>">
                                     <div class="col-auto">
                                         <img src="<?= $user->getImageUrl() ?>" class="rounded-circle img-profile" alt="">
                                     </div>

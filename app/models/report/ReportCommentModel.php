@@ -75,6 +75,11 @@ class ReportCommentModel implements DBModel {
         return $baseUrl . $this->imagePath . '?v=' . $randomHex;
     }
 
+    public function getReferenceUrl()
+    {
+        return App::get('root_uri') . '/report/detail/' . $this->idReport . '#' . $this->idReportComment;
+    }
+
     // setters
     public function setIdReportComment($idReportComment) {
         $this->idReportComment = $idReportComment;

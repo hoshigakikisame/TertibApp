@@ -12,7 +12,8 @@ class AdminService extends DBService
         return parent::getInstance();
     }
 
-    public function getAllAdmin(): array {
+    public function getAllAdmin(): array
+    {
         $rawAdmins = $this->getAll();
         $admins = [];
 
@@ -24,7 +25,7 @@ class AdminService extends DBService
 
         return $admins;
     }
-    public function getSingleAdmin(array $where): AdminModel | null
+    public function getSingleAdmin(array $where): AdminModel|null
     {
         $rawAdmin = $this->getSingle($where);
         if ($rawAdmin) {
@@ -35,7 +36,8 @@ class AdminService extends DBService
         return null;
     }
 
-    public function addNewAdmin(int $idUser, string $title): string {
+    public function addNewAdmin(int $idUser, string $title): string
+    {
         return $this->getDB()->insert($this->getTable(), [
             'id_user' => $idUser,
             'title' => $title
@@ -47,5 +49,41 @@ class AdminService extends DBService
         $this->getDB()->update($this->getTable(), [
             'title' => $title,
         ], $where);
+    }
+
+    public function getAdminNotification(AdminModel $adminRole)
+    {
+        $sql = "SELECT * FROM `tb_report_comment` WHERE id_report IN (SELECT id_report from tb_report WHERE id_admin = :id_admin) AND is_new = true AND id_user != :id_user";
+
+        $rawReportComments = $this->getDB()->execute($sql, [
+            'id_admin' => $adminRole->getIdAdmin(),
+            'id_user' => $adminRole->getIdUser()
+        ]);
+
+        $reportComments = [];
+
+        if ($rawReportComments) {
+            foreach ($rawReportComments as $rawReportComment) {
+                $reportComments[] = ReportCommentModel::fromStdClass($rawReportComment);
+            }
+        }
+
+        return $reportComments;
+    }
+
+    public function getAdminNotificationCount(AdminModel $adminRole)
+    {
+        $sql = "SELECT COUNT(*) as count FROM `tb_report_comment` WHERE id_report IN (SELECT id_report from tb_report WHERE id_admin = :id_admin) AND is_new = true AND id_user != :id_user";
+
+        $rawReportComments = $this->getDB()->execute($sql, [
+            'id_admin' => $adminRole->getIdAdmin(),
+            'id_user' => $adminRole->getIdUser()
+        ]);
+
+        if ($rawReportComments) {
+            return $rawReportComments[0]->count;
+        }
+
+        return 0;
     }
 }
