@@ -13,6 +13,16 @@
                         <h1>Notification</h1>
                         <!-- Start Notif -->
                         <?php
+                        if (empty($newReportComments)): ?>
+                            <div class="col-xl-10 col">
+                                <div class="row-auto flex-column p-3 bg-light-subtle rounded-3">
+                                    <div class="col">
+                                        <h5 class="text-left">No new notification</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                        <?php
                         /**
                          * @var ReportCommentModel[] $newReportComments
                          */
@@ -24,13 +34,15 @@
                                             <span class="badge bg-success">#
                                                 <?= $comment->getIdReportComment() ?>
                                             </span>
-                                            User #<?= $comment->getIdUser() ?> commented on report
-                                            #<?= $comment->getIdReport() ?>
+                                            User #
+                                            <?= $comment->getIdUser() ?> commented on report
+                                            #
+                                            <?= $comment->getIdReport() ?>
                                         </h5>
                                     </div>
                                     <div class="col"></div>
                                     <p class="text-wrap text-truncate">
-                                        <?= $comment->getContent() ?> <a href="<?= $comment->getReferenceUrl() ?>">Show</a>
+                                        <?= $comment->getContent() ?> <a target="_blank" href="<?= $comment->getReferenceUrl() ?>">Show</a>
                                     </p>
                                 </div>
                             </div>

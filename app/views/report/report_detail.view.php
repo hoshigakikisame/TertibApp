@@ -97,6 +97,7 @@ $user = Session::getInstance()->get('user');
                                             <hr>
                                             <h6 class="fw-bold">Detail Pelanggaran</h6>
                                             <p><?= $report->getContent() ?></p>
+                                            <img style="max-height: 300px" src="<?= $report->getImageUrl() ?>" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -129,7 +130,7 @@ $user = Session::getInstance()->get('user');
                                             <div class="content">
                                                 <p><?= $comment->getContent() ?></p>
                                             </div>
-                                            <img style="height: 200px" src="<?= $comment->getImageUrl() ?>" alt="">
+                                            <img style="max-height: 200px" src="<?= $comment->getImageUrl() ?>" alt="">
                                         </div>
                                     </div>
                                 </div>

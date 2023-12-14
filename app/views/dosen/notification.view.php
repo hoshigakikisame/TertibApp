@@ -13,6 +13,16 @@
                     <div class="row mb-4">
                         <h1>Notification</h1>
                         <?php
+                        if (empty($newReportComments)): ?>
+                            <div class="col-xl-10 col">
+                                <div class="row-auto flex-column p-3 bg-light-subtle rounded-3">
+                                    <div class="col">
+                                        <h5 class="text-left">No new notification</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                        <?php
                         /**
                          * @var ReportCommentModel[] $newReportComments
                          */

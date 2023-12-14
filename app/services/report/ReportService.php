@@ -12,7 +12,7 @@ class ReportService extends DBService {
     }
 
     public function getAllReport(): array {
-        $rawReports = $this->getAll();
+        $rawReports = $this->getDB()->findAll($this->getTable(), 'id_report', 'DESC');
         $reports = [];
 
         if ($rawReports) {

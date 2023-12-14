@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo isset($title) ? $title : "Default Title" ?></title>
+    <title><?= isset($pageTitle) ? $pageTitle : "Tertib App" ?></title>
     <!-- Custom Bootstrap  -->
     <link rel="stylesheet" href="<?php echo App::get("root_uri") . "/public/css/index.css" ?>">
     <!-- Bootstrap Icons -->

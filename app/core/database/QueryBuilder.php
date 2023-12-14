@@ -65,10 +65,12 @@ class QueryBuilder
 		}
 	 }
 
-	 public function findAll($table) {
+	 public function findAll($table, string $orderby = '', string $order = 'ASC', int $limit = 0) {
 		$sql = sprintf(
-			"SELECT * FROM %s",
-			$table
+			"SELECT * FROM %s %s",
+			$table,
+			($orderby ? "ORDER BY $orderby $order" : '') . 
+			($limit > 0 ? " LIMIT $limit" : '')
 		);
 
 		try {
