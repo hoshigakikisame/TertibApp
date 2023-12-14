@@ -38,7 +38,15 @@ class GlobalController
 	
 	public function stats()
 	{
-		return Helper::view('global/stats');
+		// Defining services
+		$violationRecapService = ViolationRecapService::getInstance();
+		$recaps = $violationRecapService->getRecap();
+
+		$data = [
+			'recaps' => $recaps
+		];
+
+		return Helper::view('global/stats', $data);
 	}
 
 	/**

@@ -145,7 +145,8 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
                             /**
                              * @var UserModel $currentUser
                              */
-                            $currentUser = Session::getInstance()->get('user'); ?>
+                            $currentUser = Session::getInstance()->get('user'); 
+                            ?>
                             <div class="row mt-3">
                                 <div class="col-auto">
                                     <img src="<?= $currentUser->getImageUrl() ?>" class="rounded-circle border border-white img-profile" alt="">
