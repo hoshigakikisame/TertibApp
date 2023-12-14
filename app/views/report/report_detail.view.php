@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var UserModel $user
  */
@@ -145,7 +146,7 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
                             /**
                              * @var UserModel $currentUser
                              */
-                            $currentUser = Session::getInstance()->get('user'); 
+                            $currentUser = Session::getInstance()->get('user');
                             ?>
                             <div class="row mt-3">
                                 <div class="col-auto">
@@ -241,7 +242,7 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
                                                  */
                                                 $currentUser = Session::getInstance()->get('user');
                                                 if ($currentUser->isAdmin()) : ?>
-                                                    <button type="button" onclick="checkVal($(this))" class="btn btn-secondary text-white" data-bs-toggle="modal" data-bs-target="#modalConfirmation">
+                                                    <button type="button" onclick="checkVal($(this),$('#inputGroupSelect01').val() )" class="btn btn-secondary text-white" data-bs-toggle="modal" data-bs-target="#modalConfirmation">
                                                         Save
                                                     </button>
                                                 <?php endif; ?>
@@ -269,7 +270,7 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
         }
     }
 
-    function modalConfirmation(elemen) {
+    function modalConfirmation(elemen, status) {
         const modal = /*html*/ `
         <!-- Modal -->
 <div class="modal fade" id="modalConfirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -278,7 +279,7 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
             
             <div class="modal-body text-center">
             <i class="bi bi-patch-question text-primary" style="font-size:200px"></i>
-            <h4 class="w-75 px-3 mx-auto">Apakah Anda Yakin Menetapkan Status Tersebut Pada Aduan Ini?</h4>
+            <h4 class="w-75 px-3 mx-auto">mengganti status ke ${status} sama dengan menutup report, apakah anda yakin?</h4>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

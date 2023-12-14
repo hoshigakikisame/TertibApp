@@ -39,7 +39,7 @@
 
                     </div>
 
-                    <div class=" row mb-4">
+                    <div class=" row mb-4 gap-4">
                         <h1>Recent Reports</h1>
                         <?php
                         /**
