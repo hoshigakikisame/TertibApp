@@ -108,7 +108,6 @@ class QueryBuilder
 			$table,
 			implode(' AND ', array_map(fn ($key) => "$key = :$key", array_keys($parameters)))
 		);
-
 		try {
 			$statement = $this->pdo->prepare($sql);
 			$statement->execute($parameters);

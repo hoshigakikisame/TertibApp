@@ -22,8 +22,8 @@ class ReportController
 			$adminUser = null;
 			$adminRole = null;
 		} else {
-			$adminUser = $userService->getSingleUser(['id_user' => $report->getIdAdmin()]);
-			$adminRole = $adminService->getSingleAdmin(['id_user' => $adminUser->getIdUser()]);
+			$adminRole = $adminService->getSingleAdmin(['id_admin' => $report->getIdAdmin()]);
+			$adminUser = $userService->getSingleUser(['id_user' => $adminRole->getIdUser()]);
 			$adminUser->setRoleDetail($adminRole);
 		}
 
