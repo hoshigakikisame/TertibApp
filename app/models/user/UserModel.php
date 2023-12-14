@@ -13,8 +13,8 @@ class UserModel implements DBModel
     protected string $phoneNumber;
     protected string $address;
     protected string $imagePath = '/public/media/default/blank_user.png';
-
     protected $roleDetail;
+    protected string $uniqueKey;
 
     public function __construct($idUser, $username, $firstName, $lastName, $salt, $passwordHash, $email, $role, $imagePath, $phoneNumber, $address)
     {
@@ -29,6 +29,7 @@ class UserModel implements DBModel
         $this->imagePath = $imagePath;
         $this->phoneNumber = $phoneNumber;
         $this->address = $address;
+        $this->uniqueKey = Helper::generateRandomHex(8);
     }
 
     public static function fromStdClass($stdClass): UserModel
@@ -113,8 +114,7 @@ class UserModel implements DBModel
         if ($this->imagePath == null || $this->imagePath == '') {
             return $baseUrl . 'user_profile/blank_user.png';
         }
-        $randomHex = Helper::generateRandomHex(8);
-        return $baseUrl . $this->imagePath . '?v=' . $randomHex;
+        return $baseUrl . $this->imagePath . '?v=' . $this->uniqueKey;
     }
 
     public function setIdUser($idUser)
