@@ -38,10 +38,10 @@
                                                 <div class="modal-header justify-content-center">
                                                     <h4 class="modal-title" id="modalAdd">ADD ADMIN</h4>
                                                 </div>
-                                                <div class="modal-body">
+                                                <div class="modal-body" title="flashIdentity">
                                                     <div class="mb-3">
-                                                        <label for="username" class="form-label">Username</label>
-                                                        <input type="text" class="form-control" id="username" name="username" placeholder="Input Admin Username" required>
+                                                        <label for="identity" class="form-label">Username</label>
+                                                        <input type="text" class="form-control" id="identity" name="username" placeholder="Input Admin Username" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="firstname" class="form-label">Firstname</label>

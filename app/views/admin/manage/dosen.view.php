@@ -172,6 +172,12 @@
 </div>
 
 <script>
+    const addModal = document.getElementById('modalAdd')
+    addModal.addEventListener('hidden.bs.modal', event => {
+        $("div[role=alert]").remove();
+        removeVal("input");
+    })
+
     function editActionButton(idUser, username, nidn, firstname, lastname, title, email, noTelp, address) {
         const modal = /*html*/ `
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">

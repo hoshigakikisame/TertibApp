@@ -146,6 +146,12 @@
 </div>
 
 <script>
+    const addModal = document.getElementById('modalAdd')
+    addModal.addEventListener('hidden.bs.modal', event => {
+        removeVal("input");
+    })
+
+
     function editButtonAction(idCodeOfConduct, name, idViolationLevel, description) {
         const modal = /*html*/ `
         <div class="modal fade" id="modalEdit" data-bs-backdrop="dynamic" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalEdit" aria-hidden="true">

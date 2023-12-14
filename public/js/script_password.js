@@ -92,10 +92,9 @@ if ($("button#btnPress").length > 0) {
   });
 } else {
   const buttonSelector = "button[type=submit]";
-  $(buttonSelector).mouseenter(function (e) {
+  $(buttonSelector).click(function (e) {
     e.preventDefault();
     $("div[role=alert]").remove();
-
     if ($(this).parent().siblings().find("#noTelp").length > 0) {
       validTlp = countTlp(
         15,
@@ -104,7 +103,8 @@ if ($("button#btnPress").length > 0) {
           "warning",
           "Telephone Number Maximal 15 Character and Minimal 3 Character",
           "Retype your Telephone Number"
-        )
+        ),
+        $(this)
       );
     }
 
@@ -114,7 +114,8 @@ if ($("button#btnPress").length > 0) {
           "warning",
           "Confirm Password Not Same.",
           "Retype your Confirm Password "
-        )
+        ),
+        $(this)
       );
     }
 
@@ -126,12 +127,13 @@ if ($("button#btnPress").length > 0) {
           "warning",
           "Identity Number Maximal 10 Character and Minimal 4 Character",
           "Retype your Identity Number"
-        )
+        ),
+        $(this)
       );
     }
-    if (validTlp !== undefined) {
+    if (validTlp !== undefined && identity !== undefined) {
       validTlp.submit();
-    } else if (identity !== undefined) {
+    } else if (identity !== undefined && validTlp !== undefined) {
       identity.submit();
     } else if (password !== undefined) {
       password.submit();

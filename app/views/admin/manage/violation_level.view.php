@@ -85,7 +85,7 @@
                                             $violationLevel = $violationLevels[$i];
                                         ?>
                                             <tr>
-                                                <td><?= $i+1 ?></td>
+                                                <td><?= $i + 1 ?></td>
                                                 <td><?= $violationLevel->getLevel(); ?></td>
                                                 <td><?= $violationLevel->getName(); ?></td>
                                                 <td><?= $violationLevel->getWeight(); ?></td>
@@ -116,6 +116,12 @@
 </div>
 
 <script>
+    const addModal = document.getElementById('modalAdd')
+    addModal.addEventListener('hidden.bs.modal', event => {
+        removeVal("input");
+    })
+
+
     function editViolationButton(id_violation_level, level, name, weight) {
         const modal = /*html */ `
         <div class="modal fade" id="editModal"  tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
