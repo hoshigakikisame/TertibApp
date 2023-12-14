@@ -104,39 +104,39 @@ $user = Session::getInstance()->get('user');
                             <!-- End content -->
 
                             <!-- start comment -->
-                            <?php 
+                            <?php
                             /**
                              * @var ReportCommentModel[] $reportComments
                              */
-                            foreach ($reportComments as $comment): 
+                            foreach ($reportComments as $comment) :
                                 $user = $comment->getUser();
                             ?>
-                            <div class="row my-3">
-                                <div class="col-auto">
-                                    <img src="<?= $user->getImageUrl() ?>" class="rounded-circle img-profile" alt="">
-                                </div>
-                                <div class="col">
-                                    <div class="content">
-                                        <div class="info mb-2">
-                                            <h6 class="mb-0">
-                                                <?= $user->getUsername() ?>
-                                            </h6>
-                                            <p class="mb-0">
-                                                <?= GenericUtil::dateToHumanReadable($comment->getCreatedAt()) ?>
-                                            </p>
-                                        </div>
-                                        <hr>
+                                <div class="row my-3">
+                                    <div class="col-auto">
+                                        <img src="<?= $user->getImageUrl() ?>" class="rounded-circle img-profile" alt="">
+                                    </div>
+                                    <div class="col">
                                         <div class="content">
-                                            <p><?= $comment->getContent() ?></p>
+                                            <div class="info mb-2">
+                                                <h6 class="mb-0">
+                                                    <?= $user->getUsername() ?>
+                                                </h6>
+                                                <p class="mb-0">
+                                                    <?= GenericUtil::dateToHumanReadable($comment->getCreatedAt()) ?>
+                                                </p>
+                                            </div>
+                                            <hr>
+                                            <div class="content">
+                                                <p><?= $comment->getContent() ?></p>
+                                            </div>
+                                            <img style="height: 200px" src="<?= $comment->getImageUrl() ?>" alt="">
                                         </div>
-                                        <img style="height: 200px" src="<?= $comment->getImageUrl() ?>" alt="">
                                     </div>
                                 </div>
-                            </div>
                             <?php endforeach; ?>
                             <!-- End comment -->
 
-                            <?php 
+                            <?php
                             /**
                              * @var UserModel $currentUser
                              */
@@ -201,36 +201,43 @@ $user = Session::getInstance()->get('user');
                                     <div class="action row border-top ">
                                         <form action="<?= $updateReportDetailEndpoint ?>" method="post" id="updateReportDetailForm" class='col py-3'>
                                             <div class="input-group mb-3">
-                                                <label class="input-group-text" for="inputGroupSelect01">Status</label>
-                                                <select class="form-select" id="inputGroupSelect01" name="status">
-                                                    <?php foreach (ReportModel::getStatusChoices() as $status): ?>
-                                                    <option value="<?= $status ?>" <?= $status == $report->getStatus() ? "selected" : "" ?> ><?= $status ?></option>
+                                                <?php
+                                                $view = 'input-group';
+                                                $action = 'disabled readonly';
+                                                if ($currentUser->isAdmin()) {
+                                                    $view = 'input-group-text';
+                                                    $action = '';
+                                                } ?>
+                                                <label class="<?= $view ?>" for="inputGroupSelect01">Status</label>
+                                                <select class="form-select" id="inputGroupSelect01" name="status" <?= $action ?>>
+                                                    <?php foreach (ReportModel::getStatusChoices() as $status) : ?>
+                                                        <option value="<?= $status ?>" <?= $status == $report->getStatus() ? "selected" : "" ?>><?= $status ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
                                             <div class="input-group mb-3">
-                                                <label class="input-group-text" for="inputGroupSelect01">Code of Conduct</label>
-                                                <select class="form-select" id="inputGroupSelect01" name="id_code_of_conduct">
-                                                    <?php 
+                                                <label class="<?= $view ?>" for="inputGroupSelect02">Code of Conduct</label>
+                                                <select class="form-select" id="inputGroupSelect02" name="id_code_of_conduct" <?= $action ?>>
+                                                    <?php
                                                     /**
                                                      * @var CodeOfConductModel[] $codeOfConducts
                                                      */
-                                                    foreach ($codeOfConducts as $codeOfConduct): ?>
-                                                        <option value="<?= $codeOfConduct->getIdCodeOfConduct() ?>" <?= $codeOfConduct == $report->getCodeOfConduct() ? "selected" : "" ?> ><?= $codeOfConduct->getName() ?></option>
+                                                    foreach ($codeOfConducts as $codeOfConduct) : ?>
+                                                        <option value="<?= $codeOfConduct->getIdCodeOfConduct() ?>" <?= $codeOfConduct == $report->getCodeOfConduct() ? "selected" : "" ?>><?= $codeOfConduct->getName() ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
                                             <hr>
-                                            <div class="input-group mb-3 d-flex justify-content-end">
-                                                <?php 
+                                            <div class="input-group mb-3 d-flex justify-content-end" id="action_wrapper">
+                                                <?php
                                                 /**
                                                  * @var UserModel $currentUser
                                                  */
                                                 $currentUser = Session::getInstance()->get('user');
-                                                if ($currentUser->isAdmin()): ?>
-                                                <button onclick='$("#updateReportDetailForm").submit()' class="btn btn-secondary text-white">
-                                                    Save
-                                                </button>
+                                                if ($currentUser->isAdmin()) : ?>
+                                                    <button type="button" onclick="checkVal($(this))" class="btn btn-secondary text-white" data-bs-toggle="modal" data-bs-target="#modalConfirmation">
+                                                        Save
+                                                    </button>
                                                 <?php endif; ?>
                                             </div>
 
@@ -245,3 +252,52 @@ $user = Session::getInstance()->get('user');
         </main>
     </div>
 </div>
+
+<script>
+    function checkVal(elemen) {
+        const val = $('#inputGroupSelect01').val();
+        if (val == 'Invalid' || val == 'Valid') {
+            modalConfirmation(elemen);
+        } else {
+            elemen.parents('form').submit();
+        }
+    }
+
+    function modalConfirmation(elemen) {
+        const modal = /*html*/ `
+        <!-- Modal -->
+<div class="modal fade" id="modalConfirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            
+            <div class="modal-body text-center">
+            <i class="bi bi-patch-question text-primary" style="font-size:200px"></i>
+            <h4 class="w-75 px-3 mx-auto">Apakah Anda Yakin Menetapkan Status Tersebut Pada Aduan Ini?</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id='save' class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+        `
+        $('#action_wrapper').append(modal)
+        $('#modalConfirmation').modal('show')
+
+        $('button[type="button"]#save').click(function(e) {
+            console.log(elemen.parents('form'))
+            elemen.parents('form').submit();
+            $('#modalConfirmation').modal('hide')
+        });
+
+
+        const myModalEl = document.getElementById('modalConfirmation')
+        myModalEl.addEventListener('hidden.bs.modal', event => {
+            $('#modalConfirmation').remove();
+        })
+
+
+    }
+</script>
