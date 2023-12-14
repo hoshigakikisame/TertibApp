@@ -14,4 +14,22 @@ class GenericUtil {
     public static function dateToHumanReadable(string $date): string {
         return date("F jS, Y", strtotime($date));
     }
+
+    public static function textRedact(string $text): string {
+        return str_repeat('█', strlen($text));
+    }
+
+    public static function optionalTextRedaction(string $text, bool $shouldRedact): string {
+        return $shouldRedact ? self::textRedact($text) : $text;
+    }
+
+    public static function getRedactionImageUrl()
+    {
+        $baseUrl = MediaStorageService::getInstance()->getAccessUrl();
+        return $baseUrl . 'user_profile/redacted.png';
+    }
+
+    public static function optionalImageRedaction(string $imgUrl, bool $shouldRedact): string {
+        return $shouldRedact ? self::getRedactionImageUrl() : $imgUrl;
+    }
 }

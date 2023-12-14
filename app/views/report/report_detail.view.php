@@ -1,5 +1,9 @@
 <?php
+/**
+ * @var UserModel $user
+ */
 $user = Session::getInstance()->get('user');
+$isMahasiswa = $user->getRole() == 'mahasiswa';
 
 /**
  * @var ReportModel $report
@@ -31,13 +35,13 @@ $user = Session::getInstance()->get('user');
                             <!-- start content -->
                             <div class="row">
                                 <div class="col-auto">
-                                    <img src="<?= $dosenUser->getImageUrl() ?>" class="rounded-circle img-profile" alt="">
+                                    <img src="<?= GenericUtil::optionalImageRedaction($dosenUser->getImageUrl(), $isMahasiswa) ?>" class="rounded-circle img-profile" alt="">
                                 </div>
                                 <div class="col">
                                     <div class="content">
                                         <div class="info mb-2">
                                             <h6 class="mb-0">
-                                                <?= $dosenUser->getFirstName() . " " . $dosenUser->getLastName() ?> <span class="badge bg-success fs-6">#<?= $report->getIdReport() ?></span>
+                                                <?= GenericUtil::optionalTextRedaction($dosenUser->getFirstName() . " " . $dosenUser->getLastName(), $isMahasiswa) ?> <span class="badge bg-success fs-6">#<?= $report->getIdReport() ?></span>
                                             </h6>
                                             <p class="mb-0">Submited a Report on
                                                 <?= GenericUtil::dateToHumanReadable($report->getReportDate()) ?>
@@ -114,13 +118,13 @@ $user = Session::getInstance()->get('user');
                             ?>
                                 <div class="row my-3" id="<?= $comment->getIdReportComment() ?>">
                                     <div class="col-auto">
-                                        <img src="<?= $user->getImageUrl() ?>" class="rounded-circle img-profile" alt="">
+                                        <img src="<?= GenericUtil::optionalImageRedaction($user->getImageUrl(), $isMahasiswa) ?>" class="rounded-circle img-profile" alt="">
                                     </div>
                                     <div class="col">
                                         <div class="content">
                                             <div class="info mb-2">
                                                 <h6 class="mb-0">
-                                                    <?= $user->getUsername() ?>
+                                                    <?= GenericUtil::optionalTextRedaction($user->getUsername(), $isMahasiswa) ?>
                                                 </h6>
                                                 <p class="mb-0">
                                                     <?= GenericUtil::dateToHumanReadable($comment->getCreatedAt()) ?>
@@ -144,7 +148,7 @@ $user = Session::getInstance()->get('user');
                             $currentUser = Session::getInstance()->get('user'); ?>
                             <div class="row mt-3">
                                 <div class="col-auto">
-                                    <img src="<?= $currentUser->getImageUrl() ?>" class="rounded-circle img-profile" alt="">
+                                    <img src="<?= $currentUser->getImageUrl() ?>" class="rounded-circle border border-white img-profile" alt="">
                                 </div>
                                 <div class="col">
                                     <h6>
@@ -169,17 +173,17 @@ $user = Session::getInstance()->get('user');
                             <div class="row-auto">
                                 <div class="col-auto d-flex flex-column gap-2">
                                     <div class="img d-flex align-items-center gap-3">
-                                        <img src="<?= $dosenUser->getImageUrl() ?>" class="border border-white rounded-circle img-profile" alt="">
+                                        <img src="<?= GenericUtil::optionalImageRedaction($dosenUser->getImageUrl(), $isMahasiswa) ?>" class="border border-white rounded-circle img-profile" alt="">
                                         <h6>
-                                            <?= $dosenUser->getFirstName() . " " . $dosenUser->getLastName() ?>
+                                            <?= GenericUtil::optionalTextRedaction($dosenUser->getFirstName() . " " . $dosenUser->getLastName(), $isMahasiswa) ?>
                                         </h6>
                                     </div>
 
                                     <div class="info">
                                         <p>participant</p>
                                         <div class="participant">
-                                            <img src="<?= $dosenUser->getImageUrl() ?>" class="border border-white rounded-circle img-profile" style="width: 30px; height: 30px" alt="">
-                                            <img src="<?= $adminUser?->getImageUrl() ?? '' ?>" class="border border-white rounded-circle img-profile" style="width: 30px; height: 30px" alt="">
+                                            <img src="<?= GenericUtil::optionalImageRedaction($dosenUser->getImageUrl(), $isMahasiswa) ?>" class="border border-white rounded-circle img-profile" style="width: 30px; height: 30px" alt="">
+                                            <img src="<?= GenericUtil::optionalImageRedaction($adminUser?->getImageUrl() ?? '', $isMahasiswa) ?>" class="border border-white rounded-circle img-profile" style="width: 30px; height: 30px" alt="">
                                             <img src="<?= $mahasiswaUser?->getImageUrl() ?? '' ?>" class="border border-white rounded-circle img-profile" style="width: 30px; height: 30px" alt="">
                                         </div>
                                         <div class="row mt-3">
@@ -195,7 +199,7 @@ $user = Session::getInstance()->get('user');
                                                 <h6 class="fw-bold">Managed by</h6>
                                             </div>
                                             <div class="col">
-                                                <h6><?= $adminUser?->getUsername() ?? 'No One Yet' ?></h6>
+                                                <h6><?= GenericUtil::optionalTextRedaction($adminUser?->getUsername() ?? 'No One Yet', $isMahasiswa) ?></h6>
                                             </div>
                                         </div>
                                     </div>
