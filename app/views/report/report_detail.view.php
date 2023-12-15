@@ -36,13 +36,13 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
                             <!-- start content -->
                             <div class="row">
                                 <div class="col-auto">
-                                    <img src="<?= GenericUtil::optionalImageRedaction($dosenUser->getImageUrl(), $isMahasiswa) ?>" class="rounded-circle img-profile" alt="">
+                                    <img src="<?= GenericUtil::optionalImageRedaction($report->getDosenImageUrl(), $isMahasiswa) ?>" class="rounded-circle img-profile" alt="">
                                 </div>
                                 <div class="col">
                                     <div class="content">
                                         <div class="info mb-2">
                                             <h6 class="mb-0">
-                                                <?= GenericUtil::optionalTextRedaction($dosenUser->getFirstName() . " " . $dosenUser->getLastName(), $isMahasiswa) ?> <span class="badge bg-success fs-6">#<?= $report->getIdReport() ?></span>
+                                                <?= GenericUtil::optionalTextRedaction($report->getDosenFirstName() . " " . $report->getDosenLastName(), $isMahasiswa) ?> <span class="badge bg-success fs-6">#<?= $report->getIdReport() ?></span>
                                             </h6>
                                             <p class="mb-0">Submited a Report on
                                                 <?= GenericUtil::dateToHumanReadable($report->getReportDate()) ?>
@@ -71,7 +71,7 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
                                                     <h6 class="fw-bold">Mahasiswa</h6>
                                                 </div>
                                                 <div class="col">
-                                                    <h6>: <?= $mahasiswaUser->getFirstName() . " " . $mahasiswaUser->getLastName() ?></h6>
+                                                    <h6>: <?= $report->getMahasiswaFirstName() . " " . $report->getMahasiswaLastName() ?></h6>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -79,7 +79,7 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
                                                     <h6 class="fw-bold">Nama Pelanggaran</h6>
                                                 </div>
                                                 <div class="col">
-                                                    <h6>: <?= $codeOfConduct->getName() ?></h6>
+                                                    <h6>: <?= $report->getCodeOfConductName() ?></h6>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -87,7 +87,7 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
                                                     <h6 class="fw-bold">Deskripsi Pelanggaran</h6>
                                                 </div>
                                                 <div class="col">
-                                                    <h6>: <?= $codeOfConduct->getDescription() ?></h6>
+                                                    <h6>: <?= $report->getCodeOfConductDescription() ?></h6>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -115,17 +115,16 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
                              * @var ReportCommentModel[] $reportComments
                              */
                             foreach ($reportComments as $comment) :
-                                $user = $comment->getUser();
                             ?>
                                 <div class="row my-3" id="<?= $comment->getIdReportComment() ?>">
                                     <div class="col-auto">
-                                        <img src="<?= GenericUtil::optionalImageRedaction($user->getImageUrl(), $isMahasiswa) ?>" class="rounded-circle img-profile" alt="">
+                                        <img src="<?= GenericUtil::optionalImageRedaction($comment->getAuthorImageUrl(), $isMahasiswa) ?>" class="rounded-circle img-profile" alt="">
                                     </div>
                                     <div class="col">
                                         <div class="content">
                                             <div class="info mb-2">
                                                 <h6 class="mb-0">
-                                                    <?= GenericUtil::optionalTextRedaction($user->getUsername(), $isMahasiswa) ?>
+                                                    <?= GenericUtil::optionalTextRedaction($comment->getAuthorUsername(), $isMahasiswa) ?>
                                                 </h6>
                                                 <p class="mb-0">
                                                     <?= GenericUtil::dateToHumanReadable($comment->getCreatedAt()) ?>
@@ -175,18 +174,18 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
                             <div class="row-auto">
                                 <div class="col-auto d-flex flex-column gap-2">
                                     <div class="img d-flex align-items-center gap-3">
-                                        <img src="<?= GenericUtil::optionalImageRedaction($dosenUser->getImageUrl(), $isMahasiswa) ?>" class="border border-white rounded-circle img-profile" alt="">
+                                        <img src="<?= GenericUtil::optionalImageRedaction($report->getDosenImageUrl(), $isMahasiswa) ?>" class="border border-white rounded-circle img-profile" alt="">
                                         <h6>
-                                            <?= GenericUtil::optionalTextRedaction($dosenUser->getFirstName() . " " . $dosenUser->getLastName(), $isMahasiswa) ?>
+                                            <?= GenericUtil::optionalTextRedaction($report->getDosenFirstName() . " " . $report->getDosenLastName(), $isMahasiswa) ?>
                                         </h6>
                                     </div>
 
                                     <div class="info">
                                         <p class="mb-1">participant</p>
                                         <div class="participant">
-                                            <img src="<?= GenericUtil::optionalImageRedaction($dosenUser->getImageUrl(), $isMahasiswa) ?>" class="border border-white rounded-circle img-profile-sm" alt="">
-                                            <img src="<?= GenericUtil::optionalImageRedaction($adminUser?->getImageUrl() ?? '', $isMahasiswa) ?>" class="border border-white rounded-circle img-profile-sm" alt="">
-                                            <img src="<?= $mahasiswaUser?->getImageUrl() ?? '' ?>" class="border border-white rounded-circle img-profile-sm" alt="">
+                                            <img src="<?= GenericUtil::optionalImageRedaction($report->getDosenImageUrl(), $isMahasiswa) ?>" class="border border-white rounded-circle img-profile-sm" alt="">
+                                            <img src="<?= GenericUtil::optionalImageRedaction($report->getAdminImageUrl() ?? '', $isMahasiswa) ?>" class="border border-white rounded-circle img-profile-sm" alt="">
+                                            <img src="<?= $report->getMahasiswaImageUrl() ?? '' ?>" class="border border-white rounded-circle img-profile-sm" alt="">
                                         </div>
                                         <div class="row mt-3">
                                             <div class="col-5">
@@ -201,7 +200,7 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
                                                 <h6 class="fw-bold">Managed by</h6>
                                             </div>
                                             <div class="col">
-                                                <h6><?= GenericUtil::optionalTextRedaction($adminUser?->getUsername() ?? 'No One Yet', $isMahasiswa) ?></h6>
+                                                <h6><?= GenericUtil::optionalTextRedaction($report->getAdminUsername() ?? 'No One Yet', $isMahasiswa) ?></h6>
                                             </div>
                                         </div>
                                     </div>

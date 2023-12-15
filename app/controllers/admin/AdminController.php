@@ -114,6 +114,15 @@ class AdminController
 	 * @return [type] [description]
 	 */
 	
+	public function logActivityPage() {
+		$logActivityService = LogActivityService::getInstance();
+		$logActivities = $logActivityService->getAllLogActivity();
+		$data = [
+			'logActivities' => $logActivities
+		];
+		return Helper::view('admin/logactivity', $data);
+	}
+
 	public function profilePage()
 	{
 		/**

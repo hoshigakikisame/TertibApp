@@ -3,7 +3,7 @@
 class ReportCommentService extends DBService {
     public function __construct()
     {
-        parent::__construct('tb_report_comment');
+        parent::__construct('tb_report_comment', 'view_report_comment');
     }
 
     public static function getInstance(): self
@@ -13,7 +13,7 @@ class ReportCommentService extends DBService {
 
     public function getManyReportComment($where): array
     {
-        $rawReportComments = $this->getDB()->findMany($this->getTable(), $where, 'id_report_comment', 'ASC');
+        $rawReportComments = $this->getDB()->findMany($this->getView(), $where, 'id_report_comment', 'ASC');
         $reportComments = [];
 
         if ($rawReportComments) {

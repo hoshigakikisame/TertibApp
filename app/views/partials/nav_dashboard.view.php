@@ -107,6 +107,14 @@ switch ($role) {
                                 </ul>
                             </div>
                         </li>
+                        <li class="mb-2  position-relative">
+                            <div class="content nav-item gap-1 d-flex align-items-center">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <a class="nav-link"
+                                    href="<?php echo App::get('root_uri') . "/" . $role . "/logactivity" ?> "
+                                    title="logactivity">Log Activity</a>
+                            </div>
+                        </li>
                     <?php endif; ?>
                     <li class="mb-2 position-relative">
                         <div class="content nav-item  d-flex gap-1 align-items-center">
