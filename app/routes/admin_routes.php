@@ -2,7 +2,7 @@
 
 // admin routes
 $router->get('/^admin\/dashboard$/', ['AuthMiddleware@shouldValidated', 'RoleMiddleware@shouldAdmin', 'AdminController@dashboard']);
-$router->get('/^admin\/report$/', ['AuthMiddleware@shouldValidated', 'RoleMiddleware@shouldAdmin', 'AdminController@report']);
+$router->get('/^admin\/report$/', ['AuthMiddleware@shouldValidated', 'RoleMiddleware@shouldAdmin', 'AdminController@reportPage']);
 $router->get('/^admin\/notification$/', ['AuthMiddleware@shouldValidated', 'RoleMiddleware@shouldAdmin', 'AdminController@notificationPage']);
 $router->get('/^admin\/profile$/', ['AuthMiddleware@shouldValidated', 'RoleMiddleware@shouldAdmin', 'AdminController@profilePage']);
 $router->post('/^admin\/update-profile$/', ['AuthMiddleware@shouldValidated', 'RoleMiddleware@shouldAdmin', 'AdminController@updateProfile']);

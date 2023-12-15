@@ -41,9 +41,40 @@ class AdminController
 	 * [contact description]
 	 * @return [type] [description]
 	 */
-	public function report()
+	public function reportPage()
 	{
-		return Helper::view('admin/report');
+		$reportService = ReportService::getInstance();
+		$codeOfConductService = CodeOfConductService::getInstance();
+		
+		$reports = [];
+
+		$filter = [];
+
+		if (isset($_GET['status']) && $_GET['status'] != '')
+			$filter += ['status' => $_GET['status']];
+		if (isset($_GET['managed_by_me']) && $_GET['managed_by_me'] != '') {
+			$user = Session::getInstance()->get('user');
+			$adminRole = $user->getRoleDetail();
+			$filter += ['id_admin' => $adminRole->getIdAdmin()];
+		}
+			
+		$reports = $reportService->getManyReport($filter);
+
+		$codeOfConducts = $codeOfConductService->getAllCodeOfConduct();
+
+		for ($i = 0; $i < count($reports); $i++) {
+			for ($j = 0; $j < count($codeOfConducts); $j++) {
+				if ($reports[$i]->getIdCodeOfConduct() == $codeOfConducts[$j]->getIdCodeOfConduct()) {
+					$reports[$i]->setCodeOfConduct($codeOfConducts[$j]);
+				}
+			}
+		}
+
+		$data = [
+			'reports' => $reports
+		];
+
+		return Helper::view('admin/report', $data);
 	}
 
 	/**

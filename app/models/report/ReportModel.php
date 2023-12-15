@@ -6,8 +6,17 @@ class ReportModel implements DBModel
     protected int $idCodeOfConduct;
     protected string $title;
     protected string $nidnDosen;
+    protected string $usernameDosen;
+    protected string $firstNameDosen;
+    protected string $lastNameDosen;
     protected int|null $idAdmin;
+    protected string|null $usernameAdmin;
+    protected string|null $firstNameAdmin;
+    protected string|null $lastNameAdmin;
     protected string $nimMahasiswa;
+    protected string $usernameMahasiswa;
+    protected string $firstNameMahasiswa;
+    protected string $lastNameMahasiswa;
     protected string $reportDate;
     protected string $content;
     protected string $status;
@@ -34,14 +43,44 @@ class ReportModel implements DBModel
      */
     protected $mahasiswa;
 
-    public function __construct($idReport, $idCodeOfConduct, $title, $nidnDosen, $idAdmin, $nimMahasiswa, $reportDate, $content, $status, $imagePath, $location)
+    public function __construct(
+        $idReport, 
+        $idCodeOfConduct, 
+        $title, 
+        $nidnDosen, 
+        $usernameDosen,
+        $firstNameDosen,
+        $lastNameDosen,
+        $idAdmin, 
+        $usernameAdmin,
+        $firstNameAdmin,
+        $lastNameAdmin,
+        $nimMahasiswa, 
+        $usernameMahasiswa,
+        $firstNameMahasiswa,
+        $lastNameMahasiswa,
+        $reportDate, 
+        $content, 
+        $status, 
+        $imagePath, 
+        $location
+    )
     {
         $this->idReport = $idReport;
         $this->idCodeOfConduct = $idCodeOfConduct;
         $this->title = $title;
         $this->nidnDosen = $nidnDosen;
+        $this->usernameDosen = $usernameDosen;
+        $this->firstNameDosen = $firstNameDosen;
+        $this->lastNameDosen = $lastNameDosen;
         $this->idAdmin = $idAdmin;
+        $this->usernameAdmin = $usernameAdmin;
+        $this->firstNameAdmin = $firstNameAdmin;
+        $this->lastNameAdmin = $lastNameAdmin;
         $this->nimMahasiswa = $nimMahasiswa;
+        $this->usernameMahasiswa = $usernameMahasiswa;
+        $this->firstNameMahasiswa = $firstNameMahasiswa;
+        $this->lastNameMahasiswa = $lastNameMahasiswa;
         $this->reportDate = $reportDate;
         $this->content = $content;
         $this->status = $status;
@@ -56,8 +95,17 @@ class ReportModel implements DBModel
             $stdClass->id_code_of_conduct,
             $stdClass->title,
             $stdClass->nidn_dosen,
+            $stdClass->username_dosen,
+            $stdClass->first_name_dosen,
+            $stdClass->last_name_dosen,
             $stdClass->id_admin,
+            $stdClass->username_admin,
+            $stdClass->first_name_admin,
+            $stdClass->last_name_admin,
             $stdClass->nim_mahasiswa,
+            $stdClass->username_mahasiswa,
+            $stdClass->first_name_mahasiswa,
+            $stdClass->last_name_mahasiswa,
             $stdClass->report_date,
             $stdClass->content,
             $stdClass->status,
@@ -87,14 +135,59 @@ class ReportModel implements DBModel
         return $this->nidnDosen;
     }
 
+    public function getUsernameDosen()
+    {
+        return $this->usernameDosen;
+    }
+
+    public function getFirstNameDosen()
+    {
+        return $this->firstNameDosen;
+    }
+    
+    public function getLastNameDosen()
+    {
+        return $this->lastNameDosen;
+    }
+
     public function getIdAdmin()
     {
         return $this->idAdmin;
     }
 
+    public function getUsernameAdmin()
+    {
+        return $this->usernameAdmin;
+    }
+
+    public function getFirstNameAdmin()
+    {
+        return $this->firstNameAdmin;
+    }
+
+    public function getLastNameAdmin()
+    {
+        return $this->lastNameAdmin;
+    }
+
     public function getNimMahasiswa()
     {
         return $this->nimMahasiswa;
+    }
+
+    public function getUsernameMahasiswa()
+    {
+        return $this->usernameMahasiswa;
+    }
+
+    public function getFirstNameMahasiswa()
+    {
+        return $this->firstNameMahasiswa;
+    }
+
+    public function getLastNameMahasiswa()
+    {
+        return $this->lastNameMahasiswa;
     }
 
     public function getReportDate()

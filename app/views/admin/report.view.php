@@ -11,6 +11,21 @@
                     <div class="row mb-4">
                         <h1>Reports</h1>
                     </div>
+                    <div class="d-flex flex-row-reverse mt-4 mb-4">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="bi bi-funnel"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="<?= App::get('root_uri') . '/admin/report' ?>">All</a></li>
+                                <?php foreach (ReportModel::getStatusChoices() as $status) : ?>
+                                    <li><a class="dropdown-item" href="<?= App::get('root_uri') . '/admin/report?status=' . $status ?>"><?= $status ?></a></li>
+                                <?php endforeach; ?>
+                                <li><a class="dropdown-item" href="<?= App::get('root_uri') . '/admin/report?managed_by_me=1' ?>">Managed By Me</a></li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="row table-responsive">
                         <table class="table">
                             <thead>
@@ -20,22 +35,39 @@
                                     <th scope="col">Report By</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Create Date</th>
-                                    <th scope="col">Completed Date</th>
                                     <th scope="col">Confirm By</th>
                                     <th scope="col">Details</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th>1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td>@mdo</td>
-                                    <td>@mdo</td>
-                                    <td>@mdo</td>
-                                    <td><a href="<?= App::get('root_uri') . '/report/detail/' ?>" class="btn btn-link">Show Details</a></td>
-                                </tr>
+                                <?php
+                                /**
+                                 * @var ReportModel $report
+                                 */
+                                foreach ($reports as $report): ?>
+                                    <tr>
+                                        <th>
+                                            <?= $report->getTitle() ?>
+                                        </th>
+                                        <td>
+                                            <?= $report->getUsernameMahasiswa() ?>
+                                        </td>
+                                        <td>
+                                            <?= $report->getUsernameDosen() ?>
+                                        </td>
+                                        <td>
+                                            <?= $report->getStatus() ?>
+                                        </td>
+                                        <td>
+                                            <?= $report->getReportDate() ?>
+                                        </td>
+                                        <td>
+                                            <?= $report->getUsernameAdmin() ?? "No one yet" ?>
+                                        </td>
+                                        <td><a href="<?= App::get('root_uri') . '/report/detail/' . $report->getIdReport() ?>"
+                                                class="btn btn-link">Show Details</a></td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

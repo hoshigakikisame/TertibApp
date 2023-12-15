@@ -3,7 +3,7 @@
 class ReportService extends DBService {
     public function __construct()
     {
-        parent::__construct('tb_report');
+        parent::__construct('view_report');
     }
 
     public static function getInstance(): self
@@ -36,6 +36,9 @@ class ReportService extends DBService {
 
     public function getManyReport($where): array
     {
+        if (empty($where)) {
+            return $this->getAllReport();
+        }
         $rawReports = $this->getDB()->findMany($this->getTable(), $where, 'id_report', 'DESC');
         $reports = [];
 
