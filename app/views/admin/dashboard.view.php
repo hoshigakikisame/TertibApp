@@ -18,25 +18,21 @@
                         <h1>Welcome to Tertib App</h1>
                     </div>
                     <div class="row px-4 gap-lg-5 gap-1 mb-4">
-                        <div class="col-lg-2 col-auto border border-2 py-2 rounded-3 flex-grow-1 flex-lg-grow-0">
+                        <?php foreach (ReportModel::getStatusChoices() as $status): 
+                                $count = 0;
+                                foreach ($reports as $report) {
+                                    if ($report->getStatus() == $status) {
+                                        $count++;
+                                    }
+                                }
+                            ?>
+                            <div class="col-lg-2 col-auto border border-2 py-2 rounded-3 flex-grow-1 flex-lg-grow-0">
                             <div class="shadow-sm rounded-3 py-3 px-4 h-100">
-                                <h1 class="mb-0">65</h1>
-                                <h6>Reports</h6>
+                                <h1 class="mb-0"><?= $count ?></h1>
+                                <h6><?= $status ?></h6>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-auto border border-2 py-2 rounded-3 flex-grow-1 flex-lg-grow-0">
-                            <div class="shadow-sm rounded-3 py-3 px-4 h-100 ">
-                                <h1 class="mb-0">65</h1>
-                                <h6>Checked <br> Reports</h6>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-auto border border-2 py-2 rounded-3 flex-grow-1 flex-lg-grow-0">
-                            <div class="shadow-sm rounded-3 py-3 px-4 h-100 ">
-                                <h1 class="mb-0">65</h1>
-                                <h6 class="">Unchecked <br> Reports</h6>
-                            </div>
-                        </div>
-
+                        <?php endforeach; ?>
                     </div>
 
                     <div class=" row mb-4 gap-4">
@@ -58,7 +54,7 @@
                                             <span class="badge text-bg-info"><?= $report->getStatus() ?></span>
                                             <span><?= GenericUtil::dateToHumanReadable($report->getReportDate()) ?></span>
                                         </div>
-                                        <h6 class="mb-0"><span class="text-primary">#<?= $report->getIdReport() ?></span> <?= $firstname ?> </h6>
+                                        <h6 class="mb-0"><span class="text-primary">#<?= $report->getIdReport() ?></span> <?= $report->getUsernameDosen() ?> </h6>
                                         <p><?= $codeOfConduct->getDescription() ?></p>
                                     </div>
                                     <div class="col d-flex justify-content-end">
