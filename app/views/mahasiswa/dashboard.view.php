@@ -33,23 +33,32 @@
                         </div>
                     </div>
                     <div class="row mb-4 gap-4">
-                        <h1>Recent Reports</h1>
+                        <h1>Recent Violations</h1>
+                        <?php 
+                        /**
+                         * @var MahasiswaViolationModel[] $mahasiswaViolations
+                         */
+                        foreach ($mahasiswaViolations as $violation): ?>
                         <div class="col-11 border border-2 ms-4 px-4 py-3 rounded-3">
                             <div class="row flex-column">
                                 <div class="col">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span class="badge text-bg-info">new</span>
-                                        <span>282332</span>
+                                    <div class="d-flex justify-content-left mb-2">
+                                        <span class="badge text-bg-black me-2"><?= $violation->getViolationLevelName() ?></span>
+                                        <span class="badge text-bg-warning me-2">Level <?= $violation->getViolationLevelLevel() ?></span>
+                                        <span class="badge text-bg-danger me-2">+<?= $violation->getViolationLevelWeight() ?></span>
                                     </div>
-                                    <h6 class="mb-0"><span class="text-primary">#22312332</span> </h6>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, voluptatibus consequatur deserunt ipsum dolorum provident velit eveniet, incidunt, ipsa tempore dicta nam et sunt culpa assumenda esse accusamus dolorem sequi?</p>
+                                    <h6 class="mb-0">
+                                        <span class="text-primary">#<?= $violation->getIdMahasiswaViolation() ?></span> 
+                                        <span><?= $violation->getFirstNameMahasiswa() . " " . $violation->getLastNameMahasiswa() ?></span> 
+                                    </h6>
+                                    <p><?= $violation->getCodeOfConductName() ?></p>
                                 </div>
                                 <div class="col d-flex justify-content-end">
-                                    <a class="btn btn-primary text-white justify-self-end" href="<?= App::get('root_uri') . '/report/detail/'  ?>" role="button">Report
-                                        Detail</a>
+                                    <a class="btn btn-primary text-white justify-self-end" href="<?= App::get('root_uri') . '/report/detail/'  . $violation->getIdReport() ?>" role="button">Detail</a>
                                 </div>
                             </div>
                         </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>

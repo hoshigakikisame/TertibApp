@@ -4,7 +4,7 @@ class MahasiswaViolationService extends DBService
 
     public function __construct()
     {
-        parent::__construct('tb_mahasiswa_violation');
+        parent::__construct('view_mahasiswa_violation');
     }
 
     public static function getInstance(): self
@@ -24,6 +24,23 @@ class MahasiswaViolationService extends DBService
 
         return $violations;
     }
+
+    public function getManyMahasiswaViolation($where): array {
+        if (empty($where)) {
+            return $this->getAllMahasiswaViolation();
+        }
+        $rawViolations = $this->getDB()->findMany($this->getTable(), $where, 'id_mahasiswa_violation', 'DESC');
+        $violations = [];
+
+        if ($rawViolations) {
+            foreach ($rawViolations as $rawViolation) {
+                $violations[] = MahasiswaViolationModel::fromStdClass($rawViolation);
+            }
+        }
+
+        return $violations;
+    }
+
     public function getSingleMahasiswaViolation($where): MahasiswaViolationModel | null
     {
         $rawViolation = $this->getSingle($where);

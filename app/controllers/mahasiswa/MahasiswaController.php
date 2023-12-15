@@ -14,13 +14,17 @@ class MahasiswaController
          * @var UserModel
          */
         $user = Session::getInstance()->get('user');
+        $mahasiswaRole = $user->getRoleDetail();
+        assert($mahasiswaRole instanceof MahasiswaModel);
 
+        $mahasiswaViolationService = MahasiswaViolationService::getInstance();
 
+        $mahasiswaViolations = $mahasiswaViolationService->getManyMahasiswaViolation(['nim_mahasiswa' => $mahasiswaRole->getNim()]);
 
         $data = [
             'firstname' => $user->getFirstName(),
             'lastname' => $user->getLastName(),
-
+            'mahasiswaViolations' => $mahasiswaViolations
         ];
 
         return Helper::view('mahasiswa/dashboard', $data);
