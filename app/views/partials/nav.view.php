@@ -5,7 +5,7 @@
 <nav class="navbar NavUp navbar-expand-lg sticky-top text-dark">
 	<div class="container-fluid px-3 px-lg-5 py-2">
 		<a class="navbar-brand" href="<?php echo App::get('root_uri'); ?>">
-			<img src="<?php echo App::get('root_uri') . "/public/img/logo.png" ?>" class="img-profile" alt="Tertib APP">
+			<img src="<?php echo App::get('root_uri') . "/public/img/logo.png" ?>" class="d-inline-block align-text-center" alt="Tertib APP" width="35" height="35">
 			Tertib APP</a>
 		<button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
