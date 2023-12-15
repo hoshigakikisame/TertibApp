@@ -59,7 +59,7 @@
                                             <span class="badge text-bg-info"><?= $report->getStatus() ?></span>
                                             <span><?= GenericUtil::dateToHumanReadable($report->getReportDate()) ?></span>
                                         </div>
-                                        <h6 class="mb-0"><span class="text-primary">#<?= $report->getIdReport() ?></span> <?= $firstname ?> </h6>
+                                        <h6 class="mb-0"><span class="text-primary">#<?= $report->getIdReport() ?></span> You Reported Mahasiswa with Username <?= $report->getUsernameMahasiswa() ?> </h6>
                                         <p><?= $codeOfConduct->getDescription() ?></p>
                                     </div>
                                     <div class="col d-flex justify-content-end">
