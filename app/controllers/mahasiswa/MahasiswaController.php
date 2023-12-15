@@ -19,12 +19,21 @@ class MahasiswaController
 
         $mahasiswaViolationService = MahasiswaViolationService::getInstance();
 
+        /**
+         * @var MahasiswaViolationModel[] $mahasiswaViolations
+         */
         $mahasiswaViolations = $mahasiswaViolationService->getManyMahasiswaViolation(['nim_mahasiswa' => $mahasiswaRole->getNim()]);
+        $totalPoints = 0;
+        foreach ($mahasiswaViolations as $mahasiswaViolation) {
+            $totalPoints += $mahasiswaViolation->getViolationLevelWeight();
+        }
 
         $data = [
             'firstname' => $user->getFirstName(),
             'lastname' => $user->getLastName(),
-            'mahasiswaViolations' => $mahasiswaViolations
+            'mahasiswaViolations' => $mahasiswaViolations,
+            'totalViolations' => count($mahasiswaViolations) ?? 0,
+            'totalPoints' => $totalPoints
         ];
 
         return Helper::view('mahasiswa/dashboard', $data);

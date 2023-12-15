@@ -35,6 +35,15 @@ class MahasiswaService extends DBService
         return null;
     }
 
+    public function getTotalMahasiswaPoints($nimMahasiswa): int
+    {
+        $totalPoints = $this->getDB()->execute("SELECT total_points FROM view_total_mahasiswa_point WHERE nim_mahasiswa = :nim_mahasiswa", [
+            'nim_mahasiswa' => $nimMahasiswa
+        ]);
+
+        return $totalPoints['total_points'] ?? 0;
+    }
+
     public function addNewMahasiswa(int $nim, int $idUser, string $prodi): string {
         return $this->getDB()->insert($this->getTable(), [
             'nim' => $nim,
