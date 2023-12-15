@@ -230,7 +230,7 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
                                                      * @var CodeOfConductModel[] $codeOfConducts
                                                      */
                                                     foreach ($codeOfConducts as $codeOfConduct) : ?>
-                                                        <option value="<?= $codeOfConduct->getIdCodeOfConduct() ?>" <?= $codeOfConduct == $report->getCodeOfConduct() ? "selected" : "" ?>><?= $codeOfConduct->getName() ?></option>
+                                                        <option value="<?= $codeOfConduct->getIdCodeOfConduct() ?>" <?= $codeOfConduct->getIdCodeOfConduct() == $report->getIdCodeOfConduct() ? "selected" : "" ?>><?= $codeOfConduct->getName() ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
