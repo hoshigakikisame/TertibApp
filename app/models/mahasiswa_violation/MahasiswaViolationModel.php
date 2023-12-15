@@ -11,6 +11,7 @@ class MahasiswaViolationModel implements DBModel {
     protected string $violationLevelName;
     protected int $violationLevelLevel;
     protected int $violationLevelWeight;
+    protected bool $isNew;
     /**
      * @var ReportModel
      */
@@ -26,7 +27,8 @@ class MahasiswaViolationModel implements DBModel {
         $codeOfConductName,
         $violationLevelName,
         $violationLevelLevel,
-        $violationLevelWeight
+        $violationLevelWeight,
+        $isNew = false
     )
     {
         $this->idMahasiswaViolation = $idMahasiswaViolation;
@@ -39,6 +41,7 @@ class MahasiswaViolationModel implements DBModel {
         $this->violationLevelName = $violationLevelName;
         $this->violationLevelLevel = $violationLevelLevel;
         $this->violationLevelWeight = $violationLevelWeight;
+        $this->isNew = $isNew;
     }
 
     public static function fromStdClass($stdClass): MahasiswaViolationModel
@@ -53,7 +56,8 @@ class MahasiswaViolationModel implements DBModel {
             $stdClass->code_of_conduct_name,
             $stdClass->violation_level_name,
             $stdClass->violation_level_level,
-            $stdClass->violation_level_weight
+            $stdClass->violation_level_weight,
+            $stdClass->is_new
         );
     }
 

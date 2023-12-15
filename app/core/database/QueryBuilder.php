@@ -39,16 +39,6 @@ class QueryBuilder
 	}
 
 	/**
-	 * @param  string $keyword [description]
-	 * @param  string $table   [description]
-	 * @return array          [description]
-	 */
-	public function search($keyword, $table)
-	{
-
-	}
-
-	/**
 	 * Find one row using an id|pk
 	 * @param  string $id
 	 * @param string $table_name

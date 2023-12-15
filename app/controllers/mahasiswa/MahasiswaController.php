@@ -40,19 +40,30 @@ class MahasiswaController
     }
 
     public function notificationPage()
-    {
-        /**
-         * @var UserModel
-         */
-        $user = Session::getInstance()->get('user');
+	{
+		/**
+		 * @var UserModel
+		 */
+		$user = Session::getInstance()->get('user');
+		$mahasiswaRole = $user->getRoleDetail();
+		assert($mahasiswaRole instanceof MahasiswaModel);
 
-        $data = [
-            'firstname' => $user->getFirstName(),
-            'lastname' => $user->getLastName(),
-        ];
+		$mahasiswaViolationService = MahasiswaViolationService::getInstance();
 
-        return Helper::view('mahasiswa/notification', $data);
-    }
+		$newMahasiswaViolations = $mahasiswaViolationService->getManyMahasiswaViolation(['nim_mahasiswa' => $mahasiswaRole->getNim(), 'is_new' => true]);
+
+		$data = [
+			'firstname' => $user->getFirstName(),
+			'lastname' => $user->getLastName(),
+			'newMahasiswaViolations' => $newMahasiswaViolations,
+		];
+
+		// mark all new violations as read
+		if (count($newMahasiswaViolations) > 0)
+            $mahasiswaViolationService->markNewMahasiswaViolationAsRead($newMahasiswaViolations);
+
+		return Helper::view('mahasiswa/notification', $data);
+	}
 
     public function profilePage()
     {
@@ -157,60 +168,27 @@ class MahasiswaController
         return Helper::redirect('/mahasiswa/profile');
     }
 
-    public function reportPage()
+    public function violationHistoryPage()
     {
+        /**
+         * @var UserModel
+         */
+        $user = Session::getInstance()->get('user');
+        $mahasiswaRole = $user->getRoleDetail();
+        assert($mahasiswaRole instanceof MahasiswaModel);
 
-        $userService = UserService::getInstance();
-        $mahasiswaService = MahasiswaService::getInstance();
-        $codeOfConductService = CodeOfConductService::getInstance();
-        $violationLevelService = ViolationLevelService::getInstance();
+        $mahasiswaViolationService = MahasiswaViolationService::getInstance();
 
         /**
-         * @var UserModel[]
+         * @var MahasiswaViolationModel[] $mahasiswaViolations
          */
-        $users = $userService->getManyUser(['role' => 'mahasiswa']);
-        /**
-         * @var MahasiswaModel[]
-         */
-        $mahasiswaList = $mahasiswaService->getAllMahasiswa();
-        /**
-         * @var CodeOfConductModel[]
-         */
-        $codeOfConducts = $codeOfConductService->getAllCodeOfConduct();
-        /**
-         * @var ViolationLevelModel[]
-         */
-        $violationLevels = $violationLevelService->getAllViolationLevel();
-
-        for ($i = 0; $i < count($users); $i++) {
-            for ($j = 0; $j < count($mahasiswaList); $j++) {
-                if ($users[$i]->getIdUser() == $mahasiswaList[$j]->getIdUser()) {
-                    $users[$i]->setRoleDetail($mahasiswaList[$j]);
-                }
-            }
-        }
-
-        for ($i = 0; $i < count($codeOfConducts); $i++) {
-            for ($j = 0; $j < count($violationLevels); $j++) {
-                if ($codeOfConducts[$i]->getIdViolationLevel() == $violationLevels[$j]->getIdViolationLevel()) {
-                    $codeOfConducts[$i]->setViolationLevel($violationLevels[$j]);
-                }
-            }
-        }
-
-        // sort code of conducts by violation level
-        usort($codeOfConducts, function ($a, $b) {
-            return $a->getViolationLevel()->getLevel() <=> $b->getViolationLevel()->getLevel();
-        });
+        $mahasiswaViolations = $mahasiswaViolationService->getManyMahasiswaViolation(['nim_mahasiswa' => $mahasiswaRole->getNim()]);
 
         $data = [
-            'flash' => Flasher::flash(),
-            'users' => $users,
-            'codeOfConducts' => $codeOfConducts,
-            'addNewReportEndpoint' => App::get('root_uri') . '/dosen/report/new'
+            'mahasiswaViolations' => $mahasiswaViolations,
         ];
 
-        return Helper::view('mahasiswa/report', $data);
+        return Helper::view('mahasiswa/violation_history', $data);
     }
 
     public function updatePassword()

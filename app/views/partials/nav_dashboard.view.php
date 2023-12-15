@@ -8,6 +8,7 @@ $user = Session::getInstance()->get('user');
 $role = $user->getRole();
 
 $newReportCommentCount = 0;
+$newViolationCount = 0;
 
 switch ($role) {
     case 'dosen':
@@ -22,7 +23,11 @@ switch ($role) {
         $adminService = AdminService::getInstance();
         $newReportCommentCount = $adminService->getAdminNotificationCount($adminRole);
         break;
-    default:
+    case 'mahasiswa':
+        $mahasiswaRole = $user->getRoleDetail();
+        assert($mahasiswaRole instanceof MahasiswaModel);
+        $mahasiswaService = MahasiswaService::getInstance();
+        $newViolationCount = $mahasiswaService->getMahasiswaNotificationCount($mahasiswaRole);
         break;
 }
 
@@ -49,24 +54,45 @@ switch ($role) {
                                 href="<?php echo App::get('root_uri') . "/" . $role . "/dashboard"; ?>">Dashboard</a>
                         </div>
                     </li>
-                    <li class="mb-2  position-relative">
-                        <div class="content nav-item gap-1 d-flex align-items-center">
-                            <i class="bi bi-exclamation-circle"></i>
-                            <a class="nav-link" href="<?php echo App::get('root_uri') . "/" . $role . "/report" ?>"
-                                title="report">Report</a>
-                        </div>
-                    </li>
+                    <?php if ($role == "mahasiswa"): ?>
+                        <li class="mb-2  position-relative">
+                            <div class="content nav-item gap-1 d-flex align-items-center">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <a class="nav-link"
+                                    href="<?php echo App::get('root_uri') . "/" . $role . "/violation-history" ?> "
+                                    title="report">Violation History</a>
+                            </div>
+                        </li>
+                    <?php else: ?>
+                        <li class="mb-2  position-relative">
+                            <div class="content nav-item gap-1 d-flex align-items-center">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <a class="nav-link" href="<?php echo App::get('root_uri') . "/" . $role . "/report" ?>"
+                                    title="report">Report</a>
+                            </div>
+                        </li>
+                    <?php endif; ?>
                     <li class="mb-2 position-relative">
                         <div class="content nav-item gap-1 d-flex justify-content-center align-items-center">
                             <i class="bi bi-bell"></i>
                             <a class="nav-link"
                                 href="<?php echo App::get('root_uri') . "/" . $role . "/notification" ?>">Notification
-                                <?php if ($newReportCommentCount > 0): ?>
-                                <span
-                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    <?= $newReportCommentCount ?>
-                                    <span class="visually-hidden">unread messages</span>
-                                </span>
+                                <?php if ($role == "mahasiswa"): ?>
+                                    <?php if ($newViolationCount > 0): ?>
+                                        <span
+                                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            <?= $newViolationCount ?>
+                                            <span class="visually-hidden">unread messages</span>
+                                        </span>
+                                    <?php endif; ?>
+                                <?php else: ?>
+                                    <?php if ($newReportCommentCount > 0): ?>
+                                        <span
+                                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            <?= $newReportCommentCount ?>
+                                            <span class="visually-hidden">unread messages</span>
+                                        </span>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                             </a>
                         </div>

@@ -58,4 +58,16 @@ class MahasiswaViolationService extends DBService
             'id_report' => $idReport,
         ]);
     }
+
+    /**
+     * @param MahasiswaViolationModel[] $mahasiswaViolations
+     */
+    public function markNewMahasiswaViolationAsRead(array $mahasiswaViolations) {
+        $ids = [];
+        foreach ($mahasiswaViolations as $mahasiswaViolation) {
+            $ids[] = $mahasiswaViolation->getIdMahasiswaViolation();
+        }
+
+        return $this->getDB()->execute("UPDATE {$this->getTable()} SET is_new = false WHERE id_mahasiswa_violation IN (" . implode(',', $ids) . ")");
+    }
 }

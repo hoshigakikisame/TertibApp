@@ -59,4 +59,13 @@ class MahasiswaService extends DBService
             'prodi' => $prodi,
         ], $where);
     }
+
+    public function getMahasiswaNotificationCount(MahasiswaModel $mahasiswaModel)
+    {
+        // Defining Services
+        $mahasiswaViolationService = MahasiswaViolationService::getInstance();
+        $mahasiswaViolations = $mahasiswaViolationService->getManyMahasiswaViolation(['nim_mahasiswa' => $mahasiswaModel->getNim(), 'is_new' => true]);
+
+        return count($mahasiswaViolations) ?? 0;
+    }
 }
