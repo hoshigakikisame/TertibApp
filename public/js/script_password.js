@@ -8,7 +8,6 @@ function flashAlert(type, message, action) {
 
 // javascript validation for nim and nidn
 function validationIdentity(max = 10, target = "", alert = "", elemen) {
-  console.log(elemen);
   let identity = elemen.parent().siblings().find("#identity");
   if (identity.val().length > max || identity.val().length < 4) {
     $(target).before(alert);
@@ -19,7 +18,6 @@ function validationIdentity(max = 10, target = "", alert = "", elemen) {
 
 // javascript validation for telephone number
 function countTlp(max = 15, target, alert, elemen) {
-  console.log(elemen);
   let tlp = elemen.parent().siblings().find("#noTelp");
   if (tlp.val().length > max || tlp.val().length < 3) {
     $(target).before(alert);
@@ -32,11 +30,7 @@ function countTlp(max = 15, target, alert, elemen) {
 function checkValidPassword(alert, elemen) {
   const newPassword = elemen.parent().siblings().find("#newPassword");
   const confirmPassword = elemen.parent().siblings().find("#confirmPassword");
-  if (
-    newPassword.val() !== confirmPassword.val() ||
-    confirmPassword.val() === "" ||
-    newPassword.val() === ""
-  ) {
+  if (newPassword.val() !== confirmPassword.val()) {
     $("div[title=flash]").before(alert);
   } else {
     return elemen.parents().find("form");
@@ -85,8 +79,12 @@ if ($("button#btnPress").length > 0) {
         $(this)
       );
 
-      if ((validTlp == password) == identity) {
-        validTlp.submit();
+      if (
+        validTlp !== undefined &&
+        identity !== undefined &&
+        password !== undefined
+      ) {
+        $(this).parents().find("form").submit();
       }
     });
   });
