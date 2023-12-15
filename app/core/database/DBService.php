@@ -40,14 +40,18 @@ class DBService {
         return $this->db;
     }
 
+    public function getView() {
+        return $this->view;
+    }
+
     public function getAll() {
-        $rawData = $this->db->findAll($this->table);
+        $rawData = $this->db->findAll($this->view);
 
         return $rawData;
     }
 
     public function getSingle(array $where) {
-        $rawData = $this->db->findOne($this->table, $where);
+        $rawData = $this->db->findOne($this->view, $where);
 
         return $rawData;
     }

@@ -12,7 +12,7 @@ class ReportService extends DBService {
     }
 
     public function getAllReport(): array {
-        $rawReports = $this->getDB()->findAll($this->getTable(), 'id_report', 'DESC');
+        $rawReports = $this->getDB()->findAll($this->getView(), 'id_report', 'DESC');
         $reports = [];
 
         if ($rawReports) {
@@ -39,7 +39,7 @@ class ReportService extends DBService {
         if (empty($where)) {
             return $this->getAllReport();
         }
-        $rawReports = $this->getDB()->findMany($this->getTable(), $where, 'id_report', 'DESC');
+        $rawReports = $this->getDB()->findMany($this->getView(), $where, 'id_report', 'DESC');
         $reports = [];
 
         if ($rawReports) {

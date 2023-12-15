@@ -29,7 +29,7 @@ class MahasiswaViolationService extends DBService
         if (empty($where)) {
             return $this->getAllMahasiswaViolation();
         }
-        $rawViolations = $this->getDB()->findMany($this->getTable(), $where, 'id_mahasiswa_violation', 'DESC');
+        $rawViolations = $this->getDB()->findMany($this->getView(), $where, 'id_mahasiswa_violation', 'DESC');
         $violations = [];
 
         if ($rawViolations) {
