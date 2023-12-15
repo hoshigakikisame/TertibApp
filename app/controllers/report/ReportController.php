@@ -8,32 +8,8 @@ class ReportController
 		$reportService = ReportService::getInstance();
 		$reportCommentService = ReportCommentService::getInstance();
 		$codeOfConductService = CodeOfConductService::getInstance();
-		$violationLevelService = ViolationLevelService::getInstance();
-		$userService = UserService::getInstance();
-		$mahasiswaService = MahasiswaService::getInstance();
-		$dosenService = DosenService::getInstance();
-		$adminService = AdminService::getInstance();
 
 		$report = $reportService->getSingleReport(['id_report' => $idReport]);
-		// $codeOfConduct = $codeOfConductService->getSingleCodeOfConduct(['id_code_of_conduct' => $report->getIdCodeOfConduct()]);
-		// $violationLevel = $violationLevelService->getSingleViolationLevel(['id_violation_level' => $codeOfConduct->getIdViolationLevel()]);
-
-		// if ($report->getIdAdmin() == null) {
-		// 	$adminUser = null;
-		// 	$adminRole = null;
-		// } else {
-		// 	$adminRole = $adminService->getSingleAdmin(['id_admin' => $report->getIdAdmin()]);
-		// 	$adminUser = $userService->getSingleUser(['id_user' => $adminRole->getIdUser()]);
-		// 	$adminUser->setRoleDetail($adminRole);
-		// }
-
-		// $mahasiswaRole = $mahasiswaService->getSingleMahasiswa(['nim' => $report->getNimMahasiswa()]);
-		// $mahasiswaUser = $userService->getSingleUser(['id_user' => $mahasiswaRole->getIdUser()]);
-		// $mahasiswaUser->setRoleDetail($mahasiswaRole);
-
-		// $dosenRole = $dosenService->getSingleDosen(['nidn' => $report->getNidnDosen()]);
-		// $dosenUser = $userService->getSingleUser(['id_user' => $dosenRole->getIdUser()]);
-		// $dosenUser->setRoleDetail($dosenRole);
 
 		$reportComments = $reportCommentService->getManyReportComment(['id_report' => $idReport]);
 		$codeOfConducts = $codeOfConductService->getAllCodeOfConduct();
@@ -41,11 +17,6 @@ class ReportController
 		$data = [
 			'flash' => Flasher::flash(),
 			'report' => $report,
-			// 'codeOfConduct' => $codeOfConduct,
-			// 'violationLevel' => $violationLevel,
-			// 'mahasiswaUser' => $mahasiswaUser,
-			// 'dosenUser' => $dosenUser,
-			// 'adminUser' => $adminUser,
 			'reportComments' => $reportComments,
 			'codeOfConducts' => $codeOfConducts,
 			'addNewReportCommentEndpoint' => App::get('root_uri') . "/report/detail/$idReport/comment/new",
