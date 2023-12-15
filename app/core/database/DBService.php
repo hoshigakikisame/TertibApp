@@ -8,11 +8,13 @@ class DBService {
      */
     private $db;
     private string $table;
+    private string $view;
 
-    public function __construct(string $table = ''){
+    public function __construct(string $table = '', string $view = ''){
         $this->db = App::get('database');
         assert($this->db instanceof QueryBuilder);
         $this->table = $table;
+        $this->view = $view != '' ? $view : $table;
     }
 
     protected function __clone(){}

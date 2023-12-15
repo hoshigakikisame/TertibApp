@@ -4,7 +4,7 @@ class MahasiswaViolationService extends DBService
 
     public function __construct()
     {
-        parent::__construct('view_mahasiswa_violation');
+        parent::__construct('tb_mahasiswa_violation', 'view_mahasiswa_violation');
     }
 
     public static function getInstance(): self

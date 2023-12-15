@@ -3,7 +3,7 @@
 class ReportService extends DBService {
     public function __construct()
     {
-        parent::__construct('view_report');
+        parent::__construct('tb_report', 'view_report');
     }
 
     public static function getInstance(): self
