@@ -31,10 +31,10 @@
                                 <tr>
                                     <th scope="col">Title</th>
                                     <th scope="col">Subject</th>
-                                    <th scope="col">Report By</th>
+                                    <th scope="col">Reported By</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Create Date</th>
-                                    <th scope="col">Confirm By</th>
+                                    <th scope="col">Confirmed By</th>
                                     <th scope="col">Details</th>
                                 </tr>
                             </thead>

@@ -41,11 +41,7 @@
                         /**
                          * @var ReportModel[] $reports
                          */
-                        foreach ($reports as $report) :
-                            /**
-                             * @var CodeOfConductModel $codeOfConduct
-                             */
-                            $codeOfConduct = $report->getCodeOfConduct();
+                        foreach ($reports as $report):
                         ?>
                             <div class="col-11 border border-2 ms-4 px-4 py-3 rounded-3">
                                 <div class="row flex-column">
@@ -54,8 +50,8 @@
                                             <span class="badge text-bg-info"><?= $report->getStatus() ?></span>
                                             <span><?= GenericUtil::dateToHumanReadable($report->getReportDate()) ?></span>
                                         </div>
-                                        <h6 class="mb-0"><span class="text-primary">#<?= $report->getIdReport() ?></span> Dosen <?= $report->getUsernameDosen() ?> Reported Mahasiswa with Username <?= $report->getUsernameMahasiswa() ?> </h6>
-                                        <p><?= $codeOfConduct->getDescription() ?></p>
+                                        <h6 class="mb-0"><span class="text-primary">#<?= $report->getIdReport() ?></span> Dosen <?= $report->getDosenUsername() ?> Reported Mahasiswa with Username <?= $report->getMahasiswaUsername() ?> </h6>
+                                        <p><?= $report->getCodeOfConductName() ?></p>
                                     </div>
                                     <div class="col d-flex justify-content-end">
                                         <a class="btn btn-primary text-white justify-self-end" href="<?= App::get('root_uri') . '/report/detail/' . $report->getIdReport() ?>" role="button">Report
