@@ -34,7 +34,7 @@ switch ($role) {
 ?>
 <nav class="navbar navbar-expand-lg align-items-stretch">
     <div class="container-fluid align-items-lg-start flex-lg-column ">
-        <a class="navbar-brand my-3" href="#"><img src="<?php echo App::get('root_uri') . "/public/img/logo.png" ?>" class="img-profile" alt="Tertib APP"> Tertib APP</a>
+        <a class="navbar-brand my-3" href="#"><img src="<?php echo App::get('root_uri') . "/public/img/logo.png" ?>" class="d-inline-block align-text-center" alt="Tertib APP" width="40" height="40"> Tertib APP</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" aria-controls="navbarOffcanvasLg">
             <span class="navbar-toggler-icon"></span>
         </button>
