@@ -49,10 +49,10 @@
                                             <?= $report->getTitle() ?>
                                         </th>
                                         <td>
-                                            <?= $report->getUsernameMahasiswa() ?>
+                                            <?= $report->getMahasiswaUsername() ?>
                                         </td>
                                         <td>
-                                            <?= $report->getUsernameDosen() ?>
+                                            <?= $report->getDosenUsername() ?>
                                         </td>
                                         <td>
                                             <?= $report->getStatus() ?>
@@ -61,7 +61,7 @@
                                             <?= $report->getReportDate() ?>
                                         </td>
                                         <td>
-                                            <?= $report->getUsernameAdmin() ?? "No one yet" ?>
+                                            <?= $report->getAdminUsername() ?? "No one yet" ?>
                                         </td>
                                         <td><a href="<?= App::get('root_uri') . '/report/detail/' . $report->getIdReport() ?>" class="btn btn-link">Show Details</a></td>
                                     </tr>

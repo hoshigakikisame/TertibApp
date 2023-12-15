@@ -8,9 +8,25 @@ class ReportCommentModel implements DBModel {
     protected string $imagePath;
     protected bool $isNew;
     protected string $createdAt;
-    protected $user;
+    protected string $authorUsername;
+    protected string $authorFirstName;
+    protected string $authorLastName;
+    protected string $authorImagePath;
     
-    public function __construct($idReportComment, $idReport, $idUser, $content, $imagePath, $isNew, $createdAt) {
+    protected string $uniqueKey;
+    public function __construct(
+        $idReportComment, 
+        $idReport, 
+        $idUser, 
+        $content, 
+        $imagePath, 
+        $isNew, 
+        $createdAt,
+        $authorUsername = '',
+        $authorFirstName = '',
+        $authorLastName = '',
+        $authorImagePath = ''
+    ) {
         $this->idReportComment = $idReportComment;
         $this->idReport = $idReport;
         $this->idUser = $idUser;
@@ -18,6 +34,11 @@ class ReportCommentModel implements DBModel {
         $this->imagePath = $imagePath;
         $this->isNew = $isNew;
         $this->createdAt = $createdAt;
+        $this->authorUsername = $authorUsername;
+        $this->authorFirstName = $authorFirstName;
+        $this->authorLastName = $authorLastName;
+        $this->authorImagePath = $authorImagePath;
+        $this->uniqueKey = Helper::generateRandomHex(8);
     }
 
     public static function fromStdClass($stdClass): ReportCommentModel {
@@ -28,7 +49,11 @@ class ReportCommentModel implements DBModel {
             $stdClass->content,
             $stdClass->image_path,
             $stdClass->is_new,
-            $stdClass->created_at
+            $stdClass->created_at,
+            $stdClass->author_username,
+            $stdClass->author_first_name,
+            $stdClass->author_last_name,
+            $stdClass->author_image_path
         );
     }
 
@@ -61,8 +86,20 @@ class ReportCommentModel implements DBModel {
         return $this->createdAt;
     }
 
-    public function getUser() {
-        return $this->user;
+    public function getAuthorUsername() {
+        return $this->authorUsername;
+    }
+
+    public function getAuthorFirstName() {
+        return $this->authorFirstName;
+    }
+
+    public function getAuthorLastName() {
+        return $this->authorLastName;
+    }
+
+    public function getAuthorImagePath() {
+        return $this->authorImagePath;
     }
 
     public function getImageUrl()
@@ -71,8 +108,16 @@ class ReportCommentModel implements DBModel {
         if ($this->imagePath == null || $this->imagePath == '') {
             return '';
         }
-        $randomHex = Helper::generateRandomHex(8);
-        return $baseUrl . $this->imagePath . '?v=' . $randomHex;
+        return $baseUrl . $this->imagePath . '?v=' . $this->uniqueKey;
+    }
+
+    public function getAuthorImageUrl()
+    {
+        $baseUrl = MediaStorageService::getInstance()->getAccessUrl();
+        if ($this->authorImagePath == null || $this->authorImagePath == '') {
+            return $baseUrl . 'user_profile/blank_user.png';
+        }
+        return $baseUrl . $this->authorImagePath . '?v=' . $this->uniqueKey;
     }
 
     public function getReferenceUrl()
@@ -107,9 +152,5 @@ class ReportCommentModel implements DBModel {
 
     public function setCreatedAt($createdAt) {
         $this->createdAt = $createdAt;
-    }
-
-    public function setUser($user) {
-        $this->user = $user;
     }
 }

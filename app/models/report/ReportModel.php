@@ -6,86 +6,92 @@ class ReportModel implements DBModel
     protected int $idCodeOfConduct;
     protected string $title;
     protected string $nidnDosen;
-    protected string $usernameDosen;
-    protected string $firstNameDosen;
-    protected string $lastNameDosen;
     protected int|null $idAdmin;
-    protected string|null $usernameAdmin;
-    protected string|null $firstNameAdmin;
-    protected string|null $lastNameAdmin;
     protected string $nimMahasiswa;
-    protected string $usernameMahasiswa;
-    protected string $firstNameMahasiswa;
-    protected string $lastNameMahasiswa;
     protected string $reportDate;
     protected string $content;
     protected string $status;
     protected string $imagePath;
     // final look of this property, should be like this: https://res.cloudinary.com/dfbwr0uv7/image/upload/report/2a574124289bc1a148e67d0f1b32e520.jpeg
     protected string $location;
-
-    /**
-     * @var CodeOfConductModel
-     */
-    protected $codeOfConduct;
-    /**
-     * @var UserModel $dosen
-     */
-    protected $dosen;
-
-    /**
-     * @var UserModel $admin
-     */
-    protected $admin;
-
-    /**
-     * @var UserModel $mahasiswa
-     */
-    protected $mahasiswa;
-
+    protected string $dosenUsername;
+    protected string $dosenFirstName;
+    protected string $dosenLastName;
+    protected string $dosenImagePath;
+    protected string $adminUsername;
+    protected string $adminFirstName;
+    protected string $adminLastName;
+    protected string $adminImagePath;
+    protected string $mahasiswaUsername;
+    protected string $mahasiswaFirstName;
+    protected string $mahasiswaLastName;
+    protected string $mahasiswaImagePath;
+    protected string $codeOfConductName;
+    protected string $codeOfConductDescription;
+    protected string $violationLevelName;
+    protected int $violationLevelLevel;
+    protected int $violationLevelWeight;
+    protected string $uniqueKey;
     public function __construct(
         $idReport, 
         $idCodeOfConduct, 
         $title, 
         $nidnDosen, 
-        $usernameDosen,
-        $firstNameDosen,
-        $lastNameDosen,
         $idAdmin, 
-        $usernameAdmin,
-        $firstNameAdmin,
-        $lastNameAdmin,
         $nimMahasiswa, 
-        $usernameMahasiswa,
-        $firstNameMahasiswa,
-        $lastNameMahasiswa,
         $reportDate, 
         $content, 
         $status, 
         $imagePath, 
-        $location
+        $location,
+        $dosenUsername = '',
+        $dosenFirstName = '',
+        $dosenLastName = '',
+        $dosenImagePath = '',
+        $adminUsername = '',
+        $adminFirstName = '',
+        $adminLastName = '',
+        $adminImagePath = '',
+        $mahasiswaUsername = '',
+        $mahasiswaFirstName = '',
+        $mahasiswaLastName = '',
+        $mahasiswaImagePath = '',
+        $codeOfConductName = '',
+        $codeOfConductDescription = '',
+        $violationLevelName = '',
+        $violationLevelLevel = 0,
+        $violationLevelWeight = 0
     )
     {
         $this->idReport = $idReport;
         $this->idCodeOfConduct = $idCodeOfConduct;
         $this->title = $title;
         $this->nidnDosen = $nidnDosen;
-        $this->usernameDosen = $usernameDosen;
-        $this->firstNameDosen = $firstNameDosen;
-        $this->lastNameDosen = $lastNameDosen;
         $this->idAdmin = $idAdmin;
-        $this->usernameAdmin = $usernameAdmin;
-        $this->firstNameAdmin = $firstNameAdmin;
-        $this->lastNameAdmin = $lastNameAdmin;
         $this->nimMahasiswa = $nimMahasiswa;
-        $this->usernameMahasiswa = $usernameMahasiswa;
-        $this->firstNameMahasiswa = $firstNameMahasiswa;
-        $this->lastNameMahasiswa = $lastNameMahasiswa;
         $this->reportDate = $reportDate;
         $this->content = $content;
         $this->status = $status;
         $this->imagePath = $imagePath;
         $this->location = $location;
+        $this->dosenUsername = $dosenUsername;
+        $this->dosenFirstName = $dosenFirstName;
+        $this->dosenLastName = $dosenLastName;
+        $this->dosenImagePath = $dosenImagePath;
+        $this->adminUsername = $adminUsername;
+        $this->adminFirstName = $adminFirstName;
+        $this->adminLastName = $adminLastName;
+        $this->adminImagePath = $adminImagePath;
+        $this->mahasiswaUsername = $mahasiswaUsername;
+        $this->mahasiswaFirstName = $mahasiswaFirstName;
+        $this->mahasiswaLastName = $mahasiswaLastName;
+        $this->mahasiswaImagePath = $mahasiswaImagePath;
+        $this->codeOfConductName = $codeOfConductName;
+        $this->codeOfConductDescription = $codeOfConductDescription;
+        $this->violationLevelName = $violationLevelName;
+        $this->violationLevelLevel = $violationLevelLevel;
+        $this->violationLevelWeight = $violationLevelWeight;
+        $this->uniqueKey = Helper::generateRandomHex(8);
     }
 
     public static function fromStdClass($stdClass): ReportModel
@@ -95,22 +101,30 @@ class ReportModel implements DBModel
             $stdClass->id_code_of_conduct,
             $stdClass->title,
             $stdClass->nidn_dosen,
-            $stdClass->username_dosen,
-            $stdClass->first_name_dosen,
-            $stdClass->last_name_dosen,
             $stdClass->id_admin,
-            $stdClass->username_admin,
-            $stdClass->first_name_admin,
-            $stdClass->last_name_admin,
             $stdClass->nim_mahasiswa,
-            $stdClass->username_mahasiswa,
-            $stdClass->first_name_mahasiswa,
-            $stdClass->last_name_mahasiswa,
             $stdClass->report_date,
             $stdClass->content,
             $stdClass->status,
             $stdClass->image_path,
-            $stdClass->location
+            $stdClass->location,
+            $stdClass->dosen_username,
+            $stdClass->dosen_first_name,
+            $stdClass->dosen_last_name,
+            $stdClass->dosen_image_path,
+            $stdClass->admin_username,
+            $stdClass->admin_first_name,
+            $stdClass->admin_last_name,
+            $stdClass->admin_image_path,
+            $stdClass->mahasiswa_username,
+            $stdClass->mahasiswa_first_name,
+            $stdClass->mahasiswa_last_name,
+            $stdClass->mahasiswa_image_path,
+            $stdClass->code_of_conduct_name,
+            $stdClass->code_of_conduct_description,
+            $stdClass->violation_level_name,
+            $stdClass->violation_level_level,
+            $stdClass->violation_level_weight
         );
     }
 
@@ -135,59 +149,14 @@ class ReportModel implements DBModel
         return $this->nidnDosen;
     }
 
-    public function getUsernameDosen()
-    {
-        return $this->usernameDosen;
-    }
-
-    public function getFirstNameDosen()
-    {
-        return $this->firstNameDosen;
-    }
-    
-    public function getLastNameDosen()
-    {
-        return $this->lastNameDosen;
-    }
-
     public function getIdAdmin()
     {
         return $this->idAdmin;
     }
 
-    public function getUsernameAdmin()
-    {
-        return $this->usernameAdmin;
-    }
-
-    public function getFirstNameAdmin()
-    {
-        return $this->firstNameAdmin;
-    }
-
-    public function getLastNameAdmin()
-    {
-        return $this->lastNameAdmin;
-    }
-
     public function getNimMahasiswa()
     {
         return $this->nimMahasiswa;
-    }
-
-    public function getUsernameMahasiswa()
-    {
-        return $this->usernameMahasiswa;
-    }
-
-    public function getFirstNameMahasiswa()
-    {
-        return $this->firstNameMahasiswa;
-    }
-
-    public function getLastNameMahasiswa()
-    {
-        return $this->lastNameMahasiswa;
     }
 
     public function getReportDate()
@@ -215,9 +184,89 @@ class ReportModel implements DBModel
         return $this->location;
     }
 
-    public function getCodeOfConduct()
+    public function getDosenUsername()
     {
-        return $this->codeOfConduct;
+        return $this->dosenUsername;
+    }
+
+    public function getDosenFirstName()
+    {
+        return $this->dosenFirstName;
+    }
+
+    public function getDosenLastName()
+    {
+        return $this->dosenLastName;
+    }
+
+    public function getDosenImagePath()
+    {
+        return $this->dosenImagePath;
+    }
+
+    public function getAdminUsername()
+    {
+        return $this->adminUsername;
+    }
+
+    public function getAdminFirstName()
+    {
+        return $this->adminFirstName;
+    }
+
+    public function getAdminLastName()
+    {
+        return $this->adminLastName;
+    }
+
+    public function getAdminImagePath()
+    {
+        return $this->adminImagePath;
+    }
+
+    public function getMahasiswaUsername()
+    {
+        return $this->mahasiswaUsername;
+    }
+
+    public function getMahasiswaFirstName()
+    {
+        return $this->mahasiswaFirstName;
+    }
+
+    public function getMahasiswaLastName()
+    {
+        return $this->mahasiswaLastName;
+    }
+
+    public function getMahasiswaImagePath()
+    {
+        return $this->mahasiswaImagePath;
+    }
+
+    public function getCodeOfConductName()
+    {
+        return $this->codeOfConductName;
+    }
+
+    public function getCodeOfConductDescription()
+    {
+        return $this->codeOfConductDescription;
+    }
+
+    public function getViolationLevelName()
+    {
+        return $this->violationLevelName;
+    }
+
+    public function getViolationLevelLevel()
+    {
+        return $this->violationLevelLevel;
+    }
+
+    public function getViolationLevelWeight()
+    {
+        return $this->violationLevelWeight;
     }
 
     public static function getStatusChoices(): array
@@ -237,25 +286,36 @@ class ReportModel implements DBModel
         if ($this->imagePath == null || $this->imagePath == '') {
             return '';
         }
-        $randomHex = Helper::generateRandomHex(8);
-        return $baseUrl . $this->imagePath . '?v=' . $randomHex;
+        return $baseUrl . $this->imagePath . '?v=' . $this->uniqueKey;
     }
 
-    public function getDosen()
+    public function getDosenImageUrl()
     {
-        return $this->dosen;
+        $baseUrl = MediaStorageService::getInstance()->getAccessUrl();
+        if ($this->dosenImagePath == null || $this->dosenImagePath == '') {
+            return $baseUrl . 'user_profile/blank_user.png';
+        }
+        return $baseUrl . $this->dosenImagePath . '?v=' . $this->uniqueKey;
     }
 
-    public function getAdmin()
+    public function getAdminImageUrl()
     {
-        return $this->admin;
+        $baseUrl = MediaStorageService::getInstance()->getAccessUrl();
+        if ($this->adminImagePath == null || $this->adminImagePath == '') {
+            return $baseUrl . 'user_profile/blank_user.png';
+        }
+        return $baseUrl . $this->adminImagePath . '?v=' . $this->uniqueKey;
     }
 
-    public function getMahasiswa()
+    public function getMahasiswaImageUrl()
     {
-        return $this->mahasiswa;
+        $baseUrl = MediaStorageService::getInstance()->getAccessUrl();
+        if ($this->mahasiswaImagePath == null || $this->mahasiswaImagePath == '') {
+            return $baseUrl . 'user_profile/blank_user.png';
+        }
+        return $baseUrl . $this->mahasiswaImagePath . '?v=' . $this->uniqueKey;
     }
-
+    
     /**
      * @param UserModel $user
      * @return bool
