@@ -34,13 +34,11 @@ switch ($role) {
 ?>
 <nav class="navbar navbar-expand-lg align-items-stretch">
     <div class="container-fluid align-items-lg-start flex-lg-column ">
-        <a class="navbar-brand my-3" href="#">LOGO TATIB</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg"
-            aria-controls="navbarOffcanvasLg">
+        <a class="navbar-brand my-3" href="#"><img src="<?php echo App::get('root_uri') . "/public/img/logo.png" ?>" class="img-profile" alt="Tertib APP"> Tertib APP</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" aria-controls="navbarOffcanvasLg">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvasLg"
-            aria-labelledby="navbarOffcanvasLgLabel">
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvasLg" aria-labelledby="navbarOffcanvasLgLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -50,45 +48,38 @@ switch ($role) {
                     <li class=" mb-2  position-relative">
                         <div class="content nav-item gap-1 d-flex align-items-center">
                             <i class="bi bi-house"></i>
-                            <a class="nav-link" aria-current="page"
-                                href="<?php echo App::get('root_uri') . "/" . $role . "/dashboard"; ?>">Dashboard</a>
+                            <a class="nav-link" aria-current="page" href="<?php echo App::get('root_uri') . "/" . $role . "/dashboard"; ?>">Dashboard</a>
                         </div>
                     </li>
-                    <?php if ($role == "mahasiswa"): ?>
+                    <?php if ($role == "mahasiswa") : ?>
                         <li class="mb-2  position-relative">
                             <div class="content nav-item gap-1 d-flex align-items-center">
                                 <i class="bi bi-exclamation-circle"></i>
-                                <a class="nav-link"
-                                    href="<?php echo App::get('root_uri') . "/" . $role . "/violation-history" ?> "
-                                    title="report">Violation History</a>
+                                <a class="nav-link" href="<?php echo App::get('root_uri') . "/" . $role . "/violation-history" ?> " title="report">Violation History</a>
                             </div>
                         </li>
-                    <?php else: ?>
+                    <?php else : ?>
                         <li class="mb-2  position-relative">
                             <div class="content nav-item gap-1 d-flex align-items-center">
                                 <i class="bi bi-exclamation-circle"></i>
-                                <a class="nav-link" href="<?php echo App::get('root_uri') . "/" . $role . "/report" ?>"
-                                    title="report">Report</a>
+                                <a class="nav-link" href="<?php echo App::get('root_uri') . "/" . $role . "/report" ?>" title="report">Report</a>
                             </div>
                         </li>
                     <?php endif; ?>
                     <li class="mb-2 position-relative">
                         <div class="content nav-item gap-1 d-flex justify-content-center align-items-center">
                             <i class="bi bi-bell"></i>
-                            <a class="nav-link"
-                                href="<?php echo App::get('root_uri') . "/" . $role . "/notification" ?>">Notification
-                                <?php if ($role == "mahasiswa"): ?>
-                                    <?php if ($newViolationCount > 0): ?>
-                                        <span
-                                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            <a class="nav-link" href="<?php echo App::get('root_uri') . "/" . $role . "/notification" ?>">Notification
+                                <?php if ($role == "mahasiswa") : ?>
+                                    <?php if ($newViolationCount > 0) : ?>
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                             <?= $newViolationCount ?>
                                             <span class="visually-hidden">unread messages</span>
                                         </span>
                                     <?php endif; ?>
-                                <?php else: ?>
-                                    <?php if ($newReportCommentCount > 0): ?>
-                                        <span
-                                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <?php else : ?>
+                                    <?php if ($newReportCommentCount > 0) : ?>
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                             <?= $newReportCommentCount ?>
                                             <span class="visually-hidden">unread messages</span>
                                         </span>
@@ -97,28 +88,21 @@ switch ($role) {
                             </a>
                         </div>
                     </li>
-                    <?php if ($role == "admin"): ?>
+                    <?php if ($role == "admin") : ?>
                         <li class="mb-2 gap-1">
-                            <div class="col-auto position-relative content nav-item align-items-center"
-                                title="<?php echo App::get('root_uri') . "/admin/manage" ?>">
+                            <div class="col-auto position-relative content nav-item align-items-center" title="<?php echo App::get('root_uri') . "/admin/manage" ?>">
                                 <i class="bi bi-folder"></i>
-                                <button type="button" class="btn dropdown-toggle shadow-none" data-bs-toggle="dropdown"
-                                    aria-expanded="false">Manage</button>
+                                <button type="button" class="btn dropdown-toggle shadow-none" data-bs-toggle="dropdown" aria-expanded="false">Manage</button>
                                 <ul class="dropdown-menu position-static">
-                                    <li><a class="dropdown-item"
-                                            href="<?php echo App::get('root_uri') . "/" . $role . "/manage/mahasiswa" ?>">Mahasiswa</a>
+                                    <li><a class="dropdown-item" href="<?php echo App::get('root_uri') . "/" . $role . "/manage/mahasiswa" ?>">Mahasiswa</a>
                                     </li>
-                                    <li><a class="dropdown-item"
-                                            href="<?php echo App::get('root_uri') . "/" . $role . "/manage/dosen" ?>">Dosen</a>
+                                    <li><a class="dropdown-item" href="<?php echo App::get('root_uri') . "/" . $role . "/manage/dosen" ?>">Dosen</a>
                                     </li>
-                                    <li><a class="dropdown-item"
-                                            href="<?php echo App::get('root_uri') . "/" . $role . "/manage/admin" ?>">Admin</a>
+                                    <li><a class="dropdown-item" href="<?php echo App::get('root_uri') . "/" . $role . "/manage/admin" ?>">Admin</a>
                                     </li>
-                                    <li><a class="dropdown-item"
-                                            href="<?php echo App::get('root_uri') . "/" . $role . "/manage/violation-level" ?>">Violation
+                                    <li><a class="dropdown-item" href="<?php echo App::get('root_uri') . "/" . $role . "/manage/violation-level" ?>">Violation
                                             Level</a></li>
-                                    <li><a class="dropdown-item"
-                                            href="<?php echo App::get('root_uri') . "/" . $role . "/manage/code-of-conduct" ?>">Code
+                                    <li><a class="dropdown-item" href="<?php echo App::get('root_uri') . "/" . $role . "/manage/code-of-conduct" ?>">Code
                                             of Conduct</a></li>
                                 </ul>
                             </div>
@@ -127,8 +111,7 @@ switch ($role) {
                     <li class="mb-2 position-relative">
                         <div class="content nav-item  d-flex gap-1 align-items-center">
                             <i class="bi bi-person"></i>
-                            <a class="nav-link"
-                                href="<?php echo App::get('root_uri') . "/" . $role . "/profile" ?>">Profile</a>
+                            <a class="nav-link" href="<?php echo App::get('root_uri') . "/" . $role . "/profile" ?>">Profile</a>
                         </div>
                     </li>
                     <li class="logOut border-top mt-2 position-relative">

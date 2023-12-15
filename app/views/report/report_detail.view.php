@@ -182,11 +182,11 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
                                     </div>
 
                                     <div class="info">
-                                        <p>participant</p>
+                                        <p class="mb-1">participant</p>
                                         <div class="participant">
-                                            <img src="<?= GenericUtil::optionalImageRedaction($dosenUser->getImageUrl(), $isMahasiswa) ?>" class="border border-white rounded-circle img-profile" style="width: 30px; height: 30px" alt="">
-                                            <img src="<?= GenericUtil::optionalImageRedaction($adminUser?->getImageUrl() ?? '', $isMahasiswa) ?>" class="border border-white rounded-circle img-profile" style="width: 30px; height: 30px" alt="">
-                                            <img src="<?= $mahasiswaUser?->getImageUrl() ?? '' ?>" class="border border-white rounded-circle img-profile" style="width: 30px; height: 30px" alt="">
+                                            <img src="<?= GenericUtil::optionalImageRedaction($dosenUser->getImageUrl(), $isMahasiswa) ?>" class="border border-white rounded-circle img-profile-sm" alt="">
+                                            <img src="<?= GenericUtil::optionalImageRedaction($adminUser?->getImageUrl() ?? '', $isMahasiswa) ?>" class="border border-white rounded-circle img-profile-sm" alt="">
+                                            <img src="<?= $mahasiswaUser?->getImageUrl() ?? '' ?>" class="border border-white rounded-circle img-profile-sm" alt="">
                                         </div>
                                         <div class="row mt-3">
                                             <div class="col-5">

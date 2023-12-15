@@ -8,44 +8,45 @@
 		</div>
 
 		<!-- Start Table Tatib -->
-
-		<table class="table table-responsive">
-			<thead>
-				<tr>
-					<th scope="col">Tata Tertib</th>
-					<th scope="col">Tahun</th>
-					<?php for ($i = 1; $i <= 12; $i++) : ?>
-						<th scope="col"><?= substr(DateTime::createFromFormat('!m', $i)->format('F'), 0, 3) ?></th>
-					<?php endfor; ?>
-					<th scope="col">Jumlah</th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php 
-				/**
-				 * @var ViolationRecapModel[] $recaps
-				 */
-				foreach ($recaps as $recap): ?>
-				<tr>
-					<td scope="row"><?= $recap->getCodeOfConductName() ?></td>
-					<td scope="row"><?= $recap->getYear() ?></td>
-					<td scope="row"><?= $recap->getTotalJanuary() ?></td>
-					<td scope="row"><?= $recap->getTotalFebruary() ?></td>
-					<td scope="row"><?= $recap->getTotalMarch() ?></td>
-					<td scope="row"><?= $recap->getTotalApril() ?></td>
-					<td scope="row"><?= $recap->getTotalMay() ?></td>
-					<td scope="row"><?= $recap->getTotalJune() ?></td>
-					<td scope="row"><?= $recap->getTotalJuly() ?></td>
-					<td scope="row"><?= $recap->getTotalAugust() ?></td>
-					<td scope="row"><?= $recap->getTotalSeptember() ?></td>
-					<td scope="row"><?= $recap->getTotalOctober() ?></td>
-					<td scope="row"><?= $recap->getTotalNovember() ?></td>
-					<td scope="row"><?= $recap->getTotalDecember() ?></td>
-					<td scope="row"><?= $recap->getTotal() ?></td>
-				</tr>
-				<?php endforeach; ?>
-			</tbody>
-		</table>
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr class="table-primary">
+						<th scope="col" class="text-start">Tata Tertib</th>
+						<th scope="col">Tahun</th>
+						<?php for ($i = 1; $i <= 12; $i++) : ?>
+							<th scope="col"><?= substr(DateTime::createFromFormat('!m', $i)->format('F'), 0, 3) ?></th>
+						<?php endfor; ?>
+						<th scope="col">Jumlah</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+					/**
+					 * @var ViolationRecapModel[] $recaps
+					 */
+					foreach ($recaps as $recap) : ?>
+						<tr>
+							<td scope="row" class="text-start"><?= $recap->getCodeOfConductName() ?></td>
+							<td scope="row"><?= $recap->getYear() ?></td>
+							<td scope="row"><?= $recap->getTotalJanuary() ?></td>
+							<td scope="row"><?= $recap->getTotalFebruary() ?></td>
+							<td scope="row"><?= $recap->getTotalMarch() ?></td>
+							<td scope="row"><?= $recap->getTotalApril() ?></td>
+							<td scope="row"><?= $recap->getTotalMay() ?></td>
+							<td scope="row"><?= $recap->getTotalJune() ?></td>
+							<td scope="row"><?= $recap->getTotalJuly() ?></td>
+							<td scope="row"><?= $recap->getTotalAugust() ?></td>
+							<td scope="row"><?= $recap->getTotalSeptember() ?></td>
+							<td scope="row"><?= $recap->getTotalOctober() ?></td>
+							<td scope="row"><?= $recap->getTotalNovember() ?></td>
+							<td scope="row"><?= $recap->getTotalDecember() ?></td>
+							<td scope="row"><?= $recap->getTotal() ?></td>
+						</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+		</div>
 		<!-- End Table Tatib -->
 
 		<div class="col-11 m-4">

@@ -13,12 +13,11 @@
                     </div>
                     <div class="d-flex flex-row-reverse mt-4 mb-4">
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
+                            <button class="btn btn-secondary dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-funnel"></i>
                             </button>
                             <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="<?= App::get('root_uri') . '/admin/report' ?>">All</a></li>
+                                <li><a class="dropdown-item" href="<?= App::get('root_uri') . '/admin/report' ?>">All</a></li>
                                 <?php foreach (ReportModel::getStatusChoices() as $status) : ?>
                                     <li><a class="dropdown-item" href="<?= App::get('root_uri') . '/admin/report?status=' . $status ?>"><?= $status ?></a></li>
                                 <?php endforeach; ?>
@@ -44,7 +43,7 @@
                                 /**
                                  * @var ReportModel $report
                                  */
-                                foreach ($reports as $report): ?>
+                                foreach ($reports as $report) : ?>
                                     <tr>
                                         <th>
                                             <?= $report->getTitle() ?>
@@ -64,8 +63,7 @@
                                         <td>
                                             <?= $report->getUsernameAdmin() ?? "No one yet" ?>
                                         </td>
-                                        <td><a href="<?= App::get('root_uri') . '/report/detail/' . $report->getIdReport() ?>"
-                                                class="btn btn-link">Show Details</a></td>
+                                        <td><a href="<?= App::get('root_uri') . '/report/detail/' . $report->getIdReport() ?>" class="btn btn-link">Show Details</a></td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
