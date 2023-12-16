@@ -47,4 +47,15 @@ class Helper
 	{
 		return bin2hex(random_bytes($byteSize));
 	}
+
+	public static function paginationHandler()
+	{
+		$page = 1;
+
+		if (isset($_GET['page']) && $_GET['page'] != '') {
+			$page = $_GET['page'];
+		}
+
+		return $page;
+	}
 }

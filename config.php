@@ -29,7 +29,8 @@ return [
          PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
          PDO::MYSQL_ATTR_SSL_CA => "../../../database_ca.pem",
          PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
-      )
+      ),
+      'pagination_limit' => 11,
 	],
    'host' => $_ENV['HOST'],
 	'root_uri' => dirname($_SERVER['SCRIPT_NAME']),

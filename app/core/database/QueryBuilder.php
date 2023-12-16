@@ -4,11 +4,12 @@
 class QueryBuilder
 {
 	protected $pdo;
+	protected int $paginationLimit;
 	function __construct(PDO $pdo)
 	{
 		$this->pdo = $pdo;
 		$this->setTimeZone();
-		
+		$this->paginationLimit = App::get('config')['database']['pagination_limit'];
 	}
 
 	private function setTimeZone()
@@ -55,12 +56,12 @@ class QueryBuilder
 		}
 	 }
 
-	 public function findAll($table, string $orderby = '', string $order = 'ASC', int $limit = 0) {
+	 public function findAll($table, string $orderby = '', string $order = 'ASC', int $page = 1) {
 		$sql = sprintf(
 			"SELECT * FROM %s %s",
 			$table,
-			($orderby ? "ORDER BY $orderby $order" : '') . 
-			($limit > 0 ? " LIMIT $limit" : '')
+			($orderby ? "ORDER BY $orderby $order" : '') .
+			($this->paginationLimit > 0 ? " LIMIT " . ($page - 1) * $this->paginationLimit . ", $this->paginationLimit" : '')
 		);
 
 		try {
@@ -72,14 +73,14 @@ class QueryBuilder
 		}
 	 }
 
-	 public function findMany($table, $parameters = [], string $orderby = '', string $order = 'ASC', int $limit = 0)
+	 public function findMany($table, $parameters = [], string $orderby = '', string $order = 'ASC', int $page = 1)
 	 {
 		$sql = sprintf(
 			"SELECT * FROM %s WHERE %s %s",
 			$table,
 			implode(' AND ', array_map(fn ($key) => "$key = :$key", array_keys($parameters))),
 			($orderby ? "ORDER BY $orderby $order" : '') . 
-			($limit > 0 ? " LIMIT $limit" : '')
+			($this->paginationLimit > 0 ? " LIMIT " . ($page - 1) * $this->paginationLimit . ", $this->paginationLimit" : '')
 		);
 
 		try {

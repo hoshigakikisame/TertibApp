@@ -18,10 +18,10 @@ class ReportModel implements DBModel
     protected string $dosenFirstName;
     protected string $dosenLastName;
     protected string $dosenImagePath;
-    protected string $adminUsername;
-    protected string $adminFirstName;
-    protected string $adminLastName;
-    protected string $adminImagePath;
+    protected string|null $adminUsername;
+    protected string|null $adminFirstName;
+    protected string|null $adminLastName;
+    protected string|null $adminImagePath;
     protected string $mahasiswaUsername;
     protected string $mahasiswaFirstName;
     protected string $mahasiswaLastName;

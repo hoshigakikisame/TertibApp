@@ -115,8 +115,10 @@ class AdminController
 	 */
 	
 	public function logActivityPage() {
+
+		$page = Helper::paginationHandler();
 		$logActivityService = LogActivityService::getInstance();
-		$logActivities = $logActivityService->getAllLogActivity();
+		$logActivities = $logActivityService->getAllLogActivity($page);
 		$data = [
 			'logActivities' => $logActivities
 		];

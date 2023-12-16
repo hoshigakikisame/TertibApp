@@ -11,8 +11,8 @@ class LogActivityService extends DBService {
         return parent::getInstance();
     }
 
-    public function getAllLogActivity(): array {
-        $rawLogActivities = $this->getDB()->findAll($this->getTable(), 'id_log', 'DESC');
+    public function getAllLogActivity(int $page = 1): array {
+        $rawLogActivities = $this->getDB()->findAll($this->getTable(), 'id_log', 'DESC', $page);
         /**
          * @var LogActivityModel[] $rawCodeOfConducts
          */
