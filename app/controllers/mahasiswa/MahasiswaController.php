@@ -170,6 +170,9 @@ class MahasiswaController
 
     public function violationHistoryPage()
     {
+
+        $currentPage = PaginationUtil::paginationHandler();
+
         /**
          * @var UserModel
          */
@@ -182,10 +185,19 @@ class MahasiswaController
         /**
          * @var MahasiswaViolationModel[] $mahasiswaViolations
          */
-        $mahasiswaViolations = $mahasiswaViolationService->getManyMahasiswaViolation(['nim_mahasiswa' => $mahasiswaRole->getNim()]);
+        $mahasiswaViolations = $mahasiswaViolationService->getManyMahasiswaViolation(['nim_mahasiswa' => $mahasiswaRole->getNim()], $currentPage);
+        $mahasiswaViolationsCount = $mahasiswaViolationService->count();
+
+        $prevPage = PaginationUtil::getPrevPage($currentPage);
+		$pageCount = PaginationUtil::getPageCount($mahasiswaViolationsCount);
+		$nextPage = PaginationUtil::getNextPage($mahasiswaViolations, $currentPage);
 
         $data = [
             'mahasiswaViolations' => $mahasiswaViolations,
+            'prevPage' => $prevPage,
+			'currentPage' => $currentPage,
+			'pageCount' => $pageCount,
+			'nextPage' => $nextPage
         ];
 
         return Helper::view('mahasiswa/violation_history', $data);

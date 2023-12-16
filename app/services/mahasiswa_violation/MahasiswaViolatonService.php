@@ -25,11 +25,11 @@ class MahasiswaViolationService extends DBService
         return $violations;
     }
 
-    public function getManyMahasiswaViolation($where): array {
+    public function getManyMahasiswaViolation($where, $page = 0): array {
         if (empty($where)) {
             return $this->getAllMahasiswaViolation();
         }
-        $rawViolations = $this->getDB()->findMany($this->getView(), $where, 'id_mahasiswa_violation', 'DESC');
+        $rawViolations = $this->getDB()->findMany($this->getView(), $where, 'id_mahasiswa_violation', 'DESC', $page);
         $violations = [];
 
         if ($rawViolations) {
