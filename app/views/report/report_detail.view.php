@@ -146,6 +146,8 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
                              * @var UserModel $currentUser
                              */
                             $currentUser = Session::getInstance()->get('user');
+
+                            if ($report->isParticipant($currentUser) && !$report->isAlreadyClosed() && $currentUser->getRole() != 'mahasiswa'):
                             ?>
                             <div class="row mt-3">
                                 <div class="col-auto">
@@ -167,6 +169,8 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
                                     </form>
                                 </div>
                             </div>
+                            <?php endif; ?>
+
                         </div>
                         <div class="col-3">
                             <!-- for admin -->

@@ -345,6 +345,10 @@ class ReportModel implements DBModel
         return $isParticipant;
     }
 
+    public function isAlreadyClosed(): bool {
+        return $this->getStatus() == 'Valid' || $this->getStatus() == 'Invalid';
+    }
+
     // setters
     public function setIdReport($idReport)
     {

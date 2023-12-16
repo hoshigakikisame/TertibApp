@@ -46,6 +46,7 @@ class ReportController
 
 			$report = $reportService->getSingleReport(['id_report' => $idReport]);
 			$isParticipant = $report->isParticipant($user);
+			$isAlreadyClosed = $report->isAlreadyClosed();
 
 			if ($report == null) {
 				Flasher::setFlash("danger", "Report not found");
@@ -54,6 +55,11 @@ class ReportController
 
 			if (!$isParticipant) {
 				Flasher::setFlash("danger", "You are not a participant of this report");
+				return Helper::redirect("/report/detail/$idReport");
+			}
+
+			if ($isAlreadyClosed) {
+				Flasher::setFlash("danger", "This report is already closed");
 				return Helper::redirect("/report/detail/$idReport");
 			}
 
