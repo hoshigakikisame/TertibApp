@@ -45,7 +45,7 @@ class AdminController
 	{
 		$reportService = ReportService::getInstance();
 		$codeOfConductService = CodeOfConductService::getInstance();
-		
+
 		$reports = [];
 
 		$filter = [];
@@ -57,7 +57,7 @@ class AdminController
 			$adminRole = $user->getRoleDetail();
 			$filter += ['id_admin' => $adminRole->getIdAdmin()];
 		}
-			
+
 		$reports = $reportService->getManyReport($filter);
 
 		$codeOfConducts = $codeOfConductService->getAllCodeOfConduct();
@@ -113,14 +113,15 @@ class AdminController
 	 * [contact description]
 	 * @return [type] [description]
 	 */
-	
-	public function logActivityPage() {
+
+	public function logActivityPage()
+	{
 
 		$currentPage = PaginationUtil::paginationHandler();
-		
+
 		$logActivityService = LogActivityService::getInstance();
 		$logActivities = $logActivityService->getAllLogActivity($currentPage);
-		
+
 		$prevPage = PaginationUtil::getPrevPage($currentPage);
 		$pageCount = PaginationUtil::getPageCount($logActivityService->count());
 		$nextPage = PaginationUtil::getNextPage($logActivities, $currentPage);
@@ -132,7 +133,7 @@ class AdminController
 			'pageCount' => $pageCount,
 			'nextPage' => $nextPage
 		];
-		return Helper::view('admin/logactivity', $data);
+		return Helper::view('admin/log_activity', $data);
 	}
 
 	public function profilePage()

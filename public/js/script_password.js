@@ -48,42 +48,50 @@ if ($("button#btnPress").length > 0) {
         $("div[role=alert]").remove();
       }
 
-      validTlp = countTlp(
-        15,
-        "div[title=flashTelepon]",
-        flashAlert(
-          "warning",
-          "Telephone Number Maximal 15 Character and Minimal 3 Character",
-          "Retype your Telephone Number"
-        ),
-        $(this)
-      );
+      if ($(this).parent().siblings().find("#noTelp").length > 0) {
+        validTlp = countTlp(
+          15,
+          "div[title=flashTelepon]",
+          flashAlert(
+            "warning",
+            "Telephone Number Maximal 15 Character and Minimal 3 Character",
+            "Retype your Telephone Number"
+          ),
+          $(this)
+        );
+      }
 
-      password = checkValidPassword(
-        flashAlert(
-          "warning",
-          "Confirm Password Not Same.",
-          "Retype your Confirm Password "
-        ),
-        $(this)
-      );
+      if ($(this).parent().siblings().find("#newPassword").length > 0) {
+        password = checkValidPassword(
+          flashAlert(
+            "warning",
+            "Confirm Password Not Same.",
+            "Retype your Confirm Password "
+          ),
+          $(this)
+        );
+      }
 
-      identity = validationIdentity(
-        10,
-        "div[title=flashIdentity]",
-        flashAlert(
-          "warning",
-          "Identity Number Maximal 10 Character and Minimal 4 Character",
-          "Retype your Identity Number"
-        ),
-        $(this)
-      );
+      if ($(this).parent().siblings().find("#identity").length > 0) {
+        identity = validationIdentity(
+          10,
+          "div[title=flashIdentity]",
+          flashAlert(
+            "warning",
+            "Identity Number Maximal 10 Character and Minimal 4 Character",
+            "Retype your Identity Number"
+          ),
+          $(this)
+        );
+      }
 
       if (
         validTlp !== undefined &&
         identity !== undefined &&
         password !== undefined
       ) {
+        $(this).parents().find("form").submit();
+      } else if (identity !== undefined) {
         $(this).parents().find("form").submit();
       }
     });
@@ -93,6 +101,7 @@ if ($("button#btnPress").length > 0) {
   $(buttonSelector).click(function (e) {
     e.preventDefault();
     $("div[role=alert]").remove();
+
     if ($(this).parent().siblings().find("#noTelp").length > 0) {
       validTlp = countTlp(
         15,
@@ -129,6 +138,7 @@ if ($("button#btnPress").length > 0) {
         $(this)
       );
     }
+
     if (validTlp !== undefined && identity !== undefined) {
       validTlp.submit();
     } else if (identity !== undefined && validTlp !== undefined) {
