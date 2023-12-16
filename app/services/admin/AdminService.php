@@ -53,7 +53,7 @@ class AdminService extends DBService
 
     public function getAdminNotification(AdminModel $adminRole)
     {
-        $sql = "SELECT * FROM `tb_report_comment` WHERE id_report IN (SELECT id_report from tb_report WHERE id_admin = :id_admin) AND is_new = true AND id_user != :id_user";
+        $sql = "SELECT * FROM `view_report_comment` WHERE id_report IN (SELECT id_report from tb_report WHERE id_admin = :id_admin) AND is_new = true AND id_user != :id_user";
 
         $rawReportComments = $this->getDB()->execute($sql, [
             'id_admin' => $adminRole->getIdAdmin(),
