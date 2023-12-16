@@ -108,6 +108,12 @@
                                 </table>
                             </div>
                         </div>
+                        <?php Helper::importView('partials/pagination_control.view.php', [
+                            'prevPage' => $prevPage,
+                            'currentPage' => $currentPage,
+                            'pageCount' => $pageCount,
+                            'nextPage' => $nextPage
+                        ]); ?>
                     </div>
                 </div>
             </div>

@@ -3,11 +3,19 @@ class ManageDosenController {
 
     public function manageDosenPage()
 	{
+
+		$currentPage = PaginationUtil::paginationHandler();
+
 		$userService = UserService::getInstance();
 		$dosenService = DosenService::getInstance();
 
 		$users = $userService->getManyUser(['role' => 'dosen']);
-		$dosens = $dosenService->getAllDosen();
+		$dosens = $dosenService->getAllDosen($currentPage);
+		$dosenCount = $dosenService->count();
+
+		$prevPage = PaginationUtil::getPrevPage($currentPage);
+		$pageCount = PaginationUtil::getPageCount($dosenCount);
+		$nextPage = PaginationUtil::getNextPage($dosens, $currentPage);
 
 		for ($i = 0; $i < count($users); $i++) {
 			for ($j = 0; $j < count($dosens); $j++) {
@@ -23,7 +31,11 @@ class ManageDosenController {
 			'newDosenEndpoint' => App::get('root_uri') . '/admin/manage/dosen/new',
 			'updateDosenEndpoint' => App::get('root_uri') . '/admin/manage/dosen/update',
 			'deleteDosenEndpoint' => App::get('root_uri') . '/admin/manage/dosen/delete',
-			'usersCount' => count($users),
+			'usersCount' => $dosenCount,
+			'prevPage' => $prevPage,
+			'currentPage' => $currentPage,
+			'pageCount' => $pageCount,
+			'nextPage' => $nextPage
 		];
 
 		return Helper::view('admin/manage/dosen', $data);

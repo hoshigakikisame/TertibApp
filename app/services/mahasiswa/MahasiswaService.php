@@ -12,8 +12,9 @@ class MahasiswaService extends DBService
         return parent::getInstance();
     }
 
-    public function getAllMahasiswa(): array {
-        $rawMahasiswas = $this->getAll();
+    public function getAllMahasiswa(int $page = 0): array
+    {
+        $rawMahasiswas = $this->getDB()->findAll($this->getTable(), 'nim', 'ASC', $page);
         $mahasiswas = [];
 
         if ($rawMahasiswas) {
@@ -24,7 +25,7 @@ class MahasiswaService extends DBService
 
         return $mahasiswas;
     }
-    public function getSingleMahasiswa($where): MahasiswaModel | null
+    public function getSingleMahasiswa($where): MahasiswaModel|null
     {
         $rawMahasiswa = $this->getSingle($where);
         if ($rawMahasiswa) {
@@ -44,7 +45,8 @@ class MahasiswaService extends DBService
         return $totalPoints['total_points'] ?? 0;
     }
 
-    public function addNewMahasiswa(int $nim, int $idUser, string $prodi): string {
+    public function addNewMahasiswa(int $nim, int $idUser, string $prodi): string
+    {
         return $this->getDB()->insert($this->getTable(), [
             'nim' => $nim,
             'id_user' => $idUser,

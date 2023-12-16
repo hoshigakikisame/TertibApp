@@ -3,11 +3,19 @@ class ManageMahasiswaController {
 
     public function manageMahasiswaPage()
 	{
+
+		$currentPage = PaginationUtil::paginationHandler();
+
 		$userService = UserService::getInstance();
 		$mahasiswaService = MahasiswaService::getInstance();
 
 		$users = $userService->getManyUser(['role' => 'mahasiswa']);
-		$mahasiswas = $mahasiswaService->getAllMahasiswa();
+		$mahasiswas = $mahasiswaService->getAllMahasiswa($currentPage);
+		$mahasiswaCount = $mahasiswaService->count();
+
+		$prevPage = PaginationUtil::getPrevPage($currentPage);
+		$pageCount = PaginationUtil::getPageCount($mahasiswaCount);
+		$nextPage = PaginationUtil::getNextPage($mahasiswas, $currentPage);
 
 		for ($i = 0; $i < count($users); $i++) {
 			for ($j = 0; $j < count($mahasiswas); $j++) {
@@ -23,7 +31,11 @@ class ManageMahasiswaController {
 			'newMahasiswaEndpoint' => App::get('root_uri') . '/admin/manage/mahasiswa/new',
 			'updateMahasiswaEndpoint' => App::get('root_uri') . '/admin/manage/mahasiswa/update',
 			'deleteMahasiswaEndpoint' => App::get('root_uri') . '/admin/manage/mahasiswa/delete',
-			'usersCount' => count($users),
+			'usersCount' => $mahasiswaCount,
+			'prevPage' => $prevPage,
+			'currentPage' => $currentPage,
+			'pageCount' => $pageCount,
+			'nextPage' => $nextPage
 		];
 
 		return Helper::view('admin/manage/mahasiswa', $data);

@@ -4,18 +4,29 @@ class ManageViolationLevelController
 	public function manageViolationLevelPage()
 	{
 
+		$currentPage = PaginationUtil::paginationHandler();
+
 		$violationLevelService = ViolationLevelService::getInstance();
 
-		$violationLevels = $violationLevelService->getAllViolationLevel() ?? [];
+		$violationLevels = $violationLevelService->getAllViolationLevel($currentPage) ?? [];
+		$violationLevelsCount = $violationLevelService->count();
+
+		$prevPage = PaginationUtil::getPrevPage($currentPage);
+		$pageCount = PaginationUtil::getPageCount($violationLevelsCount);
+		$nextPage = PaginationUtil::getNextPage($violationLevels, $currentPage);
 
 		$data = [
 			'flash' => Flasher::flash(),
 			'violationLevels' => $violationLevels,
-			'violationLevelsCount' => count($violationLevels),
+			'violationLevelsCount' => $violationLevelsCount,
 			'violationLevelEndpoint' => App::get('root_uri') . '/admin/manage/violation-level',
 			'addViolationLevelEndpoint' => App::get('root_uri') . '/admin/manage/violation-level/new',
 			'updateViolationLevelEndpoint' => App::get('root_uri') . '/admin/manage/violation-level/update',
 			'deleteViolationLevelEndpoint' => App::get('root_uri') . '/admin/manage/violation-level/delete',
+			'prevPage' => $prevPage,
+			'currentPage' => $currentPage,
+			'pageCount' => $pageCount,
+			'nextPage' => $nextPage
 		];
 
 		return Helper::view('admin/manage/violation_level', $data);

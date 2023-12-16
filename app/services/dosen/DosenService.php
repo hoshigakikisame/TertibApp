@@ -11,9 +11,9 @@ class DosenService extends DBService
     {
         return parent::getInstance();
     }
-    public function getAllDosen(): array
+    public function getAllDosen(int $page = 0): array
     {
-        $rawDosens = $this->getAll();
+        $rawDosens = $this->getDB()->findAll($this->getTable(), 'nidn', 'ASC', $page);
         $dosens = [];
 
         if ($rawDosens) {
