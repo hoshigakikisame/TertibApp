@@ -22,12 +22,12 @@
                         /**
                          * @var MahasiswaViolationModel[] $mahasiswaViolations
                          */
-                        foreach ($mahasiswaViolations as $violation): ?>
+                        foreach ($mahasiswaViolations as $violation) : ?>
                             <div class="col-11 border border-2 ms-4 px-4 py-3 rounded-3">
                                 <div class="row flex-column">
                                     <div class="col">
                                         <div class="d-flex justify-content-left mb-2">
-                                            <span class="badge text-bg-black me-2">
+                                            <span class="badge text-bg-dark me-2">
                                                 <?= $violation->getViolationLevelName() ?>
                                             </span>
                                             <span class="badge text-bg-warning me-2">Level
@@ -50,9 +50,7 @@
                                         </p>
                                     </div>
                                     <div class="col d-flex justify-content-end">
-                                        <a class="btn btn-primary text-white justify-self-end"
-                                            href="<?= App::get('root_uri') . '/report/detail/' . $violation->getIdReport() ?>"
-                                            role="button">Detail</a>
+                                        <a class="btn btn-primary text-white justify-self-end" href="<?= App::get('root_uri') . '/report/detail/' . $violation->getIdReport() ?>" role="button">Detail</a>
                                     </div>
                                 </div>
                             </div>

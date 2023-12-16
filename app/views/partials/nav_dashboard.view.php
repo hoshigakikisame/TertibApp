@@ -43,8 +43,8 @@ switch ($role) {
                 <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            <div class="offcanvas-body flex-column ">
-                <ul class="navbar-nav mb-2 mb-lg-0 flex-column align-items-end  align-items-lg-start flex-grow-1 pe-3">
+            <div class="offcanvas-body flex-column">
+                <ul class="navbar-nav mb-2 mb-lg-0 flex-column align-items-end  align-items-lg-start flex-grow-1 pe-2">
                     <li class=" mb-2  position-relative">
                         <div class="content nav-item gap-1 d-flex align-items-center">
                             <i class="bi bi-house"></i>
@@ -55,7 +55,7 @@ switch ($role) {
                         <li class="mb-2  position-relative">
                             <div class="content nav-item gap-1 d-flex align-items-center">
                                 <i class="bi bi-exclamation-circle"></i>
-                                <a class="nav-link" href="<?php echo App::get('root_uri') . "/" . $role . "/violation-history" ?> " title="report">Violation History</a>
+                                <a class="nav-link" href="<?php echo App::get('root_uri') . "/" . $role . "/violation-history" ?>" title="report">Violation History</a>
                             </div>
                         </li>
                     <?php else : ?>
