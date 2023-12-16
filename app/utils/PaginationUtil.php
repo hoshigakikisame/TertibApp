@@ -24,7 +24,12 @@ class PaginationUtil {
 
 	public static function getNextPage(array $data, int $page): int|null
 	{
-		if (count($data) < 10) {
+		/**
+		 * @var array $config
+		 */
+		$config = App::get('config');
+		$paginationLimit = $config['database']['pagination_limit'];
+		if (count($data) < $paginationLimit) {
 			return null;
 		}
 
