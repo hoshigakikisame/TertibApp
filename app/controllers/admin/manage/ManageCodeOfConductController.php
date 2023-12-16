@@ -2,15 +2,24 @@
 class ManageCodeOfConductController {
     public function manageCodeOfConductPage()
 	{
+
+		$currentPage = PaginationUtil::paginationHandler();
+
         // Defining services
 		$violationLevelService = ViolationLevelService::getInstance();
         $codeOfConductService = CodeOfConductService::getInstance();
 
         // Get all violation levels
 		$violationLevels = $violationLevelService->getAllViolationLevel() ?? [];
+		$violationLevelsCount = $violationLevelService->count();
 
         // Get all code of conducts
-        $codeOfConducts = $codeOfConductService->getAllCodeOfConduct() ?? [];
+        $codeOfConducts = $codeOfConductService->getAllCodeOfConduct($currentPage) ?? [];
+		$codeOfConductsCount = $codeOfConductService->count();
+
+		$prevPage = PaginationUtil::getPrevPage($currentPage);
+		$pageCount = PaginationUtil::getPageCount($codeOfConductsCount);
+		$nextPage = PaginationUtil::getNextPage($codeOfConducts, $currentPage);
 
         for ($i = 0; $i < count($codeOfConducts); $i++) {
             for ($j = 0; $j < count($violationLevels); $j++) {
@@ -23,13 +32,17 @@ class ManageCodeOfConductController {
 		$data = [
 			'flash' => Flasher::flash(),
             'violationLevels' => $violationLevels,
-            'violationLevelsCount' => count($violationLevels),
+            'violationLevelsCount' => $violationLevelsCount,
 			'codeOfConducts' => $codeOfConducts,
-			'codeOfConductCount' => count($codeOfConducts),
+			'codeOfConductCount' => $codeOfConductsCount,
 			'manageCodeOfConductEndpoint' => App::get('root_uri') . '/admin/manage/code-of-conduct',
 			'addCodeOfConductEndpoint' => App::get('root_uri') . '/admin/manage/code-of-conduct/new',
 			'updateCodeOfConductEndpoint' => App::get('root_uri') . '/admin/manage/code-of-conduct/update',
 			'deleteCodeOfConductEndpoint' => App::get('root_uri') . '/admin/manage/code-of-conduct/delete',
+			'prevPage' => $prevPage,
+			'currentPage' => $currentPage,
+			'pageCount' => $pageCount,
+			'nextPage' => $nextPage
 		];
 
 		return Helper::view('admin/manage/code_of_conduct', $data);

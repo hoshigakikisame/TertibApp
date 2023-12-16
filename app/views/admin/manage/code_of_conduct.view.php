@@ -94,7 +94,7 @@
                                 <table class="table align-middle">
                                     <thead>
                                         <tr>
-                                            <th scope="col">No</th>
+                                            <th scope="col">ID</th>
                                             <th scope="col">Name</th>
                                             <th scope="col">Description</th>
                                             <th scope="col">Level</th>
@@ -138,6 +138,12 @@
                                 </table>
                             </div>
                         </div>
+                        <?php Helper::importView('partials/pagination_control.view.php', [
+                            'prevPage' => $prevPage,
+                            'currentPage' => $currentPage,
+                            'pageCount' => $pageCount,
+                            'nextPage' => $nextPage
+                        ]); ?>
                     </div>
                 </div>
             </div>

@@ -12,7 +12,7 @@ class LogActivityService extends DBService {
     }
 
     public function getAllLogActivity(int $page = 1): array {
-        $rawLogActivities = $this->getDB()->findAll($this->getTable(), 'id_log', 'DESC', $page);
+        $rawLogActivities = $this->getDB()->findAll($this->getTable(), 'id_log', 'ASC', $page);
         /**
          * @var LogActivityModel[] $rawCodeOfConducts
          */

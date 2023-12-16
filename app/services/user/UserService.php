@@ -37,9 +37,9 @@ class UserService extends DBService
         return null;
     }
 
-    public function getManyUser(array $where = []): array
+    public function getManyUser(array $where = [], int $page = 0): array
     {
-        $rawUsers = $this->getDB()->findWhere($this->getTable(), $where);
+        $rawUsers = $this->getDB()->findMany($this->getTable(), $where, 'id_user', 'ASC', $page);
         $users = [];
         if ($rawUsers) {
             foreach ($rawUsers as $rawUser) {

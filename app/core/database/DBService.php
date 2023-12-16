@@ -40,6 +40,10 @@ class DBService {
         return $this->db;
     }
 
+    public function count() {
+        return $this->db->count($this->view);
+    }
+
     public function getView() {
         return $this->view;
     }

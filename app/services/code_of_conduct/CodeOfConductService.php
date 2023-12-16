@@ -12,8 +12,8 @@ class CodeOfConductService extends DBService
         return parent::getInstance();
     }
 
-    public function getAllCodeOfConduct(): array {
-        $rawCodeOfConducts = $this->getAll();
+    public function getAllCodeOfConduct(int $page = 0): array {
+        $rawCodeOfConducts = $this->getDB()->findAll($this->getTable(), 'id_code_of_conduct', 'ASC', $page);
         /**
          * @var CodeOfConductModel[] $rawCodeOfConducts
          */

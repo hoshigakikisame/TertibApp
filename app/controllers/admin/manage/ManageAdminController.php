@@ -6,8 +6,15 @@ class ManageAdminController {
 		$userService = UserService::getInstance();
 		$adminService = AdminService::getInstance();
 
+		$currentPage = PaginationUtil::paginationHandler();
+		
 		$users = $userService->getManyUser(['role' => 'admin']);
-		$admins = $adminService->getAllAdmin();
+		$admins = $adminService->getAllAdmin($currentPage);
+		$adminCount = $adminService->count();
+		
+		$prevPage = PaginationUtil::getPrevPage($currentPage);
+		$pageCount = PaginationUtil::getPageCount($adminCount);
+		$nextPage = PaginationUtil::getNextPage($admins, $currentPage);
 
 		for ($i = 0; $i < count($users); $i++) {
 			for ($j = 0; $j < count($admins); $j++) {
@@ -23,7 +30,11 @@ class ManageAdminController {
 			'newAdminEndpoint' => App::get('root_uri') . '/admin/manage/admin/new',
 			'updateAdminEndpoint' => App::get('root_uri') . '/admin/manage/admin/update',
 			'deleteAdminEndpoint' => App::get('root_uri') . '/admin/manage/admin/delete',
-			'usersCount' => count($users),
+			'usersCount' => $adminCount,
+			'prevPage' => $prevPage,
+			'currentPage' => $currentPage,
+			'pageCount' => $pageCount,
+			'nextPage' => $nextPage
 		];
 
 		return Helper::view('admin/manage/admin', $data);

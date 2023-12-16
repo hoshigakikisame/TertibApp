@@ -12,9 +12,9 @@ class AdminService extends DBService
         return parent::getInstance();
     }
 
-    public function getAllAdmin(): array
+    public function getAllAdmin(int $page = 1): array
     {
-        $rawAdmins = $this->getAll();
+        $rawAdmins = $this->getDB()->findAll($this->getTable(), 'id_admin', 'ASC', $page);
         $admins = [];
 
         if ($rawAdmins) {

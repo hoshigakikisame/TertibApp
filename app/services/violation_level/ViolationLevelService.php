@@ -11,9 +11,9 @@ class ViolationLevelService extends DBService
         return parent::getInstance();
     }
 
-    public function getAllViolationLevel()
+    public function getAllViolationLevel(int $page = 0): array
     {
-        $rawViolationLevels = parent::getAll();
+        $rawViolationLevels = $this->getDB()->findAll($this->getTable(), 'id_violation_level', 'ASC', $page);
         /**
          * @var ViolationLevelModel[] $violationLevels
          */

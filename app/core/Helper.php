@@ -37,25 +37,15 @@ class Helper
 		header("Location: " . App::get("root_uri") . "{$path}");
 	}
 
-	public static function importView(string $filePath)
+	public static function importView(string $filePath, array $data = [])
 	{
 		$appDir = dirname(__DIR__);
+		extract($data);
 		return require_once "$appDir/views/$filePath";
 	}
 
 	public static function generateRandomHex(int $byteSize = 16)
 	{
 		return bin2hex(random_bytes($byteSize));
-	}
-
-	public static function paginationHandler()
-	{
-		$page = 1;
-
-		if (isset($_GET['page']) && $_GET['page'] != '') {
-			$page = $_GET['page'];
-		}
-
-		return $page;
 	}
 }

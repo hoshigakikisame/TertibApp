@@ -6,10 +6,14 @@ class QueryBuilder
 	protected $pdo;
 	protected int $paginationLimit;
 	function __construct(PDO $pdo)
-	{
+	{	
+		/**
+		 * @var array $config
+		 */
+		$config = App::get('config');
 		$this->pdo = $pdo;
 		$this->setTimeZone();
-		$this->paginationLimit = App::get('config')['database']['pagination_limit'];
+		$this->paginationLimit = $config['database']['pagination_limit'];
 	}
 
 	private function setTimeZone()
@@ -25,6 +29,13 @@ class QueryBuilder
 	public function getLastInsertId()
 	{
 		return $this->pdo->lastInsertId();
+	}
+
+	public function count(string $table): int
+	{
+		$statement = $this->pdo->prepare("SELECT COUNT(*) FROM {$table}");
+		$statement->execute();
+		return $statement->fetchColumn();
 	}
 
 	/**
@@ -56,12 +67,12 @@ class QueryBuilder
 		}
 	 }
 
-	 public function findAll($table, string $orderby = '', string $order = 'ASC', int $page = 1) {
+	 public function findAll($table, string $orderby = '', string $order = 'ASC', int $page = 0) {
 		$sql = sprintf(
 			"SELECT * FROM %s %s",
 			$table,
 			($orderby ? "ORDER BY $orderby $order" : '') .
-			($this->paginationLimit > 0 ? " LIMIT " . ($page - 1) * $this->paginationLimit . ", $this->paginationLimit" : '')
+			($this->paginationLimit > 0 && $page > 0 ? " LIMIT " . ($page - 1) * $this->paginationLimit . ", $this->paginationLimit" : '')
 		);
 
 		try {
@@ -73,14 +84,14 @@ class QueryBuilder
 		}
 	 }
 
-	 public function findMany($table, $parameters = [], string $orderby = '', string $order = 'ASC', int $page = 1)
+	 public function findMany($table, $parameters = [], string $orderby = '', string $order = 'ASC', int $page = 0)
 	 {
 		$sql = sprintf(
 			"SELECT * FROM %s WHERE %s %s",
 			$table,
 			implode(' AND ', array_map(fn ($key) => "$key = :$key", array_keys($parameters))),
 			($orderby ? "ORDER BY $orderby $order" : '') . 
-			($this->paginationLimit > 0 ? " LIMIT " . ($page - 1) * $this->paginationLimit . ", $this->paginationLimit" : '')
+			($this->paginationLimit > 0 && $page > 0 ? " LIMIT " . ($page - 1) * $this->paginationLimit . ", $this->paginationLimit" : '')
 		);
 
 		try {

@@ -116,11 +116,21 @@ class AdminController
 	
 	public function logActivityPage() {
 
-		$page = Helper::paginationHandler();
+		$currentPage = PaginationUtil::paginationHandler();
+		
 		$logActivityService = LogActivityService::getInstance();
-		$logActivities = $logActivityService->getAllLogActivity($page);
+		$logActivities = $logActivityService->getAllLogActivity($currentPage);
+		
+		$prevPage = PaginationUtil::getPrevPage($currentPage);
+		$pageCount = PaginationUtil::getPageCount($logActivityService->count());
+		$nextPage = PaginationUtil::getNextPage($logActivities, $currentPage);
+
 		$data = [
-			'logActivities' => $logActivities
+			'logActivities' => $logActivities,
+			'prevPage' => $prevPage,
+			'currentPage' => $currentPage,
+			'pageCount' => $pageCount,
+			'nextPage' => $nextPage
 		];
 		return Helper::view('admin/logactivity', $data);
 	}

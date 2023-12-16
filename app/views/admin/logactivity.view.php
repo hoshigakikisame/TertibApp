@@ -16,7 +16,7 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">No</th>
+                                        <th scope="col">ID</th>
                                         <th scope="col">Method</th>
                                         <th scope="col">Activity</th>
                                         <th scope="col">Created At</th>
@@ -25,22 +25,22 @@
                                 <tbody>
                                     <?php
                                     /**
-                                     * @var LogActivityModel[] $report
+                                     * @var LogActivityModel[] $logActivities
                                      */
                                     if (is_array($logActivities) || is_object($logActivities)) {
-                                        for ($i=1; $i < count($logActivities); $i++) { ?>
+                                        foreach ($logActivities as $logActivity) { ?>
                                             <tr>
                                                 <th>
-                                                    <?= $i ?>
+                                                    <?= $logActivity->getIdLog() ?>
                                                 </th>
                                                 <td>
-                                                    <?= $logActivities[$i]->getMethod() ?>
+                                                    <?= $logActivity->getMethod() ?>
                                                 </td>
                                                 <td>
-                                                    <?= $logActivities[$i]->getActivity() ?>
+                                                    <?= $logActivity->getActivity() ?>
                                                 </td>
                                                 <td>
-                                                    <?= $logActivities[$i]->getCreatedAt() ?>
+                                                    <?= $logActivity->getCreatedAt() ?>
                                             </tr>
                                         <?php
                                         }
@@ -53,6 +53,13 @@
                         </div>
                         <!-- End Notif -->
                     </div>
+
+                    <?php Helper::importView('partials/pagination_control.view.php', [
+                        'prevPage' => $prevPage,
+                        'currentPage' => $currentPage,
+                        'pageCount' => $pageCount,
+                        'nextPage' => $nextPage
+                    ]); ?>
                 </div>
             </div>
         </main>
