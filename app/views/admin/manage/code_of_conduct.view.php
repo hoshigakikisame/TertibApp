@@ -22,26 +22,14 @@
                                     <h6>Code Of Conduct Totals</h6>
                                 </div>
                             </div>
-                            <?php
-                            /**
-                             * @var ViolationLevelModel[] $violationLevels
-                             */
-                            for ($i = 0; $i < count($violationLevels); $i++) :
-                                $violationLevel = $violationLevels[$i];
-                                $memberCount = 0;
-                                foreach ($codeOfConducts as $codeOfConduct) {
-                                    if ($codeOfConduct->getViolationLevel()->getIdViolationLevel() == $violationLevel->getIdViolationLevel()) {
-                                        $memberCount++;
-                                    }
-                                }
-                            ?>
+                            <?php foreach ($countPerLevel as $level => $count): ?>
                                 <div class="col-lg-2 col-auto border border-2 mt-3 py-2 px-2 rounded-3 flex-grow-1 flex-lg-grow-0">
                                     <div class="shadow-sm rounded-3 py-3 px-lg-4 px-0 h-100">
-                                        <h1 class="mb-0"><?= $memberCount ?></h1>
-                                        <h6>Offense level <?= GenericUtil::intToRoman($violationLevel->getLevel()) ?> </h6>
+                                        <h1 class="mb-0"><?= $count ?></h1>
+                                        <h6>Offense level <?= GenericUtil::intToRoman($level) ?> </h6>
                                     </div>
                                 </div>
-                            <?php endfor; ?>
+                            <?php endforeach; ?>
                         </div>
 
                         <div class="row flex-column gap-3 mt-4">

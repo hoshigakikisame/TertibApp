@@ -31,10 +31,16 @@ class QueryBuilder
 		return $this->pdo->lastInsertId();
 	}
 
-	public function count(string $table): int
+	public function count(string $table, array $where = []): int
 	{
-		$statement = $this->pdo->prepare("SELECT COUNT(*) FROM {$table}");
-		$statement->execute();
+		$sql = sprintf(
+			"SELECT COUNT(*) FROM %s %s",
+			$table,
+			$where ? "WHERE " . implode(' AND ', array_map(fn ($key) => "$key = :$key", array_keys($where))) : ''
+		);
+
+		$statement = $this->pdo->prepare($sql);
+		$statement->execute($where);
 		return $statement->fetchColumn();
 	}
 

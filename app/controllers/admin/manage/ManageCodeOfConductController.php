@@ -10,6 +10,9 @@ class ManageCodeOfConductController {
         $codeOfConductService = CodeOfConductService::getInstance();
 
         // Get all violation levels
+		/**
+		 * @var ViolationLevelModel[] $violationLevels
+		 */
 		$violationLevels = $violationLevelService->getAllViolationLevel() ?? [];
 		$violationLevelsCount = $violationLevelService->count();
 
@@ -20,6 +23,12 @@ class ManageCodeOfConductController {
 		$prevPage = PaginationUtil::getPrevPage($currentPage);
 		$pageCount = PaginationUtil::getPageCount($codeOfConductsCount);
 		$nextPage = PaginationUtil::getNextPage($codeOfConducts, $currentPage);
+
+		$countPerLevel = [];
+
+		foreach ($violationLevels as $violationLevel) {
+			$countPerLevel[$violationLevel->getLevel()] = $codeOfConductService->count(['id_violation_level' => $violationLevel->getIdViolationLevel()]);
+		}
 
         for ($i = 0; $i < count($codeOfConducts); $i++) {
             for ($j = 0; $j < count($violationLevels); $j++) {
@@ -42,7 +51,8 @@ class ManageCodeOfConductController {
 			'prevPage' => $prevPage,
 			'currentPage' => $currentPage,
 			'pageCount' => $pageCount,
-			'nextPage' => $nextPage
+			'nextPage' => $nextPage,
+			'countPerLevel' => $countPerLevel
 		];
 
 		return Helper::view('admin/manage/code_of_conduct', $data);

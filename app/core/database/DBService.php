@@ -40,8 +40,8 @@ class DBService {
         return $this->db;
     }
 
-    public function count() {
-        return $this->db->count($this->view);
+    public function count(array $where = []) {
+        return $this->db->count($this->view, $where);
     }
 
     public function getView() {
