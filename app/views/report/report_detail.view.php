@@ -147,28 +147,32 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
                              */
                             $currentUser = Session::getInstance()->get('user');
 
-                            if ($report->isParticipant($currentUser) && !$report->isAlreadyClosed() && $currentUser->getRole() != 'mahasiswa'):
+                            if ($report->isParticipant($currentUser) && !$report->isAlreadyClosed() && $currentUser->getRole() != 'mahasiswa') :
                             ?>
-                            <div class="row mt-3">
-                                <div class="col-auto">
-                                    <img src="<?= $currentUser->getImageUrl() ?>" class="rounded-circle border border-white img-profile" alt="">
+                                <div class="row mt-3">
+                                    <div class="col-auto">
+                                        <img src="<?= $currentUser->getImageUrl() ?>" class="rounded-circle border border-white img-profile" alt="">
+                                    </div>
+                                    <div class="col">
+                                        <h6>
+                                            <?= $currentUser->getUsername() ?>
+                                        </h6>
+                                        <form method="post" action="<?= $addNewReportCommentEndpoint ?>" enctype="multipart/form-data">
+                                            <div class="img-comment-preview d-none">
+                                                <img src="" alt="" width="100px">
+                                            </div>
+                                            <div class="mb-3" title="flashComment">
+                                                <textarea class="form-control" name="content" id="" rows="3" placeholder="Write Your Message"></textarea>
+                                            </div>
+
+                                            <div class="mb-3 float-end">
+                                                <label for="upload" class="btn btn-primary text-white"><i class="bi bi-cloud-arrow-up"></i></label>
+                                                <input class="opacity-0" id="upload" type="file" name="attachment_picture" hidden>
+                                                <button type="submit" class="btn btn-primary text-white" onclick="checkComment(event,$(this))"><i class="bi bi-send"></i></button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <h6>
-                                        <?= $currentUser->getUsername() ?>
-                                    </h6>
-                                    <form method="post" action="<?= $addNewReportCommentEndpoint ?>" enctype="multipart/form-data">
-                                        <div class="mb-3">
-                                            <textarea class="form-control" name="content" id="" rows="3" placeholder="Write Your Message"></textarea>
-                                        </div>
-                                        <div class="mb-3 float-end">
-                                            <input class="opacity-0" id="upload" type="file" name="attachment_picture" hidden>
-                                            <label for="upload" class="btn btn-primary text-white"><i class="bi bi-cloud-arrow-up"></i></label>
-                                            <button type="submit" class="btn btn-primary text-white"><i class="bi bi-send"></i></button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
                             <?php endif; ?>
 
                         </div>
@@ -263,6 +267,7 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
     </div>
 </div>
 
+<script src="<?= App::get("root_uri") . "/public/js/script.js" ?>"></script>
 <script>
     function checkVal(elemen) {
         const val = $('#inputGroupSelect01').val();
@@ -290,9 +295,8 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
             </div>
         </div>
     </div>
-</div>
+</div>`
 
-        `
         $('#action_wrapper').append(modal)
         $('#modalConfirmation').modal('show')
 
@@ -310,4 +314,45 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
 
 
     }
+
+    function checkComment(event, elemen) {
+        event.preventDefault();
+        let comment = elemen.parent().siblings().find('textarea').val();
+        if (comment.length == 0) {
+            $("div[role=alert]").remove();
+            let flash = flashAlert('warning', 'You dont input the comment text', 'please fill the comment and send again')
+            $('div[title=flashComment]').before(flash);
+        } else {
+            elemen.parents('form').submit();
+        }
+    }
+
+    function imgPreviewComment() {
+        const input = document.getElementById('upload');
+        const preview = document.querySelector('.img-comment-preview');
+        const imgPreview = preview.querySelector('img');
+
+        input.addEventListener('change', function() {
+            const file = this.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                imgPreview.style.display = 'block';
+
+                preview.classList.remove('d-none');
+
+                reader.addEventListener('load', function() {
+                    imgPreview.setAttribute('src', this.result);
+                });
+
+                reader.readAsDataURL(file);
+            } else {
+                imgPreview.style.display = null;
+                imgPreview.setAttribute('src', '');
+            }
+        });
+    }
+
+    imgPreviewComment();
 </script>

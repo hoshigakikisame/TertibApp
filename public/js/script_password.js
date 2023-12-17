@@ -1,11 +1,3 @@
-// flash alert for error
-function flashAlert(type, message, action) {
-  return /*html*/ `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
-  <strong>${message}</strong> ${action}
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>`;
-}
-
 // javascript validation for nim and nidn
 function validationIdentity(max = 10, target = "", alert = "", elemen) {
   let identity = elemen.parent().siblings().find("#identity");
