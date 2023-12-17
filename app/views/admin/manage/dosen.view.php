@@ -178,7 +178,7 @@
         </main>
     </div>
 </div>
-
+<script src="<?= App::get("root_uri") . "/public/js/script.js" ?>"></script>
 <script>
     const addModal = document.getElementById('modalAdd')
     addModal.addEventListener('hidden.bs.modal', event => {
