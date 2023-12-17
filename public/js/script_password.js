@@ -24,6 +24,16 @@ function checkValidPassword(alert, elemen) {
   const confirmPassword = elemen.parent().siblings().find("#confirmPassword");
   if (newPassword.val() !== confirmPassword.val()) {
     $("div[title=flash]").before(alert);
+  }
+
+  if (newPassword.val().length < 8) {
+    $("div[title=flash]").before(
+      flashAlert(
+        "warning",
+        "Password Must More Than 8 Character.",
+        "Retype Your Password Again"
+      )
+    );
   } else {
     return elemen.parents().find("form");
   }
