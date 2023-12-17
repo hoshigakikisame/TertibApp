@@ -142,6 +142,8 @@ switch ($role) {
                 </div>
             </div>
         </div>
+    </div>
+
 </nav>
 
 <script>

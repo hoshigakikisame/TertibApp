@@ -66,7 +66,7 @@
                                                 <div class="modal-body">
                                                     <div class="mb-3">
                                                         <label for="username" class="form-label">Username</label>
-                                                        <input type="text" class="form-control" id="username" name="username" placeholder="Input Dosen Username" required>
+                                                        <input type="text" class="form-control" id="username" name="username" placeholder="Input Mahasiswa Username" required>
                                                     </div>
                                                     <div class="mb-3" title="flashIdentity">
                                                         <label for="identity" class="form-label">NIM</label>
@@ -100,7 +100,7 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="address" class="form-label">Address</label>
-                                                        <input type="text" class="form-control" id="address" name="address" placeholder="Input Dosen Number">
+                                                        <input type="text" class="form-control" id="address" name="address" placeholder="Input Mahasiswa Number">
                                                     </div>
                                                     <div class="mb-3" title="flash">
                                                         <label for="password" class="form-label">Password</label>
