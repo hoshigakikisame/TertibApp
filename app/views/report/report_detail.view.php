@@ -272,7 +272,7 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
     function checkVal(elemen) {
         const val = $('#inputGroupSelect01').val();
         if (val == 'Invalid' || val == 'Valid') {
-            modalConfirmation(elemen);
+            modalConfirmation(elemen, val);
         } else {
             elemen.parents('form').submit();
         }
