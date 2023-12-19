@@ -63,7 +63,7 @@
                                             <input type="number" class="form-control" name="number" id="number" placeholder="Your Number" value="<?= $phoneNumber ?>">
                                         </div>
                                         <div class="d-flex gap-3 justify-content-end">
-                                            <button onclick="document.querySelector('#updateProfileForm').submit()" class="btn btn-secondary px-4 text-white">Save</button>
+                                            <button type="submit" class="btn btn-secondary px-4 text-white">Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                                             <input type="password" class="form-control" name="confirm_password" id="confirmPassword" placeholder="Enter Your New Password">
                                         </div>
                                         <div class="d-flex gap-3 justify-content-end ">
-                                            <button onclick="document.querySelector('#updateProfileForm').submit()" class="btn btn-secondary px-4 text-white" id="buttonUpdatePassword">Update Password</button>
+                                            <button type="submit" class="btn btn-secondary px-4 text-white" id="buttonUpdatePassword">Update Password</button>
                                         </div>
                                     </div>
                                 </div>
@@ -101,5 +101,6 @@
         </main>
     </div>
 </div>
+<script src="<?= App::get("root_uri") . "/public/js/script.js" ?>"></script>
 <script src="<?= App::get("root_uri") . "/public/js/script_password.js" ?>"></script>
 <script src="<?= App::get("root_uri") . "/public/js/img_preview.js" ?>"></script>

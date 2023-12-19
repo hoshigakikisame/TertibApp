@@ -38,7 +38,8 @@ function checkValidPassword(alert, elemen) {
     );
     validated = 0;
   }
-  if (validated != 0) {
+
+  if (validated === 1) {
     return elemen.parents().find("form");
   }
 }
