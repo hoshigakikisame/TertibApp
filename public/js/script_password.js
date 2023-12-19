@@ -30,12 +30,32 @@ function countTlp(max = 15, target, alert, elemen) {
 
 // javascript validation for update password
 function checkValidPassword(alert, elemen) {
-  const newPassword = elemen.parent().siblings().find("#newPassword");
-  const confirmPassword = elemen.parent().siblings().find("#confirmPassword");
+  const newPassword = elemen.parent().siblings().find("#newPassword").val();
+  const confirmPassword = elemen
+    .parent()
+    .siblings()
+    .find("#confirmPassword")
+    .val();
+
   let validated = 1;
 
   if (elemen.closest("#modalAdd").length == 1) {
-    if (newPassword.val() !== confirmPassword.val()) {
+    if (newPassword.length < 8) {
+      $("div[title=flash]").before(
+        flashAlert(
+          "warning",
+          "Password Must More Than 8 Character.",
+          "Retype Your Password Again"
+        )
+      );
+      validated = 0;
+    }
+    if (newPassword !== confirmPassword) {
+      $("div[title=flash]").before(alert);
+      validated = 0;
+    }
+  } else {
+    if (newPassword !== confirmPassword) {
       $("div[title=flash]").before(alert);
       validated = 0;
 
@@ -49,22 +69,6 @@ function checkValidPassword(alert, elemen) {
         );
         validated = 0;
       }
-    }
-  }
-
-  if (newPassword.val() !== confirmPassword.val()) {
-    $("div[title=flash]").before(alert);
-    validated = 0;
-
-    if (newPassword.val().length < 8) {
-      $("div[title=flash]").before(
-        flashAlert(
-          "warning",
-          "Password Must More Than 8 Character.",
-          "Retype Your Password Again"
-        )
-      );
-      validated = 0;
     }
   }
 
@@ -127,7 +131,10 @@ if ($("button#btnPress").length > 0) {
         password !== undefined
       ) {
         $(this).closest("form").submit();
-      } else if (identity !== undefined) {
+      } else if (
+        identity !== undefined &&
+        $(this).closest("form").attr("name") !== "modalAdd"
+      ) {
         $(this).closest("form").submit();
       }
     });
