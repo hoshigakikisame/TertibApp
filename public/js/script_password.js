@@ -2,7 +2,17 @@
 function validationIdentity(max = 10, target = "", alert = "", elemen) {
   let identity = elemen.parent().siblings().find("#identity");
   if (identity.val().length > max || identity.val().length < 4) {
-    $(target).before(alert);
+    if (identity.attr("name") == "username") {
+      $(target).before(
+        flashAlert(
+          "warning",
+          "Username Maximal 10 Character and Minimal 4 Character",
+          "Retype your Username"
+        )
+      );
+    } else {
+      $(target).before(alert);
+    }
   } else {
     return elemen.closest("form");
   }
@@ -26,17 +36,17 @@ function checkValidPassword(alert, elemen) {
   if (newPassword.val() !== confirmPassword.val()) {
     $("div[title=flash]").before(alert);
     validated = 0;
-  }
 
-  if (newPassword.val().length < 8) {
-    $("div[title=flash]").before(
-      flashAlert(
-        "warning",
-        "Password Must More Than 8 Character.",
-        "Retype Your Password Again"
-      )
-    );
-    validated = 0;
+    if (newPassword.val().length < 8) {
+      $("div[title=flash]").before(
+        flashAlert(
+          "warning",
+          "Password Must More Than 8 Character.",
+          "Retype Your Password Again"
+        )
+      );
+      validated = 0;
+    }
   }
 
   if (validated === 1) {
