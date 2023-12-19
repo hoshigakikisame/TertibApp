@@ -34,7 +34,7 @@
                                             <span class="badge bg-success">#
                                                 <?= $comment->getIdReportComment() ?>
                                             </span>
-                                            User #<?= $comment->getIdUser() ?> commented on report
+                                            <?= $comment->getAuthorFirstName() ?> commented on report
                                             #<?= $comment->getIdReport() ?>
                                         </h5>
                                     </div>
