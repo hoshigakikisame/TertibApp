@@ -231,7 +231,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Address</label>
-                        <input type="text" class="form-control" id="address" name="address" value="${address}" placeholder="Input Dosen Number">
+                        <input type="text" class="form-control" id="address" name="address" value="${address}" placeholder="Input Dosen Address">
                     </div>
                     <div class="mb-3" title="flash">
                         <label for="password" class="form-label">Password</label>
