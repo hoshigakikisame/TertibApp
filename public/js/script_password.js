@@ -33,6 +33,25 @@ function checkValidPassword(alert, elemen) {
   const newPassword = elemen.parent().siblings().find("#newPassword");
   const confirmPassword = elemen.parent().siblings().find("#confirmPassword");
   let validated = 1;
+
+  if (elemen.closest("#modalAdd").length == 1) {
+    if (newPassword.val() !== confirmPassword.val()) {
+      $("div[title=flash]").before(alert);
+      validated = 0;
+
+      if (newPassword.val().length < 8) {
+        $("div[title=flash]").before(
+          flashAlert(
+            "warning",
+            "Password Must More Than 8 Character.",
+            "Retype Your Password Again"
+          )
+        );
+        validated = 0;
+      }
+    }
+  }
+
   if (newPassword.val() !== confirmPassword.val()) {
     $("div[title=flash]").before(alert);
     validated = 0;
