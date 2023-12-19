@@ -4,7 +4,7 @@ function validationIdentity(max = 10, target = "", alert = "", elemen) {
   if (identity.val().length > max || identity.val().length < 4) {
     $(target).before(alert);
   } else {
-    return elemen.parents().find("form");
+    return elemen.closest("form");
   }
 }
 
@@ -14,7 +14,7 @@ function countTlp(max = 15, target, alert, elemen) {
   if (tlp.val().length > max || tlp.val().length < 3) {
     $(target).before(alert);
   } else {
-    return elemen.parents().find("form");
+    return elemen.closest("form");
   }
 }
 
@@ -40,7 +40,7 @@ function checkValidPassword(alert, elemen) {
   }
 
   if (validated === 1) {
-    return elemen.parents().find("form");
+    return elemen.closest("form");
   }
 }
 
@@ -97,9 +97,9 @@ if ($("button#btnPress").length > 0) {
         identity !== undefined &&
         password !== undefined
       ) {
-        $(this).parents().find("form").submit();
+        $(this).closest("form").submit();
       } else if (identity !== undefined) {
-        $(this).parents().find("form").submit();
+        $(this).closest("form").submit();
       }
     });
   });
