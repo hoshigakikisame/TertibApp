@@ -22,8 +22,10 @@ function countTlp(max = 15, target, alert, elemen) {
 function checkValidPassword(alert, elemen) {
   const newPassword = elemen.parent().siblings().find("#newPassword");
   const confirmPassword = elemen.parent().siblings().find("#confirmPassword");
+  let validated = 1;
   if (newPassword.val() !== confirmPassword.val()) {
     $("div[title=flash]").before(alert);
+    validated = 0;
   }
 
   if (newPassword.val().length < 8) {
@@ -34,7 +36,9 @@ function checkValidPassword(alert, elemen) {
         "Retype Your Password Again"
       )
     );
-  } else {
+    validated = 0;
+  }
+  if (validated != 0) {
     return elemen.parents().find("form");
   }
 }

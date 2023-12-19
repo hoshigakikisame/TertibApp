@@ -16,7 +16,7 @@ $updatePasswordEndpoint = App::get("root_uri") . "/admin/update-password";
                 <div class="col-lg-10 col ">
                     <?= $flash ?>
                 </div>
-                <div class="col-lg-10 col px-5 py-4" title='main'>
+                <div class="col-lg-10 col-auto px-lg-5 ps-4 pe-5 py-4" title='main'>
                     <div class="row gap-2">
                         <h1>Profile</h1>
                         <div class="col mx-2">
