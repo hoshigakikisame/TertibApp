@@ -39,7 +39,10 @@ function checkValidPassword(alert, elemen) {
 
   let validated = 1;
 
-  if (elemen.closest("#modalAdd").length == 1) {
+  if (
+    elemen.closest("#modalAdd").length == 1 ||
+    elemen.closest("#updatePasswordForm").length == 1
+  ) {
     if (newPassword.length < 8) {
       $("div[title=flash]").before(
         flashAlert(
@@ -50,6 +53,7 @@ function checkValidPassword(alert, elemen) {
       );
       validated = 0;
     }
+
     if (newPassword !== confirmPassword) {
       $("div[title=flash]").before(alert);
       validated = 0;
