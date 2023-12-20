@@ -33,7 +33,7 @@
                                         <h5>
                                             <span class="badge bg-danger">#<?= $violation->getIdMahasiswaViolation() ?>
                                             </span>
-                                            You've Violated <span class="text-danger" ><?= $violation->getCodeOfConductName() ?></span> Code of Conduct
+                                            Kamu Telah Melanggar Tata Tertib "<span class="text-danger" ><?= $violation->getCodeOfConductName() ?></span>"
                                         </h5>
                                     </div>
                                     <div class="col"></div>

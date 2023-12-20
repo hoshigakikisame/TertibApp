@@ -287,7 +287,7 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
             
             <div class="modal-body text-center">
             <i class="bi bi-patch-question text-primary" style="font-size:200px"></i>
-            <h4 class="w-75 px-3 mx-auto">mengganti status ke ${status} sama dengan menutup report, apakah anda yakin?</h4>
+            <h4 class="w-75 px-3 mx-auto">Mengganti status ke ${status} sama dengan menutup report, apakah Anda yakin?</h4>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
