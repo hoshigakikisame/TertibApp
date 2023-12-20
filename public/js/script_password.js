@@ -128,7 +128,6 @@ if ($("button#btnPress").length > 0) {
           $(this)
         );
       }
-
       if (
         validTlp !== undefined &&
         identity !== undefined &&
@@ -137,7 +136,7 @@ if ($("button#btnPress").length > 0) {
         $(this).closest("form").submit();
       } else if (
         identity !== undefined &&
-        $(this).closest("form").attr("name") !== "modalAdd"
+        $(this).closest("#modalAdd").length == 0
       ) {
         $(this).closest("form").submit();
       }
