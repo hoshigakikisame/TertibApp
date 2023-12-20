@@ -62,8 +62,8 @@
                                                         <input type="email" class="form-control" id="email" name="email" placeholder="Input Admin Email Address" required>
                                                     </div>
                                                     <div class="mb-3" title="flashTelepon">
-                                                        <label for="noTelp" class="form-label">No. Telp</label>
-                                                        <input type="number" class="form-control" id="noTelp" name="no_telp" placeholder="Input Admin Number" required>
+                                                        <label for="noTelp" class="form-label">Phone Number</label>
+                                                        <input type="number" class="form-control" id="noTelp" name="no_telp" placeholder="Input Admin Phone Number" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="address" class="form-label">Address</label>
@@ -216,9 +216,9 @@
                             value="${email}" placeholder="Input Admin Email Address"  readonly>
                      </div>
                      <div class="mb-3" title="flashTelepon">
-                         <label for="noTelp" class="form-label">No. Telp</label>
+                         <label for="noTelp" class="form-label">Phone Number</label>
                          <input type="number" class="form-control" id="noTelp" name="no_telp"
-                            value="${phoneNumber}" placeholder="Input Admin Number" required>
+                            value="${phoneNumber}" placeholder="Input Admin Phone Number" required>
                      </div>
                      <div class="mb-3">
                          <label for="address" class="form-label">Address</label>

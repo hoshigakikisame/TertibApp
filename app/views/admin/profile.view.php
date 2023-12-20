@@ -55,8 +55,8 @@ $updatePasswordEndpoint = App::get("root_uri") . "/admin/update-password";
                                             <input type="text" class="form-control" name="address" id="address" placeholder="Address" value="<?= $address ?>">
                                         </div>
                                         <div class="mb-3" title="flashTelepon">
-                                            <label for="noTelp" class="form-label">Number</label>
-                                            <input type="number" class="form-control" name="number" id="noTelp" placeholder="Your Number" value="<?= $phoneNumber ?>">
+                                            <label for="noTelp" class="form-label">Phone Number</label>
+                                            <input type="number" class="form-control" name="number" id="noTelp" placeholder="Your Phone Number" value="<?= $phoneNumber ?>">
                                         </div>
                                         <div class="d-flex gap-3 justify-content-end">
                                             <button type="submit" class="btn btn-secondary px-4 text-white">Save</button>

@@ -95,8 +95,8 @@
                                                         <input type="email" class="form-control" id="email" name="email" placeholder="Input Mahasiswa Email Address">
                                                     </div>
                                                     <div class="mb-3" title="flashTelepon">
-                                                        <label for="noTelp" class="form-label">No. Telp</label>
-                                                        <input type="number" class="form-control" id="noTelp" name="no_telp" placeholder="Input Mahasiswa Number">
+                                                        <label for="noTelp" class="form-label">Phone Number</label>
+                                                        <input type="number" class="form-control" id="noTelp" name="no_telp" placeholder="Input Mahasiswa Phone Number">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="address" class="form-label">Address</label>
@@ -262,9 +262,9 @@
                             placeholder="Input Mahasiswa Email Address">
                     </div>
                     <div class="mb-3" title="flashTelepon">
-                        <label for="noTelp" class="form-label">No. Telp</label>
+                        <label for="noTelp" class="form-label">Phone Number</label>
                         <input type="number" class="form-control" id="noTelp" name="no_telp" value="${noTelp}"
-                            placeholder="Input Mahasiswa Number">
+                            placeholder="Input Mahasiswa Phone Number">
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Address</label>

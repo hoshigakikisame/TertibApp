@@ -26,7 +26,7 @@
                                 <div class="col-lg-2 col-auto border border-2 mt-3 py-2 px-2 rounded-3 flex-grow-1 flex-lg-grow-0">
                                     <div class="shadow-sm rounded-3 py-3 px-lg-4 px-0 h-100">
                                         <h1 class="mb-0"><?= $count ?></h1>
-                                        <h6>Offense level <?= GenericUtil::intToRoman($level) ?> </h6>
+                                        <h6>Violation Level <?= GenericUtil::intToRoman($level) ?> </h6>
                                     </div>
                                 </div>
                             <?php endforeach; ?>

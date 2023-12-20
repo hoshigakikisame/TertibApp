@@ -66,12 +66,12 @@
                                                         <input type="email" class="form-control" id="email" name="email" placeholder="Input Dosen Email">
                                                     </div>
                                                     <div class="mb-3" title="flashTelepon">
-                                                        <label for="noTelp" class="form-label">No. Telp</label>
-                                                        <input type="number" class="form-control" id="noTelp" name="no_telp" placeholder="Input Dosen Number">
+                                                        <label for="noTelp" class="form-label">Phone Number</label>
+                                                        <input type="number" class="form-control" id="noTelp" name="no_telp" placeholder="Input Dosen Phone Number">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="address" class="form-label">Address</label>
-                                                        <input type="text" class="form-control" id="address" name="address" placeholder="Input Dosen Number">
+                                                        <input type="text" class="form-control" id="address" name="address" placeholder="Input Dosen Address">
                                                     </div>
                                                     <div class="mb-3" title="flash">
                                                         <label for="password" class="form-label">Password</label>
@@ -225,9 +225,9 @@
                             placeholder="Input Dosen Email Address" value="${email}">
                     </div>
                     <div class="mb-3" title="flashTelepon">
-                        <label for="noTelp" class="form-label">No. Telp</label>
+                        <label for="noTelp" class="form-label">Phone Number</label>
                         <input type="number" class="form-control" id="noTelp" name="no_telp"
-                            placeholder="Input Dosen Number" value="${noTelp}">
+                            placeholder="Input Dosen Phone Number" value="${noTelp}">
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Address</label>
