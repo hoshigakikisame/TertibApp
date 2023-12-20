@@ -35,8 +35,8 @@
                                             <input type="text" class="form-control" name="username" id="username" placeholder="data" value="<?= $username ?>" disabled readonly>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="nidn" class="form-label">NIDN</label>
-                                            <input type="text" class="form-control" name="nidn" id="nidn" placeholder="data" value="<?= $nidn ?>" disabled readonly>
+                                            <label for="identity" class="form-label">NIDN</label>
+                                            <input type="text" class="form-control" name="nidn" id="identity" placeholder="data" value="<?= $nidn ?>" disabled readonly>
                                         </div>
                                         <div class="mb-3">
                                             <label for="firstname" class="form-label">Firstname</label>
@@ -59,8 +59,8 @@
                                             <input type="text" class="form-control" name="address" id="address" placeholder="Address" value="<?= $address ?>">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="number" class="form-label">Number</label>
-                                            <input type="number" class="form-control" name="number" id="number" placeholder="Your Number" value="<?= $phoneNumber ?>">
+                                            <label for="noTelp" class="form-label">Number</label>
+                                            <input type="number" class="form-control" name="number" id="noTelp" placeholder="Your Number" value="<?= $phoneNumber ?>">
                                         </div>
                                         <div class="d-flex gap-3 justify-content-end">
                                             <button type="submit" class="btn btn-secondary px-4 text-white">Save</button>

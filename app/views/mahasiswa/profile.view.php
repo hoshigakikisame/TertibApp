@@ -54,7 +54,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="number" class="form-label">Number</label>
-                                            <input type="number" class="form-control" name="number" id="number" placeholder="Your Number" value="<?= $phoneNumber ?>">
+                                            <input type="number" class="form-control" name="number" id="noTelp" placeholder="Your Number" value="<?= $phoneNumber ?>">
                                         </div>
                                         <div class="d-flex gap-3 justify-content-end">
                                             <button type="submit" class="btn btn-secondary px-4 text-white">Save</button>
