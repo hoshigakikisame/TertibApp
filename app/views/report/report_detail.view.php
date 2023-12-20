@@ -76,7 +76,7 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
                                             </div>
                                             <div class="row">
                                                 <div class="col-2">
-                                                    <h6 class="fw-bold">Nama Pelanggaran</h6>
+                                                    <h6 class="fw-bold">Pelanggaran</h6>
                                                 </div>
                                                 <div class="col">
                                                     <h6>: <?= $report->getCodeOfConductName() ?></h6>
@@ -84,7 +84,7 @@ $isMahasiswa = $user->getRole() == 'mahasiswa';
                                             </div>
                                             <div class="row">
                                                 <div class="col-2">
-                                                    <h6 class="fw-bold">Deskripsi Pelanggaran</h6>
+                                                    <h6 class="fw-bold">Deskripsi</h6>
                                                 </div>
                                                 <div class="col">
                                                     <h6>: <?= $report->getCodeOfConductDescription() ?></h6>

@@ -21,12 +21,12 @@
                                 <div class="row-auto gap-5 d-flex flex-column flex-md-row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label for="title" class="form-label">Judul</label>
-                                            <input type="text" class="form-control" id="title" name="title" placeholder="Masukkan judul">
+                                            <label for="title" class="form-label">Judul Pelanggaran</label>
+                                            <input type="text" class="form-control" id="title" name="title" placeholder="Masukkan Judul Pelanggaran">
                                         </div>
                                         <div class="mb-3">
                                             <div class="form-group">
-                                                <label for="mahasiswa_list">Mahasiswa</label>
+                                                <label class="form-label" for="mahasiswa_list">Mahasiswa</label>
                                                 <input type="text" class="form-control" list="mahasiswa_list" placeholder="Masukkan NIM atau Nama Mahasiswa" name="nim_mahasiswa" />
                                             </div>
                                             <datalist id="mahasiswa_list">
@@ -47,8 +47,8 @@
                                         </div>
                                         <div class="mb-3">
                                             <div class="form-group">
-                                                <label for="code_of_conducts">Pelanggaran</label>
-                                                <input type="text" class="form-control" list="code_of_conducts" placeholder="Masukkan Nama Pelanggaran" name="id_code_of_conduct" />
+                                                <label class="form-label" for="code_of_conducts">Pelanggaran</label>
+                                                <input type="text" class="form-control" list="code_of_conducts" placeholder="Masukkan Tata Tertib yang Dilanggar" name="id_code_of_conduct" />
                                             </div>
                                             <datalist id="code_of_conducts" onchange="updatePelanggaran(event);">
                                                 <?php
@@ -72,7 +72,7 @@
                                         </div>
                                     </div>
                                     <div class="col-auto">
-                                        <div class="mb-3 d-flex flex-column">
+                                        <div class="mb-1 d-flex flex-column">
                                             <label for="formFile" class="form-label">Lampiran Pelanggaran</label>
                                             <label for="formFile" class="bg-light-subtle drop-area rounded-3 p-3">
                                                 <input class="form-control" type="file" id="formFile" name="evidence_picture" hidden>
@@ -87,15 +87,13 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label for="deskripsi" class="form-label">Isi Pelanggaran</label>
-                                            <textarea class="form-control" id="deskripsi" rows="3" placeholder="Isi Deskripsi Pelanggaran" name="content"></textarea>
+                                            <label for="deskripsi" class="form-label">Deskripsi Pelanggaran</label>
+                                            <textarea class="form-control" id="deskripsi" rows="3" placeholder="Masukkan Deskripsi Pelanggaran" name="content"></textarea>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <p>Nb: Demi kenyamanan dan keamanan anda (Pelapor), data pribadi anda akan kami
-                                        rahasiakan dan apabila mengandung informasi sensitif akan menjadi aduan pribadi
-                                        (hanya dapat diakses melalui akun anda)</p>
+                                    <p>Catatan: Dalam upaya menjaga kenyamanan dan keamanan Anda sebagai pelapor, kami akan menjaga kerahasiaan data pribadi Anda. Setiap laporan yang Anda sampaikan sangatlah berharga bagi kami, demi terwujudnya JTI yang lebih baik.</p>
                                 </div>
                                 <!-- Button trigger modal -->
                                 <div class="row justify-content-lg-end justify-content-center">
