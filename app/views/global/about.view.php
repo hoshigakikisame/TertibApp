@@ -4,16 +4,16 @@
 	<div class="row text-center gap-4 justify-content-center position-relative overflow-x-hidden">
 		<h1>Tentang Kami</h1>
 		<div class="col-lg-6 col justify-content-center">
-			<p class="fw-semibold"><span class="fw-bold">TertibApp </span>merupakan platform pelaporan pelanggaran tata tertib di lingkungan kampus khususnya Jurusan Teknologi Informasi, Politeknik Negeri Malang. </p>
+			<p class="fw-semibold"><span class="fw-bold">Tertib APP </span>merupakan platform pelaporan pelanggaran tata tertib di lingkungan kampus khususnya Jurusan Teknologi Informasi,<br>Politeknik Negeri Malang. </p>
 		</div>
 		<div class="row gy-3 justify-content-evenly position-relative flex-column flex-lg-row">
 			<div class="col-lg-4 col text-start slide-in-left">
-				<h3 class="mb-3">Tujuan Tertib App</h3>
-				<p class="fs-6" style="text-align:justify;">Dengan semangat keadilan dan keamanan sebagai landasan utama, <span class="fw-bold"> TertibApp </span> dirancang untuk memberikan solusi efisien dalam pelaporan pelanggaran tata tertib. Kami percaya bahwa keterlibatan aktif seluruh elemen yang ada akan sangat membantu dalam pemantauan tata tertib dapat membentuk lingkungan kampus yang lebih aman dan harmonis.</p>
+				<h3 class="mb-3">Tujuan Tertib APP</h3>
+				<p class="fs-6" style="text-align:justify;">Dengan semangat keadilan dan keamanan sebagai landasan utama, <span class="fw-bold"> Tertib APP </span> dirancang untuk memberikan solusi efisien dalam pelaporan pelanggaran tata tertib. Kami percaya bahwa keterlibatan aktif seluruh elemen yang ada akan sangat membantu dalam pemantauan tata tertib dapat membentuk lingkungan kampus yang lebih aman dan harmonis.</p>
 			</div>
 			<div class="col-lg-4 col text-start slide-in-right">
 				<h3 class="mb-3">
-					Manfaat Tertib App
+					Manfaat Tertib APP
 				</h3>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item d-flex gap-2 border-0 border py-0">

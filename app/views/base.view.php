@@ -8,7 +8,7 @@
     <link rel="icon" href="<?php echo App::get("root_uri") . "/public/favicon_io/favicon.ico" ?>" sizes="32x32">
     <link rel="apple-touch-icon" href="<?php echo App::get("root_uri") . "/public/favicon_io/apple-touch-icon.png" ?>"><!-- 180×180 -->
     <link rel="manifest" href="<?php echo App::get("root_uri") . "/public/favicon_io/site.webmanifest" ?>">
-    <title><?= isset($pageTitle) ? $pageTitle : "Tertib App" ?></title>
+    <title><?= isset($pageTitle) ? $pageTitle : "Tertib APP" ?></title>
     <!-- Custom Bootstrap  -->
     <link rel="stylesheet" href="<?php echo App::get("root_uri") . "/public/css/index.css" ?>">
     <!-- Bootstrap Icons -->
