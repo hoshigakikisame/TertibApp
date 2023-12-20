@@ -134,7 +134,7 @@ switch ($role) {
                             <h3 class="fs-6" style=" margin-bottom:-2px;">
                                 <?= $user->getFirstName() . " " . $user->getLastName() ?>
                             </h3>
-                            <p class="" style="font-size:12px;margin-bottom:-5px;">
+                            <p class="text-capitalize" style="font-size:12px;margin-bottom:-5px;">
                                 <?= ($role == "admin") ? $user->getRoleDetail()->getTitle() : $role; ?>
                             </p>
                         </div>
