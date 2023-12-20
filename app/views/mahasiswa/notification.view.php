@@ -31,7 +31,7 @@
                                 <div class="row-auto flex-column p-3 bg-light-subtle rounded-3">
                                     <div class="col ">
                                         <h5>
-                                            <span class="badge bg-danger">#<?= "aaaa" ?>
+                                            <span class="badge bg-danger">#<?= $violation->getIdMahasiswaViolation() ?>
                                             </span>
                                             You've Violated <span class="text-danger" ><?= $violation->getCodeOfConductName() ?></span> Code of Conduct
                                         </h5>
