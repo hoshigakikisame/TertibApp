@@ -19,13 +19,13 @@
                         <h1>Welcome to Tertib App</h1>
                     </div>
                     <div class="row px-4 gap-lg-5 gap-1 mb-4">
-                        <div class="col-lg-2 col-auto border border-2 py-2 rounded-3 flex-grow-1 flex-lg-grow-0">
+                        <div class="col-lg-2 col-auto border border-info border-2 py-2 rounded-3 flex-grow-1 flex-lg-grow-0">
                             <div class="shadow-sm rounded-3 py-3 px-4 h-100">
                                 <h1 class="mb-0"><?= $totalViolations ?></h1>
                                 <h6>Violation</h6>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-auto border border-2 py-2 rounded-3 flex-grow-1 flex-lg-grow-0">
+                        <div class="col-lg-2 col-auto border border-danger border-2 py-2 rounded-3 flex-grow-1 flex-lg-grow-0">
                             <div class="shadow-sm rounded-3 py-3 px-4 h-100 ">
                                 <h1 class="mb-0"><?= $totalPoints ?></h1>
                                 <h6>Points</h6>
