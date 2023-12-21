@@ -47,8 +47,34 @@ class AccountRecoveryService extends DBService
             $email = $user->getEmail();
             $subject = "Reset Password";
             $htmlBody = "
-                <h1>Reset Password</h1>
-                <p>Click <a href='http://$host$rootUri/auth/update-password/$token'>here</a> to reset your password</p>
+            <head>
+            <style>
+            *{
+                font-family: 'Poppins', sans-serif !important;
+                }
+
+                a.link{
+                    color: #fff;
+                    text-decoration: none !important;
+                    padding: 10px 20px;
+                    background-color: #FCB216;
+                    border-radius: 5px;
+                }
+                </style>
+            </head>
+            <body>
+            <h1>Tertib App</h1>
+            <h2>Halo</h2>
+            <p>
+              Kami telah menerima permintaan anda untuk mengatur ulang password anda.
+              Apabila anda tidak membuat permintaan, abaikan pesan ini.
+            </p>
+    
+            <a class='link' href='http://$host$rootUri/auth/update-password/$token'> Reset Password </a>
+        
+            <h3>Terima Kasih</h3>
+            <h6>Tim Admin Tertib App</h6>
+            </body>
             ";
 
             return $emailApi->sendEmail($email, $subject, $htmlBody);
