@@ -34,7 +34,7 @@ switch ($role) {
 ?>
 <nav class="navbar navbar-expand-lg align-items-stretch">
     <div class="container-fluid align-items-lg-start flex-lg-column ">
-        <a class="navbar-brand my-3" href="#"><img src="<?php echo App::get('root_uri') . "/public/img/logo.png" ?>" class="d-inline-block align-text-center" alt="Tertib APP" width="40" height="40"> Tertib APP</a>
+        <a class="navbar-brand my-3" href="#"><img src="<?php echo App::get('root_uri') . "/public/img/logo.png" ?>" class="d-inline-block align-text-center" alt="Tertib App" width="40" height="40"> Tertib App</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" aria-controls="navbarOffcanvasLg">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -109,7 +109,7 @@ switch ($role) {
                         </li>
                         <li class="mb-2 position-relative">
                             <div class="content nav-item gap-1 d-flex align-items-center">
-                                <i class="bi bi-exclamation-circle"></i>
+                                <i class="bi bi-activity"></i>
                                 <a class="nav-link" href="<?php echo App::get('root_uri') . "/" . $role . "/log-activity" ?>">Log Activity</a>
                             </div>
                         </li>

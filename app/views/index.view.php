@@ -12,7 +12,7 @@
 					<h6>#JTItertib</h6>
 				</div>
 				<p class="py-3" style="font-family:Poppins-Medium;width:min(80vw,320px)">Laporkan Para Oknum Kampus yang
-					Kurang Tertib dan Disiplin di <span class="text-primary">Tertib</span> APP</p>
+					Kurang Tertib dan Disiplin di <span class="text-primary">Tertib</span> App</p>
 				<!-- link Report Button -->
 				<a href="<?= App::get('root_uri') . '/dosen/report' ?>" class="py-2 px-5 rounded-3 link-underline link-underline-opacity-0 text-white" style="font-family:Poppins-Semi-Bold; background:var(--btn-gradient);">Report ></a>
 			</div>
