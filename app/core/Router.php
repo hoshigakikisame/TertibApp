@@ -14,7 +14,9 @@ class Router
 
 	private static $instances = [];
 
-	protected function __construct(){}
+	protected function __construct()
+	{
+	}
 
 	protected function __clone()
 	{
@@ -79,7 +81,8 @@ class Router
 			}
 		}
 		http_response_code(404);
-		throw new Exception("Route: " . $requestUri . " not found!");
+		Helper::view('error/404');
+		return die();
 	}
 
 	/**
@@ -100,7 +103,7 @@ class Router
 		$method = new ReflectionMethod($controller, $method);
 		if ($method->getNumberOfParameters() > 0) {
 			return $method->invokeArgs(new $controller, $parameters);
-		} 
+		}
 
 		return $method->invoke(new $controller);
 	}
